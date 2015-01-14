@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="index" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/index.jsp" />
+	</definition>
+
+	
+	<definition name="result" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/result.jsp" />
+	</definition>
+	
+		
+	<definition name="addCustomer" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/addCustomer.jsp" />
+	</definition>
+	
+</tiles-definitions>
