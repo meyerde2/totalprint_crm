@@ -6,7 +6,7 @@
 
 
 		<div class="body">
-			<h1>Home page !</h1>
+			<h1>baaam !</h1>
 
 			<p>The time on the server is ${serverTime}.</p>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
