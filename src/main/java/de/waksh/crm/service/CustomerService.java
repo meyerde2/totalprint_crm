@@ -1,4 +1,4 @@
-package de.waksh.crm.dao;
+package de.waksh.crm.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,16 +8,21 @@ import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import de.waksh.crm.dao.CustomerDAO;
 import de.waksh.crm.model.Customer;
 
-public class JdbcCustomerDAO implements CustomerDAO {
+public class CustomerService implements CustomerDAO {
 	private DataSource dataSource;
+	
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
 
-	public void insert(Customer customer) {
+	public void insertCustomer(Customer customer) {
 
 		String sql = "INSERT INTO CUSTOMER "
 				+ "(id, name, age) VALUES (?, ?, ?)";
@@ -45,7 +50,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
 		}
 	}
 
-	public Customer findByCustomerId(int custId) {
+	public Customer getCustomerById(int custId) {
 
 		String sql = "SELECT * FROM CUSTOMER WHERE id = ?";
 
@@ -75,7 +80,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
 		}
 	}
 
-	public ArrayList<Customer> showAllCustomers() {
+	public ArrayList<Customer> getAllCustomers() {
 		ArrayList<Customer> cList = new ArrayList<Customer>();
 
 		String sql = "SELECT * FROM CUSTOMER";
@@ -110,7 +115,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
 	}
 
 	@Override
-	public Customer updateByCustomerId(int custId, String name, int age) {
+	public Customer updateCustomerById(int custId, String name, int age) {
 		String sql = "UPDATE customer SET name = " + name + " , age = " + age
 				+ " WHERE id = " + custId;
 
@@ -137,4 +142,5 @@ public class JdbcCustomerDAO implements CustomerDAO {
 			}
 		}
 	}
+
 }

@@ -7,7 +7,6 @@ public class Customer
 	
 	public Customer(String name, int age) {
 		super();
-
 		this.name = name;
 		this.age = age;
 	}

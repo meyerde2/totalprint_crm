@@ -37,12 +37,14 @@ public class AddCustomerController {
 			ModelMap model) {
 		model.addAttribute("name", customer.getName());
 		model.addAttribute("age", customer.getAge());
-
+/*
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"Spring-Module.xml");
 		CustomerDAO customerDAO = (CustomerDAO) context.getBean("customerDAO");
 		Customer c = new Customer(customer.getName(), customer.getAge());
-		customerDAO.insert(c);
+		customerDAO.insertCustomer(c);
+		
+		*/
 		return "result";
 	}
 	

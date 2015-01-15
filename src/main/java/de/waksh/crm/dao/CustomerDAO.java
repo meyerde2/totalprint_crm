@@ -6,8 +6,8 @@ import de.waksh.crm.model.Customer;
 
 public interface CustomerDAO 
 {
-	public void insert(Customer customer);
-	public Customer findByCustomerId(int custId);
-	public Customer updateByCustomerId(int custId, String name, int age);
-	public ArrayList<Customer> showAllCustomers();
+	public void insertCustomer(Customer customer);
+	public Customer getCustomerById(int custId);
+	public Customer updateCustomerById(int custId, String name, int age);
+	public ArrayList<Customer> getAllCustomers();
 }

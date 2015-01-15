@@ -15,5 +15,17 @@ Menu
 	    	<spring:url value="/addCustomer" var="addCustomerUrl" htmlEscape="true"/>
  			<a href="${addCustomerUrl}">addCustomer</a>
  		</li>
+ 		
+ 		  <li>
+	    	<spring:url value="/service/customer/" var="getCustomerService" htmlEscape="true"/>
+ 			<a href="${getCustomerService}">getCustomerService</a>
+ 		</li>
+ 		
+ 		<li>
+	    	<spring:url value="/test" var="test" htmlEscape="true"/>
+ 			<a href="${test}">JDBC Test</a>
+ 		</li>
+ 		
+ 		
 	</ul>
 </div>

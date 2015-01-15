@@ -58,14 +58,14 @@ public class HomeController {
 
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"Spring-Module.xml");
-		CustomerDAO customerDAO = (CustomerDAO) context.getBean("customerDAO");
+		CustomerDAO customerDAO = (CustomerDAO) context.getBean("customerService");
 
-		ArrayList<Customer> customerList = customerDAO.showAllCustomers();
+		ArrayList<Customer> customerList = customerDAO.getAllCustomers();
 		model.addAttribute("cList", customerList);
 		System.out.println(customerList.toString());
 
 		Customer customer = new Customer("Dennis", 21);
-		customerDAO.insert(customer);
+		customerDAO.insertCustomer(customer);
 
 		// Customer customer1 = customerDAO.findByCustomerId(2);
 		// System.out.println(customer1);
