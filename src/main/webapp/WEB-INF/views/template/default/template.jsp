@@ -2,15 +2,24 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Spring MVC - Tiles Integration tutorial</title>
 	<title>CRM</title>
-	<link rel="stylesheet" href="resources/css/screen.css" type="text/css" media="screen, projection"></link>
-	<link rel="stylesheet" href="resources/css/print.css" type="text/css" media="print"></link>
+	
+	
 	<!--[if IE]>
 	<link rel="stylesheet" href="resources/css/ie.css" type="text/css" media="screen, projection">
 	<![endif]-->
-<style>
-body{ margin-top:20px; margin-bottom:20px; background-color:#DFDFDF;}
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"></link>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+<!--
+   @import url("resources/css/menu.css");
+
+-->
+
 </style>
 </head>
 <body>
@@ -20,7 +29,7 @@ body{ margin-top:20px; margin-bottom:20px; background-color:#DFDFDF;}
 		<tiles:insertAttribute name="header" />
 		<!-- Menu Page -->
 		<div class="span-5  border"
-			style="height: 200px; background-color: #FCFCFC;">
+			style="height: 50px; ">
 			<tiles:insertAttribute name="menu" />
 		</div>
 		<!-- Body Page -->

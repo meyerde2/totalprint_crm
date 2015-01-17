@@ -10,12 +10,34 @@
 
 	
 	<definition name="result" extends="defaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/result.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/privatkunden/privatkunden/result.jsp" />
 	</definition>
 	
 		
 	<definition name="addCustomer" extends="defaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/addCustomer.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/privatkunden/addCustomer.jsp" />
+	</definition>
+	
+	
+	<definition name="suche" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/suche/suche.jsp" />
+		<put-attribute name="current" value="suche" />
+	</definition>
+	
+	
+	<definition name="privatkunden" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/privatkunden/privatkunden.jsp" />
+		<put-attribute name="current" value="privatkunden" />
+	</definition>
+	
+	<definition name="businesskunden" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/businesskunden/businesskunden.jsp" />
+		<put-attribute name="current" value="businesskunden" />
+	</definition>
+	
+	<definition name="werbekampagnen" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/werbekampagnen/werbekampagnen.jsp" />
+		<put-attribute name="current" value="werbekampagnen" />
 	</definition>
 	
 </tiles-definitions>
