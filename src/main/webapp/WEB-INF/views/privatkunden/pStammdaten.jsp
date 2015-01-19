@@ -10,9 +10,15 @@
 
 			<table  class="table table-hover">
 				<tr>
-					<th>cID</th>
+					<td>cID</td>
+					<td>${ID}</td>
+				</tr>
+				<tr>
+					<td>Anrede</td>
+					<td>${ID}</td>
+				</tr>
 
-					<th>Anrede</th>
+
 					<th>Name</th>
 					<th>Vorname</th>
 

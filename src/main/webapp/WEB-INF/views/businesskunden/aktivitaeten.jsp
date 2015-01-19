@@ -1,4 +1,3 @@
-
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
 <tiles:insertDefinition name="defaultTemplate">
@@ -7,11 +6,25 @@
 		<title>Privatkunden</title>
 
 		<div class="body">
-			<h1>Privatkunden !</h1>
+			<h1>Privatkunden - Aktivitäten</h1>
 
-			<p>This is a simple example of Tiles 3 integration with Spring
-				Framework.</p>
-			<p>Uses Tiles 3.0.3 and springframework 3.2.7.</P>
+
+			<table  class="table table-hover">
+				<tr>
+					<th>Datum</th>
+					<th>Mitarbeitername</th>
+					<th>Kontaktmedium</th>
+					<th>Kontaktgrund</th>
+					<th>Notiz</th>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
 		</div>
 
 

@@ -8,7 +8,7 @@
 		<div class="body">
 			<h1>Gesch‰ftskunden - Bestellung bearbeiten</h1>
 
-			<form method="POST" action="/crm/privatkunden/submitAddAbo">
+			<form name="bestellung" method="POST" action="/crm/privatkunden/submitAddAbo">
 				<table>
 					<tr>
 						<td><label>Kundennummer</label></td>
@@ -55,7 +55,7 @@
 					</tr>
 			
 					<tr class="abwLieferadresse">
-						<td><label>Strasse</label></td>
+						<td><label>Straﬂe</label></td>
 						<td><input type="text" class="form-control"name="strasse" id="strasse"></td>
 					</tr>
 					<tr class="abwLieferadresse">
@@ -67,14 +67,61 @@
 						<td><input type="text" class="form-control"name="ort" id="ort"></td>
 					</tr>
 
+					<tr >
+						<td><label>Zeitschrift A</label></td>
+						<td><input type="text" class="form-control"name="numberZeitschriftA" id="numberZeitschriftA"></td>
+					</tr>
+					
+					<tr >
+						<td><label>Zeitschrift B</label></td>
+						<td><input type="text" class="form-control"name="numberZeitschriftB" id="numberZeitschriftB"></td>
+					</tr>
+					<tr >
+						<td><label>Tageszeitung</label></td>
+						<td><input type="text" class="form-control"name="numberTZ" id="numberTZ"></td>
+					</tr>
+
+
 					<tr>
 						<td></td>
 						<td colspan="2"><input type="submit" class="form-control"value="Bestellung bearbeiten" /></td>
 					</tr>
+									
+					
 				</table>
 			</form>
 
 		</div>
+		<script>
+			$(document).ready(function() {
+				document.forms['bestellung']['cID'].readOnly = true;
+				
+			var isVisiblePayment = false;
+				
+				$(".abwLieferadresse").hide();
+				$(".payment").hide();
+				
+				$("input:radio[value=lastschrift]").click(function() {
+					if(!isVisiblePayment){
+						$(".payment").show("slow");
+						isVisiblePayment = true;
+					}
+					
+				});
+				$("input:radio[value=rechnung]").click(function() {
+					if(isVisiblePayment){
+						$(".payment").hide("slow");
+						isVisiblePayment = false;
+					}
+				
+				});
+				
+				$(".abwLieferadresse").hide();
+				$(".checkbox-inline").click(function() {
+					$(".abwLieferadresse").toggle("slow");
+				});
+			});
+		</script>
 
 	</tiles:putAttribute>
 </tiles:insertDefinition>

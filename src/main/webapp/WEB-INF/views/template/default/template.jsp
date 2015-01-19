@@ -18,9 +18,16 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" type="text/css"
+	href="/crm/resources/jquery/jquery.datetimepicker.css"></link>
+<script src="/crm/resources/jquery/jquery.js"></script>
+<script src="/crm/resources/jquery/jquery.datetimepicker.js"></script>
+
 <style type="text/css">
 <!--
 @import url("/crm/resources/css/menu.css");
+
+@import url("/crm/resources/css/style.css");
 -->
 </style>
 </head>
@@ -40,5 +47,6 @@
 		<div class="footerPage" style="width: 1024px; margin: auto;">
 			<tiles:insertAttribute name="footer" />
 		</div>
+	</div>
 </body>
 </html>

@@ -43,6 +43,7 @@
 			</div>
 			<div>
 				<ul class="nav navbar-nav">
+
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="${homeUrl}">Home<span
 							class="caret"></span></a>
@@ -88,5 +89,4 @@
 	</nav>
 
 
-</div>
 </div>

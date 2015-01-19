@@ -8,7 +8,7 @@
 		<div class="body">
 			<h1>Privatkunden - Aktivität anlegen</h1>
 
-			<form method="POST" action="/crm/submitAddActivity">
+			<form name="activityAnlegen" method="POST" action="/crm/submitAddActivity">
 				<table id="activity">
 					<tr>
 						<td><label>Datum</label></td>
@@ -40,20 +40,20 @@
 					</tr>
 					<tr>
 						<td><label>Kontaktgrund</label></td>
-						<td>
-							<select class="form-control" name="grund" size="1">
-								<option>---bitte wählen---</option>
-								<option>Abonnementabschluss</option>
-								<option>Kündigung</option>
-								<option>Adressänderung</option>
-								<option>Beschwerde</option>
-								<option>Sonstiges</option>
+						<td> 
+							<select class="form-control" name="grund" id="grund" class="grund" size="1">
+								<option value="">---bitte wählen---</option>
+								<option value="abo">Abonnementabschluss</option>
+								<option value="kuendigung">Kündigung</option>
+								<option value="change">Adressänderung</option>
+								<option value="beschwerde">Beschwerde</option>
+								<option value="sonstiges">Sonstiges</option>
 							</select>
 						</td>
 					</tr>
 					<tr id="sonstiges">
 						<td><label>Sonstiges</label></td>
-						<td><input type="text" class="form-control" name="sonstiges" id="sonstiges"></td>
+						<td><input type="text" class="form-control" name="sonstigesTxt" id="sonstigesTxt"></td>
 					</tr>
 					<tr>
 						<td><label>Notiz</label></td>
@@ -63,5 +63,41 @@
 			</form>
 		</div>
 
+		<script>
+		$(document).ready(function() {
+			$("#sonstiges").hide();
+			
+			$('#date').datetimepicker(
+					{
+
+						lang : 'de',
+						i18n : {
+							de : {
+								months : [ 'Januar', 'Februar', 'März',
+										'April', 'Mai', 'Juni', 'Juli',
+										'August', 'September', 'Oktober',
+										'November', 'Dezember', ],
+								dayOfWeek : [ "Mo", "Di", "Mi", "Do", "Fr" ]
+							}
+						},
+						timepicker : false,
+						format : 'd.m.Y'
+					});
+
+		
+			$('#grund').change(function() {    
+				   // assign the value to a variable, so you can test to see if it is working
+				    var selectVal = $('#grund').val();
+				   if (selectVal == 'sonstiges'){
+						$("#sonstiges").show();
+				   }else{
+						$("#sonstiges").hide();
+				   }
+
+				});
+		
+		});
+			
+		</script>
 	</tiles:putAttribute>
 </tiles:insertDefinition>
