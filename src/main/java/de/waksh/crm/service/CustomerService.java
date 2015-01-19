@@ -8,9 +8,6 @@ import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import de.waksh.crm.dao.CustomerDAO;
 import de.waksh.crm.model.Customer;
 

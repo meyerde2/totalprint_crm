@@ -29,6 +29,27 @@
 		<put-attribute name="body" value="/WEB-INF/views/privatkunden/privatkunden.jsp" />
 		<put-attribute name="current" value="privatkunden" />
 	</definition>
+		<definition name="pStammdaten" extends="defaultTemplate">
+			<put-attribute name="body" value="/WEB-INF/views/privatkunden/pStammdaten.jsp" />
+			<put-attribute name="current" value="pStammdaten" />
+		</definition>
+		<definition name="aboAbschliessen" extends="defaultTemplate">
+			<put-attribute name="body" value="/WEB-INF/views/privatkunden/abonnementAbschliessen.jsp" />
+			<put-attribute name="current" value="aboAbschliessen" />
+		</definition>
+		<definition name="aboKuendingen" extends="defaultTemplate">
+			<put-attribute name="body" value="/WEB-INF/views/privatkunden/abonnementKuendingen.jsp" />
+			<put-attribute name="current" value="aboKuendingen" />
+		</definition>
+		<definition name="activities" extends="defaultTemplate">
+			<put-attribute name="body" value="/WEB-INF/views/privatkunden/aktivitaeten.jsp" />
+			<put-attribute name="current" value="activities" />
+		</definition>
+		<definition name="activitiesAnlegen" extends="defaultTemplate">
+			<put-attribute name="body" value="/WEB-INF/views/privatkunden/aktivitaetenAnlegen.jsp" />
+			<put-attribute name="current" value="activitiesAnlegen" />
+		</definition>
+		
 	
 	<definition name="businesskunden" extends="defaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/businesskunden/businesskunden.jsp" />

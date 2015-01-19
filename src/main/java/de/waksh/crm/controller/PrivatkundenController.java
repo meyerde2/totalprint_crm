@@ -22,4 +22,49 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 		return "/privatkunden/privatkunden";
 	}
 	
+	@RequestMapping(value = "/privatkunden/stammdaten", method = RequestMethod.GET)
+	public String pStammdaten(Model model) {
+		logger.info("pStammdaten-Page!");
+		
+		return "/privatkunden/pStammdaten";
+	}
+	
+	@RequestMapping(value = "/privatkunden/aboKuendigen", method = RequestMethod.GET)
+	public String pAboKuendigen(Model model) {
+		logger.info("abonnementKuendigen-Page!");
+		
+		return "/privatkunden/abonnementKuendigen";
+	}
+	
+	
+	@RequestMapping(value = "/privatkunden/aboAbschliessen", method = RequestMethod.GET)
+	public String pAboAbschliessen(Model model) {
+		logger.info("aboAbschlieﬂen-Page !");
+		
+		return "/privatkunden/abonnementAbschliessen";
+	}
+	
+	@RequestMapping(value = "/privatkunden/submitAddAbo", method = RequestMethod.POST)
+	public String pAddAbo(Model model) {
+		logger.info("aboAbschlieﬂen-Page !");
+		
+		return "/privatkunden/abonnementAbschliessen";
+	}
+	
+	@RequestMapping(value = "/privatkunden/activity", method = RequestMethod.GET)
+	public String pActivity(Model model) {
+		logger.info("activity-Page !");
+		
+		return "/privatkunden/aktivitaeten";
+	}
+	
+	@RequestMapping(value = "/privatkunden/activityAnlegen", method = RequestMethod.GET)
+	public String pActivityAnlegen(Model model) {
+		logger.info("activityAnlegen-Page !");
+		
+		return "/privatkunden/aktivitaetenAnlegen";
+	}
+	
+	
+	
 }

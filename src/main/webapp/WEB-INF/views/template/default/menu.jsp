@@ -1,91 +1,92 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <div class="menu">
+	<spring:url value="/" var="homeUrl" htmlEscape="true" />
+
 	<spring:url value="/suche" var="suche" htmlEscape="true" />
+
 	<spring:url value="/privatkunden" var="privatkunden" htmlEscape="true" />
+	<spring:url value="/privatkunden/stammdaten" var="pStammdaten"
+		htmlEscape="true" />
+	<spring:url value="/privatkunden/aboAbschliessen" var="aboAbschliessen"
+		htmlEscape="true" />
+	<spring:url value="/privatkunden/aboKuendigen" var="aboKuendigen"
+		htmlEscape="true" />
+	<spring:url value="/privatkunden/activity" var="pActivity"
+		htmlEscape="true" />
+	<spring:url value="/privatkunden/activityAnlegen"
+		var="pActivityAnlegen" htmlEscape="true" />
+
 	<spring:url value="/businesskunden" var="businesskunden"
 		htmlEscape="true" />
+	<spring:url value="/businesskunden/stammdaten" var="bStammdaten"
+		htmlEscape="true" />
+	<spring:url value="/businesskunden/bestellungBearbeiten"
+		var="bestellungBearbeiten" htmlEscape="true" />
+	<spring:url value="/businesskunden/activity" var="bActivity"
+		htmlEscape="true" />
+	<spring:url value="/businesskunden/activityAnlegen"
+		var="bActivityAnlegen" htmlEscape="true" />
+
 	<spring:url value="/werbekampagnen" var="werbekampagnen"
 		htmlEscape="true" />
+
 	<spring:url value="/service/customer/" var="getCustomerService"
 		htmlEscape="true" />
 	<spring:url value="/test" var="test" htmlEscape="true" />
 
 
-	<div class="btn-toolbar">
-		<!--Default buttons with dropdown menu-->
-		<div class="btn-group">
-			<spring:url value="/home" var="homeUrl" htmlEscape="true" />
-			<button type="button" class="btn btn-default"
-				onclick="location.href='${homeUrl}'">Startseite</button>
-			<button type="button" data-toggle="dropdown"
-				class="btn btn-default dropdown-toggle">
-				<span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu">
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="${homeUrl}">CRM</a>
+			</div>
+			<div>
+				<ul class="nav navbar-nav">
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="${homeUrl}">Home<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="${getCustomerService}">JsonServiceCustomer</a></li>
+							<li class="divider"></li>
+							<li><a href="${test}">JDBC Test</a></li>
+						</ul></li>
+					<li ><a href="${suche}">Suche</a></li>
 
-				<li><a href="${getCustomerService}">JsonServiceCustomer</a></li>
-				<li class="divider"></li>
-				<li><a href="${test}">JDBC Test</a></li>
-			</ul>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="${privatkunden}">Privatkunden<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="${pStammdaten}">Stammdaten</a></li>
+							<li class="divider"></li>
+							<li><a href="${aboAbschliessen}">Abonnement abschließen</a></li>
+							<li><a href="${aboKuendigen}">Abonnement kündigen</a></li>
+							<li class="divider"></li>
+							<li><a href="${pActivity}">Aktivitäten</a></li>
+							<li><a href="${pActivityAnlegen}">Aktivitäten anlegen</a></li>
+						</ul></li>
 
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="${businesskunden}">Geschäftskunden<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+
+							<li><a href="${bStammdaten}">Stammdaten</a></li>
+							<li class="divider"></li>
+							<li><a href="${bestellungBearbeiten}">Bestellung
+									bearbeiten</a></li>
+							<li class="divider"></li>
+							<li><a href="${bActivity}">Aktivitäten</a></li>
+							<li><a href="${bActivityAnlegen}">Aktivitäten anlegen</a></li>
+						</ul></li>
+
+
+					<li><a href="${werbekampagnen}">Werbekampagnen</a></li>
+				</ul>
+			</div>
 		</div>
+	</nav>
 
 
-		<div class="btn-group">
-			<spring:url value="/home" var="homeUrl" htmlEscape="true" />
-			<button type="button" class="btn btn-default"
-				onclick="location.href='${suche}'">Suche</button>
-		</div>
-		
-		
-		<div class="btn-group">
-			<spring:url value="/home" var="homeUrl" htmlEscape="true" />
-			<button type="button" class="btn btn-default"
-				onclick="location.href='${privatkunden}'">Privatkunden</button>
-			<button type="button" data-toggle="dropdown"
-				class="btn btn-default dropdown-toggle">
-				<span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu">
-
-				<li><a href="#">Another action</a></li>
-				<li class="divider"></li>
-				<li><a href="#">Separated link</a></li>
-			</ul>
-		</div>
-
-		<div class="btn-group">
-			<spring:url value="/home" var="homeUrl" htmlEscape="true" />
-			<button type="button" class="btn btn-default"
-				onclick="location.href='${businesskunden}'">Geschäftskunden</button>
-			<button type="button" data-toggle="dropdown"
-				class="btn btn-default dropdown-toggle">
-				<span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu">
-
-				<li><a href="#">Another action</a></li>
-				<li class="divider"></li>
-				<li><a href="#">Separated link</a></li>
-			</ul>
-		</div>
-
-		<div class="btn-group">
-			<spring:url value="/home" var="homeUrl" htmlEscape="true" />
-			<button type="button" class="btn btn-default"
-				onclick="location.href='${werbekampagnen}'">Werbekampagnen</button>
-			<button type="button" data-toggle="dropdown"
-				class="btn btn-default dropdown-toggle">
-				<span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu">
-
-				<li><a href="#">Another action</a></li>
-				<li class="divider"></li>
-				<li><a href="#">Separated link</a></li>
-			</ul>
-		</div>
-
-	</div>
+</div>
 </div>

@@ -2,7 +2,6 @@ package de.waksh.crm.controller;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -89,7 +88,6 @@ public class HomeController {
 
 		// Customer customer2 = customerDAO.updateByCustomerId(4,"name", 100);
 		// System.out.println(customer2);
-
 		return "test";
 	}
 
