@@ -8,58 +8,66 @@
 		<div class="body">
 			<h1>Privatkunden - Stammdaten</h1>
 
-			<table  class="table table-hover">
-				<tr>
-					<td>cID</td>
-					<td>${ID}</td>
-				</tr>
-				<tr>
-					<td>Anrede</td>
-					<td>${ID}</td>
-				</tr>
 
+			<div class="container">
+				<div class="row">
+						<div class="well well-sm" style="width:900px;">
+							<h3 class="panel-title">Max Mustermann</h3>
+							<div class="row">
+								<div class="col-md-6">
 
-					<th>Name</th>
-					<th>Vorname</th>
+									<div class="col-md-3 col-lg-3 " align="center">
+										<img alt="User Pic"
+											src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100"
+											class="img-circle">
+									</div>
 
-					<th>Straﬂe</th>
-					<th>PLZ</th>
-					<th>Ort</th>
+									<div class=" col-md-9 col-lg-9 ">
+										<table class="table table-user-information">
+											<tbody>
+												<tr>
+													<td>Kundenummer</td>
+													<td>1337</td>
+												</tr>
+												<tr>
+													<td>Anrede</td>
+													<td>Herr</td>
+												</tr>
+												<tr>
+													<td>Anschrift</td>
+													<td>Teststraﬂe 10, 2430 Eckernfˆrde</td>
+												</tr>
+												<tr>
+													<td>Abweichende Lieferanschrift</td>
+													<td>Teststraﬂe 1000, 2430 Kiel</td>
+												</tr>
+												<tr>
+													<td>Bankverbindung</td>
+													<td>DE19123412341234123412 (IBAN)<br> <br>
+														PBNKDEFF (BIC)<br> <br> Max Mustermann
+														(Kontoinhaber)
+													</td>
+												</tr>
+												<tr>
+													<td>Email</td>
+													<td><a href="c">info@example.com</a></td>
+												</tr>
 
-					<th>Straﬂe</th>
-					<th>PLZ</th>
-					<th>Ort</th>
-
-					<th>IBAN</th>
-					<th>BIC</th>
-					<th>Bank</th>
-					<th>Kontoinhaber</th>
-					<th>Abonnement</th>
-				</tr>
-
-				<tr>
-					<td>${ID}</td>
-
-					<td>${anrede}</td>
-					<td>${name}</td>
-					<td>${vorname}</td>
-
-					<td>${strasse}</td>
-					<td>${plz}</td>
-					<td>${ort}</td>
-
-					<td>${strasse}</td>
-					<td>${plz}</td>
-					<td>${ort}</td>
-
-					<td>${iban}</td>
-					<td>${bic}</td>
-					<td>${bank}</td>
-					<td>${kontoinhabr}</td>
-					<td>${abo}</td>
-				</tr>
-			</table>
-
-		</div>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="panel-footer">
+								<a href="mailto:info@example.com"
+									data-original-title="Broadcast Message" data-toggle="tooltip"
+									type="button" class="btn btn-sm btn-primary"> <i
+									class="glyphicon glyphicon-envelope"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 	</tiles:putAttribute>
 </tiles:insertDefinition>

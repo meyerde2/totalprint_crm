@@ -20,7 +20,6 @@
 
 <link rel="stylesheet" type="text/css"
 	href="/crm/resources/jquery/jquery.datetimepicker.css"></link>
-<script src="/crm/resources/jquery/jquery.js"></script>
 <script src="/crm/resources/jquery/jquery.datetimepicker.js"></script>
 
 <style type="text/css">

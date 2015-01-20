@@ -3,125 +3,364 @@
 <tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="body">
 
-		<title>Gesch‰ftskunden - Bestellung bearbeiten</title>
+		<title>Gesch‰ftskunden</title>
 
 		<div class="body">
 			<h1>Gesch‰ftskunden - Bestellung bearbeiten</h1>
 
-			<form name="bestellung" method="POST" action="/crm/privatkunden/submitAddAbo">
-				<table>
-					<tr>
-						<td><label>Kundennummer</label></td>
-						<td><input type="text" class="form-control"name="cID" id="cID"></td>
-					</tr>
-					<tr>
-						<td><label>Name</label></td>
-						<td><input type="text" class="form-control"name="name" id="name"></td>
+			<form name="abschliessen" method="POST"
+				action="/crm/privatkunden/submitAddAbo">
 
-					</tr>
-					<tr>
-						<td><label>Vorname</label></td>
-						<td><input type="text" class="form-control"name="vorname" id="vorname"></td>
-					</tr>
-					<tr>
-						<td><label>Zahlungsart</label></td>
-						<td><input type="radio" class="radio-inline"name="zahlungsart" id="zahlungsart"
-							value="rechnung">Rechnung <input type="radio"
-							class="radio-inline"name="zahlungsart" id="zahlungsart" value="lastschrift">Lastschrift
-						</td>
-					</tr>
+				<div class="container">
+					<div class="row form-group">
+						<div class="col-xs-12">
+							<ul class="nav nav-pills nav-justified thumbnail setup-panel">
+								<li class="active"><a href="#step-1">
+										<h4 class="list-group-item-heading">Step 1</h4>
+										<p class="list-group-item-text">Kundendaten</p>
+								</a></li>
+								<li class="disabled"><a href="#step-2">
+										<h4 class="list-group-item-heading">Step 2</h4>
+										<p class="list-group-item-text">Rechnungsart</p>
+								</a></li>
+								<li class="disabled"><a href="#step-3">
+										<h4 class="list-group-item-heading">Step 3</h4>
+										<p class="list-group-item-text">Lieferadresse</p>
+								</a></li>
+								<li class="disabled"><a href="#step-4">
+										<h4 class="list-group-item-heading">Step 4</h4>
+										<p class="list-group-item-text">Anzahl</p>
+								</a></li>
+								<li class="disabled"><a href="#step-5">
+										<h4 class="list-group-item-heading">Step 5</h4>
+										<p class="list-group-item-text">Best‰tigung</p>
+								</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="row setup-content" id="step-1">
+						<div class="col-xs-12">
+							<div class="col-md-12 well text-center">
+								<h1>Kundendaten</h1>
+								<table>
+									<tr>
+										<td><label>Kundennummer</label></td>
+										<td>12345</td>
+									</tr>
+									<tr>
+										<td><label>Firma</label></td>
+										<td>Muster GmbH</td>
 
-					<tr class="payment">
-						<td><label>IBAN</label></td>
-						<td><input type="text" class="form-control"name="iban" id="iban"></td>
-					</tr>
-					<tr class="payment">
-						<td><label>BIC</label></td>
-						<td><input type="text" class="form-control"name="bic" id="bic"></td>
-					</tr>
-					<tr class="payment">
-						<td><label>Kontoinhaber</label></td>
-						<td><input type="text" class="form-control"name="kontoinhaber" id="kontoinhaber"></td>
-					</tr>
-					<tr class="payment">
-						<td><label>Bank</label></td>
-						<td><input type="text" class="form-control"name="bank" id="bank"></td>
-					</tr>
-					<tr>
-						<td><label>Abweichende Lieferadresse</label></td>
-						<td>
-							<input type="checkbox" class="checkbox-inline"name="abwLieferadresse" id="abwLieferadresse" value="ja"> 
-						</td>
-					</tr>
+									</tr>
+									<tr>
+										<td><label>Name</label></td>
+										<td>Mustermann</td>
+
+									</tr>
+									<tr>
+										<td><label>Vorname</label></td>
+										<td>Max</td>
+									</tr>
+								</table>
+
+								<button id="activate-step-2" class="btn btn-primary btn-lg">Weiter</button>
+
+
+							</div>
+						</div>
+					</div>
+					<div class="row setup-content" id="step-2">
+						<div class="col-xs-12">
+							<div class="col-md-12 well text-center">
+								<h1 class="text-center">Zahlungsart</h1>
+								<table>
+									<tr>
+										<td><label>Zahlungsart</label></td>
+										<td><input type="radio" class="radio-inline"
+											name="zahlungsart" id="zahlungsart" value="rechnung"
+											checked="true">Rechnung <input type="radio"
+											class="radio-inline" name="zahlungsart" id="zahlungsart"
+											value="lastschrift">Lastschrift</td>
+									</tr>
+
+									<tr class="rechnung">
+										<td><label>Name</label></td>
+										<td>Max Mustermann</td>
+									</tr>
+
+									<tr class="rechnung">
+										<td><label>Straﬂe</label></td>
+										<td>Musterstr. 123</td>
+									</tr>
+
+									<tr class="rechnung">
+										<td><label>PLZ/Ort</label></td>
+										<td>12345 Kiel</td>
+									</tr>
+									<tr class="payment">
+										<td><label>IBAN</label></td>
+										<td><input type="text" class="form-control" name="iban"
+											id="iban" placeholder="IBAN"></td>
+									</tr>
+									<tr class="payment">
+										<td><label>BIC</label></td>
+										<td><input type="text" class="form-control" name="bic"
+											id="bic" placeholder="BIC"></td>
+									</tr>
+									<tr class="payment">
+										<td><label>Bank</label></td>
+										<td><input type="text" class="form-control" name="bank"
+											id="bank" placeholder="Bank"></td>
+									</tr>
+									<tr class="payment">
+										<td><label>Kontoinhaber</label></td>
+										<td><input type="text" class="form-control"
+											name="kontoinhaber" id="kontoinhaber"
+											placeholder="Kontoinhaber"></td>
+									</tr>
+
+								</table>
+								<button id="activate-step-3" class="btn btn-primary btn-lg">Weiter</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="row setup-content" id="step-3">
+						<div class="col-xs-12">
+							<div class="col-md-12 well text-center">
+								<h1 class="text-center">Lieferadresse</h1>
+
+								<table>
+									<tr>
+										<td><label>Straﬂe</label></td>
+										<td>Musterstr. 123</td>
+									</tr>
+									<tr>
+										<td><label>PLZ</label></td>
+										<td>12345</td>
+									</tr>
+									<tr>
+										<td><label>Ort</label></td>
+										<td>Dˆrfchen XYZ</td>
+									</tr>
+
+
+									<tr>
+										<td><label>Abweichende Lieferadresse</label></td>
+										<td><input type="checkbox" class="checkbox-inline"
+											name="abwLieferadresse" id="abwLieferadresse" value="ja">
+										</td>
+									</tr>
+
+									<tr class="abwLieferadresse">
+										<td><label>Straﬂe</label></td>
+										<td><input type="text" class="form-control"
+											name="strasse" id="strasse" placeholder="Straﬂe"></td>
+									</tr>
+									<tr class="abwLieferadresse">
+										<td><label>PLZ</label></td>
+										<td><input type="text" class="form-control" name="plz"
+											id="plz" placeholder="Postleitzahl"></td>
+									</tr>
+									<tr class="abwLieferadresse">
+										<td><label>Ort</label></td>
+										<td><input type="text" class="form-control" name="ort"
+											id="ort" placeholder="Ort"></td>
+									</tr>
+								</table>
+								<button id="activate-step-4" class="btn btn-primary btn-lg">Weiter</button>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="row setup-content" id="step-4">
+						<div class="col-xs-12">
+							<div class="col-md-12 well text-center">
+								<h1 class="text-center">Lieferadresse</h1>
+
+								<table>
+									<tr>
+										<td><label>Zeitschrift A</label></td>
+										<td><input type="number" MIN="0" MAX="" STEP="1"
+											class="form-control" name="numberZeitschriftA"
+											id="numberZeitschriftA" placeholder="Anzahl"></td>
+									</tr>
+
+									<tr>
+										<td><label>Zeitschrift B</label></td>
+										<td><input type="number" MIN="0" MAX="" STEP="1"
+											class="form-control" name="numberZeitschriftB"
+											id="numberZeitschriftB" placeholder="Anzahl"></td>
+									</tr>
+									<tr>
+										<td><label>Tageszeitung</label></td>
+										<td><input type="number" MIN="0" MAX="" STEP="1"
+											class="form-control" name="numberTZ" id="numberTZ" placeholder="Anzahl"></td>
+									</tr>
+								</table>
+								<button id="activate-step-5" class="btn btn-primary btn-lg">Weiter</button>
+							</div>
+						</div>
+					</div>
+
+
+
+					<div class="row setup-content" id="step-5">
+						<div class="col-xs-12">
+							<div class="col-md-12 well text-center">
+								<h1 class="text-center">Best‰tigung</h1>
+
+								<table>
+									<tr>
+										<td><label>Straﬂe</label></td>
+										<td>Musterstr. 123</td>
+									</tr>
+									<tr>
+										<td><label>PLZ</label></td>
+										<td>12345</td>
+									</tr>
+									<tr>
+										<td><label>Ort</label></td>
+										<td>Dˆrfchen XYZ</td>
+									</tr>
+
+								</table>
+
+			Die eingegebenen Daten m¸ssen an das ERP System geliefert werden:<br>
+Kunden ID<br>
+Straﬂe<br>
+Nr.<br>
+PLZ<br>
+Ort<br>
+IBAN<br>
+BIC<br>
+Name der Bank<br>
+Kontoinhaber<br>
+Menge Zeitschrift A<br>
+Menge Zeitschrift B<br>
+Menge Tageszeitung<br>
 			
-					<tr class="abwLieferadresse">
-						<td><label>Straﬂe</label></td>
-						<td><input type="text" class="form-control"name="strasse" id="strasse"></td>
-					</tr>
-					<tr class="abwLieferadresse">
-						<td><label>PLZ</label></td>
-						<td><input type="text" class="form-control"name="plz" id="plz"></td>
-					</tr>
-					<tr class="abwLieferadresse">
-						<td><label>Ort</label></td>
-						<td><input type="text" class="form-control"name="ort" id="ort"></td>
-					</tr>
 
-					<tr >
-						<td><label>Zeitschrift A</label></td>
-						<td><input type="text" class="form-control"name="numberZeitschriftA" id="numberZeitschriftA"></td>
-					</tr>
-					
-					<tr >
-						<td><label>Zeitschrift B</label></td>
-						<td><input type="text" class="form-control"name="numberZeitschriftB" id="numberZeitschriftB"></td>
-					</tr>
-					<tr >
-						<td><label>Tageszeitung</label></td>
-						<td><input type="text" class="form-control"name="numberTZ" id="numberTZ"></td>
-					</tr>
+								<button id="submitAbo" class="btn btn-primary btn-lg">Bearbeitung
+									abschlieﬂen</button>
+							</div>
+						</div>
+					</div>
 
 
-					<tr>
-						<td></td>
-						<td colspan="2"><input type="submit" class="form-control"value="Bestellung bearbeiten" /></td>
-					</tr>
-									
-					
-				</table>
+				</div>
+
 			</form>
-
 		</div>
 		<script>
-			$(document).ready(function() {
-				document.forms['bestellung']['cID'].readOnly = true;
-				
-			var isVisiblePayment = false;
-				
-				$(".abwLieferadresse").hide();
-				$(".payment").hide();
-				
-				$("input:radio[value=lastschrift]").click(function() {
-					if(!isVisiblePayment){
-						$(".payment").show("slow");
-						isVisiblePayment = true;
-					}
-					
-				});
-				$("input:radio[value=rechnung]").click(function() {
-					if(isVisiblePayment){
-						$(".payment").hide("slow");
-						isVisiblePayment = false;
-					}
-				
-				});
-				
-				$(".abwLieferadresse").hide();
-				$(".checkbox-inline").click(function() {
-					$(".abwLieferadresse").toggle("slow");
-				});
-			});
-		</script>
+			$(document)
+					.ready(
+							function() {
 
+								var isVisiblePayment = false;
+
+								$(".abwLieferadresse").hide();
+								$(".payment").hide();
+
+								$("input:radio[value=lastschrift]").click(
+										function() {
+											if (!isVisiblePayment) {
+												$(".rechnung").hide("fast");
+												$(".payment").show("slow");
+
+												isVisiblePayment = true;
+											}
+
+										});
+								$("input:radio[value=rechnung]").click(
+										function() {
+											if (isVisiblePayment) {
+												$(".payment").hide("fast");
+												$(".rechnung").show("slow");
+												isVisiblePayment = false;
+											}
+
+										});
+								$(".checkbox-inline").click(function() {
+									$(".abwLieferadresse").toggle("slow");
+								});
+
+								var navListItems = $('ul.setup-panel li a'), allWells = $('.setup-content');
+
+								allWells.hide();
+
+								navListItems
+										.click(function(e) {
+											e.preventDefault();
+											var $target = $($(this)
+													.attr('href')), $item = $(
+													this).closest('li');
+
+											if (!$item.hasClass('disabled')) {
+												navListItems.closest('li')
+														.removeClass('active');
+												$item.addClass('active');
+												allWells.hide();
+												$target.show();
+											}
+										});
+
+								$('ul.setup-panel li.active a')
+										.trigger('click');
+
+								// DEMO ONLY //
+								$('#activate-step-2')
+										.on(
+												'click',
+												function(e) {
+													$('ul.setup-panel li:eq(1)')
+															.removeClass(
+																	'disabled');
+													$(
+															'ul.setup-panel li a[href="#step-2"]')
+															.trigger('click');
+													$(this).remove();
+												})
+
+								$('#activate-step-3')
+										.on(
+												'click',
+												function(e) {
+													$('ul.setup-panel li:eq(2)')
+															.removeClass(
+																	'disabled');
+													$(
+															'ul.setup-panel li a[href="#step-3"]')
+															.trigger('click');
+													$(this).remove();
+												})
+								$('#activate-step-4')
+										.on(
+												'click',
+												function(e) {
+													$('ul.setup-panel li:eq(3)')
+															.removeClass(
+																	'disabled');
+													$(
+															'ul.setup-panel li a[href="#step-4"]')
+															.trigger('click');
+													$(this).remove();
+												})
+								$('#activate-step-5')
+										.on(
+												'click',
+												function(e) {
+													$('ul.setup-panel li:eq(4)')
+															.removeClass(
+																	'disabled');
+													$(
+															'ul.setup-panel li a[href="#step-5"]')
+															.trigger('click');
+													$(this).remove();
+												})
+
+							});
+		</script>
 	</tiles:putAttribute>
 </tiles:insertDefinition>

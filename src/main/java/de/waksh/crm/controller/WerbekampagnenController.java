@@ -22,4 +22,18 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 		return "/werbekampagnen/werbekampagnen";
 	}
 	
+	@RequestMapping(value = "/werbekampagnen/kampagnenUebersicht", method = RequestMethod.GET)
+	public String wUebersicht(Model model) {
+		logger.info("kampagnenUebersicht-Page!");
+		
+		return "/werbekampagnen/kampagnenUebersicht";
+	}
+	
+	@RequestMapping(value = "/werbekampagnen/kampagnenErstellen", method = RequestMethod.GET)
+	public String wErstellen(Model model) {
+		logger.info("kampagnenErstellen-Page!");
+		
+		return "/werbekampagnen/kampagnenErstellen";
+	}
+	
 }

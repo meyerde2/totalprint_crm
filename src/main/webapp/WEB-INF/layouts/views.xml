@@ -23,6 +23,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/suche/suche.jsp" />
 		<put-attribute name="current" value="suche" />
 	</definition>
+
 	
 	
 	<definition name="privatkunden" extends="defaultTemplate">

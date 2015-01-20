@@ -7,11 +7,15 @@
 		<title>Werbekampagnen</title>
 
 		<div class="body">
-			<h1>Werbekampagnen !</h1>
-
-			<p>This is a simple example of Tiles 3 integration with Spring
-				Framework.</p>
-			<p>Uses Tiles 3.0.3 and springframework 3.2.7.</P>
+			<h1>Übersicht</h1>
+	Grund<br>
+Name<br>
+Wann<br>
+Kundengruppe<br>
+Mitarbeiter<br>
+Messwerte<br>
+Gewinn<br>
+	
 		</div>
 
 

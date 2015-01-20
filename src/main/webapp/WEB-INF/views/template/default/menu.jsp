@@ -6,30 +6,35 @@
 	<spring:url value="/suche" var="suche" htmlEscape="true" />
 
 	<spring:url value="/privatkunden" var="privatkunden" htmlEscape="true" />
-	<spring:url value="/privatkunden/stammdaten" var="pStammdaten"
-		htmlEscape="true" />
-	<spring:url value="/privatkunden/aboAbschliessen" var="aboAbschliessen"
-		htmlEscape="true" />
-	<spring:url value="/privatkunden/aboKuendigen" var="aboKuendigen"
-		htmlEscape="true" />
-	<spring:url value="/privatkunden/activity" var="pActivity"
-		htmlEscape="true" />
-	<spring:url value="/privatkunden/activityAnlegen"
-		var="pActivityAnlegen" htmlEscape="true" />
+		<spring:url value="/privatkunden/stammdaten" var="pStammdaten"
+			htmlEscape="true" />
+		<spring:url value="/privatkunden/aboAbschliessen" var="aboAbschliessen"
+			htmlEscape="true" />
+		<spring:url value="/privatkunden/aboKuendigen" var="aboKuendigen"
+			htmlEscape="true" />
+		<spring:url value="/privatkunden/activity" var="pActivity"
+			htmlEscape="true" />
+		<spring:url value="/privatkunden/activityAnlegen"
+			var="pActivityAnlegen" htmlEscape="true" />
 
 	<spring:url value="/businesskunden" var="businesskunden"
 		htmlEscape="true" />
-	<spring:url value="/businesskunden/stammdaten" var="bStammdaten"
-		htmlEscape="true" />
-	<spring:url value="/businesskunden/bestellungBearbeiten"
-		var="bestellungBearbeiten" htmlEscape="true" />
-	<spring:url value="/businesskunden/activity" var="bActivity"
-		htmlEscape="true" />
-	<spring:url value="/businesskunden/activityAnlegen"
-		var="bActivityAnlegen" htmlEscape="true" />
+		<spring:url value="/businesskunden/stammdaten" var="bStammdaten"
+			htmlEscape="true" />
+		<spring:url value="/businesskunden/bestellungBearbeiten"
+			var="bestellungBearbeiten" htmlEscape="true" />
+		<spring:url value="/businesskunden/activity" var="bActivity"
+			htmlEscape="true" />
+		<spring:url value="/businesskunden/activityAnlegen"
+			var="bActivityAnlegen" htmlEscape="true" />
 
 	<spring:url value="/werbekampagnen" var="werbekampagnen"
 		htmlEscape="true" />
+			<spring:url value="/werbekampagnen/kampagnenUebersicht" var="wUebersicht"
+			htmlEscape="true" />
+			<spring:url value="/werbekampagnen/kampagnenErstellen" var="wErstellen"
+			htmlEscape="true" />
+
 
 	<spring:url value="/service/customer/" var="getCustomerService"
 		htmlEscape="true" />
@@ -45,14 +50,14 @@
 				<ul class="nav navbar-nav">
 
 					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="${homeUrl}">Home<span
+						data-toggle="dropdown" href="${homeUrl}">Test<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="${getCustomerService}">JsonServiceCustomer</a></li>
 							<li class="divider"></li>
 							<li><a href="${test}">JDBC Test</a></li>
 						</ul></li>
-					<li ><a href="${suche}">Suche</a></li>
+					<li><a href="${suche}">Suche</a></li>
 
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="${privatkunden}">Privatkunden<span
@@ -81,9 +86,28 @@
 							<li><a href="${bActivityAnlegen}">Aktivitäten anlegen</a></li>
 						</ul></li>
 
+				<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="${werbekampagnen}">Werbekampagnen<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
 
-					<li><a href="${werbekampagnen}">Werbekampagnen</a></li>
+							<li><a href="${wUebersicht}">Kampagnenübersicht</a></li>
+							<li><a href="${wErstellen}">Kampagne erstellen</a></li>
+
+						</ul></li>
+
+
 				</ul>
+<!--  
+						<form action="" class="search-form">
+							<div class="form-group has-feedback">
+								<label for="search" class="sr-only">Search</label> <input
+									type="text" class="form-control" name="search" id="search"
+									placeholder="search"> <span
+									class="glyphicon glyphicon-search form-control-feedback"></span>
+							</div>
+						</form>
+-->
 			</div>
 		</div>
 	</nav>
