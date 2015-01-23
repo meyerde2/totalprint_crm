@@ -5,45 +5,32 @@
 <title>CRM</title>
 
 
-<!--[if IE]>
-	<link rel="stylesheet" href="resources/css/ie.css" type="text/css" media="screen, projection">
-	<![endif]-->
+<script	src="http://lvps87-230-14-183.dedicated.hosteurope.de/public/js/basic.js"></script>
+<link rel="stylesheet" href="http://lvps87-230-14-183.dedicated.hosteurope.de/public/css/basic.css"></link>
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"></link>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"></link>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" type="text/css"
-	href="/crm/resources/jquery/jquery.datetimepicker.css"></link>
+<link rel="stylesheet" type="text/css"	href="/crm/resources/jquery/jquery.datetimepicker.css"></link>
 <script src="/crm/resources/jquery/jquery.datetimepicker.js"></script>
 
 <style type="text/css">
-<!--
-@import url("/crm/resources/css/menu.css");
-
-@import url("/crm/resources/css/style.css");
--->
+	@import url('/crm/resources/css/crmStyle.css');
 </style>
+
 </head>
 <body>
-	<div class="container">
-		<!-- Header -->
+	<!-- Header -->
 		<tiles:insertAttribute name="header" />
 		<!-- Menu Page -->
-		<div class="menuPage" style="height: 50px;">
+		<div class="menuPage" >
 			<tiles:insertAttribute name="menu" />
 		</div>
+	<div class="container">
+
 		<!-- Body Page -->
-		<div class="bodyPage" style="width: 1024px; margin: auto;">
+		<div class="bodyPage" >
 			<tiles:insertAttribute name="body" />
 		</div>
 		<!-- Footer Page -->
-		<div class="footerPage" style="width: 1024px; margin: auto;">
+		<div class="footerPage" >
 			<tiles:insertAttribute name="footer" />
 		</div>
 	</div>

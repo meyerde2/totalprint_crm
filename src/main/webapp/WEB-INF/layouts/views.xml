@@ -7,31 +7,25 @@
 	<definition name="index" extends="defaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/index.jsp" />
 	</definition>
-
 	
 	<definition name="result" extends="defaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/privatkunden/privatkunden/result.jsp" />
 	</definition>
-	
 		
 	<definition name="addCustomer" extends="defaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/privatkunden/addCustomer.jsp" />
 	</definition>
-	
 	
 	<definition name="suche" extends="defaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/suche/suche.jsp" />
 		<put-attribute name="current" value="suche" />
 	</definition>
 	
-	
 	<definition name="miniMenu" extends="defaultTemplate">
 		<put-attribute name="miniMenu" value="/WEB-INF/views/handbuch/miniMenu.jsp" />
 		<put-attribute name="current" value="handbuch" />
 	</definition>
 
-	
-	
 	<definition name="privatkunden" extends="defaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/privatkunden/privatkunden.jsp" />
 		<put-attribute name="current" value="privatkunden" />
@@ -56,7 +50,6 @@
 			<put-attribute name="body" value="/WEB-INF/views/privatkunden/aktivitaetenAnlegen.jsp" />
 			<put-attribute name="current" value="activitiesAnlegen" />
 		</definition>
-		
 	
 	<definition name="businesskunden" extends="defaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/businesskunden/businesskunden.jsp" />

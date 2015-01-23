@@ -1,0 +1,24 @@
+/*
+modifiziertes Stylesheet für das CRM-Programm
+*/
+
+#notiz{
+	max-width:300px;
+}
+
+
+/*
+	Handbuch-Style
+*/
+
+.miniMenu{
+	margin-top: -20px;
+	width: 250px; 
+	float: left;
+
+}
+.cheapterContent{
+	width: 750px;
+	margin-left: 250px;
+
+}

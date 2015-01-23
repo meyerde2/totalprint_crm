@@ -3,10 +3,17 @@
 	<tiles:putAttribute name="body">
 		
 		<%@include file="/WEB-INF/views/handbuch/miniMenu.jsp" %>
-		
+		<div class="cheapterContent">
 		<h1>Überblick</h1>
-		<div class="overview" style="width: 150px; background-color: #71B234; margin-left: 100px;">
-			<p>Test Test Test</p>
+		
+			<p>Lorem ipsum dolor sit amet,
+			 consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna 
+			 aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+			 Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+			  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
+			  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+			   sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+			Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 
 		</div>
 			
