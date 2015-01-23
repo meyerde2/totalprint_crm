@@ -23,6 +23,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/suche/suche.jsp" />
 		<put-attribute name="current" value="suche" />
 	</definition>
+	
+	
+	<definition name="miniMenu" extends="defaultTemplate">
+		<put-attribute name="miniMenu" value="/WEB-INF/views/handbuch/miniMenu.jsp" />
+		<put-attribute name="current" value="handbuch" />
+	</definition>
 
 	
 	

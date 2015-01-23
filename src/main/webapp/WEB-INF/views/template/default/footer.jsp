@@ -20,7 +20,7 @@
 				</div>
 				<div class="col-md-3">
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="#">Benutzerhandbuch</a></li>
+						<li><a href="/crm/handbuch">Benutzerhandbuch</a></li>
 
 					</ul>
 				</div>

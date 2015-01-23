@@ -28,7 +28,8 @@
 												class="form-control" id="cId" placeholder="Kundennummer" />
 										</div>
 										<div class="form-group">
-											<label for="vorname">Vorname</label> <input type="text"
+											<label for="vorname">Vorname</label> 
+											<input type="text"
 												class="form-control" id="vorname" placeholder="Vorname" />
 										</div>
 										<div class="form-group">

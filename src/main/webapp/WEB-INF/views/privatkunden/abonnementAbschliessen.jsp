@@ -7,7 +7,8 @@
 
 		<div class="body">
 			<h1>Privatkunden - Abonnement abschließen</h1>
-
+			<a href="/crm/handbuch/kapitel1">Hilfe</a>
+			
 			<form name="abschliessen" method="POST"
 				action="/crm/privatkunden/submitAddAbo">
 

@@ -8,6 +8,8 @@
 		<put-attribute name="title" 	value="Home" />
 		<put-attribute name="header" 	value="/WEB-INF/views/template/default/header.jsp" />
 		<put-attribute name="menu" 		value="/WEB-INF/views/template/default/menu.jsp" />
+		<put-attribute name="miniMenu" 		value="/WEB-INF/views/handbuch/miniMenu.jsp" />
+		
 		<put-attribute name="body" 		value="" />
 		<put-attribute name="footer" 	value="/WEB-INF/views/template/default/footer.jsp" />
 	</definition>
