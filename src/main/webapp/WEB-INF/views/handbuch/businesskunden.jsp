@@ -4,10 +4,14 @@
 		
 		<%@include file="/WEB-INF/views/handbuch/miniMenu.jsp" %>
 		
-		<h1>Thema 1</h1>
+		<h1>Geschäftskunden</h1>
 		<div class="cheapter" style="width: 150px; background-color: #71B234; margin-left: 100px;">
-			<p>Test Test Test</p>
-
+			<p>GeschäftskundenGeschäftskundenGeschäftskundenGeschäftskundenGeschäftskundenGeschäftskunden Test Test</p>
+			
+			<div id="bestellungBearbeiten">
+			
+				
+			</div>
 		</div>
 			
 	</tiles:putAttribute>

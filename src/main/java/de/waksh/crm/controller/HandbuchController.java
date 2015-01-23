@@ -24,15 +24,20 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 	@RequestMapping(value = "/handbuch", method = RequestMethod.GET)
 	public String handbuch(Model model) {
 		logger.info("Suche!");
-		return "/handbuch/miniMenu";
+		return "/handbuch/overview";
 	}
 	
-	@RequestMapping(value = "/handbuch/kapitel1", method = RequestMethod.GET)
+	@RequestMapping(value = "/handbuch/businesskunden", method = RequestMethod.GET)
 	public String kapitel1(Model model) {
 		logger.info("Suche!");
-		return "/handbuch/kapitel1";
+		return "/handbuch/businesskunden";
 	}
-
+	
+	@RequestMapping(value = "/handbuch/privatkunden", method = RequestMethod.GET)
+	public String privatkunden(Model model) {
+		logger.info("Suche!");
+		return "/handbuch/privatkunden";
+	}
 
 	
 }
