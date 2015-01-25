@@ -59,8 +59,10 @@
 								</div>
 							</div>
 							<div class="panel-footer">
-
-								<a href="/crm/privatkunden/aboAbschliessen" class="btn btn-primary btn-lg">Abonnement abschließen</a>
+								<div class="panelStammdaten">
+									<a href="/crm/privatkunden/aboAbschliessen" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span> Abonnement abschließen</a>
+									<a href="/crm/privatkunden/aboKuendigen" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-remove"></span> Abonnement kündigen</a>
+								</div>
 							</div>
 						</div>
 					</div>

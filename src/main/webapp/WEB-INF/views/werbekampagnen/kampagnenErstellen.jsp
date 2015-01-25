@@ -8,7 +8,7 @@
 		<h1>Werbekampagne erstellen</h1>
 		<dl class="accordion">
 		
-		<dt><a href="" class="accTitle">Sonderausgabe</a></dt>
+		<dt><a href="" class="accTitle">Sonderausgabe  <span class="glyphicon glyphicon-pencil"></span> </a></dt>
 		<dd>
 		<div class="row">
 					<div class="col-md-8">
@@ -89,9 +89,12 @@
 										<div class="form-group">
 											<label for="name"> Notiz</label>
 											<textarea name="message" id="notiz" class="form-control"
-												rows="12" cols="25" required="required" placeholder="Notiz"></textarea>
+												rows="12" cols="25"  placeholder="Notiz"></textarea>
 										</div>
-										<input type="submit" class="btn btn-primary pull-right" value="Kampagne erstellen" />
+										
+									        <button type="submit" class="btn btn-primary pull-right">
+									          <span class="glyphicon glyphicon-ok"></span> Kampagne erstellen 
+									        </button>
 									</div>
 								</div>
 							</form>
@@ -101,7 +104,7 @@
 
 		</dd>
 		
-		<dt><a href="" class="accTitle">Beilage</a></dt>
+		<dt><a href="" class="accTitle">Beilage  <span class="glyphicon glyphicon-pencil"></span></a></dt>
 		<dd>
 		
 			<div class="row">
@@ -183,7 +186,7 @@
 										<div class="form-group">
 											<label for="name"> Notiz</label>
 											<textarea name="message" id="notiz" class="form-control"
-												rows="12" cols="25" required="required" placeholder="Notiz"></textarea>
+												rows="12" cols="25"  placeholder="Notiz"></textarea>
 										</div>
 										<input type="submit" class="btn btn-primary pull-right" value="Kampagne erstellen" />
 									</div>
@@ -196,7 +199,7 @@
 			
 		</dd>
 		
-		<dt><a href="" class="accTitle">Geburtstage</a></dt>
+		<dt><a href="" class="accTitle">Geburtstage  <span class="glyphicon glyphicon-pencil"></span></a></dt>
 		<dd>
 		<div class="row">
 					<div class="col-md-8">
@@ -244,7 +247,7 @@
 										<div class="form-group">
 											<label for="name"> Notiz</label>
 											<textarea name="message" id="notiz" class="form-control"
-												rows="12" cols="25" required="required" placeholder="Notiz"></textarea>
+												rows="12" cols="25"  placeholder="Notiz"></textarea>
 										</div>
 										<input type="submit" class="btn btn-primary pull-right" value="Kampagne erstellen" />
 									</div>

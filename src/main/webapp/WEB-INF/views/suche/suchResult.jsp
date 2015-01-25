@@ -63,7 +63,11 @@
 								<td>Otto</td>
 								<td>Privatkunde</td>
 								<td>Kiel</td>
-								<td><a href="/crm/privatkunden/stammdaten">auswählen</a></td>
+								<td>
+								<a href="/crm/privatkunden/stammdaten" class="btn btn-primary btn-sm">
+						        	<span class="glyphicon glyphicon-zoom-in"></span> auswählen
+						        </a>
+								</td>
 							</tr>
 							<tr>
 								<td>2</td>
@@ -72,7 +76,11 @@
 								<td>Thornton</td>
 								<td>Privatkunde</td>
 								<td>Kiel</td>
-								<td><a href="/crm/privatkunden/stammdaten">auswählen</a></td>
+								<td>
+								<a href="/crm/privatkunden/stammdaten" class="btn btn-primary btn-sm">
+						        	<span class="glyphicon glyphicon-zoom-in"></span> auswählen
+						        </a>
+								</td>
 							</tr>
 							<tr>
 								<td>3</td>
@@ -81,7 +89,11 @@
 								<td>the Bird</td>
 								<td>Geschäftskunde</td>
 								<td>Kiel</td>
-								<td><a href="/crm/suche/${customer.cId}">auswählen</a></td>
+								<td>
+								<a href="/crm/suche/${customer.cId}" class="btn btn-primary btn-sm">
+						        	<span class="glyphicon glyphicon-zoom-in"></span> auswählen
+						        </a>
+								</td>
 							</tr>
 							
 							

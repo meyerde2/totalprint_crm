@@ -13,6 +13,10 @@
 
 
 					<div class="row form-group">
+						<div class="infoPanel">
+							<a href="/crm/privatkunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>Vorname Name</a>
+							<a href="/crm/handbuch/privatkunden"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
+						</div>
 						<div class="col-xs-12">
 							<ul class="nav nav-pills nav-justified thumbnail setup-panel">
 								<li class="active"><a href="#step-1">
@@ -63,7 +67,7 @@
 									</tr>
 								</table>
 
-								<button id="activate-step-2" class="btn btn-primary btn-lg">Weiter</button>
+								<button id="activate-step-2" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></button>
 
 
 							</div>
@@ -120,7 +124,7 @@
 									</tr>
 
 								</table>
-								<button id="activate-step-3" class="btn btn-primary btn-lg">Weiter</button>
+								<button id="activate-step-3" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></button>
 							</div>
 						</div>
 					</div>
@@ -168,7 +172,7 @@
 											id="ort" placeholder="Ort"></td>
 									</tr>
 								</table>
-								<button id="activate-step-4" class="btn btn-primary btn-lg">Weiter</button>
+								<button id="activate-step-4" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></button>
 							</div>
 						</div>
 					</div>
@@ -199,7 +203,7 @@
 											class="form-control" name="numberTZ" id="numberTZ" placeholder="Anzahl"></td>
 									</tr>
 								</table>
-								<button id="activate-step-5" class="btn btn-primary btn-lg">Weiter</button>
+								<button id="activate-step-5" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></button>
 							</div>
 						</div>
 					</div>
@@ -226,24 +230,23 @@
 									</tr>
 
 								</table>
-
-			Die eingegebenen Daten müssen an das ERP System geliefert werden:<br>
-Kunden ID<br>
-Straße<br>
-Nr.<br>
-PLZ<br>
-Ort<br>
-IBAN<br>
-BIC<br>
-Name der Bank<br>
-Kontoinhaber<br>
-Menge Zeitschrift A<br>
-Menge Zeitschrift B<br>
-Menge Tageszeitung<br>
+	
+										Die eingegebenen Daten müssen an das ERP System geliefert werden:<br>
+									Kunden ID<br>
+									Straße<br>
+									Nr.<br>
+									PLZ<br>
+									Ort<br>
+									IBAN<br>
+									BIC<br>
+									Name der Bank<br>
+									Kontoinhaber<br>
+									Menge Zeitschrift A<br>
+									Menge Zeitschrift B<br>
+									Menge Tageszeitung<br>
 			
 
-								<button id="submitAbo" class="btn btn-primary btn-lg">Bearbeitung
-									abschließen</button>
+								<button type="submit" id="submitAbo" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-ok"></span> Bearbeitung abschließen</button>
 							</div>
 						</div>
 					</div>

@@ -6,14 +6,22 @@
 		<title>Privatkunden</title>
 
 		<div class="aboAbschliessen">
+			<div>
 			<h1>Privatkunden - Abonnement abschlieﬂen</h1>
-			<a href="/crm/handbuch/kapitel1">Hilfe</a>
+
+			</div>
+
 			
 			<form name="abschliessen" method="POST"
 				action="/crm/privatkunden/submitAddAbo">
 
 
 					<div class="row form-group">
+					<div class="infoPanel">
+							<a href="/crm/privatkunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>Vorname Name</a>
+							<a href="/crm/handbuch/privatkunden"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
+					</div>
+						
 						<div class="col-xs-12">
 							<ul class="nav nav-pills nav-justified thumbnail setup-panel">
 								<li class="active"><a href="#step-1">
@@ -34,6 +42,8 @@
 								</a></li>
 							</ul>
 						</div>
+						
+						
 					</div>
 					<div class="row setup-content" id="step-1">
 						<div class="col-xs-12">
@@ -55,7 +65,7 @@
 									</tr>
 								</table>
 
-								<button id="activate-step-2" class="btn btn-primary btn-lg">Weiter</button>
+								<button id="activate-step-2" class="btn btn-primary btn-md">Weiter<span class="glyphicon glyphicon-chevron-right"></span></button>
 
 
 							</div>
@@ -112,7 +122,7 @@
 									</tr>
 
 								</table>
-								<button id="activate-step-3" class="btn btn-primary btn-lg">Weiter</button>
+								<button id="activate-step-3" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></button>
 							</div>
 						</div>
 					</div>
@@ -160,7 +170,7 @@
 											id="ort" placeholder="Ort"></td>
 									</tr>
 								</table>
-								<button id="activate-step-4" class="btn btn-primary btn-lg">Weiter</button>
+								<button id="activate-step-4" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></button>
 							</div>
 						</div>
 					</div>
@@ -191,7 +201,7 @@
 									werden? <input type="checkbox" id="aboYes">
 								</p>
 
-								<button id="submitAbo" class="btn btn-primary btn-lg">Abonnement
+								<button id="submitAbo" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-ok"></span>  Abonnement
 									abschlieﬂen</button>
 							</div>
 						</div>

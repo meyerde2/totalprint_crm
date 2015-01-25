@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -21,6 +24,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -57,9 +61,26 @@ public class HomeController {
 
 		model.addAttribute("serverTime", formattedDate);
 
+		
+		
 		return "home";
 	}
 
+	@RequestMapping(value = "/hello")
+    public String hello(
+            @CookieValue(value = "hitCounter", defaultValue = "0") Long hitCounter,
+            HttpServletResponse response) {
+ 
+        // increment hit counter
+        hitCounter++;
+ 
+        // create cookie and set it in response
+        Cookie cookie = new Cookie("hitCounter", hitCounter.toString());
+        response.addCookie(cookie);
+ 
+        // render hello.jsp page
+        return "home";
+    }
 	@RequestMapping(value = "test", method = RequestMethod.GET)
 	public String test(Model model) {
 		String greetings = "Greetings, Spring MVC!";

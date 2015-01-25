@@ -49,39 +49,39 @@
             	<ul class="nav navbar-nav">
                     <!-- Beispiel EintrÃ¤ge fÃ¼r die Navigation-->
              
-					<li class="${theString=='/crm/' ? 'active' : ''}"><a href="${homeUrl}">CRM</a></li>
-					<li class="<c:if test="${fn:contains(theString, 'suche')}">active</c:if>"><a href="${suche}">Suche</a></li>
+					<li class="${theString=='/crm/' ? 'active' : ''}"><a href="${homeUrl}"><span class="glyphicon glyphicon-home"></span>  CRM</a></li>
+					<li class="<c:if test="${fn:contains(theString, 'suche')}">active</c:if>"><a href="${suche}"> <span class="glyphicon glyphicon-search"></span>  Suche</a></li>
 
-					<li class="dropdown <c:if test="${fn:contains(theString, 'privatkunden')}">active</c:if>"> <a class="dropdown-toggle" data-toggle="dropdown" href="${privatkunden}">Privatkunden<span class="caret"></span></a>
+					<li class="dropdown <c:if test="${fn:contains(theString, 'privatkunden')}">active</c:if>"> <a class="dropdown-toggle" data-toggle="dropdown" href="${privatkunden}"><span class="glyphicon glyphicon-th-list"></span>  Privatkunden<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="${pStammdaten}">Stammdaten</a></li>
+							<li><a href="${pStammdaten}"><span class="glyphicon glyphicon-th-large"></span>  Stammdaten</a></li>
 							<li class="divider"></li>
-							<li><a href="${aboAbschliessen}">Abonnement abschließen</a></li>
-							<li><a href="${aboKuendigen}">Abonnement kündigen</a></li>
+							<li><a href="${aboAbschliessen}"><span class="glyphicon glyphicon-plus"></span>  Abonnement abschließen</a></li>
+							<li><a href="${aboKuendigen}"><span class="glyphicon glyphicon-remove"></span>  Abonnement kündigen</a></li>
 							<li class="divider"></li>
-							<li><a href="${pActivity}">Aktivitäten</a></li>
-							<li><a href="${pActivityAnlegen}">Aktivitäten anlegen</a></li>
+							<li><a href="${pActivity}"><span class="glyphicon glyphicon-th-large"></span>  Aktivitäten</a></li>
+							<li><a href="${pActivityAnlegen}"><span class="glyphicon glyphicon-plus"></span>  Aktivitäten anlegen</a></li>
 						</ul>
 					</li>
 
-					<li class="dropdown <c:if test="${fn:contains(theString, 'businesskunden')}">active</c:if>"><a class="dropdown-toggle" data-toggle="dropdown" href="${businesskunden}">Geschäftskunden<span class="caret"></span></a>
+					<li class="dropdown <c:if test="${fn:contains(theString, 'businesskunden')}">active</c:if>"><a class="dropdown-toggle" data-toggle="dropdown" href="${businesskunden}"><span class="glyphicon glyphicon-th-list"></span>  Geschäftskunden<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 
-							<li><a href="${bStammdaten}">Stammdaten</a></li>
+							<li><a href="${bStammdaten}"><span class="glyphicon glyphicon-th-large"></span> Stammdaten</a></li>
 							<li class="divider"></li>
-							<li><a href="${bestellungBearbeiten}">Bestellung
+							<li><a href="${bestellungBearbeiten}"><span class="glyphicon glyphicon-pencil"></span>  Bestellung
 									bearbeiten</a></li>
 							<li class="divider"></li>
-							<li><a href="${bActivity}">Aktivitäten</a></li>
-							<li><a href="${bActivityAnlegen}">Aktivitäten anlegen</a></li>
+							<li><a href="${bActivity}"><span class="glyphicon glyphicon-th-large"></span>  Aktivitäten</a></li>
+							<li><a href="${bActivityAnlegen}"><span class="glyphicon glyphicon-plus"></span>  Aktivitäten anlegen</a></li>
 						</ul>
 					</li>
 					
-					<li class="dropdown <c:if test="${fn:contains(theString, 'werbekampagne')}">active</c:if>"><a class="dropdown-toggle" data-toggle="dropdown" href="${werbekampagnen}">Werbekampagnen<span class="caret"></span></a>
+					<li class="dropdown <c:if test="${fn:contains(theString, 'werbekampagne')}">active</c:if>"><a class="dropdown-toggle" data-toggle="dropdown" href="${werbekampagnen}"><span class="glyphicon glyphicon-th-list"></span>   Werbekampagnen<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 	
-							<li><a href="${wUebersicht}">Kampagnenübersicht</a></li>
-							<li><a href="${wErstellen}">Kampagne erstellen</a></li>
+							<li><a href="${wUebersicht}"><span class="glyphicon glyphicon-th-large"></span>  Kampagnenübersicht</a></li>
+							<li><a href="${wErstellen}"><span class="glyphicon glyphicon-plus"></span>   Kampagne erstellen</a></li>
 	
 						</ul>
 					</li>
@@ -96,7 +96,8 @@
     	        
                 <!-- Beispiel EintrÃ¤ge fÃ¼r die Navigation-->
     	        <ul class="nav navbar-nav navbar-right">
-    	        	<li><a href="http://lvps87-230-14-183.dedicated.hosteurope.de/logout">Logout</a></li>
+    	        	<li><a href="http://lvps87-230-14-183.dedicated.hosteurope.de/logout"><span class="glyphicon glyphicon-log-out"></span>  Logout</a></li>
+
     	        </ul>
             </div>
        </nav>

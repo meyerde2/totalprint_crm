@@ -13,6 +13,10 @@
 			<div class="row">
 				<div class="col-md-8">
 					<div class="well well-sm">
+						 <div class="infoPanel">
+							<a href="/crm/privatkunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>Vorname Name</a>
+							<a href="/crm/handbuch/privatkunden"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
+						</div>
 						<div class="filterable">
 							<div class="panel-heading">
 								<h3 class="panel-title">Übersicht</h3>

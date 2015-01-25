@@ -51,9 +51,11 @@
 												type="radio" class="radio-inline" name="kundenart"
 												id="kundenart" value="businesskunde"> Geschäftskunde
 										</div>
-
-										<input type="submit" class="btn btn-primary pull-right"
-											value="Suchen" />
+								
+											  
+										<button type="submit" class="btn btn-primary pull-right">
+								          <span class="glyphicon glyphicon-search"></span> Suche 
+								        </button>
 									</div>
 
 									<div class="col-md-6">

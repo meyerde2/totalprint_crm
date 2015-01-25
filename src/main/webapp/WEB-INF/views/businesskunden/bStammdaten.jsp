@@ -54,7 +54,7 @@
 												</tr>
 												<tr>
 													<td>Email</td>
-													<td><a href="c">info@example.com</a></td>
+													<td><a href="c" class="glyphicon glyphicon-envelope">  info@example.com</a></td>
 												</tr>
 
 											</tbody>
@@ -63,11 +63,10 @@
 								</div>
 							</div>
 							<div class="panel-footer">
-								<a href="mailto:info@example.com"
-									data-original-title="Broadcast Message" data-toggle="tooltip"
-									type="button" class="btn btn-sm btn-primary"> <i
-									class="glyphicon glyphicon-envelope"></i>
-								</a>
+								<div class="panelStammdaten">
+									<a href="/crm/businesskunden/bestellungBearbeiten" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span> Bestellung bearbeiten</a>
+								</div>
+								
 							</div>
 						</div>
 					</div>
