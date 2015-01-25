@@ -6,10 +6,10 @@
 	
 
 		<title>Privatkunden</title>
-
-		<div class="body">
-			<h1>Privatkunden !</h1>
-
+		<h1>Privatkunden - Abonnement kündigen</h1>
+		
+		<div class="well">
+		
 			<form method="POST" action="/crm/submitAddAbo">
 				<table>
 					<tr>
@@ -28,19 +28,19 @@
 							id="vorname"></td>
 					</tr>
 					<tr>
-						<td><label>Abonnement?</label></td>
+						<td><label>Kündigen?</label></td>
 						<td><input type="checkbox" class="checkbox-inline" name="abo"
 							id="abo" value="ja"></td>
 					</tr>
 					<tr>
-						<td><label>Wirksamkeitsdatum der Kündigung</label></td>
+						<td><label>Kündigung zum</label></td>
 						<td><input type="text" class="form-control" name="dateUntil"
 							id="dateUntil"></td>
 					</tr>
 					<tr>
 						<td></td>
-						<td colspan="2"><input type="submit" class="form-control"
-							value="Abonnement abschließen" /></td>
+						<td colspan="2"><input type="submit" class="btn btn-primary"
+							value="Abonnement kündigen" /></td>
 					</tr>
 				</table>
 			</form>

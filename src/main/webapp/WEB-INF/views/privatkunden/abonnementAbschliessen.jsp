@@ -5,14 +5,14 @@
 
 		<title>Privatkunden</title>
 
-		<div class="body">
+		<div class="aboAbschliessen">
 			<h1>Privatkunden - Abonnement abschließen</h1>
 			<a href="/crm/handbuch/kapitel1">Hilfe</a>
 			
 			<form name="abschliessen" method="POST"
 				action="/crm/privatkunden/submitAddAbo">
 
-				<div class="container">
+
 					<div class="row form-group">
 						<div class="col-xs-12">
 							<ul class="nav nav-pills nav-justified thumbnail setup-panel">
@@ -196,7 +196,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+		
 			</form>
 		</div>
 		<script>

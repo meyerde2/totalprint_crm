@@ -9,8 +9,9 @@
 			<h1>Geschäftskunden - Stammdaten</h1>
 
 			<div class="container">
+				<div class="suche">
 				<div class="row">
-						<div class="well well-sm" style="width:900px;">
+						<div class="well well-sm">
 							<h3 class="panel-title">Unternehmen GmbH</h3>
 							<div class="row">
 								<div class="col-md-6">
@@ -69,6 +70,7 @@
 								</a>
 							</div>
 						</div>
+					</div>
 					</div>
 				</div>
 			</div>

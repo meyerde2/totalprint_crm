@@ -2,10 +2,43 @@
 modifiziertes Stylesheet für das CRM-Programm
 */
 
+h2{
+	font-size: 2em;
+}
+
+.container{
+	
+	width: 1024px; 
+}
 #notiz{
 	max-width:300px;
 }
 
+.panel-title{
+	
+	padding: 20px;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+.well{
+	
+	width: 800px;
+}
+
+.table-user-information{
+	margin-left: 40px;	
+	width: 550px;
+}
+
+.suche .row .form-group{
+	width: 150px;
+}
+
+
+.aboAbschliessen .row, .bestellungBearbeiten .row{
+	
+	width: 830px;
+}
 
 /*
 	Handbuch-Style
@@ -22,3 +55,6 @@ modifiziertes Stylesheet für das CRM-Programm
 	margin-left: 250px;
 
 }
+/*
+	End
+*/

@@ -20,7 +20,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="cId"> Kundennummer</label> <input type="text"
-												class="form-control" id="cId" placeholder="Kundennummer" />
+												class="form-control" id="cId" placeholder="Kundennummer" required="required" />
 										</div>
 										<div class="form-group">
 											<label for="date"> Datum</label> <input
@@ -29,8 +29,8 @@
 										</div>
 
 										<div class="form-group">
-											<label for="ma"> Mitarbeitername</label> <select
-												class="form-control" name="ma" size="1">
+											<label for="ma"> Mitarbeitername</label> 
+											<select class="form-control" name="ma" size="1" >
 												<option>---bitte wählen---</option>
 												<option>Schweini</option>
 												<option>Poldi</option>
@@ -40,8 +40,8 @@
 											</select>
 										</div>
 										<div class="form-group">
-											<label for="ma"> Kontaktmedium</label> <select
-												class="form-control" name="medium" size="1">
+											<label for="ma"> Kontaktmedium</label> 
+											<select class="form-control" name="medium" size="1">
 												<option>---bitte wählen---</option>
 												<option>Telefon</option>
 												<option>E-Mail</option>
@@ -49,9 +49,8 @@
 											</select>
 										</div>
 										<div class="form-group">
-											<label for="ma"> Kontaktgrund</label> <select
-												class="form-control" name="grund" id="grund" class="grund"
-												size="1">
+											<label for="ma"> Kontaktgrund</label> 
+											<select class="form-control" name="grund" id="grund" class="grund" size="1">
 												<option value="">---bitte wählen---</option>
 												<option value="abo">Abonnementabschluss</option>
 												<option value="kuendigung">Kündigung</option>

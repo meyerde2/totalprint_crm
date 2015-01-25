@@ -5,13 +5,13 @@
 
 		<title>Geschäftskunden</title>
 
-		<div class="body">
+		<div class="bestellungBearbeiten">
 			<h1>Geschäftskunden - Bestellung bearbeiten</h1>
 
 			<form name="abschliessen" method="POST"
 				action="/crm/privatkunden/submitAddAbo">
 
-				<div class="container">
+
 					<div class="row form-group">
 						<div class="col-xs-12">
 							<ul class="nav nav-pills nav-justified thumbnail setup-panel">
@@ -177,7 +177,7 @@
 					<div class="row setup-content" id="step-4">
 						<div class="col-xs-12">
 							<div class="col-md-12 well text-center">
-								<h1 class="text-center">Lieferadresse</h1>
+								<h1 class="text-center">Anzahl</h1>
 
 								<table>
 									<tr>
@@ -247,9 +247,6 @@ Menge Tageszeitung<br>
 							</div>
 						</div>
 					</div>
-
-
-				</div>
 
 			</form>
 		</div>

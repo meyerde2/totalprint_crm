@@ -6,59 +6,72 @@
 
 	<definition name="index" extends="defaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/index.jsp" />
+				<put-attribute name="current" value="home" cascade="true"/>
+		
+	</definition>
+	
+	<definition name="home" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
+		<put-attribute name="title" value="TItle" />
+		<put-attribute name="current" value="home" cascade="true"/>
 	</definition>
 	
 	<definition name="result" extends="defaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/privatkunden/privatkunden/result.jsp" />
+				<put-attribute name="current" value="home" cascade="true"/>
+		
 	</definition>
 		
 	<definition name="addCustomer" extends="defaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/privatkunden/addCustomer.jsp" />
+				<put-attribute name="current" value="home" cascade="true"/>
+		
 	</definition>
 	
 	<definition name="suche" extends="defaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/suche/suche.jsp" />
-		<put-attribute name="current" value="suche" />
+		<put-attribute name="current" value="suche" cascade="true"/>
+		<put-attribute name="title" value="suche"/>
 	</definition>
 	
 	<definition name="miniMenu" extends="defaultTemplate">
 		<put-attribute name="miniMenu" value="/WEB-INF/views/handbuch/miniMenu.jsp" />
-		<put-attribute name="current" value="handbuch" />
+		<put-attribute name="current" value="handbuch" cascade="true" />
 	</definition>
 
 	<definition name="privatkunden" extends="defaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/privatkunden/privatkunden.jsp" />
-		<put-attribute name="current" value="privatkunden" />
+		<put-attribute name="current" value="privatkunden"  cascade="true"/>
 	</definition>
 		<definition name="pStammdaten" extends="defaultTemplate">
 			<put-attribute name="body" value="/WEB-INF/views/privatkunden/pStammdaten.jsp" />
-			<put-attribute name="current" value="pStammdaten" />
+			<put-attribute name="current" value="privatkunden" cascade="true"/>
 		</definition>
 		<definition name="aboAbschliessen" extends="defaultTemplate">
 			<put-attribute name="body" value="/WEB-INF/views/privatkunden/abonnementAbschliessen.jsp" />
-			<put-attribute name="current" value="aboAbschliessen" />
+			<put-attribute name="current" value="aboAbschliessen" cascade="true" />
 		</definition>
 		<definition name="aboKuendingen" extends="defaultTemplate">
 			<put-attribute name="body" value="/WEB-INF/views/privatkunden/abonnementKuendingen.jsp" />
-			<put-attribute name="current" value="aboKuendingen" />
+			<put-attribute name="current" value="aboKuendingen"  cascade="true"/>
 		</definition>
 		<definition name="activities" extends="defaultTemplate">
 			<put-attribute name="body" value="/WEB-INF/views/privatkunden/aktivitaeten.jsp" />
-			<put-attribute name="current" value="activities" />
+			<put-attribute name="current" value="activities" cascade="true"/>
 		</definition>
 		<definition name="activitiesAnlegen" extends="defaultTemplate">
 			<put-attribute name="body" value="/WEB-INF/views/privatkunden/aktivitaetenAnlegen.jsp" />
-			<put-attribute name="current" value="activitiesAnlegen" />
+			<put-attribute name="current" value="activitiesAnlegen" cascade="true"/>
 		</definition>
 	
 	<definition name="businesskunden" extends="defaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/businesskunden/businesskunden.jsp" />
-		<put-attribute name="current" value="businesskunden" />
+		<put-attribute name="current" value="businesskunden" cascade="true"/>
 	</definition>
 	
 	<definition name="werbekampagnen" extends="defaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/werbekampagnen/werbekampagnen.jsp" />
-		<put-attribute name="current" value="werbekampagnen" />
+		<put-attribute name="current" value="werbekampagnen" cascade="true"/>
 	</definition>
 	
 </tiles-definitions>
