@@ -13,6 +13,9 @@
 	<script src="/crm/resources/jquery/messages_de.js"></script>
 	<script src="/crm/resources/jquery/additional-methods.js"></script>
 	
+	<link href="/crm/resources/css/star-rating.css" rel="stylesheet" type="text/css"/></link>
+    <script src="/crm/resources/jquery/star-rating.js" type="text/javascript"></script>
+	
 	<link rel="icon" type="image/png" href="/crm/resources/images/favicon.png"></link>
 	
 	

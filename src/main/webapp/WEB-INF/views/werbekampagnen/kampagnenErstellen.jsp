@@ -1,313 +1,346 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-
 <tiles:insertDefinition name="defaultTemplate">
-	<tiles:putAttribute name="body">
-
-		<title>Werbekampagne erstellen</title>
-
-		<h1>Werbekampagne erstellen</h1>
-		<dl class="accordion">
-		
-		<dt><a href="" class="accTitle">Sonderausgabe  <span class="glyphicon glyphicon-pencil"></span> </a></dt>
-		<dd>
-		<div class="row">
-					<div class="col-md-8">
-						<div class="well well-sm">
-
-							<form name="bestellung" method="POST"
-								action="/crm/suche/submitSearch">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="kName">Kampagnenbezeichnung</label> <input type="text" 
-											class="form-control" id="kName" placeholder="Kampagnenbezeichnung" />
-										</div>
-										<div class="form-group">
-											<label for="date">Datum</label> 
-											<input type="text" class="form-control" id="date" placeholder="Datum" />
-										</div>
-										<div class="form-group">
-											<label for="grund">Grund</label> 
-											<select class="form-control" name="grund" size="1" >
-												<option>---bitte wählen---</option>
-												<option>Neukundengewinnung</option>
-												<option>Event</option>
-												<option>Kundenbindung</option>
-												<option>Sonstiges</option>
-											</select>
-										</div>
-										<div class="form-group">
-											<label for="zielgruppe">Zielgruppe</label> 
-											<select class="form-control" name="zielgruppe" size="1" >
-												<option>---bitte wählen---</option>
-												<option>Kunden, die die Zeitschrift A kaufen</option>
-												<option>Kunden, die die Zeitschrift B kaufen</option>
-												<option>Kunden, die die Tageszeitung abonnieren</option>
-												<option>Kunden in einem bestimmten Gebiet</option>
-												<option>Kunden in einem bestimmten Alter</option>
-											</select>
-										</div>
-										<div class="form-group">
-											<label for="thema">Thema</label> 
-											<select class="form-control" name="thema" size="1" >
-												<option>---bitte wählen---</option>
-												<option>Angeln</option>
-												<option>Sport</option>
-												<option>Kunst</option>
-											</select>
-										</div>
-										<div class="form-group">
-											<label for="aExemplare">Anzahl der Exemplare</label> <input type="text"
-												class="form-control" id="aExemplare" placeholder="Anzahl der Exemplare" />
-										</div>
-										<div class="form-group">
-											<label for="vExemplare">Anzahl der verkauften Exemplare</label> <input type="text"
-												class="form-control" id="vExemplare" placeholder="Verkaufte Exemplare" />
-										</div>
-										<div class="form-group">
-											<label for="inserate">Anzahl der Inserate</label> <input type="text"
-												class="form-control" id="inserate" placeholder="Anzahl der Inserate" />
-										</div>
-
-				
-									</div>
-
-									<div class="col-md-6">
-
-										<div class="form-group">
-											<label for="kosten">Kosten</label> <input type="text"
-												class="form-control" id="kosten" placeholder="Kosten" />
-										</div>
-										<div class="form-group">
-											<label for="umsatz">Umsatz</label> <input type="text"
-												class="form-control" id="umsatz" placeholder="Umsatz" />
-										</div>
-										<div class="form-group">
-											<label for="resonanz">Resonanz</label> <input type="text"
-												class="form-control" id="resonanz" placeholder="Resonanz" />
-										</div>
-										<div class="form-group">
-											<label for="name"> Notiz</label>
-											<textarea name="message" id="notiz" class="form-control"
-												rows="12" cols="25"  placeholder="Notiz"></textarea>
-										</div>
-										
-									        <button type="submit" class="btn btn-primary pull-right">
-									          <span class="glyphicon glyphicon-ok"></span> Kampagne erstellen 
-									        </button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-
-		</dd>
-		
-		<dt><a href="" class="accTitle">Beilage  <span class="glyphicon glyphicon-pencil"></span></a></dt>
-		<dd>
-		
-			<div class="row">
-					<div class="col-md-8">
-						<div class="well well-sm">
-
-							<form name="bestellung" method="POST"
-								action="/crm/suche/submitSearch">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="kName">Kampagnenbezeichnung</label> <input type="text" 
-											class="form-control" id="kName" placeholder="Kampagnenbezeichnung" />
-										</div>
-										<div class="form-group">
-											<label for="date">Datum</label> 
-											<input type="text" class="form-control" id="date" placeholder="Datum" />
-										</div>
-										<div class="form-group">
-											<label for="grund">Grund</label> 
-											<select class="form-control" name="grund" size="1" >
-												<option>---bitte wählen---</option>
-												<option>Neukundengewinnung</option>
-												<option>Event</option>
-												<option>Kundenbindung</option>
-												<option>Sonstiges</option>
-											</select>
-										</div>
-										<div class="form-group">
-											<label for="zielgruppe">Zielgruppe</label> 
-											<select class="form-control" name="zielgruppe" size="1" >
-												<option>---bitte wählen---</option>
-												<option>Kunden, die die Zeitschrift A kaufen</option>
-												<option>Kunden, die die Zeitschrift B kaufen</option>
-												<option>Kunden, die die Tageszeitung abonnieren</option>
-												<option>Kunden in einem bestimmten Gebiet</option>
-												<option>Kunden in einem bestimmten Alter</option>
-											</select>
-										</div>
-										<div class="form-group">
-											<label for="thema">Thema</label> 
-											<select class="form-control" name="thema" size="1" >
-												<option>---bitte wählen---</option>
-												<option>Angeln</option>
-												<option>Sport</option>
-												<option>Kunst</option>
-											</select>
-										</div>
-										<div class="form-group">
-											<label for="aExemplare">Anzahl der Exemplare</label> <input type="text"
-												class="form-control" id="aExemplare" placeholder="Anzahl der Exemplare" />
-										</div>
-										<div class="form-group">
-											<label for="vExemplare">Anzahl der verkauften Exemplare</label> <input type="text"
-												class="form-control" id="vExemplare" placeholder="Verkaufte Exemplare" />
-										</div>
-										<div class="form-group">
-											<label for="inserate">Anzahl der Inserate</label> <input type="text"
-												class="form-control" id="inserate" placeholder="Anzahl der Inserate" />
-										</div>
-
-				
-									</div>
-
-									<div class="col-md-6">
-
-										<div class="form-group">
-											<label for="kosten">Kosten</label> <input type="text"
-												class="form-control" id="kosten" placeholder="Kosten" />
-										</div>
-										<div class="form-group">
-											<label for="umsatz">Umsatz</label> <input type="text"
-												class="form-control" id="umsatz" placeholder="Umsatz" />
-										</div>
-										<div class="form-group">
-											<label for="resonanz">Resonanz</label> <input type="text"
-												class="form-control" id="resonanz" placeholder="Resonanz" />
-										</div>
-										<div class="form-group">
-											<label for="name"> Notiz</label>
-											<textarea name="message" id="notiz" class="form-control"
-												rows="12" cols="25"  placeholder="Notiz"></textarea>
-										</div>
-										<input type="submit" class="btn btn-primary pull-right" value="Kampagne erstellen" />
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-
+<tiles:putAttribute name="body">
+<title>Werbekampagne erstellen</title>
+<h1>Werbekampagne erstellen</h1>
+<div id="kampagneErstellen">
+   <dl class="accordion">
+      <a href="" class="accTitle">
+         <dt>Sonderausgabe <span class="glyphicon glyphicon-pencil"></span> </dt>
+      </a>
+      <dd>
+         <div class="row">
+            <div class="col-md-8">
+               <div class="well well-sm">
+                  <form name="bestellung" method="POST"
+                     action="/crm/werbekampagnen/submitSonderausgabeErstellen">
+                     <div class="row">
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label for="kName">Kampagnenbezeichnung</label> <input type="text" 
+                                 class="form-control" name="kampagnenBez" id="kampagnenBez" placeholder="Kampagnenbezeichnung" />
+                           </div>
+                           <div class="form-group">
+                              <label for="dateBeginn">Startzeitpunkt</label> 
+                              <input type="text" class="form-control date" name="dateBeginn" id="dateBeginn" placeholder="Startzeitpunkt" />
+                           </div>
+                           <div class="form-group">
+                              <label for="dateUntil">Endzeitpunkt</label> 
+                              <input type="text" class="form-control date" name="dateUntil" id="dateUntil" placeholder="Endzeitpunkt" />
+                           </div>
+                           <div class="form-group">
+                              <label for="grund">Grund</label> 
+                              <select class="form-control" name="grundId" size="1" >
+                                 <option value="">---bitte wählen---</option>
+                                 <option value="1">Neukundengewinnung</option>
+                                 <option value="2">Event</option>
+                                 <option value="3">Kundenbindung</option>
+                                 <option value="4">Sonstiges</option>
+                              </select>
+                           </div>
+                           <div class="form-group">
+                              <label for="zielgruppe">Zielgruppe</label> 
+                              <select class="form-control" name="zielgruppeId" size="1" >
+                                 <option value="">---bitte wählen---</option>
+                                 <option value="1">Kunden, die die Zeitschrift A kaufen</option>
+                                 <option value="2">Kunden, die die Zeitschrift B kaufen</option>
+                                 <option value="3">Kunden, die die Tageszeitung abonnieren</option>
+                                 <option value="4">Kunden in einem bestimmten Gebiet</option>
+                                 <option value="5">Kunden in einem bestimmten Alter</option>
+                              </select>
+                           </div>
+                           <div class="form-group">
+                              <label for="thema">Thema</label> 
+                              <select class="form-control" name="themenId" size="1" >
+                                 <option value="">---bitte wählen---</option>
+                                 <option value="1">Angeln</option>
+                                 <option value="2">Sport</option>
+                                 <option value="3">Kunst</option>
+                              </select>
+                           </div>
+                           <div class="form-group">
+                              <label for="aExemplare">Anzahl der Exemplare</label> <input type="text"
+                                 class="form-control" name="anzahlExemplare" id="anzahlExemplare" placeholder="Anzahl der Exemplare" />
+                           </div>
+                           <div class="form-group">
+                              <label for="vExemplare">Anzahl der verkauften Exemplare</label> <input type="text"
+                                 class="form-control" name="anzahlVerkaufteExemplare" id="anzahlVerkaufteExemplare" placeholder="Verkaufte Exemplare" />
+                           </div>
+                           <div class="form-group">
+                              <label for="inserate">Anzahl der Inserate</label> <input type="text"
+                                 class="form-control" name="anzahlInserate" id="anzahlInserate" placeholder="Anzahl der Inserate" />
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label for="kosten">Kosten</label> <input type="text"
+                                 class="form-control" name="kosten" id="kosten" placeholder="Kosten" />
+                           </div>
+                           <div class="form-group">
+                              <label for="umsatz">Umsatz</label> <input type="text"
+                                 class="form-control" name="umsatz" id="umsatz" placeholder="Umsatz" />
+                           </div>
+                           <div class="form-group">
+                              <label for="resonanz">Resonanz</label>
+                                 <input class="rating-input" type="number" name="rating"/>
+                           </div>
+                           <div class="form-group">
+                              <label for="name">Notiz</label>
+                              <textarea name="notiz" id="notiz" class="form-control"
+                                 rows="12" cols="25"  placeholder="Notiz"></textarea>
+                           </div>
+                           <button type="submit" class="btn btn-primary pull-right">
+                           <span class="glyphicon glyphicon-ok"></span> Kampagne erstellen 
+                           </button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </dd>
+      <a href="" class="accTitle">
+         <dt>Beilage  <span class="glyphicon glyphicon-pencil"></span></dt>
+      </a>
+      <dd>
+         <div class="row">
+            <div class="col-md-8">
+               <div class="well well-sm">
+                  <form name="bestellung" method="POST"
+                     action="/crm/werbekampagnen/submitBeilageErstellen">
+                    <div class="row">
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label for="kName">Kampagnenbezeichnung</label> <input type="text" 
+                                 class="form-control" name="kampagnenBez" id="kampagnenBez" placeholder="Kampagnenbezeichnung" />
+                           </div>
+                           <div class="form-group">
+                              <label for="dateBeginn">Startzeitpunkt</label> 
+                              <input type="text" class="form-control date" name="dateBeginn" id="dateBeginn" placeholder="Startzeitpunkt" />
+                           </div>
+                           <div class="form-group">
+                              <label for="dateUntil">Endzeitpunkt</label> 
+                              <input type="text" class="form-control date" name="dateUntil" id="dateUntil" placeholder="Endzeitpunkt" />
+                           </div>
+                           <div class="form-group">
+                              <label for="grund">Grund</label> 
+                              <select class="form-control" name="grundId" size="1" >
+                                 <option value="">---bitte wählen---</option>
+                                 <option value="1">Neukundengewinnung</option>
+                                 <option value="2">Event</option>
+                                 <option value="3">Kundenbindung</option>
+                                 <option value="4">Sonstiges</option>
+                              </select>
+                           </div>
+                           <div class="form-group">
+                              <label for="zielgruppe">Zielgruppe</label> 
+                              <select class="form-control" name="zielgruppeId" size="1" >
+                                 <option value="">---bitte wählen---</option>
+                                 <option value="1">Kunden, die die Zeitschrift A kaufen</option>
+                                 <option value="2">Kunden, die die Zeitschrift B kaufen</option>
+                                 <option value="3">Kunden, die die Tageszeitung abonnieren</option>
+                                 <option value="4">Kunden in einem bestimmten Gebiet</option>
+                                 <option value="5">Kunden in einem bestimmten Alter</option>
+                              </select>
+                           </div>
+                           <div class="form-group">
+                              <label for="thema">Thema</label> 
+                              <select class="form-control" name="themenId" size="1" >
+                                 <option value="">---bitte wählen---</option>
+                                 <option value="1">Angeln</option>
+                                 <option value="2">Sport</option>
+                                 <option value="3">Kunst</option>
+                              </select>
+                           </div>
+                           <div class="form-group">
+                              <label for="aExemplare">Anzahl der Exemplare</label> <input type="text"
+                                 class="form-control" name="anzahlExemplare" id="anzahlExemplare" placeholder="Anzahl der Exemplare" />
+                           </div>
+                           <div class="form-group">
+                              <label for="vExemplare">Anzahl der verkauften Exemplare</label> <input type="text"
+                                 class="form-control" name="anzahlVerkaufteExemplare" id="anzahlVerkaufteExemplare" placeholder="Verkaufte Exemplare" />
+                           </div>
+                           <div class="form-group">
+                              <label for="inserate">Anzahl der Inserate</label> <input type="text"
+                                 class="form-control" name="anzahlInserate" id="anzahlInserate" placeholder="Anzahl der Inserate" />
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label for="kosten">Kosten</label> <input type="text"
+                                 class="form-control" name="kosten" id="kosten" placeholder="Kosten" />
+                           </div>
+                           <div class="form-group">
+                              <label for="umsatz">Umsatz</label> <input type="text"
+                                 class="form-control" name="umsatz" id="umsatz" placeholder="Umsatz" />
+                           </div>
+                           <div class="form-group">
+                              <label for="resonanz">Resonanz</label>
+                                 <input class="rating-input" type="number" name="rating"/>
+                           </div>
+                           <div class="form-group">
+                              <label for="name"> Notiz</label>
+                              <textarea name="notiz" id="notiz" class="form-control"
+                                 rows="12" cols="25"  placeholder="Notiz"></textarea>
+                           </div>
+                           <button type="submit" class="btn btn-primary pull-right">
+                           <span class="glyphicon glyphicon-ok"></span> Kampagne erstellen 
+                           </button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </dd>
+      <a href="" class="accTitle">
+         <dt>Geburtstage  <span class="glyphicon glyphicon-pencil"></span></dt>
+      </a>
+      <dd>
+         <div class="row">
+            <div class="col-md-8">
+               <div class="well well-sm">
+                  <form name="bestellung" method="POST"
+                     action="/crm/werbekampagnen/submitGeburtstageErstellen">
+                     <div class="row">
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label for="kName">Kampagnenbezeichnung</label> <input type="text" 
+                                 class="form-control" name="kampagnenBez" id="kampagnenBez" placeholder="Kampagnenbezeichnung" />
+                           </div>
+                           <div class="form-group">
+                              <label for="dateBeginn">Startzeitpunkt</label> 
+                              <input type="text" class="form-control date" name="dateBeginn" id="dateBeginn" placeholder="Startzeitpunkt" />
+                           </div>
+                           <div class="form-group">
+                              <label for="dateUntil">Endzeitpunkt</label> 
+                              <input type="text" class="form-control date" name="dateUntil" id="dateUntil" placeholder="Endzeitpunkt" />
+                           </div>
+                           <div class="form-group">
+                              <label for="grund">Grund</label> 
+                              <select class="form-control" name="grundId" size="1" >
+                                 <option value="">---bitte wählen---</option>
+                                 <option value="1">Neukundengewinnung</option>
+                                 <option value="2">Event</option>
+                                 <option value="3">Kundenbindung</option>
+                                 <option value="4">Sonstiges</option>
+                              </select>
+                           </div>
+                           <div class="form-group">
+                              <label for="kosten">Kosten</label> <input type="text"
+                                 class="form-control" name="kosten" id="kosten" placeholder="Kosten in Euro" />
+                           </div>
+                           <div class="form-group">
+                              <label for="grund">Geschenkart</label> 
+                              <select class="form-control" name="geschenkartId" size="1" >
+                                 <option value="">---bitte wählen---</option>
+                                 <option value="1">XYZ</option>
+                                 <option value="2">ABC</option>
+                              </select>
+                           </div>
+                           <div class="form-group">
+                              <label for="resonanz">Resonanz</label>
+                                 <input class="rating-input" type="number" name="rating" id="rating"/>
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label for="name"> Notiz</label>
+                              <textarea name="notiz" id="notiz" class="form-control"
+                                 rows="12" cols="25"  placeholder="Notiz"></textarea>
+                           </div>
+                           <input type="submit" class="btn btn-primary pull-right" value="Kampagne erstellen" />
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </dd>
+   </dl>
+</div>
+<style type="text/css">
+   #kampagneErstellen {
+   		width: 800px;
+   }
+   #kampagneErstellen dt {
+	   width: 800px;
+	   border-bottom: 1px solid black;
+	   font-size: 16px;
+   }
+   #kampagneErstellen a {
+	   display: block;
+	   color: black;
+   }
+   #kampagneErstellen a:hover {
+	   text-decoration: none;
+   }
+</style>
 			
-		</dd>
-		
-		<dt><a href="" class="accTitle">Geburtstage  <span class="glyphicon glyphicon-pencil"></span></a></dt>
-		<dd>
-		<div class="row">
-					<div class="col-md-8">
-						<div class="well well-sm">
-
-							<form name="bestellung" method="POST"
-								action="/crm/suche/submitSearch">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="kName">Kampagnenbezeichnung</label> <input type="text" 
-											class="form-control" id="kName" placeholder="Kampagnenbezeichnung" />
-										</div>
-										<div class="form-group">
-											<label for="date">Datum</label> 
-											<input type="text" class="form-control" id="date" placeholder="Datum" />
-										</div>
-										<div class="form-group">
-											<label for="grund">Grund</label> 
-											<select class="form-control" name="grund" size="1" >
-												<option>---bitte wählen---</option>
-												<option>Neukundengewinnung</option>
-												<option>Event</option>
-												<option>Kundenbindung</option>
-												<option>Sonstiges</option>
-											</select>
-										</div>
-										 <div class="form-group">
-											<label for="kosten">Kosten</label> <input type="text"
-												class="form-control" id="kosten" placeholder="Kosten" />
-										</div>
-										<div class="form-group">
-											<label for="geschenk">Geschenkart</label> <input type="text"
-												class="form-control" id="geschenk" placeholder="Geschenk" />
-										</div>
-										<div class="form-group">
-											<label for="resonanz">Resonanz</label> <input type="text"
-												class="form-control" id="resonanz" placeholder="Resonanz" />
-										</div>
-									</div>
-
-									<div class="col-md-6">
-
-
-										<div class="form-group">
-											<label for="name"> Notiz</label>
-											<textarea name="message" id="notiz" class="form-control"
-												rows="12" cols="25"  placeholder="Notiz"></textarea>
-										</div>
-										<input type="submit" class="btn btn-primary pull-right" value="Kampagne erstellen" />
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-
-		</dd>
-		
-		</dl>
-
-		<style type="text/css">
-		.accordion {
-			
-			   dt{
-			      
-			      border: 1px solid black;
-			      border-bottom: 0; 
-			      &:last-of-type {
-			        border-bottom: 1px solid black; 
-			      }
-			      a {
-			        display: block;
-			        color: black;
-			        font-weight: bold;
-			      }
-			   }
-			  dd {
-			     border-top: 0; 
-			     font-size: 12px;
-			     &:last-of-type {
-			       border-top: 1px solid white;
-			       position: relative;
-			       top: -1px;
-			     }
-			  }
-			}
-			.accTitle{
-				
-				  
-				 
-			}
-		</style>
 <script>
-
 (function($) {
+
+   var allPanels = $('.accordion > dd').hide();
+
+   $('a > dt').click(function() {
+      allPanels.slideUp();
+      $(this).parent().next().toggle();
+      return false;
+   }
+   );
+
+}
+)(jQuery);
+
+$('.date').datetimepicker(
+{
+   lang : 'de',
+   i18n : {
+      de : {
+         months : [ 'Januar', 'Februar', 'März',
+         'April', 'Mai', 'Juni', 'Juli',
+         'August', 'September', 'Oktober',
+         'November', 'Dezember', ],
+         dayOfWeek : [ "Mo", "Di", "Mi", "Do", "Fr" ]
+      }
+   }
+   ,
+   timepicker : false,
+   format : 'd.m.Y'
+}
+);
+
+jQuery(document).ready(function () {
+
+    $('.rating-input').rating({
+          min: 0,
+          max: 5,
+          step: 1,
+          size: 'sm'
+    });
+       
+    $('#btn-rating-input').on('click', function() {
+        var $a = self.$element.closest('.star-rating');
+        var chk = !$a.hasClass('rating-disabled');
+        $('#rating-input').rating('refresh', {showClear:!chk, disabled:chk});
+    });
     
-	  var allPanels = $('.accordion > dd').hide();
-	    
-	  $('.accordion > dt > a').click(function() {
-		  
-	    allPanels.slideUp();
-	    $(this).parent().next().toggle();
-	    return false;
-	  });
-
-	})(jQuery);
-
+    
+    $('.btn-danger').on('click', function() {
+        $("#kartik").rating('destroy');
+    });
+    
+    $('.btn-success').on('click', function() {
+        $("#kartik").rating('create');
+    });
+    
+    $('.rating-input').on('rating.change', function() {
+        //alert($(this).val());
+    });
+    
+    
+    $('.rb-rating').rating({'showCaption':true, 'stars':'3', 'min':'0', 'max':'3', 'step':'1', 'size':'xs', 'starCaptions': {0:'status:nix', 1:'status:wackelt', 2:'status:geht', 3:'status:laeuft'}});
+});
 </script>
 
 	</tiles:putAttribute>
