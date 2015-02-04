@@ -6,5 +6,10 @@
 	<bean id="customerService" class="de.waksh.crm.service.CustomerService">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<bean id="activityService" class="de.waksh.crm.service.ActivityService">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
  
 </beans>

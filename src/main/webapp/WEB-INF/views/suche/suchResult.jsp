@@ -40,7 +40,7 @@
 					<table class="table">
 						<thead>
 							<tr class="filters">
-								<th><input type="text" class="form-control" placeholder="Kundennummer"
+								<th><input type="text" class="form-control" placeholder="KdNr"
 									disabled></th>
 										<th><input type="text" class="form-control"
 									placeholder="Firma" disabled></th>
@@ -52,6 +52,8 @@
 									placeholder="Kundenart" disabled></th>
 								<th><input type="text" class="form-control"
 									placeholder="Ort" disabled></th>
+								<th><input type="text" class="form-control"
+									placeholder="Abonnement" disabled></th>
 										<th>Aktion</th>
 							</tr>
 						</thead>
@@ -63,8 +65,9 @@
 								<td>Otto</td>
 								<td>Privatkunde</td>
 								<td>Kiel</td>
+								<td>ja</td>
 								<td>
-								<a href="/crm/privatkunden/stammdaten" class="btn btn-primary btn-sm">
+								<a href="/crm/suche/122" class="btn btn-primary btn-sm">
 						        	<span class="glyphicon glyphicon-zoom-in"></span> auswählen
 						        </a>
 								</td>
@@ -76,8 +79,9 @@
 								<td>Thornton</td>
 								<td>Privatkunde</td>
 								<td>Kiel</td>
+								<td>ja</td>
 								<td>
-								<a href="/crm/privatkunden/stammdaten" class="btn btn-primary btn-sm">
+								<a href="/crm/suche/2" class="btn btn-primary btn-sm">
 						        	<span class="glyphicon glyphicon-zoom-in"></span> auswählen
 						        </a>
 								</td>
@@ -89,6 +93,7 @@
 								<td>the Bird</td>
 								<td>Geschäftskunde</td>
 								<td>Kiel</td>
+								<td>nein</td>
 								<td>
 								<a href="/crm/suche/${customer.cId}" class="btn btn-primary btn-sm">
 						        	<span class="glyphicon glyphicon-zoom-in"></span> auswählen

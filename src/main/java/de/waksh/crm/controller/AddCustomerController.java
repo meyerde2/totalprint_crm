@@ -33,7 +33,7 @@ public class AddCustomerController {
 	public String addStudent(@ModelAttribute("SpringWeb") Customer customer,
 			ModelMap model) {
 		model.addAttribute("name", customer.getName());
-		model.addAttribute("age", customer.getAge());
+
 /*
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"Spring-Module.xml");

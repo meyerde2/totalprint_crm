@@ -9,6 +9,12 @@
 	<link rel="stylesheet" type="text/css"	href="/crm/resources/jquery/jquery.datetimepicker.css"></link>
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"></link>
 	<script src="/crm/resources/jquery/jquery.datetimepicker.js"></script>
+	<script src="/crm/resources/jquery/jquery.validate.js"></script>
+	<script src="/crm/resources/jquery/messages_de.js"></script>
+	<script src="/crm/resources/jquery/additional-methods.js"></script>
+	
+	<link rel="icon" type="image/png" href="/crm/resources/images/favicon.png"></link>
+	
 	
 	<style type="text/css">
 		@import url('/crm/resources/css/crmStyle.css');

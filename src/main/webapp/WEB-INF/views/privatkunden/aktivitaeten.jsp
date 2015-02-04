@@ -1,5 +1,6 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+
 
 <tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="body">
@@ -7,6 +8,8 @@
 		<title>Privatkunden - Aktivitäten</title>
 
 		<h1>Privatkunden - Aktivitäten</h1>
+
+
 
 
 		<div class="activity">
@@ -30,37 +33,16 @@
 									</tr>
 								</thead>
 								<tbody>
+						
+									<c:forEach var="activity" items="${aList}">
+									
 									<tr>
-										<td><a href="#"> <span class="activityH1" id="first">10.01.2015
-													| Kontaktgrund</span> <br> <span class="activityH2">Mitarbeitername
-													| Kontaktmedium</span> <br> <span class="activityNotiz">Lorem
-													ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-													nonumy eirmod tempor invidunt ut labore et dolore magna
-													aliquyam erat, sed diam voluptua. At vero eos et accusam et
-													justo duo dolores et ea rebum.... </span>
+										<td><a href="#?aId=${activity.aktivitaetenId}"> <span class="activityH1" id="first"> ${activity.date}
+													|  ${activity.grundBez}</span> <br> <span class="activityH2">${activity.mitarbeiterBez}
+													| ${activity.mediumBez}</span> <br> <span class="activityNotiz">${activity.notiz}.... </span>
 										</a></td>
 									</tr>
-									<tr>
-										<td><a href="#"> <span class="activityH1" id="first">21.01.2015
-													| Kontaktgrund</span> <br> <span class="activityH2">Mitarbeitername
-													| Kontaktmedium</span> <br> <span class="activityNotiz">Lorem
-													ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-													nonumy eirmod tempor invidunt ut labore et dolore magna
-													aliquyam erat, sed diam voluptua. At vero eos et accusam et
-													justo duo dolores et ea rebum.... </span>
-										</a></td>
-									</tr>
-									<tr>
-										<td><a href="#"> <span class="activityH1" id="first">15.01.2015
-													| Kontaktgrund</span> <br> <span class="activityH2">Mitarbeitername
-													| Kontaktmedium</span> <br> <span class="activityNotiz">Lorem
-													ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-													nonumy eirmod tempor invidunt ut labore et dolore magna
-													aliquyam erat, sed diam voluptua. At vero eos et accusam et
-													justo duo dolores et ea rebum.... </span>
-										</a></td>
-									</tr>
-
+		 							</c:forEach>
 								</tbody>
 							</table>
 						</div>
@@ -69,43 +51,44 @@
 				</div>
 
 			</div>
-
-			<div class="modal" id="myModal">
+			
+			<c:forEach var="activity" items="${aList}">
+			
+			<div class="modal ${activity.aktivitaetenId}" id="myModal">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">×</button>
-							<h4 class="modal-title">Aktivität</h4>
+							<h4 class="modal-title">Aktivität | ${activity.aktivitaetenId}</h4>
 						</div>
 						<div class="modal-body">
 
 
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="cId"> Kundennummer</label> 12345
+									<label for="cId">Kundennummer</label> ${activity.kundenId}
 								</div>
 								<div class="form-group">
-									<label for="date"> Datum</label> 10.01.2015
+									<label for="date">Datum</label> ${activity.date}
 								</div>
 
 								<div class="form-group">
-									<label for="ma"> Mitarbeitername</label> Vorname Nachname
+									<label for="ma">Mitarbeitername</label> ${activity.mitarbeiterBez}
 								</div>
 								<div class="form-group">
-									<label for="ma"> Kontaktmedium</label> E-Mail
+									<label for="ma">Kontaktmedium</label> ${activity.mediumBez}
 								</div>
 								<div class="form-group">
-									<label for="ma"> Kontaktgrund</label> Beschwerde
+									<label for="ma">Kontaktgrund</label> ${activity.grundBez}
 								</div>
 
 
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="name"> Notiz</label>
-									<textarea name="message" id="notiz" class="form-control"
-										rows="12" cols="25" placeholder="Notiz" disabled="disabled"></textarea>
+									<label for="name">Notiz</label>
+									<p>${activity.notiz}</p>
 								</div>
 							</div>
 						</div>
@@ -113,22 +96,34 @@
 					</div>
 				</div>
 			</div>
+			</c:forEach>
 
 
 		</div>
 
 
 		<script>
-			$('table a').click(function() {
-				$('#myModal').modal({
-					show : true
-				})
-			});
-
+		
 			$(document)
 					.ready(
 							function() {
 
+								
+								$('table a').click(function() {
+									
+									var value = $(this).attr("href");
+							      
+							        var result = value.split('=');
+							        var aId= result[1];
+									//var aId = getURLParam('aId');
+									// alert('aid:  ' + aId);
+									
+									$(".modal." + aId).modal({
+										show : true
+									})
+								});
+								
+								
 								$('.filterable .filters input')
 										.keyup(
 												function(e) {
@@ -226,6 +221,7 @@
 			.notiz{
 				display: block;
 				color: #A8A8A8;
+
 			}
 			td a {
 				display: block;
@@ -236,6 +232,9 @@
 			td a:hover {
 				background-color: #E6E6E6;
 				text-decoration: none;
+			}
+			.activityNotiz{
+				font-size: 14px;
 			}
 			
 		</style>

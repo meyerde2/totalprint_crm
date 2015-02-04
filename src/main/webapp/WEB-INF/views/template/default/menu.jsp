@@ -70,7 +70,7 @@
 							<li><a href="${bStammdaten}"><span class="glyphicon glyphicon-th-large"></span> Stammdaten</a></li>
 							<li class="divider"></li>
 							<li><a href="${bestellungBearbeiten}"><span class="glyphicon glyphicon-pencil"></span>  Bestellung
-									bearbeiten</a></li>
+									aufgeben/bearbeiten</a></li>
 							<li class="divider"></li>
 							<li><a href="${bActivity}"><span class="glyphicon glyphicon-th-large"></span>  Aktivitäten</a></li>
 							<li><a href="${bActivityAnlegen}"><span class="glyphicon glyphicon-plus"></span>  Aktivitäten anlegen</a></li>

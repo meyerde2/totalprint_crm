@@ -64,7 +64,7 @@
 							</div>
 							<div class="panel-footer">
 								<div class="panelStammdaten">
-									<a href="/crm/businesskunden/bestellungBearbeiten" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span> Bestellung bearbeiten</a>
+									<a href="/crm/businesskunden/bestellungBearbeiten" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span> Bestellung aufgeben/bearbeiten</a>
 								</div>
 								
 							</div>

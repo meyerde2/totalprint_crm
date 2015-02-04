@@ -14,6 +14,11 @@ h2{
 	max-width:300px;
 }
 
+/*
+
+
+*/
+
 .infoPanel{
 	margin-right: 20px;
 	margin-bottom: 10px;
@@ -30,26 +35,50 @@ h2{
 	font-size: 1.5em;
 	font-weight: bold;
 }
+
+/*
+
+
+*/
+
 .well{
 	
 	width: 800px;
 }
 
+/*
+
+
+*/
 .table-user-information{
 	margin-left: 40px;	
 	width: 550px;
-}
+	max-width: 550px;
+}	
+
+/*
+
+
+*/
 
 .suche .row .form-group{
 	width: 150px;
 }
 
+/*
 
+
+*/
 .aboAbschliessen .row, .bestellungBearbeiten .row{
 	
 	width: 830px;
 }
 
+.bestellungBearbeiten table td, .aboAbschliessen table td{
+	
+	min-width:250px;
+	
+}
 /*
 	Handbuch-Style
 */

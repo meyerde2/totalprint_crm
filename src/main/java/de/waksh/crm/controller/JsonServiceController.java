@@ -20,9 +20,10 @@ public class JsonServiceController {
 	CustomerDAO customerDAO;
 	
 	public JsonServiceController() {
-		context = new ClassPathXmlApplicationContext(
+	/*	context = new ClassPathXmlApplicationContext(
 				"Spring-Module.xml");
 		customerDAO = (CustomerDAO) context.getBean("customerService");
+		*/
 	}
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = "Accept=application/json; charset=UTF-8")
 	public Customer getUser(@PathVariable int id) {

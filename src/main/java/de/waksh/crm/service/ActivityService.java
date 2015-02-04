@@ -8,10 +8,11 @@ import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
-import de.waksh.crm.dao.CustomerDAO;
-import de.waksh.crm.model.Customer;
+import de.waksh.crm.dao.ActivityDAO;
+import de.waksh.crm.model.Activity;
 
-public class CustomerService implements CustomerDAO {
+public class ActivityService implements ActivityDAO{
+
 	private DataSource dataSource;
 	
 
@@ -19,18 +20,131 @@ public class CustomerService implements CustomerDAO {
 		this.dataSource = dataSource;
 	}
 
-	public void insertCustomer(Customer customer) {
+	
+	@Override
+	public ArrayList<Activity> getAllActivities() {
+		String sql = "SELECT * FROM `bascrmdb`.`Aktivitaeten_Tabelle`;";
 
-		String sql = "INSERT INTO CUSTOMER "
-				+ "(id, name, age) VALUES (?, ?, ?)";
 		Connection conn = null;
 
 		try {
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, customer.getCustId());
-			ps.setString(2, customer.getName());
+			
+			ArrayList<Activity> activityList = new ArrayList<Activity>();
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				activityList.add(new Activity(rs.getInt("AktivitaetenID"),
+						rs.getInt("KundenID"),
+						rs.getDate("Datum"),
+						rs.getInt("MitarbeiterID"),
+						rs.getInt("MedienID"),
+						rs.getInt("GrundID"),
+						rs.getString("Notiz")));
+			}
+			rs.close();
+			ps.close();
+			return activityList;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
 
+
+	@Override
+	public String getMediumById(int id) {
+		
+		String sql = "SELECT * FROM bascrmdb.Medien_Tabelle WHERE MedienID = '"+id+"';";
+
+		Connection conn = null;
+
+		try {
+			conn = dataSource.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			String strMedium = null;
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				
+				strMedium = rs.getString("Medium");
+
+			}
+			rs.close();
+			ps.close();
+			return strMedium;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
+
+
+	@Override
+	public String getGrundById(int id) {
+		
+		String sql = "SELECT * FROM bascrmdb.Grund_f_Aktivitaeten_Tabelle WHERE GrundID ='" + id + "';";
+
+		Connection conn = null;
+
+		try {
+			
+			conn = dataSource.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			String strGrund = null;
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				
+				strGrund = rs.getString("Grund");
+
+			}
+			rs.close();
+			ps.close();
+			return strGrund;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
+
+
+	@Override
+	public void insertActivity(Activity activity) {
+		
+		String sql = "INSERT INTO `bascrmdb`.`Aktivitaeten_Tabelle`(`AktivitaetenID`, `KundenID`,`Datum`,`MitarbeiterID`, `MedienID`,	`GrundID`,`Notiz`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		Connection conn = null;
+
+		try {
+			conn = dataSource.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, 0);
+			ps.setInt(2, 321);
+			ps.setDate(3, activity.getDate());
+			ps.setInt(4, activity.getMitarbeiterId());
+			ps.setInt(5, activity.getMedienId());
+			ps.setInt(6, activity.getGrundId());
+			ps.setString(7, activity.getNotiz());
+
+			System.out.println("PS   _:   " + ps.toString());
 			ps.executeUpdate();
 			ps.close();
 
@@ -45,106 +159,6 @@ public class CustomerService implements CustomerDAO {
 				}
 			}
 		}
-	}
-
-	public Customer getCustomerById(int custId) {
-
-		//String sql = "SELECT * FROM CUSTOMER WHERE id = ?";
-		String sql = "SELECT * FROM `bascrmdb`.`Aktivitaeten_Tabelle`;";
-
-		Connection conn = null;
-
-		try {
-			conn = dataSource.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, custId);
-			Customer customer = null;
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-
-				System.out.println("id......    " +rs.getString("AktivitaetenID") );
-				//customer = new Customer(rs.getString("NAME"), rs.getInt("Age"));
-			}
-			rs.close();
-			ps.close();
-			return customer;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-				}
-			}
-		}
-		
 		
 	}
-
-	public ArrayList<Customer> getAllCustomers() {
-		ArrayList<Customer> cList = new ArrayList<Customer>();
-
-		String sql = "SELECT * FROM `bascrmdb`.`Aktivitaeten_Tabelle`;";
-
-		Connection conn = null;
-
-		try {
-			conn = dataSource.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-			Customer customer = null;
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				/*customer = new Customer(rs.getString("NAME"), rs.getInt("Age"));
-				System.out.println("   name:  "
-						+ customer.getName());
-				cList.add(customer);
-				*/
-				System.out.println("id......    " +rs.getString("AktivitaetenID") );
-			}
-			rs.close();
-			ps.close();
-			return cList;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-				}
-			}
-		}
-	}
-
-	@Override
-	public Customer updateCustomerById(int custId, String name, int age) {
-		String sql = "UPDATE customer SET name = " + name + " , age = " + age
-				+ " WHERE id = " + custId;
-
-		Connection conn = null;
-
-		try {
-			conn = dataSource.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.executeUpdate(sql);
-
-			Customer customer = null;
-			customer = new Customer(name, age);
-
-			ps.close();
-			return customer;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-				}
-			}
-		}
-	}
-
 }

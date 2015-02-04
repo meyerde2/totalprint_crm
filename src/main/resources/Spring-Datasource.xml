@@ -6,10 +6,18 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
  
+ <!--
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/crm_testdb" />
+		<property name="url" value="jdbc:mysql://localhost:3306/crm_testdb" /> 
 		<property name="username" value="root" />
 		<property name="password" value="" />
+		-->
+		
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://lvps87-230-14-183.dedicated.hosteurope.de:3306/bascrmdb" /> 
+		<property name="username" value="bas-crm" />
+		<property name="password" value="passw0rt" />
+
 	</bean>
 	
 </beans>

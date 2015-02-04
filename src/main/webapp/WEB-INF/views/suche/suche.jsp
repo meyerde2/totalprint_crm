@@ -24,6 +24,13 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
+											<label for="kundenart">Kundenart</label> <br> <input
+												type="radio" class="radio-inline" name="kundenart"
+												id="kundenart" value="privatkunde"> Privatkunde <input
+												type="radio" class="radio-inline" name="kundenart"
+												id="kundenart" value="businesskunde"> Geschäftskunde
+										</div>
+										<div class="form-group">
 											<label for="cId"> Kundennummer</label> <input type="text"
 												class="form-control" id="cId" placeholder="Kundennummer" />
 										</div>
@@ -43,13 +50,6 @@
 										<div class="form-group">
 											<label for="ort">Ort</label> <input type="text"
 												class="form-control" id="ort" placeholder="Ort" />
-										</div>
-										<div class="form-group">
-											<label for="kundenart">Kundenart</label> <br> <input
-												type="radio" class="radio-inline" name="kundenart"
-												id="kundenart" value="privatkunde"> Privatkunde <input
-												type="radio" class="radio-inline" name="kundenart"
-												id="kundenart" value="businesskunde"> Geschäftskunde
 										</div>
 								
 											  
