@@ -11,11 +11,11 @@
 
 			</div>
 
-			
-			<form name="abschliessen" method="POST"
+			<!--  <form name="abschliessen" id="abschliessen" method="POST"
 				action="/crm/privatkunden/submitAddAbo">
-
-
+-->
+				<form name="abschliessen" id="abschliessen" method="POST"
+				action="#">
 					<div class="row form-group">
 					<div class="infoPanel">
 							<a href="/crm/privatkunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>Vorname Name</a>
@@ -36,7 +36,7 @@
 										<h4 class="list-group-item-heading">Step 3</h4>
 										<p class="list-group-item-text">Lieferadresse</p>
 								</a></li>
-								<li class="disabled"><a href="#step-4">
+								<li class="disabled"><a href="#step-4" id="showStep4">
 										<h4 class="list-group-item-heading">Step 4</h4>
 										<p class="list-group-item-text">Bestätigung</p>
 								</a></li>
@@ -126,7 +126,8 @@
 							</div>
 						</div>
 					</div>
-
+					</form>
+					<form>
 					<div class="row setup-content" id="step-3">
 						<div class="col-xs-12">
 							<div class="col-md-12 well text-center">
@@ -179,23 +180,73 @@
 						<div class="col-xs-12">
 							<div class="col-md-12 well text-center">
 								<h2>Bestätigung</h2>
-
-								<table>
+								<div>
+								<p class="abschnitt">Anschrift</p>
+								<table class="overview">
+									<tr>
+										<td><label>Name</label></td>
+										<td id="name">Vorname Name</td>
+									</tr>
 									<tr>
 										<td><label>Straße</label></td>
-										<td>Musterstr. 123</td>
+										<td id="strasse">Musterstr. 123</td>
 									</tr>
 									<tr>
 										<td><label>PLZ</label></td>
-										<td>12345</td>
+										<td id="plz">12345</td>
 									</tr>
 									<tr>
 										<td><label>Ort</label></td>
-										<td>Dörfchen XYZ</td>
+										<td id="ort">Dörfchen XYZ</td>
 									</tr>
-
 								</table>
-
+								</div>
+								<div id="overviewZahlungsart">
+								<table>
+								<tr>
+										<td><label>Zahlungsart</label></td>
+										<td id="tdZahlungsart">Lastschrift</td>
+								</tr>
+								</table>
+								</div>
+								<div id="overviewLastschrift">
+								<p class="abschnitt">Zahlungsart</p>
+								<table class="overview">
+									<tr class="lastschrift">
+										<td><label>IBAN</label></td>
+										<td id="tdIban" >IBAN</td>
+									</tr>
+									<tr class="lastschrift">
+										<td><label>BIC</label></td>
+										<td id="tdBic">BIC</td>
+									</tr>
+									<tr class="lastschrift">
+										<td><label>Bank</label></td>
+										<td id="tdBank">Bank</td>
+									</tr>
+									<tr class="lastschrift">
+										<td><label>Kontoinhaber</label></td>
+										<td id="tdKontoinhaber">Max Mustermann</td>
+									</tr>
+								</table>
+								</div>
+								<div id="overviewAbwLieferanschrift">
+								<p class="abschnitt">Abweichende Lieferanschrift</p>
+								<table class="overview">
+									<tr class="abwLieferanschrift">
+										<td><label>Abweichende Str.</label></td>
+										<td id="tdAbwStr">Testweg 123</td>
+									</tr>
+									<tr class="abwLieferanschrift">
+										<td><label>Abweichende PLZ</label></td>
+										<td id="tdAbwPlz">24340</td>
+									</tr>
+									<tr class="abwLieferanschrift">
+										<td><label>Abweichender Ort</label></td>
+										<td id="tdAbwOrt">Kiel</td>
+									</tr>
+								</table>
+								</div>
 								<p>
 									Soll das Abonnement der Tageszeitung verbindlich bestellt
 									werden? <input type="checkbox" id="aboYes">
@@ -209,102 +260,191 @@
 		
 			</form>
 		</div>
+		
+
+</script>
+
 		<script>
-			$(document)
-					.ready(
-							function() {
+		jQuery.validator.setDefaults({
+  		  debug: true,
+  		  success: "valid",
+  		  focusCleanup: true
+  		});
+  		$( "#abschliessen" ).validate({
+ 			
+  		  rules: {
+  		    iban: {
+  		      required: {
+  		    	  depends: function(element) {
+  	  		          return $("input[value='lastschrift']").is(":checked");
+  		      }
+		      },
+  		      iban:  {
+  		        depends: function(element) {
+  		          return $("input[value='lastschrift']").is(":checked");
+  		        }
+  		      }
+  		    },
+  			bic: {
+  				required: true,
+  				bic: true
+  			},
+  		    bank: {
+  		    	required: true
+  		    },
+  		  	kontoinhaber: {
+  		    	required: true
+  		    }
+  		  },
+  		  messages:{
+  			  iban: {
+  				  iban: "Bitte gültige IBAN eingeben."
+  				  
+  			  },
+  			  bic:{
+  				 bic: "Bitte gültige BIC eingeben." 
+  			  }
 
-								var isVisiblePayment = false;
+  		  		
+  		  }
+  		});
+		$(document)
+	    .ready(
+	        function() {
+	        	
+	            var isVisiblePayment = false;
 
-								$(".abwLieferadresse").hide();
-								$(".payment").hide();
+	            $(".abwLieferadresse").hide();
+	            $(".payment").hide();
 
-								$("input:radio[value=lastschrift]").click(
-										function() {
-											if (!isVisiblePayment) {
-												$(".rechnung").hide("fast");
-												$(".payment").show("slow");
+	            $("#activate-step-4, #showStep4").click(function(){
+	            	
+	            	if($("input[value='lastschrift']:checked").val()=="lastschrift"){
+						
+	            		$("#overviewLastschrift").show();
+	            		
+	            		$("#tdZahlungsart").html("Lastschrift");
+	            		//getValuesFromInputTextFields
+	            		$("#tdIban").html($('#iban').val());
+	            		$("#tdBic").html($('#bic').val());
+	            		$("#tdBank").html($('#bank').val());
+	            		$("#tdKontoinhaber").html($('#kontoinhaber').val());
+		            	
+	            	}else{
+	            		$("#tdZahlungsart").html("Rechnung");
+	            		$("#overviewLastschrift").hide();
+	            	}
+	            	
+	            	if( $("#abwLieferadresse").is(":checked") == true){	
 
-												isVisiblePayment = true;
-											}
+	            		$("#overviewAbwLieferanschrift").show();
+	            	}else{
+	            		
+	            		$("#overviewAbwLieferanschrift").hide();
+	            	}
+	            	
+	            });
+		
+	            
+	            $("input:radio[value=lastschrift]").click(
+	                function() {
+	                    if (!isVisiblePayment) {
+	                        $(".rechnung").hide("fast");
+	                        $(".payment").show("fast");
 
-										});
-								$("input:radio[value=rechnung]").click(
-										function() {
-											if (isVisiblePayment) {
-												$(".payment").hide("fast");
-												$(".rechnung").show("slow");
-												isVisiblePayment = false;
-											}
+	                        isVisiblePayment = true;
+	                    }
 
-										});
-								$(".checkbox-inline").click(function() {
-									$(".abwLieferadresse").toggle("slow");
-								});
+	                });
+	            $("input:radio[value=rechnung]").click(
+	                function() {
+	                    if (isVisiblePayment) {
+	                        $(".payment").hide("fast");
+	                        $(".rechnung").show("fast");
+	                        isVisiblePayment = false;
+	                    }
 
-								var navListItems = $('ul.setup-panel li a'), allWells = $('.setup-content');
+	                });
+	            $(".checkbox-inline").click(function() {
+	                $(".abwLieferadresse").toggle("slow");
+	            });
 
-								allWells.hide();
+	            var navListItems = $('ul.setup-panel li a'),
+	                allWells = $('.setup-content');
 
-								navListItems
-										.click(function(e) {
-											e.preventDefault();
-											var $target = $($(this)
-													.attr('href')), $item = $(
-													this).closest('li');
+	            allWells.hide();
 
-											if (!$item.hasClass('disabled')) {
-												navListItems.closest('li')
-														.removeClass('active');
-												$item.addClass('active');
-												allWells.hide();
-												$target.show();
-											}
-										});
+	            navListItems
+	                .click(function(e) {
+	                    e.preventDefault();
+	                    var $target = $($(this)
+	                            .attr('href')),
+	                        $item = $(
+	                            this).closest('li');
 
-								$('ul.setup-panel li.active a')
-										.trigger('click');
+	                    if (!$item.hasClass('disabled')) {
+	                        navListItems.closest('li')
+	                            .removeClass('active');
+	                        $item.addClass('active');
+	                        allWells.hide();
+	                        $target.show();
+	                    }
+	                });
 
-								// DEMO ONLY //
-								$('#activate-step-2')
-										.on(
-												'click',
-												function(e) {
-													$('ul.setup-panel li:eq(1)')
-															.removeClass(
-																	'disabled');
-													$(
-															'ul.setup-panel li a[href="#step-2"]')
-															.trigger('click');
-													$(this).remove();
-												})
+	            $('ul.setup-panel li.active a')
+	                .trigger('click');
 
-								$('#activate-step-3')
-										.on(
-												'click',
-												function(e) {
-													$('ul.setup-panel li:eq(2)')
-															.removeClass(
-																	'disabled');
-													$(
-															'ul.setup-panel li a[href="#step-3"]')
-															.trigger('click');
-													$(this).remove();
-												})
-								$('#activate-step-4')
-										.on(
-												'click',
-												function(e) {
-													$('ul.setup-panel li:eq(3)')
-															.removeClass(
-																	'disabled');
-													$(
-															'ul.setup-panel li a[href="#step-4"]')
-															.trigger('click');
-													$(this).remove();
-												})
+	            // DEMO ONLY //
+	            $('#activate-step-2')
+	                .on(
+	                    'click',
+	                    function(e) {
+	                        $('ul.setup-panel li:eq(1)')
+	                            .removeClass(
+	                                'disabled');
+	                        $(
+	                                'ul.setup-panel li a[href="#step-2"]')
+	                            .trigger('click');
+	                        $(this).remove();
+	                    })
 
-							});
+	            $('#activate-step-3')
+	                .on(
+	                    'click',
+	                    function(e) {
+	                    
+	                        
+	                        // Wenn die Elemente in dem Div keine error Label danach haben, next, ansonsten nicht!
+	                        $("#abschliessen").validate({ });
+	                        if ($("input:radio[value=lastschrift]").is(":checked") && 
+	                        		$("#iban-error").hasClass("valid") && 
+	                        		$("#bic-error").hasClass("valid")&& 
+	                        		$("#bank-error").hasClass("valid")&& 
+	                        		$("#kontoinhaber-error").hasClass("valid")
+	                        ){
+	                        	$('ul.setup-panel li:eq(2)').removeClass('disabled');
+		                        $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+		                        $(this).remove();
+	                        }else{
+	                        }
+	                      
+	                    })
+	            $('#activate-step-4')
+	                .on(
+	                    'click',
+	                    function(e) {
+	                        $('ul.setup-panel li:eq(3)')
+	                            .removeClass(
+	                                'disabled');
+	                        $(
+	                                'ul.setup-panel li a[href="#step-4"]')
+	                            .trigger('click');
+	                        $(this).remove();
+	                    })
+
+	        });
+		
+		
 		</script>
 	</tiles:putAttribute>
 </tiles:insertDefinition>

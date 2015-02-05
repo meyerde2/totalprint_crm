@@ -16,19 +16,19 @@
 							<a href="/crm/privatkunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>Vorname Name</a>
 							<a href="/crm/handbuch/privatkunden"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
 						</div>
-							<form name="activityAnlegen" method="POST"
+							<form name="activityAnlegen" id="activityAnlegen" method="POST"
 								action="/crm/privatkunden/submitAddActivity">
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="date">Datum</label> <input
 												type="text" class="form-control" name="date" id="date"
-												placeholder="Datum" required="required" />
+												placeholder="Datum" />
 										</div>
 
 										<div class="form-group">
 											<label for="ma"> Mitarbeitername</label> 
-											<select required="required" class="form-control" name="ma" size="1"  >
+											<select class="form-control" name="ma" size="1"  >
 												<option value="">---bitte wählen---</option>
 												<option value="1">Schweini</option>
 												<option value="2">Poldi</option>
@@ -39,7 +39,7 @@
 										</div>
 										<div class="form-group">
 											<label for="ma"> Kontaktmedium</label> 
-											<select required="required" class="form-control" name="medium" size="1"  >
+											<select  class="form-control" name="medium" size="1"  >
 												<option value="">---bitte wählen---</option>
 												<option value="1">Telefon</option>
 												<option value="2">E-Mail</option>
@@ -48,7 +48,7 @@
 										</div>
 										<div class="form-group">
 											<label for="ma"> Kontaktgrund</label> 
-											<select required="required" class="form-control" name="grund" id="grund" class="grund" size="1"  >
+											<select  class="form-control" name="grund" id="grund" class="grund" size="1"  >
 												<option value="">---bitte wählen---</option>
 												<option value="1">Abonnementabschluss</option>
 												<option value="2">Kündigung</option>
@@ -70,7 +70,7 @@
 										<div class="form-group">
 											<label for="notiz">Notiz</label>
 											<textarea name="notiz" id="notiz" class="form-control"
-												rows="12" cols="25" required="required" placeholder="Notiz"></textarea>
+												rows="12" cols="25" placeholder="Notiz"></textarea>
 										</div>
 									</div>
 									<div class="col-md-12">
@@ -87,6 +87,39 @@
 
 
 		<script>
+		
+		jQuery.validator.setDefaults({
+  		  debug: true,
+  		  success: "valid",
+  		  focusCleanup: true
+  		});
+  		$( "#activityAnlegen" ).validate({
+  		  rules: {
+  			date: {
+  		      required: true,
+  		      dateDECH: true
+  		    },
+  			ma: {
+  				required: true,
+  			},
+  			medium: {
+  				required: true,
+  			},
+  			grund: {
+  				required: true,
+  			},
+  			notiz: {
+  				required: true,
+  			}
+  		  },
+  		  messages:{
+  			date:{
+  				dateDECH: "Kein gültiges Datum!"
+  			}
+	
+  		  }
+  		});
+  		
 			$(document).ready(
 					function() {
 						$("#sonstiges").hide();

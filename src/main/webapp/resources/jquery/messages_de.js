@@ -1,3 +1,5 @@
+// Encoding: UTF-8
+
 (function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 		define( ["jquery", "../jquery.validate"], factory );
@@ -17,7 +19,7 @@ $.extend($.validator.messages, {
 	rangelength: $.validator.format("Geben Sie bitte mindestens {0} und maximal {1} Zeichen ein."),
 	email: "Geben Sie bitte eine gültige E-Mail Adresse ein.",
 	url: "Geben Sie bitte eine gültige URL ein.",
-	date: "Bitte geben Sie ein gültiges Datum ein.",
+	date: "Bitte geben Sie ein erlaubtes Datum ein.",
 	number: "Geben Sie bitte eine Nummer ein.",
 	digits: "Geben Sie bitte nur Ziffern ein.",
 	equalTo: "Bitte denselben Wert wiederholen.",

@@ -12,7 +12,7 @@
          <div class="row">
             <div class="col-md-8">
                <div class="well well-sm">
-                  <form name="bestellung" method="POST"
+                  <form class="erstellung" name="erstellung" id="erstellung" method="POST"
                      action="/crm/werbekampagnen/submitSonderausgabeErstellen">
                      <div class="row">
                         <div class="col-md-6">
@@ -22,11 +22,11 @@
                            </div>
                            <div class="form-group">
                               <label for="dateBeginn">Startzeitpunkt</label> 
-                              <input type="text" class="form-control date" name="dateBeginn" id="dateBeginn" placeholder="Startzeitpunkt" />
+                              <input type="text" class="form-control datePicker" name="dateBeginn" id="dateBeginn" placeholder="Startzeitpunkt" />
                            </div>
                            <div class="form-group">
                               <label for="dateUntil">Endzeitpunkt</label> 
-                              <input type="text" class="form-control date" name="dateUntil" id="dateUntil" placeholder="Endzeitpunkt" />
+                              <input type="text" class="form-control datePicker" name="dateUntil" id="dateUntil" placeholder="Endzeitpunkt" />
                            </div>
                            <div class="form-group">
                               <label for="grund">Grund</label> 
@@ -82,7 +82,7 @@
                            </div>
                            <div class="form-group">
                               <label for="resonanz">Resonanz</label>
-                                 <input class="rating-input" type="number" name="rating"/>
+                                 <input class="rating-input" type="number" name="rating" id="rating"/>
                            </div>
                            <div class="form-group">
                               <label for="name">Notiz</label>
@@ -106,7 +106,7 @@
          <div class="row">
             <div class="col-md-8">
                <div class="well well-sm">
-                  <form name="bestellung" method="POST"
+                  <form class="erstellung2" name="erstellung2" id="erstellung2" method="POST"
                      action="/crm/werbekampagnen/submitBeilageErstellen">
                     <div class="row">
                         <div class="col-md-6">
@@ -176,7 +176,7 @@
                            </div>
                            <div class="form-group">
                               <label for="resonanz">Resonanz</label>
-                                 <input class="rating-input" type="number" name="rating"/>
+                                 <input class="rating-input" type="number" name="rating" id="rating"/>
                            </div>
                            <div class="form-group">
                               <label for="name"> Notiz</label>
@@ -200,7 +200,7 @@
          <div class="row">
             <div class="col-md-8">
                <div class="well well-sm">
-                  <form name="bestellung" method="POST"
+                  <form class="erstellung3" name="erstellung3" id="erstellung3" method="POST"
                      action="/crm/werbekampagnen/submitGeburtstageErstellen">
                      <div class="row">
                         <div class="col-md-6">
@@ -278,6 +278,129 @@
 </style>
 			
 <script>
+jQuery.validator.setDefaults({
+	  debug: true,
+	  success: "valid",
+	  focusCleanup: true
+	});
+	
+	$( ".erstellung" ).validate({
+	  rules: {
+		kampagnenBez: {
+			required: true
+		},  
+		dateBeginn: {
+			required: true
+		},
+		dateUntil: {
+			required: true
+		},
+		grundId: {
+			required: true
+		},
+		zielgruppeId: {
+			required: true
+		},
+		themenId: {
+			required: true
+		},
+		anzahlExemplare: {
+			required: true
+		},
+		anzahlInserate: {
+			required: true
+		},
+		anzahlVerkaufteExemplare: {
+			required: true
+		},
+		kosten: {
+			required: true,
+		},
+		umsatz: {
+			required: true,
+		},
+		rating: {
+			required: true,
+		},
+		notiz: {
+			required: true,
+		}
+	  }	 
+	});
+
+	$( ".erstellung2" ).validate({
+		  rules: {
+			kampagnenBez: {
+				required: true
+			},  
+			dateBeginn: {
+				required: true
+			},
+			dateUntil: {
+				required: true
+			},
+			grundId: {
+				required: true
+			},
+			zielgruppeId: {
+				required: true
+			},
+			themenId: {
+				required: true
+			},
+			anzahlExemplare: {
+				required: true
+			},
+			anzahlInserate: {
+				required: true
+			},
+			anzahlVerkaufteExemplare: {
+				required: true
+			},
+			kosten: {
+				required: true,
+			},
+			umsatz: {
+				required: true,
+			},
+			rating: {
+				required: true,
+			},
+			notiz: {
+				required: true,
+			}
+		  }	 
+		});
+	
+	$( ".erstellung3" ).validate({
+		  rules: {
+			kampagnenBez: {
+				required: true
+			},  
+			dateBeginn: {
+				required: true
+			},
+			dateUntil: {
+				required: true
+			},
+			grundId: {
+				required: true
+			},
+			kosten: {
+				required: true,
+			},
+			geschenkart: {
+				required: true,
+			},
+			rating: {
+				required: true,
+			},
+			notiz: {
+				required: true,
+			}
+		  }	 
+		});
+
 (function($) {
 
    var allPanels = $('.accordion > dd').hide();
@@ -292,7 +415,7 @@
 }
 )(jQuery);
 
-$('.date').datetimepicker(
+$('.datePicker').datetimepicker(
 {
    lang : 'de',
    i18n : {

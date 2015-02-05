@@ -9,7 +9,7 @@
 					
 		<div class="well">
 
-			<form method="POST" action="/crm/submitAddAbo">
+			<form method="POST" action="/crm/submitAddAbo" id="kuendigen" name="kuendigen">
 				<div class="row">
 					<div class="infoPanel">
 							<a href="/crm/privatkunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>Vorname Name</a>
@@ -39,6 +39,28 @@
 		</div>
 
 		<script>
+		
+		jQuery.validator.setDefaults({
+  		  debug: true,
+  		  success: "valid"
+  		});
+  		$( "#kuendigen" ).validate({
+  		  rules: {
+  			dateUntil: {
+  		      required: true,
+  		      dateDECH: true
+  		    },
+  			abo: {
+  				required: true,
+  			}
+  		  },
+  		  messages:{
+  			dateUntil: {
+  				dateDECH: "Kein gültiges Datum"
+  				  
+  			  }
+  		  }
+  		});
 			$('#dateUntil').datetimepicker({
 
 			lang : 'de',

@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import de.waksh.crm.dao.CustomerDAO;
-import de.waksh.crm.model.Customer;
 
 /**
  * Handles requests for the application home page.
@@ -60,9 +59,7 @@ public class HomeController {
 		model.addAttribute("list", arr);
 
 		model.addAttribute("serverTime", formattedDate);
-
-		
-		
+	
 		return "home";
 	}
 
