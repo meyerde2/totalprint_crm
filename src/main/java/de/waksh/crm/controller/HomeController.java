@@ -1,12 +1,5 @@
 package de.waksh.crm.controller;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,9 +8,6 @@ import java.util.Locale;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -86,8 +76,7 @@ public class HomeController {
 		String greetings2 = "Greetings, Spring MVC2222222222222!";
 		model.addAttribute("message2", greetings2);
 
-		// Json einlesen
-		readJsonFromUrl("http://localhost:8080/crm/service/customer/2");
+		
 
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"Spring-Module.xml");
@@ -109,32 +98,5 @@ public class HomeController {
 		return "test";
 	}
 
-	private static void readJsonFromUrl(String url){
-
-		JSONParser parser = new JSONParser();
-
-		try {
-			InputStream is = new URL(url).openStream();
-
-			BufferedReader rd = new BufferedReader(new InputStreamReader(is,
-					Charset.forName("UTF-8")));
-
-			Object obj = parser.parse(rd);
-
-			JSONObject jsonObject = (JSONObject) obj;
-
-			String name = (String) jsonObject.get("name");
-			System.out.println("json Parse" + name);
-
-			long age = (Long) jsonObject.get("age");
-			System.out.println(age);
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
+	
 }

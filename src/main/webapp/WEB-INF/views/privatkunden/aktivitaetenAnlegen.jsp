@@ -28,14 +28,8 @@
 
 										<div class="form-group">
 											<label for="ma"> Mitarbeitername</label> 
-											<select class="form-control" name="ma" size="1"  >
-												<option value="">---bitte wählen---</option>
-												<option value="1">Schweini</option>
-												<option value="2">Poldi</option>
-												<option value="3">Özil</option>
-												<option value="4">Götze</option>
-												<option value="5">Boateng</option>
-											</select>
+											 <input type="text" class="form-control" name="ma" id="ma" placeholder="Vorname Name" readonly />
+											<input type="hidden" name="maId" id="maId" value="111">
 										</div>
 										<div class="form-group">
 											<label for="ma"> Kontaktmedium</label> 
@@ -75,7 +69,7 @@
 									</div>
 									<div class="col-md-12">
 										<button type="submit" class="btn btn-primary pull-right"
-											id="btnContactUs">Aktivität anlegen</button>
+											id="submit">Aktivität anlegen</button>
 									</div>
 								</div>
 							</form>
@@ -89,9 +83,9 @@
 		<script>
 		
 		jQuery.validator.setDefaults({
-  		  debug: true,
+  		  debug: false,
   		  success: "valid",
-  		  focusCleanup: true
+  		  focusCleanup: false
   		});
   		$( "#activityAnlegen" ).validate({
   		  rules: {
@@ -100,16 +94,22 @@
   		      dateDECH: true
   		    },
   			ma: {
-  				required: true,
+  				required: false
+  			},
+  			maId: {
+  				required: false
   			},
   			medium: {
-  				required: true,
+  				required: true
   			},
   			grund: {
-  				required: true,
+  				required: true
+  			},
+  			sonstigesTxt: {
+  				required: false
   			},
   			notiz: {
-  				required: true,
+  				required: true
   			}
   		  },
   		  messages:{

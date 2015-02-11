@@ -1,12 +1,14 @@
 package de.waksh.crm.model;
 
 public class Customer {
-	int custId;
+	int id;
+	String anrede;
 	String name;
 	String vorname;
 	String strasse;
 	String plz;
 	String ort;
+	String firma;
 	String abwStrasse;
 	String abwPlz;
 	String abwOrt;
@@ -14,25 +16,28 @@ public class Customer {
 	String bic;
 	String kontoinhaber;
 	String email;
-	boolean isPrivatkunde;
+	String kundenart;
 	boolean isAbonnent;
 	int zahlungsart;
 	int mengeA;
 	int mengeB;
 	int mengeT;
-	
-	public Customer(int custId, String name, String vorname, String strasse,
-			String plz, String ort, String abwStrasse, String abwPlz,
-			String abwOrt, String iban, String bic, String kontoinhaber,
-			String email, boolean isPrivatkunde, boolean isAbonnent,
-			int zahlungsart, int mengeA, int mengeB, int mengeT) {
+
+	public Customer(int id, String anrede, String name, String vorname,
+			String strasse, String plz, String ort, String firma,
+			String abwStrasse, String abwPlz, String abwOrt, String iban,
+			String bic, String kontoinhaber, String email, String kundenart,
+			boolean isAbonnent, int zahlungsart, int mengeA, int mengeB,
+			int mengeT) {
 		super();
-		this.custId = custId;
+		this.id = id;
+		this.anrede = anrede;
 		this.name = name;
 		this.vorname = vorname;
 		this.strasse = strasse;
 		this.plz = plz;
 		this.ort = ort;
+		this.firma = firma;
 		this.abwStrasse = abwStrasse;
 		this.abwPlz = abwPlz;
 		this.abwOrt = abwOrt;
@@ -40,7 +45,7 @@ public class Customer {
 		this.bic = bic;
 		this.kontoinhaber = kontoinhaber;
 		this.email = email;
-		this.isPrivatkunde = isPrivatkunde;
+		this.kundenart = kundenart;
 		this.isAbonnent = isAbonnent;
 		this.zahlungsart = zahlungsart;
 		this.mengeA = mengeA;
@@ -48,19 +53,34 @@ public class Customer {
 		this.mengeT = mengeT;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Customer [custId=" + custId + ", name=" + name + ", vorname="
-				+ vorname + ", strasse=" + strasse + ", plz=" + plz + ", ort="
-				+ ort + ", abwStrasse=" + abwStrasse + ", abwPlz=" + abwPlz
-				+ ", abwOrt=" + abwOrt + ", iban=" + iban + ", bic=" + bic
-				+ ", kontoinhaber=" + kontoinhaber + ", email=" + email
-				+ ", isPrivatkunde=" + isPrivatkunde + ", isAbonnent="
-				+ isAbonnent + ", zahlungsart=" + zahlungsart + ", mengeA="
-				+ mengeA + ", mengeB=" + mengeB + ", mengeT=" + mengeT + "]";
+		return "Customer [id=" + id + ", anrede=" + anrede + ", name=" + name
+				+ ", vorname=" + vorname + ", strasse=" + strasse + ", plz="
+				+ plz + ", ort=" + ort + ", firma=" + firma + ", abwStrasse="
+				+ abwStrasse + ", abwPlz=" + abwPlz + ", abwOrt=" + abwOrt
+				+ ", iban=" + iban + ", bic=" + bic + ", kontoinhaber="
+				+ kontoinhaber + ", email=" + email + ", kundenart="
+				+ kundenart + ", isAbonnent=" + isAbonnent + ", zahlungsart="
+				+ zahlungsart + ", mengeA=" + mengeA + ", mengeB=" + mengeB
+				+ ", mengeT=" + mengeT + "]";
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getAnrede() {
+		return anrede;
+	}
+
+	public void setAnrede(String anrede) {
+		this.anrede = anrede;
+	}
 
 	public String getVorname() {
 		return vorname;
@@ -94,6 +114,14 @@ public class Customer {
 		this.ort = ort;
 	}
 
+	public String getFirma() {
+		return firma;
+	}
+
+	public void setFirma(String firma) {
+		this.firma = firma;
+	}
+
 	public String getAbwStrasse() {
 		return abwStrasse;
 	}
@@ -116,6 +144,14 @@ public class Customer {
 
 	public void setAbwOrt(String abwOrt) {
 		this.abwOrt = abwOrt;
+	}
+
+	public String getKundenart() {
+		return kundenart;
+	}
+
+	public void setKundenart(String kundenart) {
+		this.kundenart = kundenart;
 	}
 
 	public String getIban() {
@@ -150,19 +186,19 @@ public class Customer {
 		this.email = email;
 	}
 
-	public boolean isPrivatkunde() {
-		return isPrivatkunde;
-	}
-
-	public void setPrivatkunde(boolean isPrivatkunde) {
-		this.isPrivatkunde = isPrivatkunde;
-	}
-
 	public boolean isAbonnent() {
 		return isAbonnent;
 	}
 
+	public boolean getIsAbonnent() {
+		return isAbonnent;
+	}
+
 	public void setAbonnent(boolean isAbonnent) {
+		this.isAbonnent = isAbonnent;
+	}
+
+	public void setIsAbonnent(boolean isAbonnent) {
 		this.isAbonnent = isAbonnent;
 	}
 
@@ -196,19 +232,6 @@ public class Customer {
 
 	public void setMengeT(int mengeT) {
 		this.mengeT = mengeT;
-	}
-
-	public Customer(String name, int age) {
-		super();
-		this.name = name;
-	}
-
-	public int getCustId() {
-		return custId;
-	}
-
-	public void setCustId(int custId) {
-		this.custId = custId;
 	}
 
 	public String getName() {

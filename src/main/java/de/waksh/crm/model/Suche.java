@@ -5,9 +5,26 @@ public class Suche {
 	private String name;
 	private String vorname;
 	private String firma;
-	private boolean isPrivatkunde;
+	private String kundenart;
 	
 	
+	public Suche() {
+		
+	}
+	public Suche(long cId, String name, String vorname, String firma,
+			String  kundenart) {
+		super();
+		this.cId = cId;
+		this.name = name;
+		this.vorname = vorname;
+		this.firma = firma;
+		this.kundenart = kundenart;
+	}
+	@Override
+	public String toString() {
+		return "Suche [cId=" + cId + ", name=" + name + ", vorname=" + vorname
+				+ ", firma=" + firma + ", kundenart=" + kundenart + "]";
+	}
 	public long getcId() {
 		return cId;
 	}
@@ -32,11 +49,11 @@ public class Suche {
 	public void setFirma(String firma) {
 		this.firma = firma;
 	}
-	public boolean isPrivatkunde() {
-		return isPrivatkunde;
+	public String getKundenart() {
+		return kundenart;
 	}
-	public void setPrivatkunde(boolean isPrivatkunde) {
-		this.isPrivatkunde = isPrivatkunde;
+	public void setKundenart(String kundenart) {
+		this.kundenart = kundenart;
 	}
 
 

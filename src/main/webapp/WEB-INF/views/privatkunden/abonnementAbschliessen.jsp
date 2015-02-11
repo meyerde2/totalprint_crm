@@ -15,7 +15,7 @@
 				action="/crm/privatkunden/submitAddAbo">
 -->
 				<form name="abschliessen" id="abschliessen" method="POST"
-				action="#">
+				action="/crm/privatkunden/submitAddAbo">
 					<div class="row form-group">
 					<div class="infoPanel">
 							<a href="/crm/privatkunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>Vorname Name</a>
@@ -30,7 +30,7 @@
 								</a></li>
 								<li class="disabled"><a href="#step-2">
 										<h4 class="list-group-item-heading">Step 2</h4>
-										<p class="list-group-item-text">Rechnungsart</p>
+										<p class="list-group-item-text">Zahlungsart</p>
 								</a></li>
 								<li class="disabled"><a href="#step-3">
 										<h4 class="list-group-item-heading">Step 3</h4>
@@ -126,8 +126,6 @@
 							</div>
 						</div>
 					</div>
-					</form>
-					<form>
 					<div class="row setup-content" id="step-3">
 						<div class="col-xs-12">
 							<div class="col-md-12 well text-center">
@@ -158,17 +156,17 @@
 									<tr class="abwLieferadresse">
 										<td><label>Straße</label></td>
 										<td><input type="text" class="form-control"
-											name="strasse" id="strasse" placeholder="Straße"></td>
+											name="abwstrasse" id="abwstrasse" placeholder="Straße"></td>
 									</tr>
 									<tr class="abwLieferadresse">
 										<td><label>PLZ</label></td>
-										<td><input type="text" class="form-control" name="plz"
-											id="plz" placeholder="Postleitzahl"></td>
+										<td><input type="text" class="form-control" name="abwplz"
+											id="abwplz" placeholder="Postleitzahl"></td>
 									</tr>
 									<tr class="abwLieferadresse">
 										<td><label>Ort</label></td>
-										<td><input type="text" class="form-control" name="ort"
-											id="ort" placeholder="Ort"></td>
+										<td><input type="text" class="form-control" name="abwort"
+											id="abwort" placeholder="Ort"></td>
 									</tr>
 								</table>
 								<button id="activate-step-4" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></button>
@@ -202,6 +200,7 @@
 								</table>
 								</div>
 								<div id="overviewZahlungsart">
+								<p class="abschnitt">Zahlungsart</p>
 								<table>
 								<tr>
 										<td><label>Zahlungsart</label></td>
@@ -210,7 +209,7 @@
 								</table>
 								</div>
 								<div id="overviewLastschrift">
-								<p class="abschnitt">Zahlungsart</p>
+								<p class="abschnitt"></p>
 								<table class="overview">
 									<tr class="lastschrift">
 										<td><label>IBAN</label></td>
@@ -247,13 +246,12 @@
 									</tr>
 								</table>
 								</div>
-								<p>
-									Soll das Abonnement der Tageszeitung verbindlich bestellt
-									werden? <input type="checkbox" id="aboYes">
-								</p>
-
-								<button id="submitAbo" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-ok"></span>  Abonnement
-									abschließen</button>
+								<p></p>
+								<!-- <button id="submit" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-ok"></span>  Abonnement
+									abschließen</button> -->
+									<a href="#" id="abbrechen" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-remove"></span>  Vorgang abbrechen</a>
+									<button id="submit" class="btn btn-primary btn-md"><span class='glyphicon glyphicon-ok'></span>  Abo verbindlich abschließen</button>
+									
 							</div>
 						</div>
 					</div>
@@ -262,50 +260,90 @@
 		</div>
 		
 
-</script>
-
 		<script>
+		
+				
 		jQuery.validator.setDefaults({
-  		  debug: true,
+  		  debug: false,
   		  success: "valid",
-  		  focusCleanup: true
+  		  focusCleanup: false
   		});
   		$( "#abschliessen" ).validate({
  			
   		  rules: {
-  		    iban: {
-  		      required: {
-  		    	  depends: function(element) {
-  	  		          return $("input[value='lastschrift']").is(":checked");
-  		      }
-		      },
-  		      iban:  {
-  		        depends: function(element) {
-  		          return $("input[value='lastschrift']").is(":checked");
-  		        }
-  		      }
-  		    },
-  			bic: {
-  				required: true,
-  				bic: true
-  			},
-  		    bank: {
-  		    	required: true
-  		    },
-  		  	kontoinhaber: {
-  		    	required: true
-  		    }
+  			iban: {
+    		      required: {
+  					depends: function(element) {
+  					      return $("input[value='lastschrift']").is(":checked");
+  					  }
+  		      },
+    		      iban:  {
+  			        depends: function(element) {
+  			          return $("input[value='lastschrift']").is(":checked");
+  			        }
+    		      }
+    		    },
+    			bic: {
+    				required: {
+    					depends: function(element) {
+    			          return $("input[value='lastschrift']").is(":checked");
+    			        }
+    				},
+    				bic: {
+    					depends: function(element) {
+    			          return $("input[value='lastschrift']").is(":checked");
+    			        }
+    				}
+    			},
+    		    bank: {
+    		    	required: {
+    		    		depends: function(element) {
+    			          return $("input[value='lastschrift']").is(":checked");
+    			        }
+    		    	}
+    		    },
+    		  	kontoinhaber: {
+    		    	required: {
+    		    		depends: function(element) {
+    			          return $("input[value='lastschrift']").is(":checked");
+    			        }
+    		    	}
+    		    }, 
+	  		  	abwstrasse: {
+			    	required: {
+			    		depends: function(element) {
+	    			          return $("#abwLieferadresse").is(":checked");
+	    			    }
+			    	}
+			   	},
+			   	abwplz: {
+			   		required: {
+			    		depends: function(element) {
+	    			          return $("#abwLieferadresse").is(":checked");
+	    			    }
+			    	},
+				   	digits: {
+			    		depends: function(element) {
+	    			          return $("#abwLieferadresse").is(":checked");
+	    			    }
+			    	}
+			   	},
+			   	abwort: {
+			   		required: {
+			    		depends: function(element) {
+	    			          return $("#abwLieferadresse").is(":checked");
+	    			    }
+			    	}
+			   	}
   		  },
   		  messages:{
   			  iban: {
-  				  iban: "Bitte gültige IBAN eingeben."
+  				  iban: "Bitte eine gültige IBAN eingeben."
   				  
   			  },
   			  bic:{
-  				 bic: "Bitte gültige BIC eingeben." 
+  				 bic: "Bitte eine gültige BIC eingeben." 
   			  }
-
-  		  		
   		  }
   		});
 		$(document)
@@ -409,11 +447,8 @@
 	                    })
 
 	            $('#activate-step-3')
-	                .on(
-	                    'click',
-	                    function(e) {
+	                .on('click', function(e) {
 	                    
-	                        
 	                        // Wenn die Elemente in dem Div keine error Label danach haben, next, ansonsten nicht!
 	                        $("#abschliessen").validate({ });
 	                        if ($("input:radio[value=lastschrift]").is(":checked") && 
@@ -427,21 +462,39 @@
 		                        $(this).remove();
 	                        }else{
 	                        }
+	                        
+	                        if ($("input:radio[value=rechnung]").is(":checked")){
+	                        	$('ul.setup-panel li:eq(2)').removeClass('disabled');
+		                        $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+		                        $(this).remove();
+	                        }
 	                      
 	                    })
-	            $('#activate-step-4')
-	                .on(
-	                    'click',
-	                    function(e) {
-	                        $('ul.setup-panel li:eq(3)')
-	                            .removeClass(
-	                                'disabled');
-	                        $(
-	                                'ul.setup-panel li a[href="#step-4"]')
-	                            .trigger('click');
-	                        $(this).remove();
-	                    })
+	            $('#activate-step-4').on('click', function(e) {
+	                	
+	                	$("#abschliessen").validate({ });
+	                	
+	                    	if ($("#abwLieferadresse").is(":checked") &&
+	                    			$("#abwstrasse-error").hasClass("valid") && 
+	                        		$("#abwplz-error").hasClass("valid")&& 
+	                        		$("#abwort-error").hasClass("valid")
+	                  			){
+	                    		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
+		                        $('ul.setup-panel li a[href="#step-4"]').trigger('click');
+		                        $(this).remove();
+	                    	}
 
+	                    	if (!$("#abwLieferadresse").is(":checked")){
+	                    		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
+		                        $('ul.setup-panel li a[href="#step-4"]').trigger('click');
+		                        $(this).remove();
+	                    	}
+                });
+	            $('#abbrechen').on('click', function(e) {
+                	
+	            	 location.reload();
+                	
+           		});
 	        });
 		
 		

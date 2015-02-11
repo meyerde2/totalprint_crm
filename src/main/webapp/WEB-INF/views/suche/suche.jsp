@@ -26,30 +26,30 @@
 										<div class="form-group">
 											<label for="kundenart">Kundenart</label> <br> <input
 												type="radio" class="radio-inline" name="kundenart"
-												id="kundenart" value="privatkunde"> Privatkunde <input
+												id="kundenart" value="Privat"> Privatkunde <input
 												type="radio" class="radio-inline" name="kundenart"
-												id="kundenart" value="businesskunde"> Geschäftskunde
+												id="kundenart" value="Haendler"> Geschäftskunde
 										</div>
 										<div class="form-group">
 											<label for="cId"> Kundennummer</label> <input type="text"
-												class="form-control" id="cId" placeholder="Kundennummer" />
+												class="form-control" id="cId" name="cId" placeholder="Kundennummer" />
 										</div>
 										<div class="form-group">
 											<label for="vorname">Vorname</label> 
 											<input type="text"
-												class="form-control" id="vorname" placeholder="Vorname" />
+												class="form-control" id="vorname" name="vorname" placeholder="Vorname" />
 										</div>
 										<div class="form-group">
 											<label for="name">Name</label> <input type="text"
-												class="form-control" id="name" placeholder="Name" />
+												class="form-control" id="name" name="name"placeholder="Name" />
 										</div>
 										<div class="form-group">
 											<label for="firma">Firma</label> <input type="text"
-												class="form-control" id="firma" placeholder="Firma" />
+												class="form-control" id="firma" name="firma" placeholder="Firma" />
 										</div>
 										<div class="form-group">
 											<label for="ort">Ort</label> <input type="text"
-												class="form-control" id="ort" placeholder="Ort" />
+												class="form-control" id="ort" name="ort" placeholder="Ort" />
 										</div>
 								
 											  

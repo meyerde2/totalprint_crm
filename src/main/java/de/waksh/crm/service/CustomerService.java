@@ -1,5 +1,14 @@
 package de.waksh.crm.service;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +16,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.sql.DataSource;
+
+import org.json.*;
 
 import de.waksh.crm.dao.CustomerDAO;
 import de.waksh.crm.model.Customer;
@@ -28,7 +39,7 @@ public class CustomerService implements CustomerDAO {
 		try {
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, customer.getCustId());
+			ps.setInt(1, customer.getId());
 			ps.setString(2, customer.getName());
 
 			ps.executeUpdate();
@@ -83,39 +94,85 @@ public class CustomerService implements CustomerDAO {
 	}
 
 	public ArrayList<Customer> getAllCustomers() {
-		ArrayList<Customer> cList = new ArrayList<Customer>();
+		
+		ArrayList<Customer> customerList = new ArrayList<Customer>();
 
-		String sql = "SELECT * FROM `bascrmdb`.`Aktivitaeten_Tabelle`;";
 
-		Connection conn = null;
-
+	
 		try {
-			conn = dataSource.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-			Customer customer = null;
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				/*customer = new Customer(rs.getString("NAME"), rs.getInt("Age"));
-				System.out.println("   name:  "
-						+ customer.getName());
-				cList.add(customer);
-				*/
-				System.out.println("id......    " +rs.getString("AktivitaetenID") );
-			}
-			rs.close();
-			ps.close();
-			return cList;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
+			// Json einlesen
+			// all:  http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/show/.json
+			URI uri = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/.json");
+			JSONTokener tokener = new JSONTokener(uri.toURL().openStream());
+			JSONArray jsonArray = new JSONArray(tokener);
+			
+			for (int i = 0; i < jsonArray.length(); i++) {
+				
+				JSONArray jsonDebitor =(JSONArray) jsonArray.getJSONObject(i).get("debitor");
+				
+				if (Integer.parseInt(jsonDebitor.getJSONObject(0).get("id").toString()) == 1 || 
+					Integer.parseInt(jsonDebitor.getJSONObject(0).get("id").toString()) == 2 
+					){
+					
+					JSONObject jsonObject =  (JSONObject)jsonArray.getJSONObject(i);
+					JSONObject objAnrede = (JSONObject) jsonObject.get("anrede");
+					
+					int id = Integer.parseInt(jsonObject.get("id").toString());
+					
+					System.out.println("inside");
+					//http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/show/1.json
+					
+					URI uriDebitor = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/show/" + id + ".json");
+					JSONTokener tokenerDebitor = new JSONTokener(uriDebitor.toURL().openStream());
+					JSONObject jsonObjDebitor = new JSONObject(tokenerDebitor);
+					JSONObject objKennzeichen = jsonObjDebitor.getJSONObject("kennzeichen");
+					//JSONArray jsonArrayRechnung =(JSONArray) jsonObject.get("rechnung");
+					//System.out.println("rechnung   " + jsonArrayRechnung.toString());
+					
+					// ToDo:  CustomerSearchEntity erstellen
+					
+					
+					// Logik: nur person interpretieren, wenn diese Debitor 1 oder 2 hat, ansonsten überspringen
+					Customer customer = new Customer(
+							Integer.parseInt(jsonObject.get("id").toString()),
+							objAnrede.get("name").toString(),
+							jsonObject.get("nachname").toString(),
+							jsonObject.get("vorname").toString(),
+							jsonObject.get("adresse").toString(), 
+							jsonObject.get("plz").toString(), 
+							jsonObject.get("ort").toString(), 
+							jsonObject.get("firma").toString(), 
+							"abwStrasse", 
+							"abwPlz", 
+							"abwOrt",
+							jsonObject.get("iBAN").toString(),
+							jsonObject.get("bIC").toString(),
+							jsonObject.get("kontoinhaber").toString(),
+							jsonObject.get("email").toString(),
+							objKennzeichen.get("name").toString(),	// isPrivatkunde
+							(Boolean)jsonObjDebitor.get("abonnement"), // isAbonnent
+							1, // Rechnungsart
+							0, 0, 0); // Mengen
+					
+					customerList.add(customer);
+					System.out.println("customer:    "  + customer.toString());
+				
 				}
+				
 			}
-		}
+	
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+
+		return customerList;
+
 	}
 
 	@Override
@@ -131,7 +188,6 @@ public class CustomerService implements CustomerDAO {
 			ps.executeUpdate(sql);
 
 			Customer customer = null;
-			customer = new Customer(name, age);
 
 			ps.close();
 			return customer;
@@ -146,5 +202,6 @@ public class CustomerService implements CustomerDAO {
 			}
 		}
 	}
+	
 
 }

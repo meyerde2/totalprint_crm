@@ -1,6 +1,6 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="body">
 
@@ -11,20 +11,6 @@
 	Die Suchtreffer sollen in einer Liste mit 20 Einträgen ausgegeben werden. Bei mehr Treffern muss die Möglichkeit gegeben werden Vor und Zurück zu blättern.
 	Die Auswahlliste besteht aus: ID, Name, Vorname, Firma, PK/GK Kennzeichen
 	Der Kunde wird durch Doppelklick selektiert und der Benutzer wird auf die Stammdatenübersicht der Geschäftskunden oder Privatkunden geleitet.
-
-			<table>
-
-				<c:forEach var="customer" items="${customerList}">
-					<tr>
-						<td>${customer.cId}</td>
-						<td>${customer.firma}</td>
-						<td>${customer.name}</td>
-						<td>${customer.vorname}</td>
-						<td>${customer.isPrivatkunde}</td>
-						<td><a href="/crm/suche/${customer.cId}">auswählen</a></td>
-					</tr>
-				</c:forEach>
-			</table>
 
  -->
 			<div class="row">
@@ -39,69 +25,42 @@
 					</div>
 					<table class="table">
 						<thead>
-							<tr class="filters">
-								<th><input type="text" class="form-control" placeholder="KdNr"
-									disabled></th>
-										<th><input type="text" class="form-control"
-									placeholder="Firma" disabled></th>
-								<th><input type="text" class="form-control"
-									placeholder="Vorname" disabled></th>
-								<th><input type="text" class="form-control"
-									placeholder="Name" disabled></th>
-								<th><input type="text" class="form-control"
-									placeholder="Kundenart" disabled></th>
-								<th><input type="text" class="form-control"
-									placeholder="Ort" disabled></th>
-								<th><input type="text" class="form-control"
-									placeholder="Abonnement" disabled></th>
-										<th>Aktion</th>
-							</tr>
+						   <tr class="filters">
+						      <th><input type="text" class="form-control" placeholder="KdNr" disabled></th>
+						      <th><input type="text" class="form-control" placeholder="Firma" disabled></th>
+						      <th><input type="text" class="form-control" placeholder="Vorname" disabled></th>
+						      <th><input type="text" class="form-control" placeholder="Name" disabled></th>
+						      <th><input type="text" class="form-control" placeholder="Ort" disabled></th>
+						      <th><input type="text" class="form-control" placeholder="Kundenart" disabled></th>
+						      <th><input type="text" class="form-control" placeholder="Abonnement" disabled></th>
+						      <th>Aktion</th>
+						   </tr>
 						</thead>
 						<tbody>
+						
+						<c:forEach var="customer" items="${customerList}">
+										
 							<tr>
-								<td>122</td>
-								<td>Unternehmen</td>								
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>Privatkunde</td>
-								<td>Kiel</td>
-								<td>ja</td>
+								<td>${customer.id}</td>
+								<td>${customer.firma}</td>	
+								<td>${customer.vorname}</td>
+								<td>${customer.name}</td>
+								<td>${customer.ort}</td>
+								<td>${customer.kundenart}</td>
+								<td>${customer.isAbonnent}</td>
 								<td>
-								<a href="/crm/suche/122" class="btn btn-primary btn-sm">
-						        	<span class="glyphicon glyphicon-zoom-in"></span> auswählen
-						        </a>
-								</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>Unternehmen</td>	
-								<td>Jacob</td>
-								<td>Thornton</td>
-								<td>Privatkunde</td>
-								<td>Kiel</td>
-								<td>ja</td>
-								<td>
-								<a href="/crm/suche/2" class="btn btn-primary btn-sm">
-						        	<span class="glyphicon glyphicon-zoom-in"></span> auswählen
-						        </a>
-								</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>Unternehmen</td>	
-								<td>Larry</td>
-								<td>the Bird</td>
-								<td>Geschäftskunde</td>
-								<td>Kiel</td>
-								<td>nein</td>
-								<td>
-								<a href="/crm/suche/${customer.cId}" class="btn btn-primary btn-sm">
+								<a href="/crm/suche/${customer.id}" class="btn btn-primary btn-sm">
 						        	<span class="glyphicon glyphicon-zoom-in"></span> auswählen
 						        </a>
 								</td>
 							</tr>
 							
-							
+						</c:forEach>	
+						<c:if test="${empty customerList}">
+						    <tr class="no-result text-center">
+								<td colspan="7"><p>Keine Ergebnisse gefunden!</p></td>
+							</tr>
+						</c:if>		
 						</tbody>
 					</table>
 				</div>
@@ -190,7 +149,7 @@
 																		$('<tr class="no-result text-center"><td colspan="'
 																				+ $table
 																						.find('.filters th').length
-																				+ '">No result found</td></tr>'));
+																				+ '">Keine Ergebnisse gefunden!</td></tr>'));
 													}
 												});
 							});

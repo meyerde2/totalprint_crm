@@ -12,7 +12,7 @@
 			<div class="container">
 				<div class="row">
 						<div class="well well-sm">
-							<h3 class="panel-title">Max Mustermann</h3>
+							<h3 class="panel-title">${customer.vorname} ${customer.name}</h3>
 							<div class="row">
 								<div class="col-md-6">
 
@@ -27,30 +27,30 @@
 											<tbody>
 												<tr>
 													<td>Kundenummer</td>
-													<td>1337</td>
+													<td>${customer.id}</td>
 												</tr>
 												<tr>
 													<td>Anrede</td>
-													<td>Herr</td>
+													<td>${customer.anrede}</td>
 												</tr>
 												<tr>
 													<td>Anschrift</td>
-													<td>Teststraße 10, 2430 Eckernförde</td>
+													<td>${customer.strasse}, ${customer.plz} ${customer.ort}</td>
 												</tr>
 												<tr>
 													<td>Abweichende Lieferanschrift</td>
-													<td>Teststraße 1000, 2430 Kiel</td>
+													<td>${customer.abwStrasse}, ${customer.abwPlz} ${customer.abwOrt}</td>
 												</tr>
 												<tr>
 													<td>Bankverbindung</td>
-													<td>DE19123412341234123412 (IBAN)<br> <br>
-														PBNKDEFF (BIC)<br> <br> Max Mustermann
-														(Kontoinhaber)
+													<td>${customer.iban} (IBAN)<br> <br>
+														${customer.bic} (BIC)<br> <br> 
+														${customer.kontoinhaber}(Kontoinhaber)
 													</td>
 												</tr>
 												<tr>
 													<td>Email</td>
-													<td><a href="c" class="glyphicon glyphicon-envelope">  info@example.com</a></td>
+													<td><a href="c" class="glyphicon glyphicon-envelope">  ${customer.email}</a></td>
 												</tr>
 
 											</tbody>
