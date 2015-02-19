@@ -105,10 +105,7 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 		
 		System.out.println("id:  " + id);
 		System.out.println("Suche...Weiterleitung");
-
-		
-		 
-		
+		String kundenart ="";
 		try {
 			// Json einlesen
 			// all:  http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/show/.json
@@ -120,9 +117,18 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 			URI uriDebitor = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/show/" + id + ".json");
 			JSONTokener tokenerDebitor = new JSONTokener(uriDebitor.toURL().openStream());
 			JSONObject jsonObjDebitor = new JSONObject(tokenerDebitor);
+			JSONObject objKundenart = (JSONObject) jsonObjDebitor.get("kennzeichen");
 			
 			
-			
+			// ToDo: Auf das ERP-Update warten und überprüfen, ob die Bezeichner verändert worden.
+		
+			if (objKundenart.get("name").equals("Haendler")){
+				kundenart ="Geschäftskunde";
+				System.out.println("Kundenart = Geschäftskunde");
+			}else{
+				kundenart = "Privatkunde";
+				System.out.println("Kundenart = Privatkunde");
+			}
 			// ToDo:  CustomerSearchEntity erstellen
 			Customer customer = new Customer(
 					Integer.parseInt(jsonObject.get("id").toString()),
@@ -140,11 +146,14 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 					jsonObject.get("bIC").toString(),
 					jsonObject.get("kontoinhaber").toString(),
 					jsonObject.get("email").toString(),
-					"leer",	// isPrivatkunde
+					kundenart,	// isPrivatkunde
 					false, // isAbonnent
 					1, // Rechnungsart
 					0, 0, 0); // Mengen
 			
+			request.getSession().setAttribute("currentCustomer", customer);
+	        System.out.println("im Suchcontroller:  " + request.getSession().getAttribute("currentCustomer").toString());
+	        
 			System.out.println("customer:    "  + customer.toString());
 			model.addAttribute("customer",customer);
 			
@@ -157,13 +166,10 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-	
-		//als Cookie speichern???
 		
 		//richtige View zurückwerfen, Unterscheidung, ob Privatkunde oder Businesskunde
 		String strView;
-		if (true){
-			
+		if (kundenart.equals("Privatkunde")){
 			strView = "/privatkunden/pStammdaten";
 		}else{
 			strView = "/businesskunden/bStammdaten";

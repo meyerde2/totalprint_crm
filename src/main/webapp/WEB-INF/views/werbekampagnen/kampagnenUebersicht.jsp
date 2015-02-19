@@ -1,5 +1,6 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="body">
@@ -11,7 +12,7 @@
 			<div class="row">
 				<div class="panel panel-primary filterable">
 					<div class="panel-heading">
-						<h3 class="panel-title">Suchergebnisse</h3>
+						<h3 class="panel-title">Übersicht der Werbekampagnen</h3>
 						<div class="pull-right">
 							<button class="btn btn-default btn-xs btn-filter">
 								<span class="glyphicon glyphicon-filter"></span> Filter
@@ -20,66 +21,44 @@
 					</div>
 					<table class="table">
 						<thead>
-							<tr class="filters">
-								<th><input type="text" class="form-control" placeholder="Bezeichnung"
-									disabled></th>
-										<th><input type="text" class="form-control"
-									placeholder="Art" disabled></th>
-								<th><input type="text" class="form-control"
-									placeholder="Datum" disabled></th>
-								<th><input type="text" class="form-control"
-									placeholder="Grund" disabled></th>
-								<th><input type="text" class="form-control"
-									placeholder="Exemplare" disabled></th>
-								<th><input type="text" class="form-control"
-									placeholder="Notiz" disabled></th>
-										<th>Aktion</th>
-							</tr>
+						   <tr class="filters">
+						      <th><input type="text" class="form-control" placeholder="ID" disabled></th>
+						      <th><input type="text" class="form-control" placeholder="Bezeichnung" disabled></th>
+						      <th><input type="text" class="form-control" placeholder="Art" disabled></th>
+						      <th><input type="text" class="form-control" placeholder="Datum" disabled></th>
+						      <th><input type="text" class="form-control" placeholder="Grund" disabled></th>
+						      <th><input type="text" class="form-control" placeholder="Exemplare" disabled></th>
+						      <th>Aktion</th>
+						   </tr>
 						</thead>
 						<tbody>
+						<c:forEach var="kampagne" items="${kampagnenList}">
+										
 							<tr>
-								<td>122</td>
-								<td>Unternehmen</td>								
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>Privatkunde</td>
-								<td>Kiel</td>
-								<td> <a href="/crm/privatkunden/stammdaten" class="btn btn-primary btn-sm">
+								<td>${kampagne.kampagnenId}</td>
+								<td>${kampagne.kampagnenBez}</td>	
+								<td>${kampagne.art}</td>
+								<td>${kampagne.dateBeginn} - ${kampagne.dateUntil}</td>
+								<td>${kampagne.grund}</td>
+								<td>${kampagne.anzahlExemplare}</td>
+								<td>
+								<a href="/crm/suche/${kampagne.kampagnenId}" class="btn btn-primary btn-sm">
 						        	<span class="glyphicon glyphicon-zoom-in"></span> auswählen
-						       		 </a>
-						        </td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>Unternehmen</td>	
-								<td>Jacob</td>
-								<td>Thornton</td>
-								<td>Privatkunde</td>
-								<td>Kiel</td>
-								<td> <a href="/crm/privatkunden/stammdaten" class="btn btn-primary btn-sm">
-						        	<span class="glyphicon glyphicon-zoom-in"></span> auswählen
-						       		 </a>
-						        </td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>Unternehmen</td>	
-								<td>Larry</td>
-								<td>the Bird</td>
-								<td>Geschäftskunde</td>
-								<td>Kiel</td>
-								<td> <a href="/crm/privatkunden/stammdaten" class="btn btn-primary btn-sm">
-						        	<span class="glyphicon glyphicon-zoom-in"></span> auswählen
-						       		 </a>
-						        </td>
+						        </a>
+								</td>
 							</tr>
 							
-							
+						</c:forEach>	
+						<c:if test="${empty kampagnenList}">
+						    <tr class="no-result text-center">
+								<td colspan="7"><p>Keine Ergebnisse gefunden!</p></td>
+							</tr>
+						</c:if>		
 						</tbody>
 					</table>
 				</div>
 
-			</div>
+			</div>		
 		<script>
 			/*
 

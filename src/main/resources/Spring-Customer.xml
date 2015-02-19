@@ -11,5 +11,11 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
+	<bean id="jsonServiceBean" class="de.waksh.crm.service.JsonService">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="kampagnenService" class="de.waksh.crm.service.KampagnenService">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
  
 </beans>

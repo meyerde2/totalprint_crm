@@ -13,7 +13,7 @@
 					<div class="col-md-8">
 						<div class="well well-sm">
 						<div class="infoPanel">
-							<a href="/crm/privatkunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>Vorname Name</a>
+							<a href="/crm/privatkunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>${sessionScope.currentCustomer.vorname} ${sessionScope.currentCustomer.name}</a>
 							<a href="/crm/handbuch/privatkunden"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
 						</div>
 							<form name="activityAnlegen" id="activityAnlegen" method="POST"

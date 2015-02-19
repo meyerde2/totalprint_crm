@@ -210,11 +210,11 @@
                            </div>
                            <div class="form-group">
                               <label for="dateBeginn">Startzeitpunkt</label> 
-                              <input type="text" class="form-control date" name="dateBeginn" id="dateBeginn" placeholder="Startzeitpunkt" />
+                              <input type="text" class="form-control datePicker" name="dateBeginn" id="dateBeginn" placeholder="Startzeitpunkt" />
                            </div>
                            <div class="form-group">
                               <label for="dateUntil">Endzeitpunkt</label> 
-                              <input type="text" class="form-control date" name="dateUntil" id="dateUntil" placeholder="Endzeitpunkt" />
+                              <input type="text" class="form-control datePicker" name="dateUntil" id="dateUntil" placeholder="Endzeitpunkt" />
                            </div>
                            <div class="form-group">
                               <label for="grund">Grund</label> 
@@ -232,7 +232,7 @@
                            </div>
                            <div class="form-group">
                               <label for="grund">Geschenkart</label> 
-                              <select class="form-control" name="geschenkartId" size="1" >
+                              <select class="form-control" name="geschenkartId" id="geschenkartId" size="1" >
                                  <option value="">---bitte wählen---</option>
                                  <option value="1">XYZ</option>
                                  <option value="2">ABC</option>
@@ -279,7 +279,7 @@
 			
 <script>
 jQuery.validator.setDefaults({
-	  debug: true,
+	  debug: false,
 	  success: "valid",
 	  focusCleanup: true
 	});
@@ -305,24 +305,26 @@ jQuery.validator.setDefaults({
 			required: true
 		},
 		anzahlExemplare: {
-			required: true
+			required: true,
+			integer: true
 		},
 		anzahlInserate: {
-			required: true
+			required: true,
+			integer: true
 		},
 		anzahlVerkaufteExemplare: {
-			required: true
+			required: true,
+			integer: true
 		},
 		kosten: {
 			required: true,
+			euroCurrency: true
 		},
 		umsatz: {
 			required: true,
+			euroCurrency: true
 		},
 		rating: {
-			required: true,
-		},
-		notiz: {
 			required: true,
 		}
 	  }	 
@@ -365,9 +367,6 @@ jQuery.validator.setDefaults({
 			},
 			rating: {
 				required: true,
-			},
-			notiz: {
-				required: true,
 			}
 		  }	 
 		});
@@ -393,9 +392,6 @@ jQuery.validator.setDefaults({
 				required: true,
 			},
 			rating: {
-				required: true,
-			},
-			notiz: {
 				required: true,
 			}
 		  }	 

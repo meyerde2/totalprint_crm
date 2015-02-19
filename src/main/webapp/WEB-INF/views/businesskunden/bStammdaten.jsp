@@ -12,7 +12,7 @@
 				<div class="suche">
 				<div class="row">
 						<div class="well well-sm">
-							<h3 class="panel-title">Unternehmen GmbH</h3>
+							<h3 class="panel-title">${sessionScope.currentCustomer.firma}</h3>
 							<div class="row">
 								<div class="col-md-6">
 
@@ -27,34 +27,34 @@
 											<tbody>
 												<tr>
 													<td>Kundenummer</td>
-													<td>1337</td>
+													<td>${sessionScope.currentCustomer.id}</td>
 												</tr>
 												<tr>
 													<td>Anrede</td>
-													<td>Herr</td>
+													<td>${sessionScope.currentCustomer.anrede}</td>
 												</tr>
 												<tr>
 													<td>Vertreter</td>
-													<td>Max Mustermann</td>
+													<td>${sessionScope.currentCustomer.vorname} ${sessionScope.currentCustomer.name}</td>
 												</tr>
 												<tr>
 													<td>Anschrift</td>
-													<td>Teststraße 10, 2430 Eckernförde</td>
+													<td>${sessionScope.currentCustomer.strasse}, ${sessionScope.currentCustomer.plz} ${sessionScope.currentCustomer.ort}</td>
 												</tr>
 												<tr>
 													<td>Abweichende Lieferanschrift</td>
-													<td>Teststraße 1000, 2430 Kiel</td>
+													<td>${sessionScope.currentCustomer.abwStrasse}, ${sessionScope.currentCustomer.abwPlz} ${sessionScope.currentCustomer.abwOrt}</td>
 												</tr>
 												<tr>
 													<td>Bankverbindung</td>
-													<td>DE19123412341234123412 (IBAN)<br> <br>
-														PBNKDEFF (BIC)<br> <br> Max Mustermann
-														(Kontoinhaber)
+													<td>${sessionScope.currentCustomer.iban} (IBAN)<br> <br>
+														${sessionScope.currentCustomer.bic} (BIC)<br> <br> 
+														${sessionScope.currentCustomer.kontoinhaber}(Kontoinhaber)
 													</td>
 												</tr>
 												<tr>
 													<td>Email</td>
-													<td><a href="c" class="glyphicon glyphicon-envelope">  info@example.com</a></td>
+													<td><a href="mailto:${sessionScope.currentCustomer.email}" class="glyphicon glyphicon-envelope">  ${sessionScope.currentCustomer.email}</a></td>
 												</tr>
 
 											</tbody>

@@ -1,5 +1,6 @@
 package de.waksh.crm.controller;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import de.waksh.crm.dao.ActivityDAO;
+import de.waksh.crm.dao.JsonDAO;
 import de.waksh.crm.model.Activity;
 import de.waksh.crm.model.ActivityEntity;
+import de.waksh.crm.model.Customer;
 
 @Controller
 public class PrivatkundenController {
@@ -53,7 +56,7 @@ public class PrivatkundenController {
 	}
 	
 	/**
-	 * Abonnement kündigen
+	 * Abonnement kündigen - View
 	 */
 	
 	@RequestMapping(value = "/privatkunden/aboKuendigen", method = RequestMethod.GET)
@@ -64,6 +67,27 @@ public class PrivatkundenController {
 		return "/privatkunden/abonnementKuendigen";
 	}
 	
+	
+	/**
+	 * Abonnement kündigen - Submit Action
+	 */
+
+	@RequestMapping(value = "/privatkunden/submitCancelAbo", method = RequestMethod.POST)
+	public String pSubmitCancelAbo(HttpServletRequest request, Model model) {
+		
+		logger.info("abonnementKuendigen-Page!");
+		
+		System.out.println("cancel abo");
+		
+		// ToDo: Datum an ERP übermitteln
+		
+		
+		
+		return "/privatkunden/abonnementKuendigen";
+	}
+	
+	
+	
 	/**
 	 * Abonnement abschließen View
 	 */
@@ -72,52 +96,74 @@ public class PrivatkundenController {
 	public String pAboAbschliessen(Model model) {
 		
 		logger.info("aboAbschließen-Page !");
+
 		
 		return "/privatkunden/abonnementAbschliessen";
 	}
 	
 	/**
 	 * Abonnement abschließen - Submit-Action
+	 * @throws IOException 
 	 */
+	
 	@RequestMapping(value = "/privatkunden/submitAddAbo", method = RequestMethod.POST)
-	public String pAddAbo(Model model) {
+	public String pAddAbo(HttpServletRequest request, Model model) {
 		
 		logger.info("aboAbschließen-Page !");
-		System.out.println("Add Abo, jo");
-		return "/privatkunden/abonnementAbschliessen";
+		
+		// Abo-Object
+		String strZahlungsart = request.getParameter("zahlungsart").toString();
+		
+		if (request.getSession().getAttribute("currentCustomer") != null){
+			
+			Customer c = (Customer) request.getSession().getAttribute("currentCustomer");
+			System.out.println("currentCustomer....  " +c.toString());
+
+		}
+		
+			
+		//AboEntity abo = new AboEntity(customerId, isLastschrift, iban, bic, bank, kontoinhaber, isAbweichendeLieferanschrift, lieferStrasse, lieferPlz, lieferOrt, mengeZeitschriftA, mengeZeitschriftB, mengeTageszeitung)
+		System.out.println("zahlungsart: " + strZahlungsart);
+		
+		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+		JsonDAO jsonDAO = (JsonDAO) context.getBean("jsonServiceBean");
+		jsonDAO.generateJsonAbo(null);
+		
+		return "/privatkunden/pStammdaten";
+		// return "redirect:/privatkunden/submitAddAboJSON" ;
 	}
+	
+	
 	
 	/**
 	 * Aktivitäten-Übersicht
 	 */
 	
 	@RequestMapping(value = "/privatkunden/activity", method = RequestMethod.GET)
-	public String pActivity(Model model) {
+	public String pActivity(HttpServletRequest request, Model model) {
 		
 		logger.info("activity-Page !");
 		
-		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"Spring-Module.xml");
-		ActivityDAO activityDAO = (ActivityDAO) context
-				.getBean("activityService");
-		
-		ArrayList<ActivityEntity> activityEntity = activityDAO.getAllActivities();
-		
-		String kundenBez = "TestVorname TestNachname"; 
-		String mitarbeiterBez = "Vorname Nachname";
-		
-		// ToDo:  ablösen, nur das übergebene Objekte an JSP übergeben!
-		
-				
-		System.out.println("activityEntity::::   " + activityEntity.toString());
-		
+		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+		ActivityDAO activityDAO = (ActivityDAO) context.getBean("activityService");
+		int id = 0;
+		if (request.getSession().getAttribute("currentCustomer") != null){
+			
+			Customer c = (Customer) request.getSession().getAttribute("currentCustomer");
+			id = c.getId();
+			
+		}
+
+		ArrayList<ActivityEntity> activityEntity = activityDAO.getAllActivities(id);
 		model.addAttribute("aList", activityEntity);
+		
+		System.out.println("activityEntity:   " + activityEntity.toString());
 		
 		return "/privatkunden/aktivitaeten";
 	}
 	
 	/**
-	 * Aktivität anlegen
+	 * Aktivität anlegen - View
 	 */
 	
 	@RequestMapping(value = "/privatkunden/activityAnlegen", method = RequestMethod.GET)
@@ -147,8 +193,7 @@ public class PrivatkundenController {
 		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 		
 
-		context = new ClassPathXmlApplicationContext(
-				"Spring-Module.xml");
+		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
 		ActivityDAO activityDAO = (ActivityDAO) context.getBean("activityService");
 		int grundId = Integer.parseInt(request.getParameter("grund"));
 		if (request.getParameter("grund").equals("5")){

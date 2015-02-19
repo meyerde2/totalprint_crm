@@ -10,23 +10,28 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import de.waksh.crm.dao.KampagnenDAO;
 import de.waksh.crm.model.GeburtstageEntity;
 import de.waksh.crm.model.SonderausgabeEntity;
 
 @Controller
 public class WerbekampagnenController {
 
-private static final Logger logger = LoggerFactory.getLogger(AddCustomerController.class);
+	private static final Logger logger = LoggerFactory.getLogger(WerbekampagnenController.class);
+	private ApplicationContext context;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	
 	@RequestMapping(value = "/werbekampagnen", method = RequestMethod.GET)
 	public String privatkunden(Model model) {
 		logger.info("werbekampagnen!");
@@ -37,6 +42,11 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 	@RequestMapping(value = "/werbekampagnen/kampagnenUebersicht", method = RequestMethod.GET)
 	public String wUebersicht(Model model) {
 		logger.info("kampagnenUebersicht-Page!");
+		
+		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+		KampagnenDAO kampagnenDAO = (KampagnenDAO) context.getBean("kampagnenService");
+		
+		model.addAttribute("kampagnenList", kampagnenDAO.getAllKampagnen());
 		
 		return "/werbekampagnen/kampagnenUebersicht";
 	}
@@ -74,10 +84,16 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 				Integer.parseInt(request.getParameter("anzahlExemplare")),
 				Integer.parseInt(request.getParameter("anzahlVerkaufteExemplare")),
 				Integer.parseInt(request.getParameter("anzahlInserate")),
-				Integer.parseInt(request.getParameter("kosten")), 
-				Integer.parseInt(request.getParameter("umsatz")),
+				1,
+				Double.parseDouble(request.getParameter("kosten")), 
+				Double.parseDouble(request.getParameter("umsatz")),
 				Integer.parseInt(request.getParameter("rating")),
 				request.getParameter("notiz"));
+		
+		
+		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+		KampagnenDAO kampagnenDAO = (KampagnenDAO) context.getBean("kampagnenService");
+		kampagnenDAO.insertSonderausgabe(sonderausgabe, 1);
 		
 		System.out.println("" + sonderausgabe.toString());
 		return "/werbekampagnen/kampagnenErstellen";
@@ -99,6 +115,13 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 		java.util.Date tmpDate2 = format.parse(dateUntil);
 		java.sql.Date sqlDateUntil = new java.sql.Date(tmpDate2.getTime());
 		
+		
+		// ToDo: Euro Komma Cast
+		//NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
+	    //Number number = format.parse("1,234");
+	    //double d = number.doubleValue();
+	    
+	    
 		SonderausgabeEntity sonderausgabe = new SonderausgabeEntity(
 				request.getParameter("kampagnenBez"),
 				sqlDateBeginn,
@@ -109,10 +132,16 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 				Integer.parseInt(request.getParameter("anzahlExemplare")),
 				Integer.parseInt(request.getParameter("anzahlVerkaufteExemplare")),
 				Integer.parseInt(request.getParameter("anzahlInserate")),
+				1,
 				Integer.parseInt(request.getParameter("kosten")), 
 				Integer.parseInt(request.getParameter("umsatz")),
 				Integer.parseInt(request.getParameter("rating")),
 				request.getParameter("notiz"));
+		
+		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+		KampagnenDAO kampagnenDAO = (KampagnenDAO) context.getBean("kampagnenService");
+		kampagnenDAO.insertSonderausgabe(sonderausgabe, 2);
+		
 		
 		System.out.println("beilage" + sonderausgabe.toString());
 
@@ -140,10 +169,14 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 				sqlDateBeginn,
 				sqlDateUntil,
 				Integer.parseInt(request.getParameter("grundId")),
-				Integer.parseInt(request.getParameter("kosten")), 
+				Double.parseDouble(request.getParameter("kosten")), 
 				Integer.parseInt(request.getParameter("geschenkartId")), 
 				Integer.parseInt(request.getParameter("rating")),
 				request.getParameter("notiz"));
+		
+		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+		KampagnenDAO kampagnenDAO = (KampagnenDAO) context.getBean("kampagnenService");
+		kampagnenDAO.insertGeburtstagsentity(geburtstagsausgabe);
 		
 		System.out.println("geburtstag:   " + geburtstagsausgabe.toString());
 		

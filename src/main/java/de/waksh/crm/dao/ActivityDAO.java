@@ -7,7 +7,7 @@ import de.waksh.crm.model.ActivityEntity;
 
 public interface ActivityDAO {
 
-	public ArrayList<ActivityEntity> getAllActivities();
+	public ArrayList<ActivityEntity> getAllActivities(int id);
 	public void insertActivity(Activity activity);
 	public String getMediumById(int id);
 	public String getGrundById(int id);

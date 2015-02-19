@@ -8,13 +8,13 @@
 		<div class="bestellungBearbeiten">
 			<h1>Geschäftskunden - Bestellung bearbeiten</h1>
 
-			<form name="abschliessen" method="POST"
+			<form name="abschliessen" id="abschliessen" method="POST"
 				action="/crm/privatkunden/submitAddAbo">
 
 
 					<div class="row form-group">
 						<div class="infoPanel">
-							<a href="/crm/privatkunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>Vorname Name</a>
+							<a href="/crm/businesskunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>${sessionScope.currentCustomer.firma}</a>
 							<a href="/crm/handbuch/privatkunden"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
 						</div>
 						<div class="col-xs-12">
@@ -101,6 +101,10 @@
 										<td><label>PLZ/Ort</label></td>
 										<td>12345 Kiel</td>
 									</tr>
+									<tr class="rechnung">
+										<td><label>PLZ/Ort</label></td>
+										<td>12345 Kiel</td>
+									</tr>
 									<tr class="payment">
 										<td><label>IBAN</label></td>
 										<td><input type="text" class="form-control" name="iban"
@@ -159,17 +163,17 @@
 									<tr class="abwLieferadresse">
 										<td><label>Straße</label></td>
 										<td><input type="text" class="form-control"
-											name="strasse" id="strasse" placeholder="Straße"></td>
+											name="abwstrasse" id="abwstrasse" placeholder="Straße Nr."></td>
 									</tr>
 									<tr class="abwLieferadresse">
 										<td><label>PLZ</label></td>
-										<td><input type="text" class="form-control" name="plz"
-											id="plz" placeholder="Postleitzahl"></td>
+										<td><input type="text" class="form-control" name="abwplz"
+											id="abwplz" placeholder="Postleitzahl"></td>
 									</tr>
 									<tr class="abwLieferadresse">
 										<td><label>Ort</label></td>
-										<td><input type="text" class="form-control" name="ort"
-											id="ort" placeholder="Ort"></td>
+										<td><input type="text" class="form-control" name="abwort"
+											id="abwort" placeholder="Ort"></td>
 									</tr>
 								</table>
 								<button id="activate-step-4" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></button>
@@ -254,17 +258,100 @@
 			</form>
 		</div>
 		<script>
-			$(document)
-					.ready(
-							function() {
+		
+		
+		jQuery.validator.setDefaults({
+	  		  debug: false,
+	  		  success: "valid",
+	  		  focusCleanup: false
+	  		});
+	  		$( "#abschliessen" ).validate({
+	 			
+	  		  rules: {
+	  			iban: {
+	    		      required: {
+	  					depends: function(element) {
+	  					      return $("input[value='lastschrift']").is(":checked");
+	  					  }
+	  		      },
+	    		      iban:  {
+	  			        depends: function(element) {
+	  			          return $("input[value='lastschrift']").is(":checked");
+	  			        }
+	    		      }
+	    		    },
+	    			bic: {
+	    				required: {
+	    					depends: function(element) {
+	    			          return $("input[value='lastschrift']").is(":checked");
+	    			        }
+	    				},
+	    				bic: {
+	    					depends: function(element) {
+	    			          return $("input[value='lastschrift']").is(":checked");
+	    			        }
+	    				}
+	    			},
+	    		    bank: {
+	    		    	required: {
+	    		    		depends: function(element) {
+	    			          return $("input[value='lastschrift']").is(":checked");
+	    			        }
+	    		    	}
+	    		    },
+	    		  	kontoinhaber: {
+	    		    	required: {
+	    		    		depends: function(element) {
+	    			          return $("input[value='lastschrift']").is(":checked");
+	    			        }
+	    		    	}
+	    		    }, 
+		  		  	abwstrasse: {
+				    	required: {
+				    		depends: function(element) {
+		    			          return $("#abwLieferadresse").is(":checked");
+		    			    }
+				    	}
+				   	},
+				   	abwplz: {
+				   		required: {
+				    		depends: function(element) {
+		    			          return $("#abwLieferadresse").is(":checked");
+		    			    }
+				    	},
+					   	digits: {
+				    		depends: function(element) {
+		    			          return $("#abwLieferadresse").is(":checked");
+		    			    }
+				    	}
+				   	},
+				   	abwort: {
+				   		required: {
+				    		depends: function(element) {
+		    			          return $("#abwLieferadresse").is(":checked");
+		    			    }
+				    	}
+				   	}
+	  		  },
+	  		  messages:{
+	  			  iban: {
+	  				  iban: "Bitte eine gültige IBAN eingeben."
+	  				  
+	  			  },
+	  			  bic:{
+	  				 bic: "Bitte eine gültige BIC eingeben." 
+	  			  }
+	  		  }
+	  		});
+	  		
+			$(document).ready(function() {
 
 								var isVisiblePayment = false;
 
 								$(".abwLieferadresse").hide();
 								$(".payment").hide();
 
-								$("input:radio[value=lastschrift]").click(
-										function() {
+								$("input:radio[value=lastschrift]").click(function() {
 											if (!isVisiblePayment) {
 												$(".rechnung").hide("fast");
 												$(".payment").show("slow");
@@ -272,16 +359,15 @@
 												isVisiblePayment = true;
 											}
 
-										});
-								$("input:radio[value=rechnung]").click(
-										function() {
+								});
+								$("input:radio[value=rechnung]").click(function() {
 											if (isVisiblePayment) {
 												$(".payment").hide("fast");
 												$(".rechnung").show("slow");
 												isVisiblePayment = false;
 											}
 
-										});
+								});
 								$(".checkbox-inline").click(function() {
 									$(".abwLieferadresse").toggle("slow");
 								});
@@ -290,9 +376,7 @@
 
 								allWells.hide();
 
-								navListItems
-										.click(function(e) {
-											e.preventDefault();
+								navListItems.click(function(e) {e.preventDefault();
 											var $target = $($(this)
 													.attr('href')), $item = $(
 													this).closest('li');
@@ -304,61 +388,70 @@
 												allWells.hide();
 												$target.show();
 											}
-										});
+								});
 
-								$('ul.setup-panel li.active a')
-										.trigger('click');
+								$('ul.setup-panel li.active a').trigger('click');
 
 								// DEMO ONLY //
-								$('#activate-step-2')
-										.on(
-												'click',
-												function(e) {
-													$('ul.setup-panel li:eq(1)')
-															.removeClass(
-																	'disabled');
-													$(
-															'ul.setup-panel li a[href="#step-2"]')
-															.trigger('click');
-													$(this).remove();
-												})
+								$('#activate-step-2').on('click',function(e) {
+									$('ul.setup-panel li:eq(1)').removeClass('disabled');
+									$('ul.setup-panel li a[href="#step-2"]').trigger('click');
+									$(this).remove();
+								});
 
 								$('#activate-step-3')
-										.on(
-												'click',
-												function(e) {
-													$('ul.setup-panel li:eq(2)')
-															.removeClass(
-																	'disabled');
-													$(
-															'ul.setup-panel li a[href="#step-3"]')
-															.trigger('click');
-													$(this).remove();
-												})
-								$('#activate-step-4')
-										.on(
-												'click',
-												function(e) {
-													$('ul.setup-panel li:eq(3)')
-															.removeClass(
-																	'disabled');
-													$(
-															'ul.setup-panel li a[href="#step-4"]')
-															.trigger('click');
-													$(this).remove();
-												})
-								$('#activate-step-5')
-										.on(
-												'click',
-												function(e) {
-													$('ul.setup-panel li:eq(4)')
-															.removeClass(
-																	'disabled');
-													$(
-															'ul.setup-panel li a[href="#step-5"]')
-															.trigger('click');
-													$(this).remove();
-												})
+				                .on('click', function(e) {
+				                    
+				                        // Wenn die Elemente in dem Div keine error Label danach haben, next, ansonsten nicht!
+				                        $("#abschliessen").validate({ });
+				                        if ($("input:radio[value=lastschrift]").is(":checked") && 
+				                        		$("#iban-error").hasClass("valid") && 
+				                        		$("#bic-error").hasClass("valid")&& 
+				                        		$("#bank-error").hasClass("valid")&& 
+				                        		$("#kontoinhaber-error").hasClass("valid")
+				                        ){
+				                        	$('ul.setup-panel li:eq(2)').removeClass('disabled');
+					                        $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+					                        $(this).remove();
+				                        }else{
+				                        }
+				                        
+				                        if ($("input:radio[value=rechnung]").is(":checked")){
+				                        	$('ul.setup-panel li:eq(2)').removeClass('disabled');
+					                        $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+					                        $(this).remove();
+				                        }
+				                      
+				                    })
+								$('#activate-step-4').on('click', function(e) {
+	                	
+					                	$("#abschliessen").validate({ });
+					                	
+					                    	if ($("#abwLieferadresse").is(":checked") &&
+					                    			$("#abwstrasse-error").hasClass("valid") && 
+					                        		$("#abwplz-error").hasClass("valid")&& 
+					                        		$("#abwort-error").hasClass("valid")
+					                  			){
+					                    		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
+						                        $('ul.setup-panel li a[href="#step-4"]').trigger('click');
+						                        $(this).remove();
+					                    	}
+				
+					                    	if (!$("#abwLieferadresse").is(":checked")){
+					                    		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
+						                        $('ul.setup-panel li a[href="#step-4"]').trigger('click');
+						                        $(this).remove();
+					                    	}
+				                });
+								$('#activate-step-5').on('click',function(e) {
+									$('ul.setup-panel li:eq(4)')
+											.removeClass(
+													'disabled');
+									$(
+											'ul.setup-panel li a[href="#step-5"]')
+											.trigger('click');
+									$(this).remove();
+								});
 
 							});
 		</script>

@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import de.waksh.crm.dao.CustomerDAO;
+import de.waksh.crm.model.Suche;
 
 /**
  * Handles requests for the application home page.
@@ -49,18 +51,26 @@ public class HomeController {
 		model.addAttribute("list", arr);
 
 		model.addAttribute("serverTime", formattedDate);
+		
+		
 	
 		return "home";
 	}
 
+
+	/*
+	 * Sessiontest
+	 */
+	
 	@RequestMapping(value = "/hello")
     public String hello(
             @CookieValue(value = "hitCounter", defaultValue = "0") Long hitCounter,
-            HttpServletResponse response) {
+             HttpServletRequest request, HttpServletResponse response) {
  
         // increment hit counter
         hitCounter++;
- 
+        System.out.println("im Hello:  "  + request.getSession().getAttribute("suche").toString());
+        
         // create cookie and set it in response
         Cookie cookie = new Cookie("hitCounter", hitCounter.toString());
         response.addCookie(cookie);
@@ -69,32 +79,10 @@ public class HomeController {
         return "home";
     }
 	@RequestMapping(value = "test", method = RequestMethod.GET)
-	public String test(Model model) {
-		String greetings = "Greetings, Spring MVC!";
-		model.addAttribute("message", greetings);
-
-		String greetings2 = "Greetings, Spring MVC2222222222222!";
-		model.addAttribute("message2", greetings2);
-
-		
-
-		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"Spring-Module.xml");
-		CustomerDAO customerDAO = (CustomerDAO) context
-				.getBean("customerService");
-		customerDAO.getAllCustomers();
-		//ArrayList<Customer> customerList = customerDAO.getAllCustomers();
-		//model.addAttribute("cList", customerList);
-		///System.out.println(customerList.toString());
-
-		//Customer customer = new Customer("Dennis", 21);
-		//customerDAO.insertCustomer(customer);
-
-		// Customer customer1 = customerDAO.findByCustomerId(2);
-		// System.out.println(customer1);
-
-		// Customer customer2 = customerDAO.updateByCustomerId(4,"name", 100);
-		// System.out.println(customer2);
+	public String test(Model model, HttpServletRequest request) {
+		Suche suche = new Suche(1, "name1", "vorname2", "firma3", "kundenart4");
+		request.getSession().setAttribute("suche", suche);
+        System.out.println("im test:  " + request.getSession().getAttribute("suche").toString());
 		return "test";
 	}
 

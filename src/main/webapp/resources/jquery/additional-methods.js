@@ -514,7 +514,7 @@ $.validator.addMethod("iban", function(value, element) {
 
 $.validator.addMethod("integer", function(value, element) {
 	return this.optional(element) || /^-?\d+$/.test(value);
-}, "A positive or negative non-decimal number please");
+}, "Bitte geben Sie eine Dezimalzahl ein.");
 
 $.validator.addMethod("ipv4", function(value, element) {
 	return this.optional(element) || /^(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)$/i.test(value);
@@ -532,6 +532,12 @@ $.validator.addMethod("letterswithbasicpunc", function(value, element) {
 	return this.optional(element) || /^[a-z\-.,()'"\s]+$/i.test(value);
 }, "Letters or punctuation only please");
 
+
+
+$.validator.addMethod("euroCurrency", function(value, element) {
+	return this.optional(element) || /^\s*-?((\d{1,3}(\.(\d){3})*)|\d*)(,\d{1,2})?\s?(\u20AC)?\s*$/.test(value);
+}, "Bitte geben Sie einen Euro-Betrag ein.");
+		
 $.validator.addMethod("mobileNL", function(value, element) {
 	return this.optional(element) || /^((\+|00(\s|\s?\-\s?)?)31(\s|\s?\-\s?)?(\(0\)[\-\s]?)?|0)6((\s|\s?\-\s?)?[0-9]){8}$/.test(value);
 }, "Please specify a valid mobile number");

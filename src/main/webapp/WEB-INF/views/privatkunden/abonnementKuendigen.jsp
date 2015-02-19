@@ -9,10 +9,10 @@
 					
 		<div class="well">
 
-			<form method="POST" action="/crm/submitAddAbo" id="kuendigen" name="kuendigen">
+			<form method="POST" action="/crm/privatkunden/submitCancelAbo" id="kuendigen" name="kuendigen">
 				<div class="row">
 					<div class="infoPanel">
-							<a href="/crm/privatkunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>Vorname Name</a>
+							<a href="/crm/privatkunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>${sessionScope.currentCustomer.vorname} ${sessionScope.currentCustomer.name}</a>
 							<a href="/crm/handbuch/privatkunden"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
 					</div>
 					<div class="col-md-6">
@@ -21,11 +21,7 @@
 							<label for="dateUntil">Kündigung zum</label> 
 							<input type="text" class="form-control" name="dateUntil" id="dateUntil">
 						</div>
-						
-						<div class="form-group">
-							<label for="abo">Soll das Abonnement wirklich gekündigt werden?</label> <br>
-							<input type="checkbox" class="checkbox-inline" name="abo" id="abo" value="ja">
-						</div>
+						<p>Hiermit wird das Abonnement zum oben genannten Datum gekündigt.</p>
 
 						<button type="submit" id="submit" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-remove"></span>  Abonnement kündigen</button>
 					</div>
@@ -41,7 +37,7 @@
 		<script>
 		
 		jQuery.validator.setDefaults({
-  		  debug: true,
+  		  debug: false,
   		  success: "valid"
   		});
   		$( "#kuendigen" ).validate({

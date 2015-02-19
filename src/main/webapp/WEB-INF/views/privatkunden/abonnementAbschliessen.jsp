@@ -18,7 +18,7 @@
 				action="/crm/privatkunden/submitAddAbo">
 					<div class="row form-group">
 					<div class="infoPanel">
-							<a href="/crm/privatkunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>Vorname Name</a>
+							<a href="/crm/privatkunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>${sessionScope.currentCustomer.vorname} ${sessionScope.currentCustomer.name}</a>
 							<a href="/crm/handbuch/privatkunden"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
 					</div>
 						
@@ -156,7 +156,7 @@
 									<tr class="abwLieferadresse">
 										<td><label>Straﬂe</label></td>
 										<td><input type="text" class="form-control"
-											name="abwstrasse" id="abwstrasse" placeholder="Straﬂe"></td>
+											name="abwstrasse" id="abwstrasse" placeholder="Straﬂe Nr."></td>
 									</tr>
 									<tr class="abwLieferadresse">
 										<td><label>PLZ</label></td>
@@ -495,6 +495,11 @@
 	            	 location.reload();
                 	
            		});
+	            $('#submit').on('click', function(e) {
+                	
+	            	alert("Abonnement abgeschlossen.");
+               	
+          		});
 	        });
 		
 		

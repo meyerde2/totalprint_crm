@@ -23,10 +23,11 @@ public class ActivityService implements ActivityDAO{
 
 	
 	@Override
-	public ArrayList<ActivityEntity> getAllActivities() {
+	public ArrayList<ActivityEntity> getAllActivities(int id) {
 		String sql = "SELECT * FROM `aktivitaeten_tabelle` "
 				+ " LEFT JOIN medien_tabelle ON aktivitaeten_tabelle.medien_id = medien_tabelle.medien_id "
-				+ " LEFT JOIN grund_f_aktivitaeten_tabelle ON aktivitaeten_tabelle.grund_id = grund_f_aktivitaeten_tabelle.grund_id;";
+				+ " LEFT JOIN grund_f_aktivitaeten_tabelle ON aktivitaeten_tabelle.grund_id = grund_f_aktivitaeten_tabelle.grund_id"
+				+ " WHERE aktivitaeten_tabelle.datum = " + id + " ORDER BY aktivitaeten_tabelle.datum DESC;";
 		
 		Connection conn = null;
 

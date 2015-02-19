@@ -48,11 +48,12 @@
             	
             	<ul class="nav navbar-nav">
                     <!-- Beispiel EintrÃ¤ge fÃ¼r die Navigation-->
-             
+             		
+             		
 					<li class="${theString=='/crm/' ? 'active' : ''}"><a href="${homeUrl}"><span class="glyphicon glyphicon-home"></span>  CRM</a></li>
 					<li class="<c:if test="${fn:contains(theString, 'suche')}">active</c:if>"><a href="${suche}"> <span class="glyphicon glyphicon-search"></span>  Suche</a></li>
 
-					<li class="dropdown <c:if test="${fn:contains(theString, 'privatkunden')}">active</c:if>"> <a class="dropdown-toggle" data-toggle="dropdown" href="${privatkunden}"><span class="glyphicon glyphicon-th-list"></span>  Privatkunden<span class="caret"></span></a>
+					<li class="dropdown  ${sessionScope.currentCustomer.kundenart != 'Privatkunde' ? 'non-active' : 'activeKundenart'} <c:if test="${fn:contains(theString, 'privatkunden')}">active</c:if> "> <a class="dropdown-toggle" data-toggle="dropdown" href="${privatkunden}"><span class="glyphicon glyphicon-th-list"></span>  Privatkunden<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="${pStammdaten}"><span class="glyphicon glyphicon-th-large"></span>  Stammdaten</a></li>
 							<li class="divider"></li>
@@ -64,7 +65,7 @@
 						</ul>
 					</li>
 
-					<li class="dropdown <c:if test="${fn:contains(theString, 'businesskunden')}">active</c:if>"><a class="dropdown-toggle" data-toggle="dropdown" href="${businesskunden}"><span class="glyphicon glyphicon-th-list"></span>  Geschäftskunden<span class="caret"></span></a>
+					<li class="dropdown ${sessionScope.currentCustomer.kundenart != 'Geschäftskunde' ? 'non-active' : 'activeKundenart'} <c:if test="${fn:contains(theString, 'businesskunden')}">active</c:if>"><a class="dropdown-toggle" data-toggle="dropdown" href="${businesskunden}"><span class="glyphicon glyphicon-th-list"></span>  Geschäftskunden<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 
 							<li><a href="${bStammdaten}"><span class="glyphicon glyphicon-th-large"></span> Stammdaten</a></li>
@@ -132,3 +133,12 @@
     	</div>
 
 </div>
+
+<style type="text/css">
+
+  .non-active {
+     
+      cursor: not-allowed;
+       pointer-events: none;
+   }
+ </style>

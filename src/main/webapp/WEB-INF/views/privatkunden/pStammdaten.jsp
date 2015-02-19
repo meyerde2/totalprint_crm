@@ -8,11 +8,12 @@
 		<div class="body">
 			<h1>Privatkunden - Stammdaten</h1>
 
-
+		${sessionScope.currentCustomer}
+		
 			<div class="container">
 				<div class="row">
 						<div class="well well-sm">
-							<h3 class="panel-title">${customer.vorname} ${customer.name}</h3>
+							<h3 class="panel-title">${sessionScope.currentCustomer.vorname} ${sessionScope.currentCustomer.name}</h3>
 							<div class="row">
 								<div class="col-md-6">
 
@@ -27,30 +28,30 @@
 											<tbody>
 												<tr>
 													<td>Kundenummer</td>
-													<td>${customer.id}</td>
+													<td>${sessionScope.currentCustomer.id}</td>
 												</tr>
 												<tr>
 													<td>Anrede</td>
-													<td>${customer.anrede}</td>
+													<td>${sessionScope.currentCustomer.anrede}</td>
 												</tr>
 												<tr>
 													<td>Anschrift</td>
-													<td>${customer.strasse}, ${customer.plz} ${customer.ort}</td>
+													<td>${sessionScope.currentCustomer.strasse}, ${sessionScope.currentCustomer.plz} ${sessionScope.currentCustomer.ort}</td>
 												</tr>
 												<tr>
 													<td>Abweichende Lieferanschrift</td>
-													<td>${customer.abwStrasse}, ${customer.abwPlz} ${customer.abwOrt}</td>
+													<td>${sessionScope.currentCustomer.abwStrasse}, ${sessionScope.currentCustomer.abwPlz} ${sessionScope.currentCustomer.abwOrt}</td>
 												</tr>
 												<tr>
 													<td>Bankverbindung</td>
-													<td>${customer.iban} (IBAN)<br> <br>
-														${customer.bic} (BIC)<br> <br> 
-														${customer.kontoinhaber}(Kontoinhaber)
+													<td>${sessionScope.currentCustomer.iban} (IBAN)<br> <br>
+														${sessionScope.currentCustomer.bic} (BIC)<br> <br> 
+														${sessionScope.currentCustomer.kontoinhaber}(Kontoinhaber)
 													</td>
 												</tr>
 												<tr>
 													<td>Email</td>
-													<td><a href="c" class="glyphicon glyphicon-envelope">  ${customer.email}</a></td>
+													<td><a href="mailto:${sessionScope.currentCustomer.email}" class="glyphicon glyphicon-envelope">  ${sessionScope.currentCustomer.email}</a></td>
 												</tr>
 
 											</tbody>
