@@ -80,7 +80,9 @@ public class WerbekampagnenController {
 		
 		model.addAttribute("kampagne", kampagnenDAO.getKampagneById(id));
 		
-		return "/werbekampagnen/kampagneAuswerten";
+		//return "/werbekampagnen/kampagneAuswerten";
+		return "/werbekampagnen/pie";
+
 	}
 	
 	

@@ -28,9 +28,8 @@
 						      <th><input type="text" class="form-control art" placeholder="Art" disabled></th>
 						      <th><input type="text" class="form-control" placeholder="Datum" disabled></th>
 						      <th><input type="text" class="form-control" placeholder="Grund" disabled></th>
-						     
-						      <th>Bearbeiten</th>
-						      <th>Auswerten</th>
+						      <th>Status</th>
+						      <th>Aktion</th>
 						   </tr>
 						</thead>
 						<tbody>
@@ -43,16 +42,14 @@
 								
 								<td><fmt:formatDate pattern="dd.MM.YYYY"  value="${kampagne.dateBeginn}" /> - <fmt:formatDate pattern="dd.MM.YYYY"  value="${kampagne.dateUntil}"  /> </td>
 								<td>${kampagne.grund}</td>
-							
+								<td><span class="label label-warning">mittel</span></td>
 								<td>
-								<a href="/crm/werbekampagnen/${kampagne.kampagnenId}" class="btn btn-primary btn-sm">
-						        	<span class="glyphicon glyphicon-pencil"></span> bearbeiten
+								<a href="/crm/werbekampagnen/${kampagne.kampagnenId}" title="bearbeiten" class="btn btn-primary btn-sm">
+						        	<span class="glyphicon glyphicon-pencil"></span> 
 						        </a>
-								</td>
-								
-								<td>
-								<a href="/crm/werbekampagnen/auswerten/${kampagne.kampagnenId}" class="btn btn-primary btn-sm">
-						        	<span class="glyphicon glyphicon-zoom-in"></span> auswerten
+			
+								<a href="/crm/werbekampagnen/auswerten/${kampagne.kampagnenId}" title="auswerten" class="btn btn-primary btn-sm">
+         							 <span class="glyphicon glyphicon-stats"></span>
 						        </a>
 								</td>
 							</tr>
