@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="body">
@@ -22,13 +23,14 @@
 					<table class="table">
 						<thead>
 						   <tr class="filters">
-						      <th><input type="text" class="form-control" placeholder="ID" disabled></th>
+						      <th><input type="text" class="form-control id" placeholder="ID" disabled></th>
 						      <th><input type="text" class="form-control" placeholder="Bezeichnung" disabled></th>
-						      <th><input type="text" class="form-control" placeholder="Art" disabled></th>
+						      <th><input type="text" class="form-control art" placeholder="Art" disabled></th>
 						      <th><input type="text" class="form-control" placeholder="Datum" disabled></th>
 						      <th><input type="text" class="form-control" placeholder="Grund" disabled></th>
-						      <th><input type="text" class="form-control" placeholder="Exemplare" disabled></th>
-						      <th>Aktion</th>
+						     
+						      <th>Bearbeiten</th>
+						      <th>Auswerten</th>
 						   </tr>
 						</thead>
 						<tbody>
@@ -38,12 +40,19 @@
 								<td>${kampagne.kampagnenId}</td>
 								<td>${kampagne.kampagnenBez}</td>	
 								<td>${kampagne.art}</td>
-								<td>${kampagne.dateBeginn} - ${kampagne.dateUntil}</td>
+								
+								<td><fmt:formatDate pattern="dd.MM.YYYY"  value="${kampagne.dateBeginn}" /> - <fmt:formatDate pattern="dd.MM.YYYY"  value="${kampagne.dateUntil}"  /> </td>
 								<td>${kampagne.grund}</td>
-								<td>${kampagne.anzahlExemplare}</td>
+							
 								<td>
-								<a href="/crm/suche/${kampagne.kampagnenId}" class="btn btn-primary btn-sm">
-						        	<span class="glyphicon glyphicon-zoom-in"></span> auswählen
+								<a href="/crm/werbekampagnen/${kampagne.kampagnenId}" class="btn btn-primary btn-sm">
+						        	<span class="glyphicon glyphicon-pencil"></span> bearbeiten
+						        </a>
+								</td>
+								
+								<td>
+								<a href="/crm/werbekampagnen/auswerten/${kampagne.kampagnenId}" class="btn btn-primary btn-sm">
+						        	<span class="glyphicon glyphicon-zoom-in"></span> auswerten
 						        </a>
 								</td>
 							</tr>
@@ -148,7 +157,13 @@
 							});
 		</script>
 
-		<style type="">
+		<style type="text/css">
+.id{
+	width: 20px;
+}	
+.art{
+	width: 140px;
+}		
 .filterable {
 	margin-top: 15px;
 }

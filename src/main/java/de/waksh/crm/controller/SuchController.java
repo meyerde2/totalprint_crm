@@ -170,12 +170,12 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 		//richtige View zurückwerfen, Unterscheidung, ob Privatkunde oder Businesskunde
 		String strView;
 		if (kundenart.equals("Privatkunde")){
-			strView = "/privatkunden/pStammdaten";
+			strView = "/privatkunden/stammdaten";
 		}else{
-			strView = "/businesskunden/bStammdaten";
+			strView = "/businesskunden/stammdaten";
 			
 		}
-		return strView;
+		return "redirect:" + strView;
 	}
 
 

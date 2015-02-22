@@ -16,29 +16,32 @@ public class WerbekampagnenEntity {
 	String beilageBei;
 	int zielgruppeId;
 	String zielgruppe;
-	int themenId;
+	String zielgruppenNotiz;
 	String thema;
 	int anzahlExemplare;
 	int anzahlVerkaufteExemplare;
 	int anzahlInserate;
-	int geschenkartId;
 	String geschenk;
 	double kosten;
 	double umsatz;
 	int resonanz;
+	double plankosten;
+	double budget;
+	int werbemittelId;
 	String notiz;
 	
 	public WerbekampagnenEntity(){
 		
 	}
-	
+
 	public WerbekampagnenEntity(int kampagnenId, String kampagnenBez,
 			Date dateBeginn, Date dateUntil, int artId, String art,
 			int grundId, String grund, int beilageBeiId, String beilageBei,
-			int zielgruppeId, String zielgruppe, int themenId, String thema,
-			int anzahlExemplare, int anzahlVerkaufteExemplare,
-			int anzahlInserate, int geschenkartId, String geschenk,
-			double kosten, double umsatz, int resonanz, String notiz) {
+			int zielgruppeId, String zielgruppe, String zielgruppenNotiz,
+			String thema, int anzahlExemplare, int anzahlVerkaufteExemplare,
+			int anzahlInserate, String geschenk, double kosten, double umsatz,
+			int resonanz, double plankosten, double budget, int werbemittelId,
+			String notiz) {
 		super();
 		this.kampagnenId = kampagnenId;
 		this.kampagnenBez = kampagnenBez;
@@ -52,21 +55,24 @@ public class WerbekampagnenEntity {
 		this.beilageBei = beilageBei;
 		this.zielgruppeId = zielgruppeId;
 		this.zielgruppe = zielgruppe;
-		this.themenId = themenId;
+		this.zielgruppenNotiz = zielgruppenNotiz;
 		this.thema = thema;
 		this.anzahlExemplare = anzahlExemplare;
 		this.anzahlVerkaufteExemplare = anzahlVerkaufteExemplare;
 		this.anzahlInserate = anzahlInserate;
-		this.geschenkartId = geschenkartId;
 		this.geschenk = geschenk;
 		this.kosten = kosten;
 		this.umsatz = umsatz;
 		this.resonanz = resonanz;
+		this.plankosten = plankosten;
+		this.budget = budget;
+		this.werbemittelId = werbemittelId;
 		this.notiz = notiz;
 	}
 
-	
-	
+
+
+
 	@Override
 	public String toString() {
 		return "WerbekampagnenEntity [kampagnenId=" + kampagnenId
@@ -75,16 +81,15 @@ public class WerbekampagnenEntity {
 				+ ", art=" + art + ", grundId=" + grundId + ", grund=" + grund
 				+ ", beilageBeiId=" + beilageBeiId + ", beilageBei="
 				+ beilageBei + ", zielgruppeId=" + zielgruppeId
-				+ ", zielgruppe=" + zielgruppe + ", themenId=" + themenId
-				+ ", thema=" + thema + ", anzahlExemplare=" + anzahlExemplare
-				+ ", anzahlVerkaufteExemplare=" + anzahlVerkaufteExemplare
-				+ ", anzahlInserate=" + anzahlInserate + ", geschenkartId="
-				+ geschenkartId + ", geschenk=" + geschenk + ", kosten="
+				+ ", zielgruppe=" + zielgruppe + ", zielgruppenNotiz="
+				+ zielgruppenNotiz + ", thema=" + thema + ", anzahlExemplare="
+				+ anzahlExemplare + ", anzahlVerkaufteExemplare="
+				+ anzahlVerkaufteExemplare + ", anzahlInserate="
+				+ anzahlInserate + ", geschenk=" + geschenk + ", kosten="
 				+ kosten + ", umsatz=" + umsatz + ", resonanz=" + resonanz
-				+ ", notiz=" + notiz + "]";
+				+ ", plankosten=" + plankosten + ", budget=" + budget
+				+ ", werbemittelId=" + werbemittelId + ", notiz=" + notiz + "]";
 	}
-
-
 
 	public int getKampagnenId() {
 		return kampagnenId;
@@ -182,13 +187,15 @@ public class WerbekampagnenEntity {
 		this.zielgruppe = zielgruppe;
 	}
 
-	public int getThemenId() {
-		return themenId;
+	public String getZielgruppenNotiz() {
+		return zielgruppenNotiz;
 	}
 
-	public void setThemenId(int themenId) {
-		this.themenId = themenId;
+
+	public void setZielgruppenNotiz(String zielgruppenNotiz) {
+		this.zielgruppenNotiz = zielgruppenNotiz;
 	}
+
 
 	public String getThema() {
 		return thema;
@@ -222,14 +229,6 @@ public class WerbekampagnenEntity {
 		this.anzahlInserate = anzahlInserate;
 	}
 
-	public int getGeschenkartId() {
-		return geschenkartId;
-	}
-
-	public void setGeschenkartId(int geschenkartId) {
-		this.geschenkartId = geschenkartId;
-	}
-
 	public String getGeschenk() {
 		return geschenk;
 	}
@@ -260,6 +259,30 @@ public class WerbekampagnenEntity {
 
 	public void setResonanz(int resonanz) {
 		this.resonanz = resonanz;
+	}
+
+	public double getPlankosten() {
+		return plankosten;
+	}
+
+	public void setPlankosten(double plankosten) {
+		this.plankosten = plankosten;
+	}
+
+	public double getBudget() {
+		return budget;
+	}
+
+	public void setBudget(double budget) {
+		this.budget = budget;
+	}
+
+	public int getWerbemittelId() {
+		return werbemittelId;
+	}
+
+	public void setWerbemittelId(int werbemittelId) {
+		this.werbemittelId = werbemittelId;
 	}
 
 	public String getNotiz() {

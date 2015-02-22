@@ -9,7 +9,7 @@
 			<h1>Gesch‰ftskunden - Bestellung bearbeiten</h1>
 
 			<form name="abschliessen" id="abschliessen" method="POST"
-				action="/crm/privatkunden/submitAddAbo">
+				action="/crm/businesskunden/submitBestellung">
 
 
 					<div class="row form-group">
@@ -49,21 +49,21 @@
 								<table>
 									<tr>
 										<td><label>Kundennummer</label></td>
-										<td>12345</td>
+										<td>${sessionScope.currentCustomer.id}</td>
 									</tr>
 									<tr>
 										<td><label>Firma</label></td>
-										<td>Muster GmbH</td>
+										<td>${sessionScope.currentCustomer.firma}</td>
 
 									</tr>
 									<tr>
 										<td><label>Name</label></td>
-										<td>Mustermann</td>
+										<td>${sessionScope.currentCustomer.name}</td>
 
 									</tr>
 									<tr>
 										<td><label>Vorname</label></td>
-										<td>Max</td>
+										<td>${sessionScope.currentCustomer.vorname}</td>
 									</tr>
 								</table>
 
@@ -89,21 +89,17 @@
 
 									<tr class="rechnung">
 										<td><label>Name</label></td>
-										<td>Max Mustermann</td>
+										<td>${sessionScope.currentCustomer.vorname} ${sessionScope.currentCustomer.name}</td>
 									</tr>
 
 									<tr class="rechnung">
 										<td><label>Straﬂe</label></td>
-										<td>Musterstr. 123</td>
+										<td>${sessionScope.currentCustomer.strasse}</td>
 									</tr>
 
 									<tr class="rechnung">
 										<td><label>PLZ/Ort</label></td>
-										<td>12345 Kiel</td>
-									</tr>
-									<tr class="rechnung">
-										<td><label>PLZ/Ort</label></td>
-										<td>12345 Kiel</td>
+										<td>${sessionScope.currentCustomer.plz} ${sessionScope.currentCustomer.ort}</td>
 									</tr>
 									<tr class="payment">
 										<td><label>IBAN</label></td>
@@ -141,15 +137,15 @@
 								<table>
 									<tr>
 										<td><label>Straﬂe</label></td>
-										<td>Musterstr. 123</td>
+										<td>${sessionScope.currentCustomer.strasse}</td>
 									</tr>
 									<tr>
 										<td><label>PLZ</label></td>
-										<td>12345</td>
+										<td>${sessionScope.currentCustomer.plz}</td>
 									</tr>
 									<tr>
 										<td><label>Ort</label></td>
-										<td>Dˆrfchen XYZ</td>
+										<td>${sessionScope.currentCustomer.ort}</td>
 									</tr>
 
 
@@ -190,21 +186,21 @@
 								<table>
 									<tr>
 										<td><label>Zeitschrift A</label></td>
-										<td><input type="number" MIN="0" MAX="" STEP="1"
+										<td><input type="number" MIN="0"  STEP="1"
 											class="form-control" name="numberZeitschriftA"
-											id="numberZeitschriftA" placeholder="Anzahl"></td>
+											id="numberZeitschriftA" placeholder="Anzahl" value="${sessionScope.currentCustomer.mengeA}"></td>
 									</tr>
 
 									<tr>
 										<td><label>Zeitschrift B</label></td>
-										<td><input type="number" MIN="0" MAX="" STEP="1"
+										<td><input type="number" MIN="0"STEP="1"
 											class="form-control" name="numberZeitschriftB"
-											id="numberZeitschriftB" placeholder="Anzahl"></td>
+											id="numberZeitschriftB" placeholder="Anzahl" value="${sessionScope.currentCustomer.mengeB}"></td>
 									</tr>
 									<tr>
 										<td><label>Tageszeitung</label></td>
-										<td><input type="number" MIN="0" MAX="" STEP="1"
-											class="form-control" name="numberTZ" id="numberTZ" placeholder="Anzahl"></td>
+										<td><input type="number" MIN="0" STEP="1"
+											class="form-control" name="numberTZ" id="numberTZ" placeholder="Anzahl" value="${sessionScope.currentCustomer.mengeT}"></td>
 									</tr>
 								</table>
 								<button id="activate-step-5" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></button>
@@ -219,38 +215,104 @@
 							<div class="col-md-12 well text-center">
 								<h1 class="text-center">Best‰tigung</h1>
 
-								<table>
+								<div>
+								<p class="abschnitt">Anschrift</p>
+								<table class="overview">
+									<tr>
+										<td><label>Firma</label></td>
+										<td id="firma">${sessionScope.currentCustomer.firma}</td>
+									</tr>
+									<tr>
+										<td><label>Name</label></td>
+										<td id="name">${sessionScope.currentCustomer.vorname} ${sessionScope.currentCustomer.name}</td>
+									</tr>
 									<tr>
 										<td><label>Straﬂe</label></td>
-										<td>Musterstr. 123</td>
+										<td id="strasse">${sessionScope.currentCustomer.strasse}</td>
 									</tr>
 									<tr>
 										<td><label>PLZ</label></td>
-										<td>12345</td>
+										<td id="plz">${sessionScope.currentCustomer.plz}</td>
 									</tr>
 									<tr>
 										<td><label>Ort</label></td>
-										<td>Dˆrfchen XYZ</td>
+										<td id="ort">${sessionScope.currentCustomer.ort}</td>
 									</tr>
-
 								</table>
-	
-										Die eingegebenen Daten m¸ssen an das ERP System geliefert werden:<br>
-									Kunden ID<br>
-									Straﬂe<br>
-									Nr.<br>
-									PLZ<br>
-									Ort<br>
-									IBAN<br>
-									BIC<br>
-									Name der Bank<br>
-									Kontoinhaber<br>
-									Menge Zeitschrift A<br>
-									Menge Zeitschrift B<br>
-									Menge Tageszeitung<br>
-			
-
-								<button type="submit" id="submitAbo" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-ok"></span> Bearbeitung abschlieﬂen</button>
+								</div>
+								<div id="overviewZahlungsart">
+								<p class="abschnitt">Zahlungsart</p>
+								<table>
+								<tr>
+										<td><label>Zahlungsart</label></td>
+										<td id="tdZahlungsart">Lastschrift</td>
+								</tr>
+								</table>
+								</div>
+								<div id="overviewLastschrift">
+								<p class="abschnitt"></p>
+								<table class="overview">
+									<tr class="lastschrift">
+										<td><label>IBAN</label></td>
+										<td id="tdIban" >IBAN</td>
+									</tr>
+									<tr class="lastschrift">
+										<td><label>BIC</label></td>
+										<td id="tdBic">BIC</td>
+									</tr>
+									<tr class="lastschrift">
+										<td><label>Bank</label></td>
+										<td id="tdBank">Bank</td>
+									</tr>
+									<tr class="lastschrift">
+										<td><label>Kontoinhaber</label></td>
+										<td id="tdKontoinhaber">Max Mustermann</td>
+									</tr>
+								</table>
+								</div>
+								<div id="overviewAbwLieferanschrift">
+								<p class="abschnitt">Abweichende Lieferanschrift</p>
+								<table class="overview">
+									<tr class="abwLieferanschrift">
+										<td><label>Abweichende Str.</label></td>
+										<td id="tdAbwStr">Testweg 123</td>
+									</tr>
+									<tr class="abwLieferanschrift">
+										<td><label>Abweichende PLZ</label></td>
+										<td id="tdAbwPlz">24340</td>
+									</tr>
+									<tr class="abwLieferanschrift">
+										<td><label>Abweichender Ort</label></td>
+										<td id="tdAbwOrt">Kiel</td>
+									</tr>
+								</table>
+								</div>
+								
+								<div id="overviewAnzahl">
+								<p class="abschnitt">Anzahl</p>
+								<table class="overview">
+									<tr class="owZeitschriftA">
+										<td><label>Zeitschrift A</label></td>
+										<td id="tdOwZeitschriftA">${sessionScope.currentCustomer.mengeA}</td>
+									</tr>
+									<tr class="owZeitschriftB">
+										<td><label>Zeitschrift B</label></td>
+										<td id="tdOwZeitschriftB">${sessionScope.currentCustomer.mengeB}</td>
+									</tr>
+									<tr class="owTageszeitung">
+										<td><label>Tageszeitung</label></td>
+										<td id="tdOwTageszeitung">${sessionScope.currentCustomer.mengeT}</td>
+									</tr>
+								</table>
+								</div>
+								
+								<p></p>
+								<!-- <button id="submit" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-ok"></span>  Abonnement
+									abschlieﬂen</button> -->
+									<a href="#" id="abbrechen" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-remove"></span>  Vorgang abbrechen</a>
+									<button id="submit" class="btn btn-primary btn-md"><span class='glyphicon glyphicon-ok'></span>  Bestellung verbindlich abschlieﬂen</button>
+									
+									
 							</div>
 						</div>
 					</div>
@@ -354,7 +416,7 @@
 								$("input:radio[value=lastschrift]").click(function() {
 											if (!isVisiblePayment) {
 												$(".rechnung").hide("fast");
-												$(".payment").show("slow");
+												$(".payment").show("fast");
 
 												isVisiblePayment = true;
 											}
@@ -363,13 +425,13 @@
 								$("input:radio[value=rechnung]").click(function() {
 											if (isVisiblePayment) {
 												$(".payment").hide("fast");
-												$(".rechnung").show("slow");
+												$(".rechnung").show("fast");
 												isVisiblePayment = false;
 											}
 
 								});
 								$(".checkbox-inline").click(function() {
-									$(".abwLieferadresse").toggle("slow");
+									$(".abwLieferadresse").toggle("fast");
 								});
 
 								var navListItems = $('ul.setup-panel li a'), allWells = $('.setup-content');
@@ -444,14 +506,44 @@
 					                    	}
 				                });
 								$('#activate-step-5').on('click',function(e) {
-									$('ul.setup-panel li:eq(4)')
-											.removeClass(
-													'disabled');
-									$(
-											'ul.setup-panel li a[href="#step-5"]')
-											.trigger('click');
+									$('ul.setup-panel li:eq(4)').removeClass('disabled');
+									$('ul.setup-panel li a[href="#step-5"]').trigger('click');
 									$(this).remove();
+									
+									if($("input[value='lastschrift']:checked").val()=="lastschrift"){
+										
+					            		$("#overviewLastschrift").show();
+					            		
+					            		$("#tdZahlungsart").html("Lastschrift");
+					            		//getValuesFromInputTextFields
+					            		$("#tdIban").html($('#iban').val());
+					            		$("#tdBic").html($('#bic').val());
+					            		$("#tdBank").html($('#bank').val());
+					            		$("#tdKontoinhaber").html($('#kontoinhaber').val());
+						            	
+					            	}else{
+					            		$("#tdZahlungsart").html("Rechnung");
+					            		$("#overviewLastschrift").hide();
+					            	}
+									
+									$("#tdOwZeitschriftA").html($('#numberZeitschriftA').val());
+									$("#tdOwZeitschriftB").html($('#numberZeitschriftB').val());
+									$("#tdOwTageszeitung").html($('#numberTZ').val());
+									
+					            	if( $("#abwLieferadresse").is(":checked") == true){	
+
+					            		$("#overviewAbwLieferanschrift").show();
+					            	}else{
+					            		
+					            		$("#overviewAbwLieferanschrift").hide();
+					            	}
 								});
+								
+					            $('#abbrechen').on('click', function(e) {
+				                	
+					            	 location.reload();
+				                	
+				           		});
 
 							});
 		</script>

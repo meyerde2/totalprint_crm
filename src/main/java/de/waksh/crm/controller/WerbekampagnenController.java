@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +16,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import de.waksh.crm.dao.KampagnenDAO;
-import de.waksh.crm.model.GeburtstageEntity;
-import de.waksh.crm.model.SonderausgabeEntity;
+import de.waksh.crm.model.WerbekampagnenEntity;
 
 @Controller
 public class WerbekampagnenController {
@@ -55,52 +56,36 @@ public class WerbekampagnenController {
 	public String wErstellen(Model model) {
 		logger.info("kampagnenErstellen-Page!");
 		
-		return "/werbekampagnen/kampagnenErstellen";
+		return "/werbekampagnen/kampagneErstellenNeu";
 	}
-	
-	@RequestMapping(value = "/werbekampagnen/submitSonderausgabeErstellen", method = RequestMethod.POST)
-	public String submitSonderausgabeErstellen(HttpServletRequest request, ModelMap model) throws ParseException {
-		//model.addAttribute("name", activity.getAktivitaetenId());d
-				
-		String dateBeginn = request.getParameter("dateBeginn");
-		String dateUntil = request.getParameter("dateUntil");
-		
-		DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
-		format.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
 
-		java.util.Date tmpDate = format.parse(dateBeginn);
-		java.sql.Date sqlDateBeginn = new java.sql.Date(tmpDate.getTime());
-		
-		java.util.Date tmpDate2 = format.parse(dateUntil);
-		java.sql.Date sqlDateUntil = new java.sql.Date(tmpDate2.getTime());
-		
-		SonderausgabeEntity sonderausgabe = new SonderausgabeEntity(
-				request.getParameter("kampagnenBez"),
-				sqlDateBeginn,
-				sqlDateUntil,
-				Integer.parseInt(request.getParameter("grundId")),
-				Integer.parseInt(request.getParameter("zielgruppeId")),
-				Integer.parseInt(request.getParameter("themenId")),
-				Integer.parseInt(request.getParameter("anzahlExemplare")),
-				Integer.parseInt(request.getParameter("anzahlVerkaufteExemplare")),
-				Integer.parseInt(request.getParameter("anzahlInserate")),
-				1,
-				Double.parseDouble(request.getParameter("kosten")), 
-				Double.parseDouble(request.getParameter("umsatz")),
-				Integer.parseInt(request.getParameter("rating")),
-				request.getParameter("notiz"));
-		
+	@RequestMapping(value = "/werbekampagnen/{id}", method = RequestMethod.GET)
+	public String specificKampagne( HttpServletRequest request, @PathVariable Integer id,
+	         HttpServletResponse response, ModelMap model) {
 		
 		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
 		KampagnenDAO kampagnenDAO = (KampagnenDAO) context.getBean("kampagnenService");
-		kampagnenDAO.insertSonderausgabe(sonderausgabe, 1);
 		
-		System.out.println("" + sonderausgabe.toString());
-		return "/werbekampagnen/kampagnenErstellen";
+		model.addAttribute("kampagne", kampagnenDAO.getKampagneById(id));
+		
+		return "/werbekampagnen/kampagneBearbeiten";
 	}
 	
-	@RequestMapping(value = "/werbekampagnen/submitBeilageErstellen", method = RequestMethod.POST)
-	public String submitBeilageErstellen(HttpServletRequest request, ModelMap model) throws ParseException  {
+	@RequestMapping(value = "/werbekampagnen/auswerten/{id}", method = RequestMethod.GET)
+	public String kampagneAuswerten( HttpServletRequest request, @PathVariable Integer id,
+	         HttpServletResponse response, ModelMap model) {
+		
+		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+		KampagnenDAO kampagnenDAO = (KampagnenDAO) context.getBean("kampagnenService");
+		
+		model.addAttribute("kampagne", kampagnenDAO.getKampagneById(id));
+		
+		return "/werbekampagnen/kampagneAuswerten";
+	}
+	
+	
+	@RequestMapping(value = "/werbekampagnen/submitKampagneErstellen", method = RequestMethod.POST)
+	public String submitKampagne(HttpServletRequest request, ModelMap model) throws ParseException  {
 		//model.addAttribute("name", activity.getAktivitaetenId());d
 		
 		String dateBeginn = request.getParameter("dateBeginn");
@@ -120,36 +105,47 @@ public class WerbekampagnenController {
 		//NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
 	    //Number number = format.parse("1,234");
 	    //double d = number.doubleValue();
-	    
-	    
-		SonderausgabeEntity sonderausgabe = new SonderausgabeEntity(
+		int werbemittelId = 0;
+		if (request.getParameter("werbemittelId") != null){
+			werbemittelId = Integer.parseInt(request.getParameter("werbemittelId"));
+		}
+		WerbekampagnenEntity kampagne = new WerbekampagnenEntity(
+				0,
 				request.getParameter("kampagnenBez"),
 				sqlDateBeginn,
 				sqlDateUntil,
+				Integer.parseInt(request.getParameter("kampagnenart")),
+				"",
 				Integer.parseInt(request.getParameter("grundId")),
+				"",
+				Integer.parseInt(request.getParameter("beilageBei")),
+				"",
 				Integer.parseInt(request.getParameter("zielgruppeId")),
-				Integer.parseInt(request.getParameter("themenId")),
+				"",
+				request.getParameter("zielgruppen_notizen"),
+				"",
 				Integer.parseInt(request.getParameter("anzahlExemplare")),
-				Integer.parseInt(request.getParameter("anzahlVerkaufteExemplare")),
-				Integer.parseInt(request.getParameter("anzahlInserate")),
-				1,
-				Integer.parseInt(request.getParameter("kosten")), 
-				Integer.parseInt(request.getParameter("umsatz")),
-				Integer.parseInt(request.getParameter("rating")),
+				0,
+				0,
+				request.getParameter("geschenk"),
+				0, 
+				0,
+				0,
+				Double.parseDouble(request.getParameter("plankosten").toString().replace(",", ".")),
+				Double.parseDouble(request.getParameter("budget").toString().replace(",", ".")),
+				werbemittelId,
 				request.getParameter("notiz"));
 		
+		System.out.println("beilage" + kampagne.toString());
 		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
 		KampagnenDAO kampagnenDAO = (KampagnenDAO) context.getBean("kampagnenService");
-		kampagnenDAO.insertSonderausgabe(sonderausgabe, 2);
+		kampagnenDAO.insertKampagne(kampagne);
 		
-		
-		System.out.println("beilage" + sonderausgabe.toString());
-
-		return "/werbekampagnen/kampagnenErstellen";
+		return "/werbekampagnen/kampagnenUebersicht";
 	}
 	
-	@RequestMapping(value = "/werbekampagnen/submitGeburtstageErstellen", method = RequestMethod.POST)
-	public String submitGeburtstageErstellen(HttpServletRequest request, ModelMap model) throws ParseException  {
+	@RequestMapping(value = "/werbekampagnen/submitKampagneUpdaten", method = RequestMethod.POST)
+	public String submitUpdateKampage(HttpServletRequest request, ModelMap model) throws ParseException  {
 		//model.addAttribute("name", activity.getAktivitaetenId());d
 		
 		String dateBeginn = request.getParameter("dateBeginn");
@@ -164,23 +160,49 @@ public class WerbekampagnenController {
 		java.util.Date tmpDate2 = format.parse(dateUntil);
 		java.sql.Date sqlDateUntil = new java.sql.Date(tmpDate2.getTime());
 		
-		GeburtstageEntity geburtstagsausgabe = new GeburtstageEntity(
+		
+		// ToDo: Euro Komma Cast
+		//NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
+	    //Number number = format.parse("1,234");
+	    //double d = number.doubleValue();
+		int werbemittelId = 0;
+		if (request.getParameter("werbemittelId") != null){
+			werbemittelId = Integer.parseInt(request.getParameter("werbemittelId"));
+		}
+		WerbekampagnenEntity kampagne = new WerbekampagnenEntity(
+				Integer.parseInt(request.getParameter("id")),
 				request.getParameter("kampagnenBez"),
 				sqlDateBeginn,
 				sqlDateUntil,
+				Integer.parseInt(request.getParameter("kampagnenart")),
+				"",
 				Integer.parseInt(request.getParameter("grundId")),
-				Double.parseDouble(request.getParameter("kosten")), 
-				Integer.parseInt(request.getParameter("geschenkartId")), 
-				Integer.parseInt(request.getParameter("rating")),
+				"",
+				Integer.parseInt(request.getParameter("beilageBei")),
+				"",
+				Integer.parseInt(request.getParameter("zielgruppeId")),
+				"",
+				request.getParameter("zielgruppen_notizen"),
+				"",
+				Integer.parseInt(request.getParameter("anzahlExemplare")),
+				0,
+				0,
+				request.getParameter("geschenk"),
+				0, 
+				0,
+				0,
+				Double.parseDouble(request.getParameter("plankosten").toString().replace(",", ".")),
+				Double.parseDouble(request.getParameter("budget").toString().replace(",", ".")),
+				werbemittelId,
 				request.getParameter("notiz"));
 		
+		
+		System.out.println("beilage" + kampagne.toString());
 		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
 		KampagnenDAO kampagnenDAO = (KampagnenDAO) context.getBean("kampagnenService");
-		kampagnenDAO.insertGeburtstagsentity(geburtstagsausgabe);
-		
-		System.out.println("geburtstag:   " + geburtstagsausgabe.toString());
-		
-		return "/werbekampagnen/kampagnenErstellen";
+		kampagnenDAO.updateKampagneById(kampagne);
+
+		return "redirect:/werbekampagnen/kampagnenUebersicht";
 	}
 	
 }

@@ -52,16 +52,16 @@
 								<table>
 									<tr>
 										<td><label>Kundennummer</label></td>
-										<td>12345</td>
+										<td>${sessionScope.currentCustomer.id}</td>
 									</tr>
 									<tr>
 										<td><label>Name</label></td>
-										<td>Mustermann</td>
+										<td>${sessionScope.currentCustomer.name}</td>
 
 									</tr>
 									<tr>
 										<td><label>Vorname</label></td>
-										<td>Max</td>
+										<td>${sessionScope.currentCustomer.vorname}</td>
 									</tr>
 								</table>
 
@@ -87,38 +87,33 @@
 
 									<tr class="rechnung">
 										<td><label>Name</label></td>
-										<td>Max Mustermann</td>
+										<td>${sessionScope.currentCustomer.vorname} ${sessionScope.currentCustomer.name}</td>
 									</tr>
 
 									<tr class="rechnung">
 										<td><label>Straße</label></td>
-										<td>Musterstr. 123</td>
+										<td>${sessionScope.currentCustomer.strasse}</td>
 									</tr>
 
 									<tr class="rechnung">
 										<td><label>PLZ/Ort</label></td>
-										<td>12345 Kiel</td>
+										<td>${sessionScope.currentCustomer.plz} ${sessionScope.currentCustomer.ort}</td>
 									</tr>
 									<tr class="payment">
 										<td><label>IBAN</label></td>
-										<td><input type="text" class="form-control" name="iban"
-											id="iban" placeholder="IBAN"></td>
+										<td><input type="text" class="form-control" name="iban" id="iban" placeholder="IBAN"></td>
 									</tr>
 									<tr class="payment">
 										<td><label>BIC</label></td>
-										<td><input type="text" class="form-control" name="bic"
-											id="bic" placeholder="BIC"></td>
+										<td><input type="text" class="form-control" name="bic" id="bic" placeholder="BIC"></td>
 									</tr>
 									<tr class="payment">
 										<td><label>Bank</label></td>
-										<td><input type="text" class="form-control" name="bank"
-											id="bank" placeholder="Bank"></td>
+										<td><input type="text" class="form-control" name="bank" id="bank" placeholder="Bank"></td>
 									</tr>
 									<tr class="payment">
 										<td><label>Kontoinhaber</label></td>
-										<td><input type="text" class="form-control"
-											name="kontoinhaber" id="kontoinhaber"
-											placeholder="Kontoinhaber"></td>
+										<td><input type="text" class="form-control" name="kontoinhaber" id="kontoinhaber" placeholder="Kontoinhaber"></td>
 									</tr>
 
 								</table>
@@ -134,15 +129,15 @@
 								<table>
 									<tr>
 										<td><label>Straße</label></td>
-										<td>Musterstr. 123</td>
+										<td>${sessionScope.currentCustomer.strasse}</td>
 									</tr>
 									<tr>
 										<td><label>PLZ</label></td>
-										<td>12345</td>
+										<td>${sessionScope.currentCustomer.plz}</td>
 									</tr>
 									<tr>
 										<td><label>Ort</label></td>
-										<td>Dörfchen XYZ</td>
+										<td>${sessionScope.currentCustomer.ort}</td>
 									</tr>
 
 
@@ -183,19 +178,19 @@
 								<table class="overview">
 									<tr>
 										<td><label>Name</label></td>
-										<td id="name">Vorname Name</td>
+										<td id="name">${sessionScope.currentCustomer.vorname} ${sessionScope.currentCustomer.name}</td>
 									</tr>
 									<tr>
 										<td><label>Straße</label></td>
-										<td id="strasse">Musterstr. 123</td>
+										<td id="strasse">${sessionScope.currentCustomer.strasse}</td>
 									</tr>
 									<tr>
 										<td><label>PLZ</label></td>
-										<td id="plz">12345</td>
+										<td id="plz">${sessionScope.currentCustomer.plz}</td>
 									</tr>
 									<tr>
 										<td><label>Ort</label></td>
-										<td id="ort">Dörfchen XYZ</td>
+										<td id="ort">${sessionScope.currentCustomer.ort}</td>
 									</tr>
 								</table>
 								</div>

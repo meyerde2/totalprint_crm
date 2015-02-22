@@ -86,13 +86,15 @@
 	
 						</ul>
 					</li>
+					<!-- 
 					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="${homeUrl}">Test<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="${getCustomerService}">JsonServiceCustomer</a></li>
 							<li class="divider"></li>
 							<li><a href="${test}">JDBC Test</a></li>
 						</ul>
-					</li>	
+					</li>
+					 -->	
     	        </ul>
     	        
                 <!-- Beispiel Einträge für die Navigation-->
@@ -140,5 +142,6 @@
      
       cursor: not-allowed;
        pointer-events: none;
+       background-color: #A9BCF5;
    }
  </style>

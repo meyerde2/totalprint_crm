@@ -121,7 +121,9 @@ public class PrivatkundenController {
 
 		}
 		
-			
+			//ToDo!!
+		
+		
 		//AboEntity abo = new AboEntity(customerId, isLastschrift, iban, bic, bank, kontoinhaber, isAbweichendeLieferanschrift, lieferStrasse, lieferPlz, lieferOrt, mengeZeitschriftA, mengeZeitschriftB, mengeTageszeitung)
 		System.out.println("zahlungsart: " + strZahlungsart);
 		
@@ -207,7 +209,7 @@ public class PrivatkundenController {
 			// Brauche Insert, getIdByGrund
 		}
 
-		// ToDo: Kundennummer mitgeben!
+		// ToDo: Kundennummer mitgeben!= PersonID aus dem JSON,  MA ID - aus der Session auslesen!
 		Activity a = new Activity(0, 11, sqlDate,
 				Integer.parseInt(request.getParameter("maId")), Integer.parseInt(request.getParameter("medium")),
 				grundId, request.getParameter("notiz"));

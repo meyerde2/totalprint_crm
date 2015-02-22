@@ -8,8 +8,7 @@
 		<div class="body">
 			<h1>Privatkunden - Stammdaten</h1>
 
-		${sessionScope.currentCustomer}
-		
+	
 			<div class="container">
 				<div class="row">
 						<div class="well well-sm">
