@@ -29,6 +29,7 @@ public class WerbekampagnenEntity {
 	double budget;
 	int werbemittelId;
 	String notiz;
+	int status;
 	
 	public WerbekampagnenEntity(){
 		
@@ -41,7 +42,7 @@ public class WerbekampagnenEntity {
 			String thema, int anzahlExemplare, int anzahlVerkaufteExemplare,
 			int anzahlInserate, String geschenk, double kosten, double umsatz,
 			int resonanz, double plankosten, double budget, int werbemittelId,
-			String notiz) {
+			String notiz, int status) {
 		super();
 		this.kampagnenId = kampagnenId;
 		this.kampagnenBez = kampagnenBez;
@@ -68,6 +69,7 @@ public class WerbekampagnenEntity {
 		this.budget = budget;
 		this.werbemittelId = werbemittelId;
 		this.notiz = notiz;
+		this.status = status;
 	}
 
 
@@ -88,7 +90,7 @@ public class WerbekampagnenEntity {
 				+ anzahlInserate + ", geschenk=" + geschenk + ", kosten="
 				+ kosten + ", umsatz=" + umsatz + ", resonanz=" + resonanz
 				+ ", plankosten=" + plankosten + ", budget=" + budget
-				+ ", werbemittelId=" + werbemittelId + ", notiz=" + notiz + "]";
+				+ ", werbemittelId=" + werbemittelId + ", notiz=" + notiz + status + "]";
 	}
 
 	public int getKampagnenId() {
@@ -291,6 +293,14 @@ public class WerbekampagnenEntity {
 
 	public void setNotiz(String notiz) {
 		this.notiz = notiz;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 }

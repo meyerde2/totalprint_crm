@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.Random;
 import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
@@ -77,14 +78,85 @@ public class WerbekampagnenController {
 		
 		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
 		KampagnenDAO kampagnenDAO = (KampagnenDAO) context.getBean("kampagnenService");
+		WerbekampagnenEntity k = kampagnenDAO.getKampagneById(id);
+		if (k.getResonanz() > 0){
+			double gesamt = ( (0.33* (k.getUmsatz()/k.getKosten())) + (0.33* (k.getBudget()/k.getKosten())) + (0.33* k.getResonanz()));
+			int status= 1;
+			k.setStatus(status);
+		}
+
+		model.addAttribute("kampagne", k);
 		
-		model.addAttribute("kampagne", kampagnenDAO.getKampagneById(id));
-		
-		//return "/werbekampagnen/kampagneAuswerten";
-		return "/werbekampagnen/pie";
+		return "/werbekampagnen/kampagneAuswerten";
+		//return "/werbekampagnen/pie";
 
 	}
 	
+	@RequestMapping(value = "/werbekampagnen/auswerten/submit/{id}", method = RequestMethod.POST)
+	public String kampagneAuswertenSubmit( HttpServletRequest request, @PathVariable Integer id,
+	         HttpServletResponse response, ModelMap model) {
+		
+		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+		KampagnenDAO kampagnenDAO = (KampagnenDAO) context.getBean("kampagnenService");
+		WerbekampagnenEntity k = kampagnenDAO.getKampagneById(id);
+
+
+		if (k.getKosten() == 0.0){
+			
+			Random r = new Random();
+			int Low = (int)(k.getPlankosten() *0.7);
+			int High = (int) (k.getPlankosten() * 1.3);
+			int R = r.nextInt(High-Low) + Low;
+			k.setKosten(R);
+		}
+		
+		if (k.getAnzahlVerkaufteExemplare() == 0){
+			
+			Random r = new Random();
+			int Low = (int)(k.getAnzahlExemplare() *0.5);
+			int High = (int) (k.getAnzahlExemplare() * 1.5);
+			int R = r.nextInt(High-Low) + Low;
+			k.setAnzahlVerkaufteExemplare(R);
+			
+		}
+	
+		
+		if (k.getUmsatz() == 0.0){
+			
+			Random r = new Random();
+			int Low = (int)(k.getKosten() *0.7);
+			int High = (int) (k.getKosten() * 2.0);
+			int R = r.nextInt(High-Low) + Low;
+			k.setUmsatz(R);
+			
+		}
+
+		if (k.getResonanz() == 0){
+			
+			Random r = new Random();
+			int Low = 1;
+			int High = 5;
+			int R = r.nextInt(High-Low) + Low;
+			k.setResonanz(R);
+			
+		}
+		
+		double gesamt = ( (0.33* (k.getUmsatz()/k.getKosten())) + (0.33* (k.getBudget()/k.getKosten())) + (0.33* k.getResonanz()));
+		int status= 0;
+		
+		if(gesamt > 5){
+			
+		}
+		
+		k.setStatus(status);
+		
+		kampagnenDAO.updateKampagneById(k);
+		model.addAttribute("kampagne", k);
+		
+		return "/werbekampagnen/kampagneAuswerten";
+		//return "/werbekampagnen/pie";
+
+	}
 	
 	@RequestMapping(value = "/werbekampagnen/submitKampagneErstellen", method = RequestMethod.POST)
 	public String submitKampagne(HttpServletRequest request, ModelMap model) throws ParseException  {
@@ -136,7 +208,8 @@ public class WerbekampagnenController {
 				Double.parseDouble(request.getParameter("plankosten").toString().replace(",", ".")),
 				Double.parseDouble(request.getParameter("budget").toString().replace(",", ".")),
 				werbemittelId,
-				request.getParameter("notiz"));
+				request.getParameter("notiz"),
+				0);
 		
 		System.out.println("beilage" + kampagne.toString());
 		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
@@ -168,9 +241,13 @@ public class WerbekampagnenController {
 	    //Number number = format.parse("1,234");
 	    //double d = number.doubleValue();
 		int werbemittelId = 0;
-		if (request.getParameter("werbemittelId") != null){
+		if (request.getParameter("werbemittelId") != null && request.getParameter("werbemittelId") != ""){
 			werbemittelId = Integer.parseInt(request.getParameter("werbemittelId"));
 		}
+		
+		int status= 0;
+		
+		
 		WerbekampagnenEntity kampagne = new WerbekampagnenEntity(
 				Integer.parseInt(request.getParameter("id")),
 				request.getParameter("kampagnenBez"),
@@ -196,7 +273,8 @@ public class WerbekampagnenController {
 				Double.parseDouble(request.getParameter("plankosten").toString().replace(",", ".")),
 				Double.parseDouble(request.getParameter("budget").toString().replace(",", ".")),
 				werbemittelId,
-				request.getParameter("notiz"));
+				request.getParameter("notiz"),
+				status);
 		
 		
 		System.out.println("beilage" + kampagne.toString());

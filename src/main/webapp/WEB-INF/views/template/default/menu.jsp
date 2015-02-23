@@ -2,7 +2,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 
 <c:set var="theString" value="${requestScope['javax.servlet.forward.request_uri']}"/>
 
@@ -57,8 +59,8 @@
 						<ul class="dropdown-menu">
 							<li><a href="${pStammdaten}"><span class="glyphicon glyphicon-th-large"></span>  Stammdaten</a></li>
 							<li class="divider"></li>
-							<li><a href="${aboAbschliessen}"><span class="glyphicon glyphicon-plus"></span>  Abonnement abschließen</a></li>
-							<li><a href="${aboKuendigen}"><span class="glyphicon glyphicon-remove"></span>  Abonnement kündigen</a></li>
+							<li ><a class="${sessionScope.currentCustomer.isAbonnent == true ? 'non-active' : ''}" href="${aboAbschliessen}"><span class="glyphicon glyphicon-plus"></span>  Abonnement abschließen</a></li>
+							<li ><a class="${sessionScope.currentCustomer.isAbonnent == false ? 'non-active' : ''}" href="${aboKuendigen}"><span class="glyphicon glyphicon-remove"></span>  Abonnement kündigen</a></li>
 							<li class="divider"></li>
 							<li><a href="${pActivity}"><span class="glyphicon glyphicon-th-large"></span>  Aktivitäten</a></li>
 							<li><a href="${pActivityAnlegen}"><span class="glyphicon glyphicon-plus"></span>  Aktivitäten anlegen</a></li>
@@ -106,30 +108,21 @@
        </nav>
        
     	<div class="system-nav">
-            <!-- Navigation zum Wechsel der Systeme     Info: EintrÃ¤ge mÃ¼ssen aus der Datenbank geladen werden Beispiel PHP:
-            $this->systems = Inhalt aus "SELECT * From system_info" -->
-
-                <!--  foreach ($this->systems as $key => $value) {-->
-                   <!--  echo '<li><a href="'. $value["link"] .'" title="'. $value["name"] .'">'. $value["shortcut"] .'</a></li>';
-                }-->
             
+			<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
+			     url="jdbc:mysql://lvps87-230-14-183.dedicated.hosteurope.de/projekt"
+			     user="bas-erp"  password="erplogin"/>
+			 
+			<sql:query dataSource="${snapshot}" var="result">
+			SELECT * from systems;
+			</sql:query>
 
     		<ul>
-    			<li>
-                    <a href="http://lvps87-230-14-183.dedicated.hosteurope.de/" title="Dashboard">Dashboard</a>
-                </li>
-                <li>
-                    <a href="http://www.projektname.de/erp" title="Enterprise-Resource-Planning">ERP</a>
-                </li>
-                <li>
-                    <a href="http://www.projektname.de/erp" title="Customer-Relationship-Management">CRM</a>
-                </li>
-                <li>
-                    <a href="http://www.projektname.de/ecm" title="Enterprice Content Management">ECM</a>
-                </li>
-                <li>
-                    <a href="" title="Test">Test</a>
-                </li>
+    			<c:forEach var="row" items="${result.rows}">
+	    			<li>
+	                    <a href="${row.link}" title="${row.name}">${row.abbreviation}</a>
+	                </li>
+                </c:forEach>
             </ul>
 
     	</div>
@@ -140,8 +133,13 @@
 
   .non-active {
      
+      cursor: not-allowed !important;
+      pointer-events: none !important;
+      background-color: #A9BCF5;
+   }
+   .non-active:hover {
+     
       cursor: not-allowed;
-       pointer-events: none;
-       background-color: #A9BCF5;
+      pointer-events: none;
    }
  </style>

@@ -13,7 +13,7 @@
 	<script src="/crm/resources/jquery/messages_de.js"></script>
 	<script src="/crm/resources/jquery/additional-methods.js"></script>
 	<script src="/crm/resources/jquery/jquery.range.js"></script>
-	<script src="/crm/resources/jquery/Chart.js"></script>
+	<script src="/crm/resources/jquery/canvasjs.js"></script>
 		
 	<link href="/crm/resources/css/jquery.range.css" rel="stylesheet" type="text/css"/></link>	
 	<link href="/crm/resources/css/star-rating.css" rel="stylesheet" type="text/css"/></link>

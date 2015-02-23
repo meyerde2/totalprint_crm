@@ -47,7 +47,7 @@
 								<td>${customer.name}</td>
 								<td>${customer.ort}</td>
 								<td>${customer.kundenart}</td>
-								<td>${customer.isAbonnent}</td>
+								<td>${customer.isAbonnent == true ? 'ja' : 'nein'}</td>
 								<td>
 								<a href="/crm/suche/${customer.id}" class="btn btn-primary btn-sm">
 						        	<span class="glyphicon glyphicon-zoom-in"></span> auswählen
