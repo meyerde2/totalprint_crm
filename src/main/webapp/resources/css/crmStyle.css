@@ -19,6 +19,8 @@ h2{
 
 */
 
+
+
 .infoPanel{
 	margin-right: 20px;
 	margin-bottom: 10px;
@@ -97,6 +99,14 @@ h2{
 	width: 250px; 
 	float: left;
 
+}
+
+.miniMenu li{
+	list-style: none;
+	margin-bottom: 5px;	
+}
+.miniMenu span{
+	padding-right: 5px;
 }
 .cheapterContent{
 	width: 750px;
