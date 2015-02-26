@@ -151,6 +151,7 @@ public class CustomerService implements CustomerDAO {
 							jsonObject.get("iBAN").toString(),
 							jsonObject.get("bIC").toString(),
 							jsonObject.get("kontoinhaber").toString(),
+							jsonObject.get("bank").toString(),
 							jsonObject.get("email").toString(),
 							objKennzeichen.get("name").toString(),	// isPrivatkunde
 							(Boolean)jsonObjDebitor.get("abonnement"), // isAbonnent

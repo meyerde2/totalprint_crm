@@ -15,6 +15,7 @@ public class Customer {
 	String iban;
 	String bic;
 	String kontoinhaber;
+	String bank;
 	String email;
 	String kundenart;
 	boolean isAbonnent;
@@ -26,7 +27,7 @@ public class Customer {
 	public Customer(int id, String anrede, String name, String vorname,
 			String strasse, String plz, String ort, String firma,
 			String abwStrasse, String abwPlz, String abwOrt, String iban,
-			String bic, String kontoinhaber, String email, String kundenart,
+			String bic, String kontoinhaber, String bank, String email, String kundenart,
 			boolean isAbonnent, int zahlungsart, int mengeA, int mengeB,
 			int mengeT) {
 		super();
@@ -44,6 +45,7 @@ public class Customer {
 		this.iban = iban;
 		this.bic = bic;
 		this.kontoinhaber = kontoinhaber;
+		this.bank = bank;
 		this.email = email;
 		this.kundenart = kundenart;
 		this.isAbonnent = isAbonnent;
@@ -53,6 +55,9 @@ public class Customer {
 		this.mengeT = mengeT;
 	}
 
+
+	
+
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", anrede=" + anrede + ", name=" + name
@@ -60,11 +65,14 @@ public class Customer {
 				+ plz + ", ort=" + ort + ", firma=" + firma + ", abwStrasse="
 				+ abwStrasse + ", abwPlz=" + abwPlz + ", abwOrt=" + abwOrt
 				+ ", iban=" + iban + ", bic=" + bic + ", kontoinhaber="
-				+ kontoinhaber + ", email=" + email + ", kundenart="
-				+ kundenart + ", isAbonnent=" + isAbonnent + ", zahlungsart="
-				+ zahlungsart + ", mengeA=" + mengeA + ", mengeB=" + mengeB
-				+ ", mengeT=" + mengeT + "]";
+				+ kontoinhaber + ", bank=" + bank + ", email=" + email
+				+ ", kundenart=" + kundenart + ", isAbonnent=" + isAbonnent
+				+ ", zahlungsart=" + zahlungsart + ", mengeA=" + mengeA
+				+ ", mengeB=" + mengeB + ", mengeT=" + mengeT + "]";
 	}
+
+
+
 
 	public int getId() {
 		return id;
@@ -152,6 +160,15 @@ public class Customer {
 
 	public void setKundenart(String kundenart) {
 		this.kundenart = kundenart;
+	}
+
+	
+	public String getBank() {
+		return bank;
+	}
+
+	public void setBank(String bank) {
+		this.bank = bank;
 	}
 
 	public String getIban() {

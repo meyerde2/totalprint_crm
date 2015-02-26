@@ -52,7 +52,7 @@
                     <!-- Beispiel Einträge für die Navigation-->
              		
              		
-					<li class="${theString=='/crm/' ? 'active' : ''}"><a href="${homeUrl}"><span class="glyphicon glyphicon-home"></span>  CRM</a></li>
+					<!--  <li class="${theString=='/crm/' ? 'active' : ''}"><a href="${homeUrl}"><span class="glyphicon glyphicon-home"></span>  CRM</a></li> -->
 					<li class="<c:if test="${fn:contains(theString, 'suche')}">active</c:if>"><a href="${suche}"> <span class="glyphicon glyphicon-search"></span>  Suche</a></li>
 
 					<li class="dropdown  ${sessionScope.currentCustomer.kundenart != 'Privatkunde' ? 'non-active' : 'activeKundenart'} <c:if test="${fn:contains(theString, 'privatkunden')}">active</c:if> "> <a class="dropdown-toggle" data-toggle="dropdown" href="${privatkunden}"><span class="glyphicon glyphicon-th-list"></span>  Privatkunden<span class="caret"></span></a>

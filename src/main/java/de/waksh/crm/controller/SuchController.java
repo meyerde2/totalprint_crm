@@ -6,11 +6,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.slf4j.Logger;
@@ -21,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,7 +35,7 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/suche", method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/home", "/crm/", "/suche" }, method = RequestMethod.GET)
 	public String privatkunden(Model model) {
 		logger.info("Suche!");
 		
@@ -103,8 +100,6 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 	         HttpServletResponse response, ModelMap model) {
 		logger.info("Suche!");
 		
-		System.out.println("id:  " + id);
-		System.out.println("Suche...Weiterleitung");
 		String kundenart ="";
 		try {
 			// Json einlesen
@@ -145,6 +140,7 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 					jsonObject.get("iBAN").toString(),
 					jsonObject.get("bIC").toString(),
 					jsonObject.get("kontoinhaber").toString(),
+					jsonObject.getString("bank").toString(),
 					jsonObject.get("email").toString(),
 					kundenart,	// isPrivatkunde
 					false, // isAbonnent
@@ -152,8 +148,7 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 					0, 0, 0); // Mengen
 			
 			request.getSession().setAttribute("currentCustomer", customer);
-	        System.out.println("im Suchcontroller:  " + request.getSession().getAttribute("currentCustomer").toString());
-	        
+
 			System.out.println("customer:    "  + customer.toString());
 			model.addAttribute("customer",customer);
 			

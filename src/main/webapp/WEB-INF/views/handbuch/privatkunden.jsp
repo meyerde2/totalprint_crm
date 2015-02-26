@@ -14,7 +14,7 @@
 			<p>
 			Über die Buttons im unteren Teil der Stammdatenübersicht können Sie direkt ein Abonnement für den Kunden abschließen oder ein bestehendes Abonnement kündigen.
  			</p>
-			<img alt="" src="/crm/WEB-INF/views/handbuch/images/001.png">
+			<img alt="" src="/crm/resources/images/handbuch/001.png">
 			
 			
 			<p>

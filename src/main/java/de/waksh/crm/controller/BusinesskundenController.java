@@ -9,6 +9,7 @@ import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import de.waksh.crm.dao.ActivityDAO;
+import de.waksh.crm.dao.JsonDAO;
 import de.waksh.crm.model.Activity;
 import de.waksh.crm.model.ActivityEntity;
 import de.waksh.crm.model.Customer;
@@ -56,8 +58,73 @@ public class BusinesskundenController {
 	}
 	
 	@RequestMapping(value = "/businesskunden/submitBestellung", method = RequestMethod.POST)
-	public String pAddAbo(Model model) {
+	public String pAddAbo(HttpServletRequest request, Model model) {
 		logger.info("bestellungAbschlieﬂen-Page !");
+		
+		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+		JsonDAO jsonDAO = (JsonDAO) context.getBean("jsonServiceBean");		
+		
+		// Abo-Object
+		Customer c = null;
+		if (request.getSession().getAttribute("currentCustomer") != null){
+			
+			c = (Customer) request.getSession().getAttribute("currentCustomer");
+
+		}
+		
+		JSONObject json = new JSONObject();
+		json.put("id", c.getId());
+
+		//person
+		if (c != null){
+			if (request.getParameter("zahlungsart").equals("lastschrift")){
+				c.setKontoinhaber(request.getParameter("kontoinhaber"));
+				c.setIban(request.getParameter("iban"));
+				c.setBic(request.getParameter("bic"));
+				c.setBank(request.getParameter("bank"));
+				
+				json.put("bank", request.getParameter("bank").toString());
+				json.put("iban", request.getParameter("iban").toString());
+				json.put("bIC", request.getParameter("bic").toString());
+				json.put("iBAN", request.getParameter("kontoinhaber").toString());
+				
+				json.put("abonnement", true);
+	
+				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/update.json",  json);
+					
+			}else{
+				json.put("abonnement", true);
+				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/update.json",  json);
+					
+			}
+			//abwLieferadresse
+			if (request.getParameter("abwLieferadresse").equals("ja")){
+				
+				c.setStrasse(request.getParameter("abwstrasse"));
+				c.setOrt(request.getParameter("abwort"));
+				c.setPlz(request.getParameter("abwplz"));
+				
+				json.put("lieferOrt", request.getParameter("abwort").toString());
+				json.put("lieferPlz", request.getParameter("abwplz").toString());
+				json.put("lieferadresse", request.getParameter("abwstrasse").toString());
+				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/update.json",  json);
+				
+			}
+			
+			c.setMengeA(Integer.parseInt(request.getParameter("numberZeitschriftA")));
+			c.setMengeB(Integer.parseInt(request.getParameter("numberZeitschriftB")));
+			c.setMengeT(Integer.parseInt(request.getParameter("numberTZ")));
+
+			// ToDo: wie die Json 
+			json.put("lieferOrt", Integer.parseInt(request.getParameter("numberZeitschriftA")));
+			json.put("lieferOrt", Integer.parseInt(request.getParameter("numberZeitschriftB")));
+			json.put("lieferOrt", Integer.parseInt(request.getParameter("numberTZ")));
+			
+			c.setAbonnent(true);
+			
+			// Session neu setzen
+			request.getSession().setAttribute("currentCustomer", c);
+		}
 		
 		return "/businesskunden/bestellungBearbeiten";
 	}
@@ -66,7 +133,7 @@ public class BusinesskundenController {
 	public String pActivity(HttpServletRequest request, Model model) {
 		logger.info("activity-Page !");
 		
-		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
 		ActivityDAO activityDAO = (ActivityDAO) context.getBean("activityService");
 		int id = 0;
 		if (request.getSession().getAttribute("currentCustomer") != null){

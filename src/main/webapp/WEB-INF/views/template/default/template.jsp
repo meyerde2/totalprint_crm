@@ -1,4 +1,8 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.*" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -37,11 +41,28 @@
 			<tiles:insertAttribute name="menu" />
 		</div>
 	<div class="container">
-
-		<!-- Body Page -->
-		<div class="bodyPage" >
-			<tiles:insertAttribute name="body" />
-		</div>
+		
+				  		<!-- Body Page -->
+				<div class="bodyPage" >
+					<tiles:insertAttribute name="body" />
+				</div>
+				<!--  
+				/*
+		<c:choose>
+		  <c:when test="${sessionScope.loggedIn == true}">
+				<div class="bodyPage" >
+					<tiles:insertAttribute name="body" />
+				</div>
+		  </c:when>
+		  <c:otherwise>
+				<div class="bodyPage" >
+					//<%@include file="/WEB-INF/views/notLoggedIn.jsp" %>
+				</div>
+		  </c:otherwise>
+		</c:choose>
+*/
+	-->	
+		
 		<!-- Footer Page -->
 		<div class="footerPage" >
 			<tiles:insertAttribute name="footer" />

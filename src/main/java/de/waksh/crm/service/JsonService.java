@@ -1,5 +1,14 @@
 package de.waksh.crm.service;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+
 import javax.sql.DataSource;
 
 import org.json.JSONArray;
@@ -17,6 +26,52 @@ public class JsonService implements JsonDAO{
 		this.dataSource = dataSource;
 	}
 
+	@Override
+	public boolean putJsonToErp(String urlString, JSONObject obj){
+		boolean status = false;
+		try {
+			URL url = new URL(urlString);
+		 
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	
+			conn.setRequestMethod("PUT");
+	        conn.setDoOutput(true);
+	        conn.setRequestProperty("Content-Type", "application/json");
+	        conn.setRequestProperty("Accept", "application/json");
+	        conn.setRequestProperty("charset", "UTF-8");
+	        
+	        OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
+	        
+			osw.write(obj.toString());
+	        osw.flush();
+	        osw.close();
+		    // System.err.println(connection.getResponseCode());
+		    //System.out.println(conn.getResponseMessage());
+		    
+		    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		    StringBuilder sb = new StringBuilder();
+		    String line;
+		    
+		    while ((line = br.readLine()) != null) {
+		        sb.append(line+"\n");
+		    }
+		    String str = sb.toString();
+		    boolean retval = str.contains("Error repor");
+		    if (!retval) {
+		    	status = true;
+		    }
+		    //System.out.println(sb);
+		    br.close();
+		    conn.disconnect();
+		    
+        } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+
+		return status;
+	}
+	
 	public JSONObject generateJsonAbo(AboEntity abo) {
 		
 
@@ -71,6 +126,4 @@ public class JsonService implements JsonDAO{
 		return json;
 		
 	}
-
-	
 }
