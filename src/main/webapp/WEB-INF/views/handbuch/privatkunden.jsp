@@ -1,14 +1,28 @@
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="body">
-		
-		<%@include file="/WEB-INF/views/handbuch/miniMenu.jsp" %>
-		
+
+		<%@include file="/WEB-INF/views/handbuch/miniMenu.jsp"%>
+
+
+
 		<h1>Privatkunden</h1>
 		<div class="cheapterContent">
-			<p>Privat</p>
-
-		</div>
+	
 			
+			
+			<p>
+			Über die Buttons im unteren Teil der Stammdatenübersicht können Sie direkt ein Abonnement für den Kunden abschließen oder ein bestehendes Abonnement kündigen.
+ 			</p>
+			<img alt="" src="/crm/WEB-INF/views/handbuch/images/001.png">
+			
+			
+			<p>
+			
+			</p>
+			
+			
+		</div>	
+		
 	</tiles:putAttribute>
 </tiles:insertDefinition>
