@@ -4,12 +4,12 @@
 
 		<%@include file="/WEB-INF/views/handbuch/miniMenu.jsp"%>
 		<div class="cheapterContent">
-			<h1>Gemeinsam dumm</h1>
+			<h1>Werbekampagen</h1>
 
-			<iframe width="640" height="360"
-				src="https://www.youtube-nocookie.com/embed/okVDMpU317w"
-				frameborder="0" allowfullscreen></iframe>
-
+			<h2>Werbekampagnen - Werbekampagne erstellen</h2>
+			<p>Wählen Sie aus, welche Art von Werbekampagne Sie anlegen
+				möchten.</p>
 		</div>
+
 	</tiles:putAttribute>
 </tiles:insertDefinition>

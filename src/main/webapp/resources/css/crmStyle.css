@@ -1,44 +1,39 @@
 /*
 modifiziertes Stylesheet für das CRM-Programm
 */
-
-h2{
+h2 {
 	font-size: 2em;
 }
 
-.container{
-	
-	width: 1024px; 
+.container {
+	width: 1024px;
 }
-#notiz{
-	max-width:300px;
+
+#notiz {
+	max-width: 300px;
 }
 
 /*
 
 
 */
-
-
-
-.infoPanel{
+.infoPanel {
 	margin-right: 20px;
 	margin-bottom: 10px;
 	float: right;
 }
-.panelStammdaten{
-	
+
+.panelStammdaten {
 	margin-left: 340px;
 }
 
-.panel-title{
-	
+.panel-title {
 	padding: 20px;
 	font-size: 1.5em;
 	font-weight: bold;
 }
 
-.abschnitt{
+.abschnitt {
 	text-align: left;
 	border-bottom: solid 1px;
 }
@@ -46,9 +41,7 @@ h2{
 
 
 */
-
-.well{
-	
+.well {
 	width: 800px;
 }
 
@@ -56,62 +49,59 @@ h2{
 
 
 */
-.table-user-information{
-	margin-left: 40px;	
+.table-user-information {
+	margin-left: 40px;
 	width: 550px;
 	max-width: 550px;
-}	
+}
 
 /*
 
 
 */
-
-.suche .row .form-group{
+.suche .row .form-group {
 	width: 150px;
 }
 
-
-
-.error{
+.error {
 	color: red;
 }
 /*
 
 
 */
-.aboAbschliessen .row, .bestellungBearbeiten .row{
-	
+.aboAbschliessen .row, .bestellungBearbeiten .row {
 	width: 830px;
 }
 
-.bestellungBearbeiten table td, .aboAbschliessen table td{
-	
-	min-width:250px;
-	
+.bestellungBearbeiten table td, .aboAbschliessen table td {
+	min-width: 250px;
 }
 /*
 	Handbuch-Style
 */
-
-.miniMenu{
+.miniMenu {
 	margin-top: -20px;
-	width: 250px; 
+	width: 250px;
 	float: left;
-
 }
 
-.miniMenu li{
+.miniMenu li {
 	list-style: none;
-	margin-bottom: 5px;	
+	margin-bottom: 5px;
 }
-.miniMenu span{
+
+.miniMenu span {
 	padding-right: 5px;
 }
-.cheapterContent{
+
+.cheapterContent {
 	width: 750px;
 	margin-left: 250px;
+}
 
+.cheapterContent h2 {
+	font-size: 16px;
 }
 /*
 	End

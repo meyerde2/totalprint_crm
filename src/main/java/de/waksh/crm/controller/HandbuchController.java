@@ -22,7 +22,7 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 	}
 	
 	@RequestMapping(value = "/handbuch/businesskunden", method = RequestMethod.GET)
-	public String kapitel1(Model model) {
+	public String businesskunden (Model model) {
 		logger.info("Suche!");
 		return "/handbuch/businesskunden";
 	}
@@ -32,6 +32,18 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 		logger.info("Suche!");
 		return "/handbuch/privatkunden";
 	}
-
+	
+	@RequestMapping(value = "/handbuch/kampagne", method = RequestMethod.GET)
+	public String kampagne(Model model) {
+		logger.info("Suche!");
+		return "/handbuch/kampagne";
+	}
+	
+	@RequestMapping(value = "/handbuch/kapitel1", method = RequestMethod.GET)
+	public String kapitel1(Model model) {
+		logger.info("Suche!");
+		return "/handbuch/kapitel1";
+	}
+	
 	
 }
