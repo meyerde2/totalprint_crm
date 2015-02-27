@@ -41,12 +41,12 @@
 						<c:forEach var="customer" items="${customerList}">
 										
 							<tr>
-								<td>${customer.id}</td>
+								<td>${customer.debitorId}</td>
 								<td>${customer.firma}</td>	
 								<td>${customer.vorname}</td>
 								<td>${customer.name}</td>
 								<td>${customer.ort}</td>
-								<td>${customer.kundenart}</td>
+								<td>${customer.kundenart == 'Businesskunde' ? 'Geschäftskunde' : 'Privatkunde'}</td>
 								<td>${customer.isAbonnent == true ? 'ja' : 'nein'}</td>
 								<td>
 								<a href="/crm/suche/${customer.id}" class="btn btn-primary btn-sm">

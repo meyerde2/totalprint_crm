@@ -73,7 +73,7 @@ public class HomeController {
     }
 	@RequestMapping(value = "test", method = RequestMethod.GET)
 	public String test(Model model, HttpServletRequest request) {
-		Suche suche = new Suche(1, "name1", "vorname2", "firma3", "kundenart4");
+		Suche suche = new Suche(1, "name1", "vorname2", "firma3", "kundenart4", "");
 		request.getSession().setAttribute("suche", suche);
         System.out.println("im test:  " + request.getSession().getAttribute("suche").toString());
 		return "test";

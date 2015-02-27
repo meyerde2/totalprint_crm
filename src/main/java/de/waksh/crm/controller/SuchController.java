@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.slf4j.Logger;
@@ -51,12 +52,9 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 		System.out.println("searching id" + request.getParameter("cId"));
 		Suche suche = new Suche(cId, 
 				request.getParameter("name"), request.getParameter("vorname"), 
-				request.getParameter("firma"), request.getParameter("kundenart"));
+				request.getParameter("firma"), request.getParameter("kundenart"), request.getParameter("ort"));
 		
-		logger.info("submitSearch!");
-	
-		System.out.println("suche to stirng " + suche.toString());
-		model.addAttribute("test","tt444");
+
 
 		// Json einlesen
 		// http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/show/1.json
@@ -69,7 +67,7 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 		ArrayList<Customer> customerList =  customerDAO.getAllCustomers();
 
 		for (Customer c : customerList){
-			if(suche.getcId() != 0 && c.getId() != suche.getcId()){
+			if(suche.getcId() != 0 && c.getDebitorId() != suche.getcId()){
 				deleteCandidates.add(c);
 			}
 			if(suche.getVorname() != "" && !c.getVorname().equals(suche.getVorname())){
@@ -81,9 +79,13 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 			if(suche.getFirma() != "" && !c.getFirma().equals(suche.getFirma())){
 				deleteCandidates.add(c);
 			}
-			if(suche.getKundenart() != null && !c.getKundenart().equals(suche.getKundenart())){ //ToDo: wird so niemals equals sein
+			if(suche.getOrt() != "" && !c.getOrt().equals(suche.getOrt())){
 				deleteCandidates.add(c);
 			}
+			if((!suche.getKundenart().equals("beides")) && !c.getKundenart().equals(suche.getKundenart())){ //ToDo: wird so niemals equals sein
+				deleteCandidates.add(c);
+			}
+
 		}
 		
 		for(Customer cDelete : deleteCandidates){
@@ -109,41 +111,55 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 			JSONObject jsonObject = new JSONObject(tokener);
 			JSONObject objAnrede = (JSONObject) jsonObject.get("anrede");
 			
-			URI uriDebitor = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/show/" + id + ".json");
+			JSONArray jsonDebitor =(JSONArray) jsonObject.get("debitor");
+			System.out.println("array..." + jsonDebitor);
+			
+			
+			int debitorId = Integer.parseInt(jsonDebitor.getJSONObject(0).get("id").toString());
+			
+			System.out.println("site " + debitorId);
+			
+			/*JSONArray arr = (JSONArray) jsonDebitor.get(0); 
+			arr.get(0);
+			System.out.println("debitor json.....??  " + arr.get(0));
+			
+			*/
+
+			
+			URI uriDebitor = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/show/" + debitorId + ".json");
 			JSONTokener tokenerDebitor = new JSONTokener(uriDebitor.toURL().openStream());
 			JSONObject jsonObjDebitor = new JSONObject(tokenerDebitor);
 			JSONObject objKundenart = (JSONObject) jsonObjDebitor.get("kennzeichen");
-			
+			JSONObject objKennzeichen = jsonObjDebitor.getJSONObject("kennzeichen");
 			
 			// ToDo: Auf das ERP-Update warten und überprüfen, ob die Bezeichner verändert worden.
 		
-			if (objKundenart.get("name").equals("Haendler")){
+			if (objKundenart.get("name").equals("Businesskunde")){
 				kundenart ="Geschäftskunde";
-				System.out.println("Kundenart = Geschäftskunde");
 			}else{
 				kundenart = "Privatkunde";
-				System.out.println("Kundenart = Privatkunde");
 			}
 			// ToDo:  CustomerSearchEntity erstellen
 			Customer customer = new Customer(
 					Integer.parseInt(jsonObject.get("id").toString()),
+					Integer.parseInt(jsonObjDebitor.get("id").toString()),
 					objAnrede.get("name").toString(),
-					jsonObject.get("nachname").toString(),
-					jsonObject.get("vorname").toString(),
-					jsonObject.get("adresse").toString(), 
-					jsonObject.get("plz").toString(), 
-					jsonObject.get("ort").toString(), 
-					jsonObject.get("firma").toString(), 
-					jsonObjDebitor.get("lieferadresse").toString(), 
-					jsonObjDebitor.get("lieferPlz").toString(), 
-					jsonObjDebitor.get("lieferOrt").toString(), 
-					jsonObject.get("iBAN").toString(),
-					jsonObject.get("bIC").toString(),
-					jsonObject.get("kontoinhaber").toString(),
-					jsonObject.getString("bank").toString(),
-					jsonObject.get("email").toString(),
+					convertFromUTF8(jsonObject.get("nachname").toString()),
+					convertFromUTF8(jsonObject.get("vorname").toString()),
+					convertFromUTF8(jsonObject.get("adresse").toString()), 
+					convertFromUTF8(jsonObject.get("plz").toString()), 
+					convertFromUTF8(jsonObject.get("ort").toString()), 
+					convertFromUTF8(jsonObject.get("firma").toString()), 
+					convertFromUTF8(jsonObjDebitor.get("lieferadresse").toString()), 
+					convertFromUTF8(jsonObjDebitor.get("lieferPlz").toString()), 
+					convertFromUTF8(jsonObjDebitor.get("lieferOrt").toString()), 
+					convertFromUTF8(jsonObject.get("iBAN").toString()),
+					convertFromUTF8(jsonObject.get("bIC").toString()),
+					convertFromUTF8(jsonObject.get("kontoinhaber").toString()),
+					convertFromUTF8(jsonObject.get("bank").toString()),
+					convertFromUTF8(jsonObject.get("email").toString()),
 					kundenart,	// isPrivatkunde
-					false, // isAbonnent
+					(Boolean)jsonObjDebitor.get("abonnement"),
 					1, // Rechnungsart
 					0, 0, 0); // Mengen
 			
@@ -173,6 +189,28 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 		return "redirect:" + strView;
 	}
 
+	
+	
+	public static String convertToUTF8(String s) {
+        String out = null;
+        try {
+            out = new String(s.getBytes("UTF-8"), "ISO-8859-1");
+        } catch (java.io.UnsupportedEncodingException e) {
+            return null;
+        }
+        return out;
+    }
+	
+	public static String convertFromUTF8(String s) {
+        String out = null;
+        try {
+            out = new String(s.getBytes("ISO-8859-1"), "UTF-8");
+        } catch (java.io.UnsupportedEncodingException e) {
+            return null;
+        }
+        return out;
+    }
+	
 
 	
 }

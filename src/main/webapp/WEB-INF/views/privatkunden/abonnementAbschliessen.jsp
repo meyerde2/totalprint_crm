@@ -101,19 +101,19 @@
 									</tr>
 									<tr class="payment">
 										<td><label>IBAN</label></td>
-										<td><input type="text" class="form-control" name="iban" id="iban" placeholder="IBAN"></td>
+										<td><input type="text" class="form-control" name="iban" id="iban" placeholder="IBAN" value="${sessionScope.currentCustomer.iban}"></td>
 									</tr>
 									<tr class="payment">
 										<td><label>BIC</label></td>
-										<td><input type="text" class="form-control" name="bic" id="bic" placeholder="BIC"></td>
+										<td><input type="text" class="form-control" name="bic" id="bic" placeholder="BIC" value="${sessionScope.currentCustomer.bic}"></td>
 									</tr>
 									<tr class="payment">
 										<td><label>Bank</label></td>
-										<td><input type="text" class="form-control" name="bank" id="bank" placeholder="Bank"></td>
+										<td><input type="text" class="form-control" name="bank" id="bank" placeholder="Bank" value="${sessionScope.currentCustomer.bank}"></td>
 									</tr>
 									<tr class="payment">
 										<td><label>Kontoinhaber</label></td>
-										<td><input type="text" class="form-control" name="kontoinhaber" id="kontoinhaber" placeholder="Kontoinhaber"></td>
+										<td><input type="text" class="form-control" name="kontoinhaber" id="kontoinhaber" placeholder="Kontoinhaber" value="${sessionScope.currentCustomer.kontoinhaber}"></td>
 									</tr>
 
 								</table>
@@ -151,17 +151,17 @@
 									<tr class="abwLieferadresse">
 										<td><label>Straﬂe</label></td>
 										<td><input type="text" class="form-control"
-											name="abwstrasse" id="abwstrasse" placeholder="Straﬂe Nr."></td>
+											name="abwstrasse" id="abwstrasse" placeholder="Straﬂe Nr." value="${sessionScope.currentCustomer.abwStrasse}"></td>
 									</tr>
 									<tr class="abwLieferadresse">
 										<td><label>PLZ</label></td>
 										<td><input type="text" class="form-control" name="abwplz"
-											id="abwplz" placeholder="Postleitzahl"></td>
+											id="abwplz" placeholder="Postleitzahl" value ="${sessionScope.currentCustomer.abwPlz}"></td>
 									</tr>
 									<tr class="abwLieferadresse">
 										<td><label>Ort</label></td>
 										<td><input type="text" class="form-control" name="abwort"
-											id="abwort" placeholder="Ort"></td>
+											id="abwort" placeholder="Ort" value="${sessionScope.currentCustomer.abwOrt}"></td>
 									</tr>
 								</table>
 								<button id="activate-step-4" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></button>
@@ -208,7 +208,7 @@
 								<table class="overview">
 									<tr class="lastschrift">
 										<td><label>IBAN</label></td>
-										<td id="tdIban" >IBAN</td>
+										<td id="tdIban">IBAN</td>
 									</tr>
 									<tr class="lastschrift">
 										<td><label>BIC</label></td>
@@ -229,15 +229,15 @@
 								<table class="overview">
 									<tr class="abwLieferanschrift">
 										<td><label>Abweichende Str.</label></td>
-										<td id="tdAbwStr">Testweg 123</td>
+										<td id="tdAbwStr">${sessionScope.currentCustomer.abwStrasse}</td>
 									</tr>
 									<tr class="abwLieferanschrift">
 										<td><label>Abweichende PLZ</label></td>
-										<td id="tdAbwPlz">24340</td>
+										<td id="tdAbwPlz">${sessionScope.currentCustomer.abwPlz}</td>
 									</tr>
 									<tr class="abwLieferanschrift">
 										<td><label>Abweichender Ort</label></td>
-										<td id="tdAbwOrt">Kiel</td>
+										<td id="tdAbwOrt">${sessionScope.currentCustomer.abwOrt}</td>
 									</tr>
 								</table>
 								</div>

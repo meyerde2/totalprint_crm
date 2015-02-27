@@ -6,19 +6,21 @@ public class Suche {
 	private String vorname;
 	private String firma;
 	private String kundenart;
+	private String ort;
 	
 	
 	public Suche() {
 		
 	}
 	public Suche(long cId, String name, String vorname, String firma,
-			String  kundenart) {
+			String  kundenart, String ort) {
 		super();
 		this.cId = cId;
 		this.name = name;
 		this.vorname = vorname;
 		this.firma = firma;
 		this.kundenart = kundenart;
+		this.ort = ort;
 	}
 	@Override
 	public String toString() {
@@ -54,6 +56,12 @@ public class Suche {
 	}
 	public void setKundenart(String kundenart) {
 		this.kundenart = kundenart;
+	}
+	public String getOrt() {
+		return ort;
+	}
+	public void setOrt(String ort) {
+		this.ort = ort;
 	}
 
 

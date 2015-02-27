@@ -35,14 +35,14 @@
 									<div class="form-group">
 									<c:set var="kosten2" value="${fn:replace(kampagne.kosten, '.', ',')}"/>
 		                              <label for="kosten">Tatsächliche Kosten</label> <input type="text"  
-		                                 class="form-control" name="kosten" id="kosten" placeholder="Kosten" value="${kosten2}"/>                           
+		                                 class="form-control" name="kosten" id="kosten" placeholder="Kosten" value="${kosten2}" disabled/>                           
 		                           </div>
 		                            <c:set var="umsatz2" value="${fn:replace(kampagne.umsatz, '.', ',')}" />
 		                            
 		                            <c:if test="${kampagne.artId != 3}">
 										<div class="form-group">
 				                        	<label for="umsatz">Umsatz</label> 
-				                        	<input type="text" class="form-control" name="umsatz" id="umsatz" placeholder="Umsatz" value="${umsatz2}"/>
+				                        	<input type="text" class="form-control" name="umsatz" id="umsatz" placeholder="Umsatz" value="${umsatz2}" disabled/>
 				                        </div>
 								
 									</c:if>	
@@ -53,11 +53,11 @@
 		                          
 		                           <div class="form-group">
 		                              <label for="vExemplare">Anzahl der verkauften Exemplare</label> <input type="text"
-		                                 class="form-control" name="anzahlVerkaufteExemplare" id="anzahlVerkaufteExemplare" placeholder="Verkaufte Exemplare" value="${kampagne.anzahlVerkaufteExemplare}"/>
+		                                 class="form-control" name="anzahlVerkaufteExemplare" id="anzahlVerkaufteExemplare" placeholder="Verkaufte Exemplare" value="${kampagne.anzahlVerkaufteExemplare}" disabled/>
 		                           </div>
 		                           <div class="form-group">
 		                              <label for="resonanz">Resonanz</label>
-		                                 <input class="rating-input" type="number" name="rating" id="rating" value="${kampagne.resonanz}"/>
+		                                 <input class="rating-input" type="number" name="rating" id="rating" value="${kampagne.resonanz}" disabled/>
 		                           </div>
 		
 		                           <button type="submit" class="btn btn-primary pull-right" ${kampagne.resonanz > 0 ? 'disabled' : ''} >

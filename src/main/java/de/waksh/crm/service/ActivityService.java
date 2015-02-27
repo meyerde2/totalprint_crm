@@ -27,22 +27,24 @@ public class ActivityService implements ActivityDAO{
 		String sql = "SELECT * FROM `aktivitaeten_tabelle` "
 				+ " LEFT JOIN medien_tabelle ON aktivitaeten_tabelle.medien_id = medien_tabelle.medien_id "
 				+ " LEFT JOIN grund_f_aktivitaeten_tabelle ON aktivitaeten_tabelle.grund_id = grund_f_aktivitaeten_tabelle.grund_id"
-				+ " WHERE aktivitaeten_tabelle.datum = " + id + " ORDER BY aktivitaeten_tabelle.datum DESC;";
+				+ " WHERE aktivitaeten_tabelle.kunden_id = " + id + " ORDER BY aktivitaeten_tabelle.datum DESC;";
 		
 		Connection conn = null;
 
 		try {
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
-			
 			String kundenBez ="Test-Kunde";
 			String mitarbeiterBez ="Test-MA";
 			
 			ArrayList<ActivityEntity> activityList = new ArrayList<ActivityEntity>();
 			ResultSet rs = ps.executeQuery();
 			
+			System.out.println("execute");
+
 			while (rs.next()) {
-				
+				System.out.println("execute2");
+
 				//kundenBez = getWebserviceFromERP
 				//mitarbeiterBez = getWebserviceFromERP
 				
@@ -166,7 +168,7 @@ public class ActivityService implements ActivityDAO{
 			ps.setString(7, activity.getNotiz());
 
 			System.out.println("PS   _:   " + ps.toString());
-			//ps.executeUpdate();
+			ps.executeUpdate();
 			ps.close();
 
 		} catch (SQLException e) {

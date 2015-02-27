@@ -9,6 +9,7 @@
 
 	<script	src="http://lvps87-230-14-183.dedicated.hosteurope.de/public/js/basic.js"></script>
 	<link rel="stylesheet" href="http://lvps87-230-14-183.dedicated.hosteurope.de/public/css/basic.css"></link>
+	<link rel="stylesheet" href="http://lvps87-230-14-183.dedicated.hosteurope.de/public/css/basic2.css"></link>
 	
 	<link rel="stylesheet" type="text/css"	href="/crm/resources/jquery/jquery.datetimepicker.css"></link>
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"></link>

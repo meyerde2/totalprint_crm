@@ -2,6 +2,7 @@ package de.waksh.crm.model;
 
 public class Customer {
 	int id;
+	int debitorId;
 	String anrede;
 	String name;
 	String vorname;
@@ -24,7 +25,7 @@ public class Customer {
 	int mengeB;
 	int mengeT;
 
-	public Customer(int id, String anrede, String name, String vorname,
+	public Customer(int id, int debitorId, String anrede, String name, String vorname,
 			String strasse, String plz, String ort, String firma,
 			String abwStrasse, String abwPlz, String abwOrt, String iban,
 			String bic, String kontoinhaber, String bank, String email, String kundenart,
@@ -32,6 +33,7 @@ public class Customer {
 			int mengeT) {
 		super();
 		this.id = id;
+		this.debitorId = debitorId;
 		this.anrede = anrede;
 		this.name = name;
 		this.vorname = vorname;
@@ -56,22 +58,19 @@ public class Customer {
 	}
 
 
-	
-
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", anrede=" + anrede + ", name=" + name
-				+ ", vorname=" + vorname + ", strasse=" + strasse + ", plz="
-				+ plz + ", ort=" + ort + ", firma=" + firma + ", abwStrasse="
-				+ abwStrasse + ", abwPlz=" + abwPlz + ", abwOrt=" + abwOrt
-				+ ", iban=" + iban + ", bic=" + bic + ", kontoinhaber="
-				+ kontoinhaber + ", bank=" + bank + ", email=" + email
-				+ ", kundenart=" + kundenart + ", isAbonnent=" + isAbonnent
-				+ ", zahlungsart=" + zahlungsart + ", mengeA=" + mengeA
-				+ ", mengeB=" + mengeB + ", mengeT=" + mengeT + "]";
+		return "Customer [id=" + id + ", debitorId=" + debitorId + ", anrede="
+				+ anrede + ", name=" + name + ", vorname=" + vorname
+				+ ", strasse=" + strasse + ", plz=" + plz + ", ort=" + ort
+				+ ", firma=" + firma + ", abwStrasse=" + abwStrasse
+				+ ", abwPlz=" + abwPlz + ", abwOrt=" + abwOrt + ", iban="
+				+ iban + ", bic=" + bic + ", kontoinhaber=" + kontoinhaber
+				+ ", bank=" + bank + ", email=" + email + ", kundenart="
+				+ kundenart + ", isAbonnent=" + isAbonnent + ", zahlungsart="
+				+ zahlungsart + ", mengeA=" + mengeA + ", mengeB=" + mengeB
+				+ ", mengeT=" + mengeT + "]";
 	}
-
-
 
 
 	public int getId() {
@@ -81,6 +80,18 @@ public class Customer {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	
+	public int getDebitorId() {
+		return debitorId;
+	}
+
+	public void setDebitorId(int debitorId) {
+		this.debitorId = debitorId;
+	}
+
+
+
 
 	public String getAnrede() {
 		return anrede;

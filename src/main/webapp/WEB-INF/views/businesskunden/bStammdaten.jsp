@@ -27,7 +27,7 @@
 											<tbody>
 												<tr>
 													<td>Kundenummer</td>
-													<td>${sessionScope.currentCustomer.id}</td>
+													<td>${sessionScope.currentCustomer.debitorId}</td>
 												</tr>
 												<tr>
 													<td>Anrede</td>
@@ -47,7 +47,9 @@
 												</tr>
 												<tr>
 													<td>Bankverbindung</td>
-													<td>${sessionScope.currentCustomer.iban} (IBAN)<br> <br>
+													<td>
+														${sessionScope.currentCustomer.bank}<br> <br>
+														${sessionScope.currentCustomer.iban} (IBAN)<br> <br>
 														${sessionScope.currentCustomer.bic} (BIC)<br> <br> 
 														${sessionScope.currentCustomer.kontoinhaber}(Kontoinhaber)
 													</td>

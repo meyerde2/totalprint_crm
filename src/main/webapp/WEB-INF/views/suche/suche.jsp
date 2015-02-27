@@ -26,9 +26,11 @@
 										<div class="form-group">
 											<label for="kundenart">Kundenart</label> <br> <input
 												type="radio" class="radio-inline" name="kundenart"
-												id="kundenart" value="Privat"> Privatkunde <input
+												id="kundenart" value="beides" checked>  Alle<input
 												type="radio" class="radio-inline" name="kundenart"
-												id="kundenart" value="Haendler"> Geschäftskunde
+												id="kundenart" value="Privatkunde"> Privatkunde <input
+												type="radio" class="radio-inline" name="kundenart"
+												id="kundenart" value="Businesskunde"> Geschäftskunde
 										</div>
 										<div class="form-group">
 											<label for="cId"> Kundennummer</label> <input type="text"
@@ -61,14 +63,9 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="name">Suchhinweise</label>
-											<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-											 sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-											  sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-											   Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
-											   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
-											   sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
-											   sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-											 Stet clita kasd gubergren, no sea takimata sanctus est.	
+											<p>Die Suche bietet verschiedene Suchkriterien, die in beliebigem Umfang nutzbar sind. 
+											Werden keine Suchkriterien angegeben, erscheint eine Übersicht aller Kunden. 
+											Durch klicken auf den Button [Suche] wird die Suchanfrage abgeschickt.	
 											</p>
 										</div>
 									</div>

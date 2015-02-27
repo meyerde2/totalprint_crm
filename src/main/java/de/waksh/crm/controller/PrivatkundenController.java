@@ -155,11 +155,12 @@ public class PrivatkundenController {
 			//ToDo!!
 
 		JSONObject json = new JSONObject();
-		json.put("id", c.getId());
+		JSONObject jsonDebi = new JSONObject();
+
 	
 		//person
 		if (c != null){
-			if (request.getParameter("zahlungsart").equals("lastschrift")){
+			if ("lastschrift".equals(request.getParameter("zahlungsart").toString())){
 				c.setKontoinhaber(request.getParameter("kontoinhaber"));
 				c.setIban(request.getParameter("iban"));
 				c.setBic(request.getParameter("bic"));
@@ -171,26 +172,37 @@ public class PrivatkundenController {
 				json.put("iBAN", request.getParameter("kontoinhaber").toString());
 				
 				json.put("abonnement", true);
-	
-				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/update.json",  json);
-					
-			}else{
-				json.put("abonnement", true);
+				
+				json.put("id", c.getId());
+
 				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/update.json",  json);
 					
 			}
+
 			//abwLieferadresse
-			if (request.getParameter("abwLieferadresse").equals("ja")){
+			System.out.println("abwLieferad  " + request.getParameter("abwLieferadresse"));
+			if ("ja".equals(request.getParameter("abwLieferadresse"))){
 				
 				c.setStrasse(request.getParameter("abwstrasse"));
 				c.setOrt(request.getParameter("abwort"));
 				c.setPlz(request.getParameter("abwplz"));
 				
-				json.put("lieferOrt", request.getParameter("abwort").toString());
-				json.put("lieferPlz", request.getParameter("abwplz").toString());
-				json.put("lieferadresse", request.getParameter("abwstrasse").toString());
-				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/update.json",  json);
+				jsonDebi.put("lieferOrt", request.getParameter("abwort").toString());
+				jsonDebi.put("lieferPlz", request.getParameter("abwplz").toString());
+				jsonDebi.put("lieferadresse", request.getParameter("abwstrasse").toString());
 				
+				jsonDebi.put("id", c.getDebitorId());
+
+				jsonDebi.put("abonnement", true);
+
+				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/update.json",  jsonDebi);
+				
+			}else{
+				jsonDebi.put("id", c.getDebitorId());
+
+				jsonDebi.put("abonnement", true);
+
+				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/update.json",  jsonDebi);
 			}
 			
 			c.setAbonnent(true);
@@ -223,6 +235,7 @@ public class PrivatkundenController {
 			
 		}
 
+		System.out.println("customerid activtity.  " + id);
 		ArrayList<ActivityEntity> activityEntity = activityDAO.getAllActivities(id);
 		model.addAttribute("aList", activityEntity);
 		
@@ -277,7 +290,8 @@ public class PrivatkundenController {
 		}
 
 		// ToDo: Kundennummer mitgeben!= PersonID aus dem JSON,  MA ID - aus der Session auslesen!
-		Activity a = new Activity(0, 11, sqlDate,
+		Customer c = (Customer) request.getSession().getAttribute("currentCustomer");
+		Activity a = new Activity(0, c.getId(), sqlDate,
 				Integer.parseInt(request.getParameter("maId")), Integer.parseInt(request.getParameter("medium")),
 				grundId, request.getParameter("notiz"));
 		
