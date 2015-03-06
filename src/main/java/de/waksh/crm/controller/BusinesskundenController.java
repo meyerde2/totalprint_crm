@@ -73,12 +73,10 @@ public class BusinesskundenController {
 			c = (Customer) request.getSession().getAttribute("currentCustomer");
 
 		}
-		
-			//ToDo!!
 
 		JSONObject json = new JSONObject();
 		JSONObject jsonDebi = new JSONObject();
-
+		JSONObject jsonBestellung = new JSONObject();
 	
 		//person
 		if (c != null){
@@ -93,14 +91,12 @@ public class BusinesskundenController {
 				json.put("bIC", request.getParameter("bic").toString());
 				json.put("iBAN", request.getParameter("kontoinhaber").toString());
 				
-				json.put("abonnement", true);
-				
 				json.put("id", c.getId());
 
-				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/update.json",  json);
+				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/person/update.json",  json);
 					
-			}
-
+			}			
+			
 			//abwLieferadresse
 			System.out.println("abwLieferad  " + request.getParameter("abwLieferadresse"));
 			if ("ja".equals(request.getParameter("abwLieferadresse"))){
@@ -113,33 +109,59 @@ public class BusinesskundenController {
 				jsonDebi.put("lieferPlz", request.getParameter("abwplz").toString());
 				jsonDebi.put("lieferadresse", request.getParameter("abwstrasse").toString());
 				
-				
-				c.setMengeA(Integer.parseInt(request.getParameter("numberZeitschriftA")));
-				c.setMengeB(Integer.parseInt(request.getParameter("numberZeitschriftB")));
-				c.setMengeT(Integer.parseInt(request.getParameter("numberTZ")));
-
-				// ToDo: wie die Json 
-				json.put("lieferOrt", Integer.parseInt(request.getParameter("numberZeitschriftA")));
-				json.put("lieferOrt", Integer.parseInt(request.getParameter("numberZeitschriftB")));
-				json.put("lieferOrt", Integer.parseInt(request.getParameter("numberTZ")));
-				
-				
-				
 				jsonDebi.put("id", c.getDebitorId());
 
 				jsonDebi.put("abonnement", true);
 
-				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/update.json",  jsonDebi);
+				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/debitor/update.json",  jsonDebi);
 				
 			}else{
 				jsonDebi.put("id", c.getDebitorId());
 
-				jsonDebi.put("abonnement", true);
 
-				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/update.json",  jsonDebi);
+				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/debitor/update.json",  jsonDebi);
 			}
 			
-			c.setAbonnent(true);
+			//
+			/*
+			
+			ArtikelVersion befüllen (artikel_id, erscheinungsdatum)
+			Bestellungen befüllen (artikel_versionen_id, person_id, menge)
+			*/
+
+			// ToDo: Get alle IDs aus Bestellungen, wenn keine drin sind, dann Post, sonst die einzlnen auslesen und putten
+			
+			
+			// ToDo: Unterscheidung, ob schon vorhanden, dann put oder nciht vorhanden dann: post
+			json.put("id", 1);
+			json.put("person", c.getId());
+			json.put("menge", Integer.parseInt(request.getParameter("numberZeitschriftA")));
+			
+			jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/update.json",  jsonBestellung);
+			
+			json.put("id", 2);
+			json.put("person", c.getId());
+			json.put("menge", Integer.parseInt(request.getParameter("numberZeitschriftA")));
+			
+			jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/update.json",  jsonBestellung);
+
+			
+			json.put("id", 3);
+			json.put("person", c.getId());
+			json.put("menge", Integer.parseInt(request.getParameter("numberTZ")));
+			
+			jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/update.json",  jsonBestellung);
+
+			
+			//Post
+			
+//			jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/person/save.json",  jsonBestellung);
+
+			//http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/person/save.json
+			
+			c.setMengeA(Integer.parseInt(request.getParameter("numberZeitschriftA")));
+			c.setMengeB(Integer.parseInt(request.getParameter("numberZeitschriftB")));
+			c.setMengeT(Integer.parseInt(request.getParameter("numberTZ")));
 			
 			// Session neu setzen
 			request.getSession().setAttribute("currentCustomer", c);

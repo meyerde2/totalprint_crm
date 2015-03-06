@@ -105,7 +105,7 @@ public class PrivatkundenController {
 				// ToDo: 
 				// json.put("kuendigungZum", request.getParameter("dateUntil").toString());
 				
-				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/update.json",  json);
+				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/debitor/update.json",  json);
 				
 				ActivityDAO activityDAO = (ActivityDAO) context.getBean("activityService");
 				
@@ -189,7 +189,7 @@ public class PrivatkundenController {
 				
 				json.put("id", c.getId());
 
-				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/update.json",  json);
+				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/person/update.json",  json);
 					
 			}
 
@@ -209,14 +209,14 @@ public class PrivatkundenController {
 
 				jsonDebi.put("abonnement", true);
 
-				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/update.json",  jsonDebi);
+				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/debitor/update.json",  jsonDebi);
 				
 			}else{
 				jsonDebi.put("id", c.getDebitorId());
 
 				jsonDebi.put("abonnement", true);
 
-				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/update.json",  jsonDebi);
+				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/debitor/update.json",  jsonDebi);
 			}
 			
 			c.setAbonnent(true);

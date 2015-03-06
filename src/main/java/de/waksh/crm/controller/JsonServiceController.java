@@ -45,9 +45,7 @@ public class JsonServiceController {
 		//JsonDAO jsonDAO = (JsonDAO) context.getBean("jsonServiceBean");
 		
 		JSONObject jObjDebitor = new JSONObject();
-    
-
-			
+   
 			jObjDebitor.put("class", "sasa");
 			jObjDebitor.put("id", "sasa");
 			jObjDebitor.put("lieferplz", "sasa");

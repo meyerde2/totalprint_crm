@@ -59,8 +59,6 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 				request.getParameter("name"), request.getParameter("vorname"), 
 				request.getParameter("firma"), request.getParameter("kundenart"), request.getParameter("ort"));
 		
-
-
 		// Json einlesen
 		// http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/show/1.json
 		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
@@ -113,7 +111,7 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 			// all:  http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/show/.json
 			
 			
-			URI uri = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/show/" + id + ".json");
+			URI uri = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/person/show/" + id + ".json");
 			JSONObject jsonObject =new JSONObject(new JSONTokener(new InputStreamReader(uri.toURL().openStream(),"UTF-8")));
 
 			
@@ -136,7 +134,7 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 			*/
 
 			
-			URI uriDebitor = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/show/" + debitorId + ".json");
+			URI uriDebitor = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/debitor/show/" + debitorId + ".json");
 		//old	JSONTokener tokenerDebitor = new JSONTokener(uriDebitor.toURL().openStream());
 			
 			JSONObject jsonObjDebitor =new JSONObject(new JSONTokener(new InputStreamReader(uriDebitor.toURL().openStream(),"UTF-8")));
@@ -145,7 +143,7 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 			JSONObject objKundenart = (JSONObject) jsonObjDebitor.get("kennzeichen");
 			JSONObject objKennzeichen = jsonObjDebitor.getJSONObject("kennzeichen");
 			
-			// ToDo: Auf das ERP-Update warten und überprüfen, ob die Bezeichner verändert worden.
+			// ToDo: Auf das Update warten und überprüfen, ob die Bezeichner verändert worden.
 		
 			if (objKundenart.get("name").equals("Businesskunde")){
 				kundenart ="Geschäftskunde";
