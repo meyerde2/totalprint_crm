@@ -26,6 +26,8 @@
 	
 	<link rel="icon" type="image/png" href="/crm/resources/images/favicon.png"></link>
 	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" ></meta>
+	
 	
 	<style type="text/css">
 		@import url('/crm/resources/css/crmStyle.css');

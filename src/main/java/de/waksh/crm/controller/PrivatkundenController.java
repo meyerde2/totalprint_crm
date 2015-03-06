@@ -2,6 +2,7 @@ package de.waksh.crm.controller;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -90,29 +91,42 @@ public class PrivatkundenController {
 
 		}
 		
-			//ToDo!!
+			//ToDo Datum wird nicht mitübertragen, ist das überhaupt im ERP-System?!!
 
-		JSONObject json = new JSONObject();
-		json.put("id", c.getId());
-	
+
 		//person
 		if (c != null){
 			
-				c.setKontoinhaber(request.getParameter("kontoinhaber"));
-
-				json.put("iBAN", request.getParameter("kontoinhaber").toString());
+			JSONObject json = new JSONObject();
+				json.put("id", c.getDebitorId());
+			
 				c.setAbonnent(false);
 				json.put("abonnement", false);
 				// ToDo: 
-				json.put("kuendigungZum", "");
+				// json.put("kuendigungZum", request.getParameter("dateUntil").toString());
 				
 				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/update.json",  json);
+				
+				ActivityDAO activityDAO = (ActivityDAO) context.getBean("activityService");
+				
+	
+					java.util.Calendar cal = java.util.Calendar.getInstance();
+					java.util.Date utilDate = cal.getTime();
+					java.sql.Date sqlDate = new Date(utilDate.getTime());
+					
+
+					Activity a = new Activity(0, c.getId(), sqlDate,
+							1, 3,
+							2, "automatisiert generiert...");
+					activityDAO.insertActivity(a);
+
+			
 				
 			// Session neu setzen
 			request.getSession().setAttribute("currentCustomer", c);
 		}
 		
-		return "/privatkunden/abonnementKuendigen";
+		return "/privatkunden/pStammdaten";
 	}
 	
 	
@@ -209,6 +223,16 @@ public class PrivatkundenController {
 			
 			// Session neu setzen
 			request.getSession().setAttribute("currentCustomer", c);
+
+			ActivityDAO activityDAO = (ActivityDAO) context.getBean("activityService");
+
+			java.util.Calendar cal = java.util.Calendar.getInstance();
+			java.util.Date utilDate = cal.getTime();
+			java.sql.Date sqlDate = new Date(utilDate.getTime());
+
+			Activity a = new Activity(0, c.getId(), sqlDate, 1, 3, 1,
+					"automatisiert generiert...");
+			activityDAO.insertActivity(a);
 		}
 
 		return "/privatkunden/pStammdaten";

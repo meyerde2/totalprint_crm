@@ -1,5 +1,5 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="body">
 
@@ -63,8 +63,13 @@
 							</div>
 							<div class="panel-footer">
 								<div class="panelStammdaten">
-									<a href="/crm/privatkunden/aboAbschliessen" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span> Abonnement abschließen</a>
-									<a href="/crm/privatkunden/aboKuendigen" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-remove"></span> Abonnement kündigen</a>
+								<c:if test="${sessionScope.currentCustomer.isAbonnent == false}">
+								<a href="/crm/privatkunden/aboAbschliessen" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span> Abonnement abschließen</a>
+								</c:if>
+								<c:if test="${sessionScope.currentCustomer.isAbonnent == true}">
+								<a href="/crm/privatkunden/aboKuendigen" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-remove"></span> Abonnement kündigen</a>
+								</c:if>
+	
 								</div>
 							</div>
 						</div>

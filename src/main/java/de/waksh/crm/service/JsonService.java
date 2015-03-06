@@ -39,14 +39,14 @@ public class JsonService implements JsonDAO{
 	        conn.setRequestProperty("Content-Type", "application/json");
 	        conn.setRequestProperty("Accept", "application/json");
 	        conn.setRequestProperty("charset", "UTF-8");
-	        
+
 	        OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
 	        
 			osw.write(obj.toString());
 	        osw.flush();
 	        osw.close();
-		    // System.err.println(connection.getResponseCode());
-		    //System.out.println(conn.getResponseMessage());
+		     System.err.println(conn.getResponseCode());
+		    System.out.println(conn.getResponseMessage());
 		    
 		    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		    StringBuilder sb = new StringBuilder();

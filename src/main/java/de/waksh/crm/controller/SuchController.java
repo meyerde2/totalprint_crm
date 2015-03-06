@@ -2,6 +2,7 @@ package de.waksh.crm.controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -106,18 +107,23 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 		try {
 			// Json einlesen
 			// all:  http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/show/.json
+			
+			
 			URI uri = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/show/" + id + ".json");
-			JSONTokener tokener = new JSONTokener(uri.toURL().openStream());
-			JSONObject jsonObject = new JSONObject(tokener);
+			JSONObject jsonObject =new JSONObject(new JSONTokener(new InputStreamReader(uri.toURL().openStream(),"UTF-8")));
+
+			
+			// old JSONTokener tokener = new JSONTokener(uri.toURL().openStream());
+			// old JSONObject jsonObject = new JSONObject(tokener);
+			
+			
 			JSONObject objAnrede = (JSONObject) jsonObject.get("anrede");
 			
 			JSONArray jsonDebitor =(JSONArray) jsonObject.get("debitor");
-			System.out.println("array..." + jsonDebitor);
 			
 			
 			int debitorId = Integer.parseInt(jsonDebitor.getJSONObject(0).get("id").toString());
 			
-			System.out.println("site " + debitorId);
 			
 			/*JSONArray arr = (JSONArray) jsonDebitor.get(0); 
 			arr.get(0);
@@ -127,8 +133,11 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 
 			
 			URI uriDebitor = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/show/" + debitorId + ".json");
-			JSONTokener tokenerDebitor = new JSONTokener(uriDebitor.toURL().openStream());
-			JSONObject jsonObjDebitor = new JSONObject(tokenerDebitor);
+		//old	JSONTokener tokenerDebitor = new JSONTokener(uriDebitor.toURL().openStream());
+			
+			JSONObject jsonObjDebitor =new JSONObject(new JSONTokener(new InputStreamReader(uriDebitor.toURL().openStream(),"UTF-8")));
+			
+			// old JSONObject jsonObjDebitor = new JSONObject(tokenerDebitor);
 			JSONObject objKundenart = (JSONObject) jsonObjDebitor.get("kennzeichen");
 			JSONObject objKennzeichen = jsonObjDebitor.getJSONObject("kennzeichen");
 			
