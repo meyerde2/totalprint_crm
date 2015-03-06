@@ -89,8 +89,6 @@ public class CustomerService implements CustomerDAO {
 				}
 			}
 		}
-		
-		
 	}
 
 	public ArrayList<Customer> getAllCustomers() {
@@ -103,7 +101,8 @@ public class CustomerService implements CustomerDAO {
 			// Json einlesen
 			// all:  http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/show/.json
 			URI uri = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/.json");
-			JSONTokener tokener = new JSONTokener(uri.toURL().openStream());
+			JSONTokener tokener = new JSONTokener(new InputStreamReader(uri.toURL().openStream(),"UTF-8"));
+			//JSONTokener tokener = new JSONTokener(uri.toURL().openStream());
 		
 			JSONArray jsonArray = new JSONArray(tokener);
 			
@@ -127,7 +126,7 @@ public class CustomerService implements CustomerDAO {
 					//http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/show/1.json
 					
 					URI uriDebitor = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/show/" + id + ".json");
-					JSONTokener tokenerDebitor = new JSONTokener(uriDebitor.toURL().openStream());
+					JSONTokener tokenerDebitor = new JSONTokener(new InputStreamReader(uriDebitor.toURL().openStream(),"UTF-8"));
 					JSONObject jsonObjDebitor = new JSONObject(tokenerDebitor);
 					JSONObject objKennzeichen = jsonObjDebitor.getJSONObject("kennzeichen");
 					//JSONArray jsonArrayRechnung =(JSONArray) jsonObject.get("rechnung");
@@ -140,21 +139,21 @@ public class CustomerService implements CustomerDAO {
 							Integer.parseInt(jsonObject.get("id").toString()),
 							Integer.parseInt(jsonObjDebitor.get("id").toString()),
 							objAnrede.get("name").toString(),
-							convertFromUTF8(jsonObject.get("nachname").toString()),
-							convertFromUTF8(jsonObject.get("vorname").toString()),
-							convertFromUTF8(jsonObject.get("adresse").toString()), 
-							convertFromUTF8(jsonObject.get("plz").toString()), 
-							convertFromUTF8(jsonObject.get("ort").toString()), 
-							convertFromUTF8(jsonObject.get("firma").toString()), 
+							jsonObject.get("nachname").toString(),
+							jsonObject.get("vorname").toString(),
+							jsonObject.get("adresse").toString(), 
+							jsonObject.get("plz").toString(),
+							jsonObject.get("ort").toString(), 
+							jsonObject.get("firma").toString(), 
 							"abwStrasse", 
 							"abwPlz", 
 							"abwOrt",
-							convertFromUTF8(jsonObject.get("iBAN").toString()),
-							convertFromUTF8(jsonObject.get("bIC").toString()),
-							convertFromUTF8(jsonObject.get("kontoinhaber").toString()),
-							convertFromUTF8(jsonObject.get("bank").toString()),
-							convertFromUTF8(jsonObject.get("email").toString()),
-							convertFromUTF8(objKennzeichen.get("name").toString()),	// isPrivatkunde
+							jsonObject.get("iBAN").toString(),
+							jsonObject.get("bIC").toString(),
+							jsonObject.get("kontoinhaber").toString(),
+							jsonObject.get("bank").toString(),
+							jsonObject.get("email").toString(),
+							objKennzeichen.get("name").toString(),	// isPrivatkunde
 							(Boolean)jsonObjDebitor.get("abonnement"), // isAbonnent
 							1, // Rechnungsart
 							0, 0, 0); // Mengen

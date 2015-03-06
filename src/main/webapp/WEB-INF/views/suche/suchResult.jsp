@@ -1,16 +1,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
 <tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="body">
+	
 
 		<title>Suche</title>
 
 		<div class="body">
 			<!-- ToDo:
-	Die Suchtreffer sollen in einer Liste mit 20 Einträgen ausgegeben werden. Bei mehr Treffern muss die Möglichkeit gegeben werden Vor und Zurück zu blättern.
+	Die Suchtreffer sollen in einer Liste mit 20 EintrÃ¤gen ausgegeben werden. Bei mehr Treffern muss die MÃ¶glichkeit gegeben werden Vor und ZurÃ¼ck zu blÃ¤ttern.
 	Die Auswahlliste besteht aus: ID, Name, Vorname, Firma, PK/GK Kennzeichen
-	Der Kunde wird durch Doppelklick selektiert und der Benutzer wird auf die Stammdatenübersicht der Geschäftskunden oder Privatkunden geleitet.
+	Der Kunde wird durch Doppelklick selektiert und der Benutzer wird auf die StammdatenÃ¼bersicht der GeschÃ¤ftskunden oder Privatkunden geleitet.
 
  -->
 			<div class="row">
@@ -46,11 +50,11 @@
 								<td>${customer.vorname}</td>
 								<td>${customer.name}</td>
 								<td>${customer.ort}</td>
-								<td>${customer.kundenart == 'Businesskunde' ? 'Geschäftskunde' : 'Privatkunde'}</td>
+								<td>${customer.kundenart == 'Businesskunde' ? 'GeschÃ¤ftskunde' : 'Privatkunde'}</td>
 								<td>${customer.isAbonnent == true ? 'ja' : 'nein'}</td>
 								<td>
 								<a href="/crm/suche/${customer.id}" class="btn btn-primary btn-sm">
-						        	<span class="glyphicon glyphicon-zoom-in"></span> auswählen
+						        	<span class="glyphicon glyphicon-zoom-in"></span> auswÃ¤hlen
 						        </a>
 								</td>
 							</tr>

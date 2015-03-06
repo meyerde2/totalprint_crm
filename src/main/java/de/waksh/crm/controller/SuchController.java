@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -38,9 +39,12 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = { "/", "/home", "/crm/", "/suche" }, method = RequestMethod.GET)
-	public String privatkunden(Model model) {
+	public String privatkunden(Model model, HttpSession session) {
 		logger.info("Suche!");
-		
+		System.out.println(session.getAttribute("loggedIn"));
+		System.out.println(session.getAttributeNames());
+		model.addAttribute("allAttributes", session.getAttributeNames());
+		model.addAttribute("getId", session.getId());
 		return "/suche/suche";
 	}
 	
@@ -153,20 +157,20 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 					Integer.parseInt(jsonObject.get("id").toString()),
 					Integer.parseInt(jsonObjDebitor.get("id").toString()),
 					objAnrede.get("name").toString(),
-					convertFromUTF8(jsonObject.get("nachname").toString()),
-					convertFromUTF8(jsonObject.get("vorname").toString()),
-					convertFromUTF8(jsonObject.get("adresse").toString()), 
-					convertFromUTF8(jsonObject.get("plz").toString()), 
-					convertFromUTF8(jsonObject.get("ort").toString()), 
-					convertFromUTF8(jsonObject.get("firma").toString()), 
-					convertFromUTF8(jsonObjDebitor.get("lieferadresse").toString()), 
-					convertFromUTF8(jsonObjDebitor.get("lieferPlz").toString()), 
-					convertFromUTF8(jsonObjDebitor.get("lieferOrt").toString()), 
-					convertFromUTF8(jsonObject.get("iBAN").toString()),
-					convertFromUTF8(jsonObject.get("bIC").toString()),
-					convertFromUTF8(jsonObject.get("kontoinhaber").toString()),
-					convertFromUTF8(jsonObject.get("bank").toString()),
-					convertFromUTF8(jsonObject.get("email").toString()),
+					jsonObject.get("nachname").toString(),
+					jsonObject.get("vorname").toString(),
+					jsonObject.get("adresse").toString(), 
+					jsonObject.get("plz").toString(), 
+					jsonObject.get("ort").toString(), 
+					jsonObject.get("firma").toString(), 
+					jsonObjDebitor.get("lieferadresse").toString(), 
+					jsonObjDebitor.get("lieferPlz").toString(), 
+					jsonObjDebitor.get("lieferOrt").toString(), 
+					jsonObject.get("iBAN").toString(),
+					jsonObject.get("bIC").toString(),
+					jsonObject.get("kontoinhaber").toString(),
+					jsonObject.get("bank").toString(),
+					jsonObject.get("email").toString(),
 					kundenart,	// isPrivatkunde
 					(Boolean)jsonObjDebitor.get("abonnement"),
 					1, // Rechnungsart
