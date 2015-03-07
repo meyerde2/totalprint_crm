@@ -80,15 +80,68 @@ public class WerbekampagnenController {
 		KampagnenDAO kampagnenDAO = (KampagnenDAO) context.getBean("kampagnenService");
 		WerbekampagnenEntity k = kampagnenDAO.getKampagneById(id);
 		if (k.getResonanz() > 0){
-			double gesamt = ( (0.33* (k.getUmsatz()/k.getKosten())) + (0.33* (k.getBudget()/k.getKosten())) + (0.33* k.getResonanz()));
-			int status= 1;
+		//	double gesamt = ( (0.33* (k.getUmsatz()/k.getKosten())) + (0.33* (k.getBudget()/k.getKosten())) + (0.33* k.getResonanz()));
+		
+			int gesamt = 0;
+			double gewinn = 0;
+			gewinn = k.getUmsatz() - k.getKosten();
+			
+			if (gewinn > (k.getKosten() * 1.1) && gewinn > 0 ){
+				//$(".gewinn #green").addClass("active");
+				gesamt = gesamt +3;
+			}else if(gewinn < (gewinn * 1.1) && gewinn > 0){
+				//(".gewinn #orange").addClass("active");
+				gesamt = gesamt +2;
+			}else{
+				//$(".gewinn #red").addClass("active");
+				gesamt = gesamt +1;
+			}
+			
+			
+			if (k.getBudget()> (k.getKosten() * 1.1) && k.getBudget() > 0 ){
+				//$(".budget #green").addClass("active");
+				gesamt = gesamt +3;
+			}else if(k.getBudget() < (k.getBudget() * 1.1) && k.getBudget() > 0){
+				//$(".budget #orange").addClass("active");
+				gesamt = gesamt +2;
+
+			}else{
+				//$(".budget #red").addClass("active");
+				gesamt = gesamt +1;
+			}
+			
+			if (k.getResonanz() > 3 ){
+				//$(".resonanz #green").addClass("active");
+				gesamt = gesamt +3;
+			}else if(k.getResonanz() > 1){
+//				$(".resonanz #orange").addClass("active");
+				gesamt = gesamt +2;
+			}else{
+				//$(".resonanz #red").addClass("active");
+				gesamt = gesamt +1;
+			}
+			
+			int status= 0;
+			
+			if (gesamt > 7  ){
+				status = 3;
+			}else if(gesamt > 4){
+				status = 2;
+			}else{
+				status = 1;
+			}
+			
 			k.setStatus(status);
 		}
 
+		
+		
 		model.addAttribute("kampagne", k);
 		
+		// ToDo: update status
+		kampagnenDAO.updateKampagnenStatusById(k);
+		
 		return "/werbekampagnen/kampagneAuswerten";
-		//return "/werbekampagnen/pie";
 
 	}
 	
@@ -141,15 +194,57 @@ public class WerbekampagnenController {
 			
 		}
 		
-		double gesamt = ( (0.33* (k.getUmsatz()/k.getKosten())) + (0.33* (k.getBudget()/k.getKosten())) + (0.33* k.getResonanz()));
+		int gesamt = 0;
+		double gewinn = 0;
+		gewinn = k.getUmsatz() - k.getKosten();
+		
+		if (gewinn > (k.getKosten() * 1.1) && gewinn > 0 ){
+			//$(".gewinn #green").addClass("active");
+			gesamt = gesamt +3;
+		}else if(gewinn < (gewinn * 1.1) && gewinn > 0){
+			//(".gewinn #orange").addClass("active");
+			gesamt = gesamt +2;
+		}else{
+			//$(".gewinn #red").addClass("active");
+			gesamt = gesamt +1;
+		}
+		
+		
+		if (k.getBudget()> (k.getKosten() * 1.1) && k.getBudget() > 0 ){
+			//$(".budget #green").addClass("active");
+			gesamt = gesamt +3;
+		}else if(k.getBudget() < (k.getBudget() * 1.1) && k.getBudget() > 0){
+			//$(".budget #orange").addClass("active");
+			gesamt = gesamt +2;
+
+		}else{
+			//$(".budget #red").addClass("active");
+			gesamt = gesamt +1;
+		}
+		
+		if (k.getResonanz() > 3 ){
+			//$(".resonanz #green").addClass("active");
+			gesamt = gesamt +3;
+		}else if(k.getResonanz() > 1){
+//			$(".resonanz #orange").addClass("active");
+			gesamt = gesamt +2;
+		}else{
+			//$(".resonanz #red").addClass("active");
+			gesamt = gesamt +1;
+		}
+		
 		int status= 0;
 		
-		if(gesamt > 5){
-			
+		if (gesamt > 7  ){
+			status = 3;
+		}else if(gesamt > 4){
+			status = 2;
+		}else{
+			status = 1;
 		}
 		
 		k.setStatus(status);
-		
+
 		kampagnenDAO.updateKampagneById(k);
 		model.addAttribute("kampagne", k);
 		
@@ -216,7 +311,7 @@ public class WerbekampagnenController {
 		KampagnenDAO kampagnenDAO = (KampagnenDAO) context.getBean("kampagnenService");
 		kampagnenDAO.insertKampagne(kampagne);
 		
-		return "/werbekampagnen/kampagnenUebersicht";
+		return "redirect:/werbekampagnen/kampagnenUebersicht";
 	}
 	
 	@RequestMapping(value = "/werbekampagnen/submitKampagneUpdaten", method = RequestMethod.POST)

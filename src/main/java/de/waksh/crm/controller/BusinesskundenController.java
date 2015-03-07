@@ -1,5 +1,11 @@
 package de.waksh.crm.controller;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -10,7 +16,10 @@ import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -59,7 +68,7 @@ public class BusinesskundenController {
 	}
 	
 	@RequestMapping(value = "/businesskunden/submitBestellung", method = RequestMethod.POST)
-	public String pAddAbo(HttpServletRequest request, Model model) {
+	public String pAddAbo(HttpServletRequest request, Model model) throws URISyntaxException, JSONException, UnsupportedEncodingException, MalformedURLException, IOException {
 		
 		logger.info("bestellung-Page !");
 		
@@ -128,31 +137,60 @@ public class BusinesskundenController {
 			ArtikelVersion befüllen (artikel_id, erscheinungsdatum)
 			Bestellungen befüllen (artikel_versionen_id, person_id, menge)
 			*/
-
-			// ToDo: Get alle IDs aus Bestellungen, wenn keine drin sind, dann Post, sonst die einzlnen auslesen und putten
+			int id2 = c.getId();
 			
+			System.out.println("getCID:  " + c.getId());
+			String url2 = "http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/person/show/" + id2 + ".json";
+			System.out.println("url2:  " + url2);
+			// ToDo: Get alle IDs aus Bestellungen, wenn keine drin sind, dann Post, sonst die einzlnen auslesen und putten
+			URI uri2 = new URI(url2);
+			JSONObject jsonObject =new JSONObject(new JSONTokener(new InputStreamReader(uri2.toURL().openStream(),"UTF-8")));
+
+			JSONArray jsonBestellungen =(JSONArray) jsonObject.get("bestellungen");
+			
+			for(int i = 0; i< jsonBestellungen.length(); i++){
+
+				int bestId = Integer.parseInt(jsonBestellungen.getJSONObject(i).get("id").toString());
+				URI uriBest = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/show/" + bestId + ".json");
+				JSONObject jsonBest =new JSONObject(new JSONTokener(new InputStreamReader(uriBest.toURL().openStream(),"UTF-8")));
+				JSONObject jArtikelVersion = (JSONObject) jsonBest.get("artikelVersionen");
+				
+				System.out.println("artikelVersionen:  " + jArtikelVersion.get("id"));
+
+				jArtikelVersion.get("id");
+				
+				JSONObject jsonBestUpdate = new JSONObject();
+				if (Integer.parseInt(jArtikelVersion.get("id").toString()) == 1){
+
+					jsonBestUpdate.put("id", bestId);
+					jsonBestUpdate.put("person", c.getId());
+					jsonBestUpdate.put("menge", Integer.parseInt(request.getParameter("numberZeitschriftA")));
+					
+					jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/update.json",  jsonBestUpdate);
+					
+				}else if (Integer.parseInt(jArtikelVersion.get("id").toString()) == 2){
+
+					jsonBestUpdate.put("id", bestId);
+					jsonBestUpdate.put("person", c.getId());
+					jsonBestUpdate.put("menge", Integer.parseInt(request.getParameter("numberZeitschriftB")));
+					
+					jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/update.json",  jsonBestUpdate);
+
+					
+				}else if (Integer.parseInt(jArtikelVersion.get("id").toString()) == 3){
+
+					jsonBestUpdate.put("id", bestId);
+					jsonBestUpdate.put("person", c.getId());
+					jsonBestUpdate.put("menge", Integer.parseInt(request.getParameter("numberTZ")));
+					
+					jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/update.json",  jsonBestUpdate);
+
+				}
+												
+			}
 			
 			// ToDo: Unterscheidung, ob schon vorhanden, dann put oder nciht vorhanden dann: post
-			json.put("id", 1);
-			json.put("person", c.getId());
-			json.put("menge", Integer.parseInt(request.getParameter("numberZeitschriftA")));
-			
-			jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/update.json",  jsonBestellung);
-			
-			json.put("id", 2);
-			json.put("person", c.getId());
-			json.put("menge", Integer.parseInt(request.getParameter("numberZeitschriftA")));
-			
-			jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/update.json",  jsonBestellung);
 
-			
-			json.put("id", 3);
-			json.put("person", c.getId());
-			json.put("menge", Integer.parseInt(request.getParameter("numberTZ")));
-			
-			jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/update.json",  jsonBestellung);
-
-			
 			//Post
 			
 //			jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/person/save.json",  jsonBestellung);
@@ -172,7 +210,7 @@ public class BusinesskundenController {
 			java.util.Date utilDate = cal.getTime();
 			java.sql.Date sqlDate = new Date(utilDate.getTime());
 
-			Activity a = new Activity(0, c.getId(), sqlDate, 1, 3, 1,
+			Activity a = new Activity(0, c.getId(), sqlDate, 1, 3, 7,
 					"automatisiert generiert...");
 			activityDAO.insertActivity(a);
 		}

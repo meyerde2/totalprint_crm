@@ -8,7 +8,7 @@
 
 		<title>Werbekampagnen</title>
 
-			<h1>Übersicht</h1>
+			<h1>Werbekampagnen - Übersicht</h1>
 
 			<div class="row">
 				<div class="panel panel-primary filterable">
@@ -42,7 +42,21 @@
 								
 								<td><fmt:formatDate pattern="dd.MM.YYYY"  value="${kampagne.dateBeginn}" /> - <fmt:formatDate pattern="dd.MM.YYYY"  value="${kampagne.dateUntil}"  /> </td>
 								<td>${kampagne.grund}</td>
-								<td><span class="label label-warning">mittel</span></td>
+								
+								<td>
+								<c:if test="${kampagne.status == 3}">
+									<span class="label label-success">gut</span>
+								</c:if> 
+								<c:if test="${kampagne.status == 2}">
+									<span class="label label-warning">mittel</span>
+								</c:if> 
+								<c:if test="${kampagne.status == 1}">
+									<span class="label label-danger">schlecht</span>
+								</c:if> 
+								<c:if test="${kampagne.status == 0}">
+									<span class="label label-default">nicht ausgewertet</span>
+								</c:if> 
+								</td>
 								<td>
 								<a href="/crm/werbekampagnen/${kampagne.kampagnenId}" title="bearbeiten" class="btn btn-primary btn-sm">
 						        	<span class="glyphicon glyphicon-pencil"></span> 

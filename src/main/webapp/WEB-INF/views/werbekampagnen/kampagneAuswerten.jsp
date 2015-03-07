@@ -394,13 +394,14 @@ jQuery(document).ready(function () {
 	
 	var gesamt = $("#gesamt").text();
 
-	if (gesamt > 3 ){
+	if (gesamt > 2 ){
 		$(".gesamt #green").addClass("active");
 	}else if(gesamt > 1){
 		$(".gesamt #orange").addClass("active");
 	}else{
 		$(".gesamt #red").addClass("active");
 	}
+	
 	
 	
 	

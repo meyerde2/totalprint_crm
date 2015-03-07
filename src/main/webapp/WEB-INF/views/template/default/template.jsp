@@ -4,6 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*" %>
 
+
+
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
@@ -65,6 +69,9 @@
 		</c:choose>
 */
 	-->	
+	
+
+
 		
 		<!-- Footer Page -->
 		<div class="footerPage" >

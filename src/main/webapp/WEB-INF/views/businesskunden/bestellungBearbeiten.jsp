@@ -35,7 +35,7 @@
 										<h4 class="list-group-item-heading">Step 4</h4>
 										<p class="list-group-item-text">Anzahl</p>
 								</a></li>
-								<li class="disabled"><a href="#step-5" id="step-5A">
+								<li class="disabled"><a href="#step-5">
 										<h4 class="list-group-item-heading">Step 5</h4>
 										<p class="list-group-item-text">Bestätigung</p>
 								</a></li>
@@ -67,7 +67,7 @@
 									</tr>
 								</table>
 
-								<button id="activate-step-2" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></button>
+								<a id="activate-step-2" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></a>
 
 
 							</div>
@@ -124,7 +124,7 @@
 									</tr>
 
 								</table>
-								<button id="activate-step-3" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></button>
+								<a id="activate-step-3" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></a>
 							</div>
 						</div>
 					</div>
@@ -156,7 +156,7 @@
 									<tr>
 										<td><label>Abweichende Lieferadresse</label></td>
 										<td><input type="checkbox" class="checkbox-inline"
-											name="abwLieferadresse" id="abwLieferadresse" value="ja">
+											name="abwLieferadresseCheck" id="abwLieferadresseCheck" value="ja">
 										</td>
 									</tr>
 
@@ -176,7 +176,7 @@
 											id="abwort" placeholder="Ort" value="${sessionScope.currentCustomer.abwOrt}"></td>
 									</tr>
 								</table>
-								<button id="activate-step-4" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></button>
+								<a id="activate-step-4" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></a>
 							</div>
 						</div>
 					</div>
@@ -207,7 +207,7 @@
 											class="form-control" name="numberTZ" id="numberTZ" placeholder="Anzahl" value="${sessionScope.currentCustomer.mengeT}"></td>
 									</tr>
 								</table>
-								<button id="activate-step-5" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></button>
+								<a id="activate-step-5" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></a>
 							</div>
 						</div>
 					</div>
@@ -325,14 +325,13 @@
 		</div>
 		<script>
 		
-		
 		jQuery.validator.setDefaults({
 	  		  debug: false,
 	  		  success: "valid",
 	  		  focusCleanup: false
 	  		});
-	  		$( "#abschliessen" ).validate({
-	 			
+	  		$("#abschliessen").validate({
+ 	 			
 	  		  rules: {
 	  			iban: {
 	    		      required: {
@@ -375,26 +374,26 @@
 		  		  	abwstrasse: {
 				    	required: {
 				    		depends: function(element) {
-		    			          return $("#abwLieferadresse").is(":checked");
+		    			          return ($("#step-3 input:checked").val() =="ja" ) ? true : false
 		    			    }
 				    	}
 				   	},
 				   	abwplz: {
 				   		required: {
 				    		depends: function(element) {
-		    			          return $("#abwLieferadresse").is(":checked");
+				    			 return ($("#step-3 input:checked").val() =="ja" ) ? true : false
 		    			    }
 				    	},
 					   	digits: {
 				    		depends: function(element) {
-		    			          return $("#abwLieferadresse").is(":checked");
+				    			 return ($("#step-3 input:checked").val() =="ja" ) ? true : false
 		    			    }
 				    	}
 				   	},
 				   	abwort: {
 				   		required: {
 				    		depends: function(element) {
-		    			          return $("#abwLieferadresse").is(":checked");
+				    			 return ($("#step-3 input:checked").val() =="ja" ) ? true : false
 		    			    }
 				    	}
 				   	}
@@ -409,6 +408,7 @@
 	  			  }
 	  		  }
 	  		});
+	  		 
 	  		
 			$(document).ready(function() {
 
@@ -465,8 +465,7 @@
 									$(this).remove();
 								});
 
-								$('#activate-step-3')
-				                .on('click', function(e) {
+								$('#activate-step-3').on('click', function(e) {
 				                    
 				                        // Wenn die Elemente in dem Div keine error Label danach haben, next, ansonsten nicht!
 				                        $("#abschliessen").validate({ });
@@ -477,7 +476,7 @@
 				                        		$("#kontoinhaber-error").hasClass("valid")
 				                        ){
 				                        	$('ul.setup-panel li:eq(2)').removeClass('disabled');
-					                        $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+					                        $('ul.setup-panel li a[href="#step-3"]').click();
 					                        $(this).remove();
 				                        }else{
 				                        }
@@ -488,27 +487,51 @@
 					                        $(this).remove();
 				                        }
 				                      
-				                    })
+				                  });
+								
 								$('#activate-step-4').on('click', function(e) {
-	                	
-					                	$("#abschliessen").validate({ });
-					                	
-					                    	if ($("#abwLieferadresse").is(":checked") &&
-					                    			$("#abwstrasse-error").hasClass("valid") && 
-					                        		$("#abwplz-error").hasClass("valid")&& 
-					                        		$("#abwort-error").hasClass("valid")
-					                  			){
-					                    		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
-						                        $('ul.setup-panel li a[href="#step-4"]').trigger('click');
-						                        $(this).remove();
-					                    	}
-				
-					                    	if (!$("#abwLieferadresse").is(":checked")){
-					                    		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
-						                        $('ul.setup-panel li a[href="#step-4"]').trigger('click');
-						                        $(this).remove();
-					                    	}
+									
+									 
+									 
+	                				alert("hello step 4");
+	                				$("input:checked").val()
+	                				alert($("#step-3 input:checked").val());
+	                				
+			                        $("#abschliessen").validate();
+
+			                        
+	                				if(($("#step-3 input:checked").val() =="ja") &&
+	                    			$("#abwstrasse-error").hasClass("valid") && 
+	                        		$("#abwplz-error").hasClass("valid")&& 
+	                        		$("#abwort-error").hasClass("valid")){
+	                					alert("jooo");
+	                		       		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
+				                        $('ul.setup-panel li a[href="#step-4"]').click();
+				                        $(this).remove();
+	                				}
+	                				
+			                        $("#abschliessen").validate({});
+
+			                    	if ($("#step-3 input:checked").val() =="ja" &&
+			                    			$("#abwstrasse-error").hasClass("valid") && 
+			                        		$("#abwplz-error").hasClass("valid")&& 
+			                        		$("#abwort-error").hasClass("valid")
+			                  			){
+			                    		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
+				                        $('ul.setup-panel li a[href="#step-4"]').click();
+				                        $(this).remove();
+			                    	}else{
+			                   
+			                    	}
+		
+			                    	if ($("#step-3 input:checked").val() != "ja"){
+			                    		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
+				                        $('ul.setup-panel li a[href="#step-4"]').click();
+				                        $(this).remove();
+			                    	}
 				                });
+								
+								
 								$('#activate-step-5').on('click',function(e) {
 									$('ul.setup-panel li:eq(4)').removeClass('disabled');
 									$('ul.setup-panel li a[href="#step-5"]').trigger('click');
@@ -535,16 +558,21 @@
 									$("#tdOwTageszeitung").html($('#numberTZ').val());
 									
 					            	if( $("#abwLieferadresse").is(":checked") == true){	
-
+										alert($('#abwstrasse').val());
 					            		$("#overviewAbwLieferanschrift").show();
+					              		$("#tdAbwStr").html($('#abwstrasse').val());
+										$("#tdAbwPlz").html($('#abwplz').val());
+										$("#tdAbwOrt").html($('#abwort').val());
 					            	}else{
 					            		
 					            		$("#overviewAbwLieferanschrift").hide();
 					            	}
 								});
-								
+ 
 								$('#step-5A').on('click',function(e) {
-		
+									$('ul.setup-panel li:eq(4)').removeClass('disabled');
+									$('ul.setup-panel li a[href="#step-5"]').trigger('click');
+									$(this).remove();
 									
 									if($("input[value='lastschrift']:checked").val()=="lastschrift"){
 										
@@ -567,14 +595,17 @@
 									$("#tdOwTageszeitung").html($('#numberTZ').val());
 									
 					            	if( $("#abwLieferadresse").is(":checked") == true){	
-
+										alert($('#abwstrasse').val());
 					            		$("#overviewAbwLieferanschrift").show();
+					              		$("#tdAbwStr").html($('#abwstrasse').val());
+										$("#tdAbwPlz").html($('#abwplz').val());
+										$("#tdAbwOrt").html($('#abwort').val());
 					            	}else{
 					            		
 					            		$("#overviewAbwLieferanschrift").hide();
 					            	}
 								});
-								
+ 
 								
 					            $('#abbrechen').on('click', function(e) {
 				                	

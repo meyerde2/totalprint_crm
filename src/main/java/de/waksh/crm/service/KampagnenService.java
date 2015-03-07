@@ -259,4 +259,37 @@ public class KampagnenService implements KampagnenDAO{
 		}
 		
 	}
+
+
+
+	@Override
+	public void updateKampagnenStatusById(WerbekampagnenEntity k) {
+
+		String sql =" UPDATE `werbekampagnen_tabelle` "
+				+ " SET	"
+				+ " `status` = ? "
+				+ "WHERE `werbekampagnen_id` = " + k.getKampagnenId()+ ";";
+			
+			Connection conn = null;
+
+			try {
+				conn = dataSource.getConnection();
+				PreparedStatement ps = conn.prepareStatement(sql);
+
+				ps.setInt(1, (int) k.getStatus());
+				 // call executeUpdate to execute our sql update statement
+			    ps.executeUpdate();
+			    ps.close();			
+				
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			} finally {
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+					}
+				}
+			}
+	}
 }

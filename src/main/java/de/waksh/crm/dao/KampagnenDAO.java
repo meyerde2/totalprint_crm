@@ -9,6 +9,7 @@ public interface KampagnenDAO {
 	
 	public WerbekampagnenEntity getKampagneById(int id);
 	public void updateKampagneById(WerbekampagnenEntity k);
+	public void updateKampagnenStatusById(WerbekampagnenEntity k);
 	public void insertKampagne(WerbekampagnenEntity k);
 	
 }

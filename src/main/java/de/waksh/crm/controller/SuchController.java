@@ -3,6 +3,8 @@ package de.waksh.crm.controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.slf4j.Logger;
@@ -27,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import de.waksh.crm.dao.CustomerDAO;
+import de.waksh.crm.dao.JsonDAO;
 import de.waksh.crm.model.Customer;
 import de.waksh.crm.model.Suche;
 
@@ -37,14 +41,25 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
+	 * @throws URISyntaxException 
+	 * @throws IOException 
+	 * @throws MalformedURLException 
+	 * @throws UnsupportedEncodingException 
+	 * @throws JSONException 
 	 */
 	@RequestMapping(value = { "/", "/home", "/crm/", "/suche" }, method = RequestMethod.GET)
-	public String privatkunden(Model model, HttpSession session) {
+	public String privatkunden(Model model, HttpSession session) throws URISyntaxException, JSONException, UnsupportedEncodingException, MalformedURLException, IOException {
 		logger.info("Suche!");
-		System.out.println(session.getAttribute("loggedIn"));
-		System.out.println(session.getAttributeNames());
+	
 		model.addAttribute("allAttributes", session.getAttributeNames());
 		model.addAttribute("getId", session.getId());
+		/*
+		URI uri = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de/user");
+		InputStreamReader is = new InputStreamReader(uri.toURL().openStream(),"UTF-8");
+		System.out.println("testttt");
+		JSONObject jsonObject =new JSONObject(new JSONTokener(is));
+		System.out.println("objek" +  jsonObject);
+		*/
 		return "/suche/suche";
 	}
 	
@@ -54,7 +69,7 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 		if (request.getParameter("cId") != ""){
 			cId = Integer.parseInt(request.getParameter("cId"));
 		}
-		System.out.println("searching id" + request.getParameter("cId"));
+
 		Suche suche = new Suche(cId, 
 				request.getParameter("name"), request.getParameter("vorname"), 
 				request.getParameter("firma"), request.getParameter("kundenart"), request.getParameter("ort"));
@@ -103,43 +118,93 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 	@RequestMapping(value = "/suche/{id}", method = RequestMethod.GET)
 	public String getCustomer( HttpServletRequest request, @PathVariable Integer id, @CookieValue(value = "custId", defaultValue = "111") String name,
 	         HttpServletResponse response, ModelMap model) {
-		logger.info("Suche!");
 		
 		String kundenart ="";
 		try {
 			// Json einlesen
-			// all:  http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/show/.json
-			
 			
 			URI uri = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/person/show/" + id + ".json");
 			JSONObject jsonObject =new JSONObject(new JSONTokener(new InputStreamReader(uri.toURL().openStream(),"UTF-8")));
-
 			
-			// old JSONTokener tokener = new JSONTokener(uri.toURL().openStream());
-			// old JSONObject jsonObject = new JSONObject(tokener);
 			
+			ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+			JsonDAO jsonDAO = (JsonDAO) context.getBean("jsonServiceBean");	
 			
 			JSONObject objAnrede = (JSONObject) jsonObject.get("anrede");
-			
 			JSONArray jsonDebitor =(JSONArray) jsonObject.get("debitor");
+			
+			JSONArray jsonBestellungen =(JSONArray) jsonObject.get("bestellungen");
+
+			ArrayList<Integer> mengen = new ArrayList<Integer>();
+			
+			int mengeA = -1;
+			int mengeB = -1;
+			int mengeTz = -1;
+			
+			for(int i = 0; i< jsonBestellungen.length(); i++){
+
+				int bestId = Integer.parseInt(jsonBestellungen.getJSONObject(i).get("id").toString());
+				URI uriBest = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/show/" + bestId + ".json");
+				JSONObject jsonBest =new JSONObject(new JSONTokener(new InputStreamReader(uriBest.toURL().openStream(),"UTF-8")));
+				JSONObject jArtikelVersion = (JSONObject) jsonBest.get("artikelVersionen");
+				
+				System.out.println("artikelVersionen:  " + jArtikelVersion.get("id"));
+
+				jArtikelVersion.get("id");
+				
+				if (Integer.parseInt(jArtikelVersion.get("id").toString()) == 1){
+					mengeA = Integer.parseInt(jsonBest.get("menge").toString());
+				}else if (Integer.parseInt(jArtikelVersion.get("id").toString()) == 2){
+					mengeB = Integer.parseInt(jsonBest.get("menge").toString());
+				}else if (Integer.parseInt(jArtikelVersion.get("id").toString()) == 3){
+					mengeTz = Integer.parseInt(jsonBest.get("menge").toString());
+				}
+				
+				mengen.add(Integer.parseInt(jsonBest.get("menge").toString()));
+								
+			}
+			
+			if(mengeA == -1){
+				// Post 				
+				JSONObject objBestSave = new JSONObject();
+				
+				objBestSave.put("id", 1);
+				objBestSave.put("person", id);
+				objBestSave.put("menge", 0);
+				mengeA = 0;
+				jsonDAO.saveJsonInErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/save.json",  objBestSave);
+
+			}
+			if(mengeB == -1){
+				// Post 				
+				JSONObject objBestSave = new JSONObject();
+				
+				objBestSave.put("id", 2);
+				objBestSave.put("person", id);
+				objBestSave.put("menge", 0);
+				mengeB = 0;
+				jsonDAO.saveJsonInErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/save.json",  objBestSave);
+
+			}
+			
+			if(mengeTz == -1){
+				// Post 				
+				JSONObject objBestSave = new JSONObject();
+				
+				objBestSave.put("id", 3);
+				objBestSave.put("person", id);
+				objBestSave.put("menge", 0);
+				mengeTz = 0;
+				jsonDAO.saveJsonInErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/save.json",  objBestSave);
+
+			}
 			
 			
 			int debitorId = Integer.parseInt(jsonDebitor.getJSONObject(0).get("id").toString());
-			
-			
-			/*JSONArray arr = (JSONArray) jsonDebitor.get(0); 
-			arr.get(0);
-			System.out.println("debitor json.....??  " + arr.get(0));
-			
-			*/
-
-			
+		
 			URI uriDebitor = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/debitor/show/" + debitorId + ".json");
-		//old	JSONTokener tokenerDebitor = new JSONTokener(uriDebitor.toURL().openStream());
 			
 			JSONObject jsonObjDebitor =new JSONObject(new JSONTokener(new InputStreamReader(uriDebitor.toURL().openStream(),"UTF-8")));
-			
-			// old JSONObject jsonObjDebitor = new JSONObject(tokenerDebitor);
 			JSONObject objKundenart = (JSONObject) jsonObjDebitor.get("kennzeichen");
 			JSONObject objKennzeichen = jsonObjDebitor.getJSONObject("kennzeichen");
 			
@@ -172,7 +237,7 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 					kundenart,	// isPrivatkunde
 					(Boolean)jsonObjDebitor.get("abonnement"),
 					1, // Rechnungsart
-					0, 0, 0); // Mengen
+					mengeA, mengeB, mengeTz); // Mengen
 			
 			request.getSession().setAttribute("currentCustomer", customer);
 

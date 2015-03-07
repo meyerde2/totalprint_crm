@@ -100,7 +100,7 @@ public class CustomerService implements CustomerDAO {
 		try {
 			// Json einlesen
 			// all:  http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/show/.json
-			URI uri = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/.json");
+			URI uri = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/person/.json");
 			JSONTokener tokener = new JSONTokener(new InputStreamReader(uri.toURL().openStream(),"UTF-8"));
 			//JSONTokener tokener = new JSONTokener(uri.toURL().openStream());
 		
@@ -122,19 +122,17 @@ public class CustomerService implements CustomerDAO {
 					int idPerson = Integer.parseInt(jsonObject.get("id").toString());
 					int id= Integer.parseInt(jsonDebitor.getJSONObject(0).get("id").toString());
 					
-					System.out.println("inside");
 					//http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/show/1.json
 					
-					URI uriDebitor = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/show/" + id + ".json");
+					URI uriDebitor = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/debitor/show/" + id + ".json");
 					JSONTokener tokenerDebitor = new JSONTokener(new InputStreamReader(uriDebitor.toURL().openStream(),"UTF-8"));
 					JSONObject jsonObjDebitor = new JSONObject(tokenerDebitor);
 					JSONObject objKennzeichen = jsonObjDebitor.getJSONObject("kennzeichen");
 					//JSONArray jsonArrayRechnung =(JSONArray) jsonObject.get("rechnung");
 					//System.out.println("rechnung   " + jsonArrayRechnung.toString());
+
+
 					
-					// ToDo:  CustomerSearchEntity erstellen
-					
-					// Logik: nur person interpretieren, wenn diese Debitor 1 oder 2 hat, ansonsten überspringen
 					Customer customer = new Customer(
 							Integer.parseInt(jsonObject.get("id").toString()),
 							Integer.parseInt(jsonObjDebitor.get("id").toString()),
