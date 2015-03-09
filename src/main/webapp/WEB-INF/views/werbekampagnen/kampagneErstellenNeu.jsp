@@ -220,8 +220,8 @@
 
 						onShow : function(ct) {
 							this.setOptions({
-								// maxDate:jQuery('#dateUntil').val()?jQuery('#dateUntil').val():false
-								maxDate : false
+								 maxDate:jQuery('#dateUntil').val()?jQuery('#dateUntil').val():false
+								//maxDate : false
 							})
 						},
 						lang : 'de',
@@ -259,8 +259,8 @@
 						onShow : function(ct) {
 
 							this.setOptions({
-								// minDate:jQuery('#dateBeginn').val()?jQuery('#dateBeginn').val():false
-								minDate : false
+								minDate:jQuery('#dateBeginn').val()?jQuery('#dateBeginn').val():false
+								//minDate : {value:'12.03.2015',format:'d.m.Y'}
 							})
 						}
 					});

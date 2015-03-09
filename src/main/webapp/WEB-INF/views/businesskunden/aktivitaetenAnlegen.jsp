@@ -29,8 +29,8 @@
 
 										<div class="form-group">
 											<label for="ma"> Mitarbeitername</label> 
-				 							<input type="text" class="form-control" name="ma" id="ma" value="${sessionScope.user.email}" placeholder="Vorname Name" readonly />
-											<input type="hidden" name="maId" id="maId" value="${sessionScope.user.id}">
+				 							<input type="text" class="form-control" name="ma" id="ma" value="Max Mustermann" placeholder="Vorname Name" readonly />
+											<input type="hidden" name="maId" id="maId" value="1">
 									
 										</div>
 										<div class="form-group">

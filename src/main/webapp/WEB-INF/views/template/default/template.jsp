@@ -23,6 +23,8 @@
 	<script src="/crm/resources/jquery/additional-methods.js"></script>
 	<script src="/crm/resources/jquery/jquery.range.js"></script>
 	<script src="/crm/resources/jquery/canvasjs.js"></script>
+	<script src="/crm/resources/jquery/jquery-simple-pagination-plugin.js"></script>
+	
 		
 	<link href="/crm/resources/css/jquery.range.css" rel="stylesheet" type="text/css"/></link>	
 	<link href="/crm/resources/css/star-rating.css" rel="stylesheet" type="text/css"/></link>

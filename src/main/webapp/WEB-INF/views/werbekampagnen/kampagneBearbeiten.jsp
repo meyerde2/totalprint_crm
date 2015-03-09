@@ -242,24 +242,56 @@ jQuery.validator.setDefaults({
 
 	
 
-$('.datePicker').datetimepicker(
-{
-   lang : 'de',
-   i18n : {
-      de : {
-         months : [ 'Januar', 'Februar', 'März',
-         'April', 'Mai', 'Juni', 'Juli',
-         'August', 'September', 'Oktober',
-         'November', 'Dezember'],
-         dayOfWeek : ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
-      }
-   }
-   ,
-   timepicker : false,
-   format : 'd.m.Y'
-}
-);
+	jQuery('#dateBeginn')
+	.datetimepicker(
+			{
 
+				onShow : function(ct) {
+					this.setOptions({
+						 maxDate:jQuery('#dateUntil').val()?jQuery('#dateUntil').val():false
+						//maxDate : false
+					})
+				},
+				lang : 'de',
+				i18n : {
+					de : {
+						months : [ 'Januar', 'Februar', 'März',
+								'April', 'Mai', 'Juni', 'Juli',
+								'August', 'September', 'Oktober',
+								'November', 'Dezember' ],
+						dayOfWeek : [ "So", "Mo", "Di", "Mi", "Do",
+								"Fr", "Sa" ]
+					}
+				},
+				timepicker : false,
+				format : 'd.m.Y'
+			});
+
+jQuery('#dateUntil')
+	.datetimepicker(
+			{
+
+				i18n : {
+					de : {
+						months : [ 'Januar', 'Februar', 'März',
+								'April', 'Mai', 'Juni', 'Juli',
+								'August', 'September', 'Oktober',
+								'November', 'Dezember' ],
+						dayOfWeek : [ "So", "Mo", "Di", "Mi", "Do",
+								"Fr", "Sa" ]
+					}
+				},
+				timepicker : false,
+				format : 'd.m.Y',
+
+				onShow : function(ct) {
+
+					this.setOptions({
+						minDate:jQuery('#dateBeginn').val()?jQuery('#dateBeginn').val():false
+						//minDate : {value:'12.03.2015',format:'d.m.Y'}
+					})
+				}
+			});
 jQuery(document).ready(function () {
 
 	

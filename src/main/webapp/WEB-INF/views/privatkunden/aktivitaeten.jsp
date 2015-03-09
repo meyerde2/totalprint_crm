@@ -25,26 +25,43 @@
 							<div class="panel-heading">
 								<h3 class="panel-title">Übersicht</h3>
 							</div>
-							<table class="table">
-								<thead>
-									<tr class="filters">
-										<th><input type="text" class="form-control"
-											placeholder="Suche"></th>
-									</tr>
-								</thead>
-								<tbody>
-						
-									<c:forEach var="activity" items="${aList}">
-									
-									<tr>
-										<td><a href="#?aId=${activity.aktivitaetenId}"> <span class="activityH1" id="first"> ${activity.date}
-													|  ${activity.grundBez}</span> <br> <span class="activityH2">${activity.mitarbeiterBez}
-													| ${activity.mediumBez}</span> <br> <span class="activityNotiz">${activity.notiz}.... </span>
-										</a></td>
-									</tr>
-		 							</c:forEach>
-								</tbody>
-							</table>
+							<div id="tableContainer">
+								<table class="table">
+									<thead>
+										<tr class="filters">
+											<th><input type="text" class="form-control"
+												placeholder="Suche"></th>
+										</tr>
+									</thead>
+									<tbody>
+							
+										<c:forEach var="activity" items="${aList}">
+										
+										<tr>
+											<td><a href="#?aId=${activity.aktivitaetenId}"> <span class="activityH1" id="first"> ${activity.date}
+														|  ${activity.grundBez}</span> <br> <span class="activityH2">${activity.mitarbeiterBez}
+														| ${activity.mediumBez}</span> <br> <span class="activityNotiz">${activity.notiz}.... </span>
+											</a></td>
+										</tr>
+			 							</c:forEach>
+									</tbody>
+								</table>
+							 <div id="naviContainerPagination">
+								<div class="my-navigation">
+									<div class="simple-pagination-first"></div>
+									<div class="simple-pagination-previous"></div>
+									<div class="simple-pagination-page-numbers"></div>
+									<div class="simple-pagination-next"></div>
+									<div class="simple-pagination-last"></div>
+								</div>
+								<div class="simple-pagination-page-x-of-x"></div>
+								<div class="simple-pagination-showing-x-of-x"></div>
+								<div>
+									Zeige <select class="simple-pagination-items-per-page"></select> Items pro Seite an.
+								</div>
+					
+							</div>
+							</div>
 						</div>
 
 					</div>
@@ -52,6 +69,8 @@
 
 			</div>
 			
+	
+	
 			<c:forEach var="activity" items="${aList}">
 			
 			<div class="modal ${activity.aktivitaetenId}" id="myModal">
@@ -103,11 +122,15 @@
 
 
 		<script>
-		
+		$('#tableContainer').simplePagination({
+			items_per_page: 5,
+			number_of_visible_page_numbers: 10
+		});
 			$(document)
 					.ready(
 							function() {
 
+							
 								
 								$('table a').click(function() {
 									

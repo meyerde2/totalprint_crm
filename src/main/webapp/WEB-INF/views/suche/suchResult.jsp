@@ -27,6 +27,7 @@
 							</button>
 						</div>
 					</div>
+					<div id="tableContainer">
 					<table class="table">
 						<thead>
 						   <tr class="filters">
@@ -67,6 +68,24 @@
 						</c:if>		
 						</tbody>
 					</table>
+					<div id="naviContainerPagination">
+								<div class="my-navigation">
+									<div class="simple-pagination-first"></div>
+									<div class="simple-pagination-previous"></div>
+									<div class="simple-pagination-page-numbers">
+									
+									</div>
+									<div class="simple-pagination-next"></div>
+									<div class="simple-pagination-last"></div>
+								</div>
+								<div class="simple-pagination-page-x-of-x"></div>
+								<div class="simple-pagination-showing-x-of-x"></div>
+								<div>
+									Zeige <select class="simple-pagination-items-per-page"></select> Elemente pro Seite an.
+								</div>
+					
+							</div>
+					</div>
 				</div>
 
 			</div>
@@ -75,6 +94,13 @@
 			/*
 			 Please consider that the JS part isn't production ready at all, I just code it to show the concept of merging filters and titles together !
 			 */
+			 
+				$('#tableContainer').simplePagination({
+					items_per_page: 5,
+					number_of_visible_page_numbers: 10
+				});
+			
+			
 			$(document)
 					.ready(
 							function() {

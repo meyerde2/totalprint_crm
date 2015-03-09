@@ -10,7 +10,36 @@ h2 {
 }
 
 #notiz {
-	max-width: 300px;
+	max-width: 370px;
+}
+
+/*
+
+
+*/
+
+#naviContainerPagination {
+	
+
+	float: left;
+	margin-left: 340px;
+
+	
+}
+.my-navigation a{
+	
+	float: left;
+	margin-left: 5px;
+	
+}
+
+
+.simple-pagination-page-x-of-x{
+	width: 300px;
+	float: left;
+}
+.simple-pagination-showing-x-of-x{
+	float: left;
 }
 
 /*

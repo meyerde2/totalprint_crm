@@ -302,7 +302,7 @@ public class BusinesskundenController {
 		Customer c = (Customer) request.getSession().getAttribute("currentCustomer");
 		Activity a = new Activity(0, c.getId(), sqlDate,
 				Integer.parseInt(request.getParameter("maId")), Integer.parseInt(request.getParameter("medium")),
-				grundId, request.getParameter("notiz"));
+				grundId, request.getParameter("notiz").toString());
 		
 		activityDAO.insertActivity(a);
 	

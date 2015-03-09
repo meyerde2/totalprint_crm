@@ -40,10 +40,7 @@ public class ActivityService implements ActivityDAO{
 			ArrayList<ActivityEntity> activityList = new ArrayList<ActivityEntity>();
 			ResultSet rs = ps.executeQuery();
 			
-			System.out.println("execute");
-
 			while (rs.next()) {
-				System.out.println("execute2");
 
 				//kundenBez = getWebserviceFromERP
 				//mitarbeiterBez = getWebserviceFromERP
