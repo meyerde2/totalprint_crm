@@ -18,6 +18,9 @@
                      action="/crm/werbekampagnen/submitKampagneUpdaten">
                                           
                      <div class="row">
+                     <div class="infoPanel">
+							<a href="/crm/handbuch/kampagne"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
+					</div>
                         <div class="col-md-6">
                            <div class="form-group">
                               <label for="kName">Kampagnenbezeichnung</label> <input type="text" 
@@ -149,13 +152,10 @@
 	   border-bottom: 1px solid black;
 	   font-size: 16px;
    }
-   #kampagneErstellen a {
-	   display: block;
-	   color: black;
-   }
-   #kampagneErstellen a:hover {
-	   text-decoration: none;
-   }
+.infoPanel {
+	margin-top: -35px;
+	margin-right: 5px;
+}
 </style>
 			
 <script>

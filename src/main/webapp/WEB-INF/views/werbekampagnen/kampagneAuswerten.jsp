@@ -15,6 +15,9 @@
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#sectionA">BI-Schnittstelle</a></li>
         <li><a data-toggle="tab" href="#sectionB">Grafische Auswertung</a></li>
+            <div class="infoPanel">
+				<a href="/crm/handbuch/kampagne"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
+			</div>
     </ul>
 
 
@@ -24,6 +27,7 @@
             <h3>BI-Schnittstelle</h3>
 			<div id="kampagneErstellen">
 		         <div class="row">
+		        
 		            <div class="col-md-8">
 		               <div class="well well-sm">
 		               

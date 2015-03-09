@@ -8,23 +8,6 @@
 		<div class="cheapterContent">
 			<h1>Privatkunden</h1>
 
-			<!doctype html>
-			<html>
-<head>
-<meta charset="utf-8">
-<title>Test</title>
-<script language="javascript">
-	function toggle(elementId) {
-		var ele = document.getElementById(elementId);
-		if (ele.style.display == "none") {
-			ele.style.display = "block";
-		} else {
-			ele.style.display = "none";
-		}
-	}
-</script>
-</head>
-<body>
 
 	<div class="tree">
 
@@ -125,9 +108,20 @@
 				beigefügt werden.</p>
 		</div>
 	</div>
-</body>
-			</html>
+
 		</div>
+
+		
+		<script type="text/javascript">
+			function toggle(elementId) {
+				var ele = document.getElementById(elementId);
+				if (ele.style.display == "none") {
+					ele.style.display = "block";
+				} else {
+					ele.style.display = "none";
+				}
+			}
+		</script>
 
 	</tiles:putAttribute>
 </tiles:insertDefinition>

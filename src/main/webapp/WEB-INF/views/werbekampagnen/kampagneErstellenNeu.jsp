@@ -16,8 +16,12 @@
                   <form class="erstellung" name="erstellung" id="erstellung" method="POST"
                      action="/crm/werbekampagnen/submitKampagneErstellen">
                                           
-                     <div class="row">
-                        <div class="col-md-6">
+                     <div class="row form-group">
+                    <div class="infoPanel">
+							<a href="/crm/handbuch/kampagne"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
+					</div>
+
+								<div class="col-md-6">
                            <div class="form-group">
                               <label for="kName">Kampagnenbezeichnung</label> <input type="text" 
                                  class="form-control" name="kampagnenBez" id="kampagnenBez" placeholder="Kampagnenbezeichnung"/>
@@ -136,196 +140,208 @@
 
 </div>
 <style type="text/css">
-   #kampagneErstellen {
-   		width: 800px;
-   }
-   #kampagneErstellen dt {
-	   width: 800px;
-	   border-bottom: 1px solid black;
-	   font-size: 16px;
-   }
-   #kampagneErstellen a {
-	   display: block;
-	   color: black;
-   }
-   #kampagneErstellen a:hover {
-	   text-decoration: none;
-   }
+#kampagneErstellen {
+	width: 800px;
+}
+
+#kampagneErstellen dt {
+	width: 800px;
+	border-bottom: 1px solid black;
+	font-size: 16px;
+}
+
+.infoPanel {
+	margin-top: -35px;
+	margin-right: 5px;
+}
 </style>
 			
 <script>
-$(".geschenk").hide();
-$(".werbemittelId").hide();
-$(".zielgruppen_notizen").hide();
+	$(".geschenk").hide();
+	$(".werbemittelId").hide();
+	$(".zielgruppen_notizen").hide();
 
-
-$('.slider-input').jRange({
-    from: 0,
-    to: 25000,
-    step: 100,
-    scale: [0, 5000,10000,15000,20000,25000],
-    format: '%s',
-    width: 375,
-    showLabels: true
-});
-
-jQuery.validator.setDefaults({
-	  debug: false,
-	  success: "valid",
-	  focusCleanup: false
-	});
-	
-	$( ".erstellung" ).validate({
-	  rules: {
-		kampagnenBez: {
-			required: true
-		},  
-		dateBeginn: {
-			required: true
-		},
-		dateUntil: {
-			required: true
-		},
-		grundId: {
-			required: true
-		},
-		zielgruppeId: {
-			required: true
-		},
-		anzahlExemplare: {
-			required: true,
-			integer: true
-		},
-		budget: {
-			required: true,
-		},
-		plankosten: {
-			required: true,
-			euroCurrency: true
-		},
-		beilageBei: {
-			required: true
-		},
-		kampagnenart: {
-			required: true
-		}
-	  }	 
+	$('.slider-input').jRange({
+		from : 0,
+		to : 25000,
+		step : 100,
+		scale : [ 0, 5000, 10000, 15000, 20000, 25000 ],
+		format : '%s',
+		width : 375,
+		showLabels : true
 	});
 
-	
- 
-	 
-	 
-jQuery('#dateBeginn').datetimepicker({
-
-	onShow:function( ct ){
-	   this.setOptions({
-	   // maxDate:jQuery('#dateUntil').val()?jQuery('#dateUntil').val():false
-			   maxDate: false
-	   })
-	  },
-	   lang : 'de',
-	   i18n : {
-	      de : {
-	         months : [ 'Januar', 'Februar', 'März',
-	         'April', 'Mai', 'Juni', 'Juli',
-	         'August', 'September', 'Oktober',
-	         'November', 'Dezember' ],
-	         dayOfWeek : ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
-	      }
-	   },
-	   timepicker : false,
-	   format : 'd.m.Y'
-	 });
-	 
-	 jQuery('#dateUntil').datetimepicker({
-
-
-	  i18n : {
-	      de : {
-	         months : [ 'Januar', 'Februar', 'März',
-	         'April', 'Mai', 'Juni', 'Juli',
-	         'August', 'September', 'Oktober',
-	         'November', 'Dezember' ],
-	         dayOfWeek : ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
-	      }
-	   }
-	   ,
-	   timepicker : false,
-	   format : 'd.m.Y',
-
-		  onShow:function( ct ){
-			  
-		   this.setOptions({
-			   // minDate:jQuery('#dateBeginn').val()?jQuery('#dateBeginn').val():false
-		    minDate:false
-		   })
-		  }
-	 });
-	 
-	 
-	 
-jQuery(document).ready(function () {
-
-	
-	$('#kampagnenart').change(function() {
-
-		if ($('#kampagnenart').val() == 3){
-			$(".geschenk").show();
-		}else{
-			$(".geschenk").hide();
-			$("#geschenk").val("");
-		}
-		
-		if ($('#kampagnenart').val() == 2){
-			$(".werbemittelId").show();
-		}else{
-			$(".werbemittelId").hide();
-			$("#werbemittelId").val("");
-		}
-
+	jQuery.validator.setDefaults({
+		debug : false,
+		success : "valid",
+		focusCleanup : false
 	});
-	
-	$('#zielgruppeId').change(function() {
 
-		if ($('#zielgruppeId').val() == 4 || $('#zielgruppeId').val() == 5 ){
-			$(".zielgruppen_notizen").show();
-		}else{
-			$(".zielgruppen_notizen").hide();
-			$("#zielgruppen_notizen").val("");
+	$(".erstellung").validate({
+		rules : {
+			kampagnenBez : {
+				required : true
+			},
+			dateBeginn : {
+				required : true
+			},
+			dateUntil : {
+				required : true
+			},
+			grundId : {
+				required : true
+			},
+			zielgruppeId : {
+				required : true
+			},
+			anzahlExemplare : {
+				required : true,
+				integer : true
+			},
+			budget : {
+				required : true,
+			},
+			plankosten : {
+				required : true,
+				euroCurrency : true
+			},
+			beilageBei : {
+				required : true
+			},
+			kampagnenart : {
+				required : true
+			}
 		}
-
 	});
-	
-    $('.rating-input').rating({
-          min: 0,
-          max: 5,
-          step: 1,
-          size: 'sm'
-    });
-       
-    $('#btn-rating-input').on('click', function() {
-        var $a = self.$element.closest('.star-rating');
-        var chk = !$a.hasClass('rating-disabled');
-        $('#rating-input').rating('refresh', {showClear:!chk, disabled:chk});
-    });
-    
-    
-    $('.btn-danger').on('click', function() {
-        $("#kartik").rating('destroy');
-    });
-    
-    $('.btn-success').on('click', function() {
-        $("#kartik").rating('create');
-    });
-    
-    $('.rating-input').on('rating.change', function() {
-        //alert($(this).val());
-    });
-    
-    
-    $('.rb-rating').rating({'showCaption':true, 'stars':'3', 'min':'0', 'max':'3', 'step':'1', 'size':'xs', 'starCaptions': {0:'status:nix', 1:'status:wackelt', 2:'status:geht', 3:'status:laeuft'}});
-});
+
+	jQuery('#dateBeginn')
+			.datetimepicker(
+					{
+
+						onShow : function(ct) {
+							this.setOptions({
+								// maxDate:jQuery('#dateUntil').val()?jQuery('#dateUntil').val():false
+								maxDate : false
+							})
+						},
+						lang : 'de',
+						i18n : {
+							de : {
+								months : [ 'Januar', 'Februar', 'März',
+										'April', 'Mai', 'Juni', 'Juli',
+										'August', 'September', 'Oktober',
+										'November', 'Dezember' ],
+								dayOfWeek : [ "So", "Mo", "Di", "Mi", "Do",
+										"Fr", "Sa" ]
+							}
+						},
+						timepicker : false,
+						format : 'd.m.Y'
+					});
+
+	jQuery('#dateUntil')
+			.datetimepicker(
+					{
+
+						i18n : {
+							de : {
+								months : [ 'Januar', 'Februar', 'März',
+										'April', 'Mai', 'Juni', 'Juli',
+										'August', 'September', 'Oktober',
+										'November', 'Dezember' ],
+								dayOfWeek : [ "So", "Mo", "Di", "Mi", "Do",
+										"Fr", "Sa" ]
+							}
+						},
+						timepicker : false,
+						format : 'd.m.Y',
+
+						onShow : function(ct) {
+
+							this.setOptions({
+								// minDate:jQuery('#dateBeginn').val()?jQuery('#dateBeginn').val():false
+								minDate : false
+							})
+						}
+					});
+
+	jQuery(document).ready(
+			function() {
+
+				$('#kampagnenart').change(function() {
+
+					if ($('#kampagnenart').val() == 3) {
+						$(".geschenk").show();
+					} else {
+						$(".geschenk").hide();
+						$("#geschenk").val("");
+					}
+
+					if ($('#kampagnenart').val() == 2) {
+						$(".werbemittelId").show();
+					} else {
+						$(".werbemittelId").hide();
+						$("#werbemittelId").val("");
+					}
+
+				});
+
+				$('#zielgruppeId').change(
+						function() {
+
+							if ($('#zielgruppeId').val() == 4
+									|| $('#zielgruppeId').val() == 5) {
+								$(".zielgruppen_notizen").show();
+							} else {
+								$(".zielgruppen_notizen").hide();
+								$("#zielgruppen_notizen").val("");
+							}
+
+						});
+
+				$('.rating-input').rating({
+					min : 0,
+					max : 5,
+					step : 1,
+					size : 'sm'
+				});
+
+				$('#btn-rating-input').on('click', function() {
+					var $a = self.$element.closest('.star-rating');
+					var chk = !$a.hasClass('rating-disabled');
+					$('#rating-input').rating('refresh', {
+						showClear : !chk,
+						disabled : chk
+					});
+				});
+
+				$('.btn-danger').on('click', function() {
+					$("#kartik").rating('destroy');
+				});
+
+				$('.btn-success').on('click', function() {
+					$("#kartik").rating('create');
+				});
+
+				$('.rating-input').on('rating.change', function() {
+					//alert($(this).val());
+				});
+
+				$('.rb-rating').rating({
+					'showCaption' : true,
+					'stars' : '3',
+					'min' : '0',
+					'max' : '3',
+					'step' : '1',
+					'size' : 'xs',
+					'starCaptions' : {
+						0 : 'status:nix',
+						1 : 'status:wackelt',
+						2 : 'status:geht',
+						3 : 'status:laeuft'
+					}
+				});
+			});
 </script>
 
 	</tiles:putAttribute>

@@ -9,6 +9,10 @@
 			<h1>Geschäftskunden - Stammdaten</h1>
 
 			<div class="container">
+					<div class="infoPanel">
+							<a href="/crm/businesskunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>${sessionScope.currentCustomer.firma}</a>
+							<a href="/crm/handbuch/businesskunden"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
+						</div>
 				<div class="suche">
 				<div class="row">
 						<div class="well well-sm">
@@ -75,6 +79,12 @@
 					</div>
 				</div>
 			</div>
-		
+<style type="text/css">
+
+.infoPanel {
+	margin-top: -25px;
+	margin-right: 220px;
+}
+</style>
 	</tiles:putAttribute>
 </tiles:insertDefinition>

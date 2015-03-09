@@ -11,6 +11,9 @@
 			<h1>Werbekampagnen - Übersicht</h1>
 
 			<div class="row">
+			<div class="infoPanel">
+				<a href="/crm/handbuch/kampagne"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
+			</div>
 				<div class="panel panel-primary filterable">
 					<div class="panel-heading">
 						<h3 class="panel-title">Übersicht der Werbekampagnen</h3>
@@ -154,6 +157,11 @@
 
 .filterable .panel-heading .pull-right {
 	margin-top: -20px;
+}
+
+.infoPanel {
+	margin-top: -5px;
+	margin-right: 5px;
 }
 
 .filterable .filters input[disabled] {

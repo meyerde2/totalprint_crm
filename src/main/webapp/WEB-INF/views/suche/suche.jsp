@@ -15,6 +15,9 @@
 
  -->
 			<div class="container">
+						<div class="infoPanel">
+							<a href="/crm/handbuch/"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
+						</div>
 				<div class="row">
 					<div class="col-md-8">
 						<div class="well well-sm">
@@ -76,6 +79,12 @@
 				</div>
 			</div>
 		</div>
+<style type="text/css">
 
+.infoPanel {
+	margin-top: -25px;
+	margin-right: 200px;
+}
+</style>
 	</tiles:putAttribute>
 </tiles:insertDefinition>

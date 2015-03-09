@@ -10,10 +10,17 @@
 
 	
 			<div class="container">
+						<div class="infoPanel">
+								<a href="/crm/privatkunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>${sessionScope.currentCustomer.vorname} ${sessionScope.currentCustomer.name}</a>
+								<a href="/crm/handbuch/privatkunden"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
+						</div>
+					
 				<div class="row">
 						<div class="well well-sm">
 							<h3 class="panel-title">${sessionScope.currentCustomer.vorname} ${sessionScope.currentCustomer.name}</h3>
 							<div class="row">
+							
+				
 								<div class="col-md-6">
 
 									<div class="col-md-3 col-lg-3 " align="center">
@@ -37,8 +44,8 @@
 													<td>Anschrift</td>
 													<td>${sessionScope.currentCustomer.strasse}, ${sessionScope.currentCustomer.plz} ${sessionScope.currentCustomer.ort}</td>
 												</tr>
-												<tr>
-													<td>Abweichende Lieferanschrift</td>
+												<tr ${sessionScope.currentCustomer.abwStrasse =="" ? 'style="display: none"' : ''}>
+													<td >Abweichende Lieferanschrift</td>
 													<td>${sessionScope.currentCustomer.abwStrasse}, ${sessionScope.currentCustomer.abwPlz} ${sessionScope.currentCustomer.abwOrt}</td>
 												</tr>
 												<tr>
@@ -82,5 +89,14 @@
 					</div>
 				</div>
 			</div>
+			
+<style type="text/css">
+
+.infoPanel {
+	margin-top: -25px;
+	margin-right: 220px;
+}
+</style>
+
 	</tiles:putAttribute>
 </tiles:insertDefinition>

@@ -15,6 +15,10 @@
                   <form class="erstellung" name="erstellung" id="erstellung" method="POST"
                      action="/crm/werbekampagnen/submitSonderausgabeErstellen">
                      <div class="row">
+                     <div class="infoPanel">
+							<a href="/crm/privatkunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>${sessionScope.currentCustomer.vorname} ${sessionScope.currentCustomer.name}</a>
+							<a href="/crm/handbuch/privatkunden"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
+					</div>
                         <div class="col-md-6">
                            <div class="form-group">
                               <label for="kName">Kampagnenbezeichnung</label> <input type="text" 
