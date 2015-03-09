@@ -6,7 +6,34 @@
 		<div class="cheapterContent">
 			<h1>Werbekampagen</h1>
 
-			<h2>Werbekampagnen - Kampagnenübersicht</h2>
+			<!doctype html>
+			<html>
+<head>
+<meta charset="utf-8">
+<title>Test</title>
+<script language="javascript">
+	function toggle(elementId) {
+		var ele = document.getElementById(elementId);
+		if (ele.style.display == "none") {
+			ele.style.display = "block";
+		} else {
+			ele.style.display = "none";
+		}
+	}
+</script>
+</head>
+<body>
+
+	<div class="tree">
+
+		<div>
+			<h2>
+				<a id="displayText" href="javascript:toggle('toggleText010');">Werbekampagnen
+					- Kampagnenübersicht</a>
+			</h2>
+		</div>
+
+		<div id="toggleText010">
 			<p>In der Kampagnenübersicht sind alle laufenden und
 				abgeschlossenen Kampagnen aufgelistet. Die Kampagnen sind editierbar
 				und auswertbar.</p>
@@ -18,14 +45,31 @@
 
 			<p>Über den Auswertungsbutton ist einmalig eine Auswertung der
 				Werbekampagne möglich.</p>
+		</div>
 
-			<h2>Werbekampagnen - Werbekampagne auswerten</h2>
+		<div>
+			<h2>
+				<a id="displayText" href="javascript:toggle('toggleText011');">Werbekampagnen
+					- Werbekampagne auswerten</a>
+			</h2>
+		</div>
+
+		<div id="toggleText011">
 			<p>Die Auswertung der Werbekampagne ist zum einen auf Basis der
 				im BI-System hinterlegten Daten und zum anderen auf grafische Weise
 				möglich. Dazu sind zwei Reiter zum Auswählen bereitgestellt.</p>
 			<img alt="" src="/crm/resources/images/handbuch/005.png">
 
-			<h2>Werbekampagnen - Werbekampagne erstellen</h2>
+		</div>
+
+		<div>
+			<h2>
+				<a id="displayText" href="javascript:toggle('toggleText012');">Werbekampagnen
+					- Werbekampagne erstellen</a>
+			</h2>
+		</div>
+
+		<div id="toggleText012">
 			<p>Beim Erstellen einer Werbekampagne ist zunächst eine
 				Bezeichnung zu vergeben. Für den Start- und Endzeitpunkt wird ein
 				Kalender eingeblendet, um jeweils ein Datum auszuwählen.</p>
@@ -46,7 +90,15 @@
 				betroffenen Felder rot markiert und es ist erst möglich, die
 				Kampagne anzulegen, wenn alle Felder korrekte Daten enthalten.</p>
 
+			.
+		</div>
+
+
+	</div>
+</body>
+			</html>
 		</div>
 
 	</tiles:putAttribute>
 </tiles:insertDefinition>
+
