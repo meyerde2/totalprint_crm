@@ -40,22 +40,22 @@ public class PrivatkundenController {
 	 * Ist eigentlich nicht eingesetzt...
 	 */
 	@RequestMapping(value = "/privatkunden", method = RequestMethod.GET)
-	public String privatkunden(Model model) {
+	public String privatkunden(HttpServletRequest request, Model model) {
 		
 		logger.info("privatkunden-Page !");
 		
-		return "/privatkunden/privatkunden";
+		return HomeController.isLoggedIn("/privatkunden/privatkunden", request);
 	}
 	
 	/**
 	 *  Stammdaten
 	 */
 	@RequestMapping(value = "/privatkunden/stammdaten", method = RequestMethod.GET)
-	public String pStammdaten(Model model) {
+	public String pStammdaten(HttpServletRequest request, Model model) {
 		
 		logger.info("pStammdaten-Page!");
 		
-		return "/privatkunden/pStammdaten";
+		return HomeController.isLoggedIn("/privatkunden/pStammdaten", request);
 	}
 	
 	/**
@@ -63,11 +63,11 @@ public class PrivatkundenController {
 	 */
 	
 	@RequestMapping(value = "/privatkunden/aboKuendigen", method = RequestMethod.GET)
-	public String pAboKuendigen(Model model) {
+	public String pAboKuendigen(HttpServletRequest request, Model model) {
 		
 		logger.info("abonnementKuendigen-Page!");
 		
-		return "/privatkunden/abonnementKuendigen";
+		return HomeController.isLoggedIn("/privatkunden/abonnementKuendigen", request);
 	}
 	
 	
@@ -126,7 +126,7 @@ public class PrivatkundenController {
 			request.getSession().setAttribute("currentCustomer", c);
 		}
 		
-		return "/privatkunden/pStammdaten";
+		return HomeController.isLoggedIn("/privatkunden/pStammdaten", request);
 	}
 	
 	
@@ -136,12 +136,12 @@ public class PrivatkundenController {
 	 */
 	
 	@RequestMapping(value = "/privatkunden/aboAbschliessen", method = RequestMethod.GET)
-	public String pAboAbschliessen(Model model) {
+	public String pAboAbschliessen(HttpServletRequest request, Model model) {
 		
 		logger.info("aboAbschlieﬂen-Page !");
 
 		
-		return "/privatkunden/abonnementAbschliessen";
+		return HomeController.isLoggedIn("/privatkunden/abonnementAbschliessen", request);
 	}
 	
 	/**
@@ -152,9 +152,7 @@ public class PrivatkundenController {
 	
 	@RequestMapping(value = "/privatkunden/submitAddAbo", method = RequestMethod.POST)
 	public String pAddAbo(HttpServletRequest request, Model model) throws IOException, URISyntaxException {
-		
-		logger.info("aboAbschlieﬂen-Page !");
-	
+			
 		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
 		JsonDAO jsonDAO = (JsonDAO) context.getBean("jsonServiceBean");		
 		
@@ -165,8 +163,7 @@ public class PrivatkundenController {
 			c = (Customer) request.getSession().getAttribute("currentCustomer");
 
 		}
-		
-			//ToDo!!
+
 
 		JSONObject json = new JSONObject();
 		JSONObject jsonDebi = new JSONObject();
@@ -181,12 +178,10 @@ public class PrivatkundenController {
 				c.setBank(request.getParameter("bank"));
 				
 				json.put("bank", request.getParameter("bank").toString());
-				json.put("iban", request.getParameter("iban").toString());
+				json.put("iBAN", request.getParameter("iban").toString());
 				json.put("bIC", request.getParameter("bic").toString());
-				json.put("iBAN", request.getParameter("kontoinhaber").toString());
-				
-				json.put("abonnement", true);
-				
+				json.put("kontoinhaber", request.getParameter("kontoinhaber").toString());
+								
 				json.put("id", c.getId());
 
 				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/person/update.json",  json);
@@ -197,15 +192,15 @@ public class PrivatkundenController {
 			System.out.println("abwLieferad  " + request.getParameter("abwLieferadresse"));
 			if ("ja".equals(request.getParameter("abwLieferadresse"))){
 				
-				c.setStrasse(request.getParameter("abwstrasse"));
-				c.setOrt(request.getParameter("abwort"));
-				c.setPlz(request.getParameter("abwplz"));
-				
+				c.setAbwStrasse(request.getParameter("abwstrasse"));
+				c.setAbwOrt(request.getParameter("abwort"));
+				c.setAbwPlz(request.getParameter("abwplz"));
+
+				jsonDebi.put("id", c.getDebitorId());
 				jsonDebi.put("lieferOrt", request.getParameter("abwort").toString());
 				jsonDebi.put("lieferPlz", request.getParameter("abwplz").toString());
 				jsonDebi.put("lieferadresse", request.getParameter("abwstrasse").toString());
 				
-				jsonDebi.put("id", c.getDebitorId());
 
 				jsonDebi.put("abonnement", true);
 
@@ -232,10 +227,11 @@ public class PrivatkundenController {
 
 			Activity a = new Activity(0, c.getId(), sqlDate, 1, 3, 1,
 					"automatisiert generiert...");
+			
 			activityDAO.insertActivity(a);
 		}
 
-		return "/privatkunden/pStammdaten";
+		return HomeController.isLoggedIn("/privatkunden/pStammdaten", request);
 		// return "redirect:/privatkunden/submitAddAboJSON" ;
 	}
 	
@@ -265,7 +261,7 @@ public class PrivatkundenController {
 		
 		System.out.println("activityEntity:   " + activityEntity.toString());
 		
-		return "/privatkunden/aktivitaeten";
+		return HomeController.isLoggedIn("/privatkunden/aktivitaeten", request);
 	}
 	
 	/**
@@ -273,11 +269,11 @@ public class PrivatkundenController {
 	 */
 	
 	@RequestMapping(value = "/privatkunden/activityAnlegen", method = RequestMethod.GET)
-	public String activityAnlegen(Model model) {
+	public String activityAnlegen(HttpServletRequest request, Model model) {
 		
 		logger.info("activity-Page !");
 
-		return "/privatkunden/aktivitaetenAnlegen";
+		return HomeController.isLoggedIn("/privatkunden/aktivitaetenAnlegen", request);
 	}
 	
 	
@@ -321,8 +317,8 @@ public class PrivatkundenController {
 		
 		activityDAO.insertActivity(a);
 		System.out.println("a  " + a.toString());	
-	
-		return "redirect:/privatkunden/activity";
+
+		return HomeController.isLoggedIn("redirect:/privatkunden/activity", request);
 	}
 	
 	

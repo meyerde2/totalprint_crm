@@ -35,14 +35,14 @@ public class WerbekampagnenController {
 	 */
 	
 	@RequestMapping(value = "/werbekampagnen", method = RequestMethod.GET)
-	public String privatkunden(Model model) {
+	public String privatkunden(HttpServletRequest request, Model model) {
 		logger.info("werbekampagnen!");
-		
-		return "/werbekampagnen/werbekampagnen";
+
+		return HomeController.isLoggedIn("/werbekampagnen/werbekampagnen", request);
 	}
 	
 	@RequestMapping(value = "/werbekampagnen/kampagnenUebersicht", method = RequestMethod.GET)
-	public String wUebersicht(Model model) {
+	public String wUebersicht(HttpServletRequest request, Model model) {
 		logger.info("kampagnenUebersicht-Page!");
 		
 		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
@@ -50,14 +50,14 @@ public class WerbekampagnenController {
 		
 		model.addAttribute("kampagnenList", kampagnenDAO.getAllKampagnen());
 		
-		return "/werbekampagnen/kampagnenUebersicht";
+		return HomeController.isLoggedIn("/werbekampagnen/kampagnenUebersicht", request);
 	}
 	
 	@RequestMapping(value = "/werbekampagnen/kampagnenErstellen", method = RequestMethod.GET)
-	public String wErstellen(Model model) {
+	public String wErstellen(HttpServletRequest request, Model model) {
 		logger.info("kampagnenErstellen-Page!");
 		
-		return "/werbekampagnen/kampagneErstellenNeu";
+		return HomeController.isLoggedIn("/werbekampagnen/kampagneErstellenNeu", request);
 	}
 
 	@RequestMapping(value = "/werbekampagnen/{id}", method = RequestMethod.GET)
@@ -69,7 +69,8 @@ public class WerbekampagnenController {
 		
 		model.addAttribute("kampagne", kampagnenDAO.getKampagneById(id));
 		
-		return "/werbekampagnen/kampagneBearbeiten";
+
+		return HomeController.isLoggedIn("/werbekampagnen/kampagneBearbeiten", request);
 	}
 	
 	@RequestMapping(value = "/werbekampagnen/auswerten/{id}", method = RequestMethod.GET)
@@ -79,69 +80,10 @@ public class WerbekampagnenController {
 		context = new ClassPathXmlApplicationContext("Spring-Module.xml");
 		KampagnenDAO kampagnenDAO = (KampagnenDAO) context.getBean("kampagnenService");
 		WerbekampagnenEntity k = kampagnenDAO.getKampagneById(id);
-		if (k.getResonanz() > 0){
-		//	double gesamt = ( (0.33* (k.getUmsatz()/k.getKosten())) + (0.33* (k.getBudget()/k.getKosten())) + (0.33* k.getResonanz()));
-		
-			int gesamt = 0;
-			double gewinn = 0;
-			gewinn = k.getUmsatz() - k.getKosten();
-			
-			if (gewinn > (k.getKosten() * 1.1) && gewinn > 0 ){
-				//$(".gewinn #green").addClass("active");
-				gesamt = gesamt +3;
-			}else if(gewinn < (gewinn * 1.1) && gewinn > 0){
-				//(".gewinn #orange").addClass("active");
-				gesamt = gesamt +2;
-			}else{
-				//$(".gewinn #red").addClass("active");
-				gesamt = gesamt +1;
-			}
-			
-			
-			if (k.getBudget()> (k.getKosten() * 1.1) && k.getBudget() > 0 ){
-				//$(".budget #green").addClass("active");
-				gesamt = gesamt +3;
-			}else if(k.getBudget() < (k.getBudget() * 1.1) && k.getBudget() > 0){
-				//$(".budget #orange").addClass("active");
-				gesamt = gesamt +2;
-
-			}else{
-				//$(".budget #red").addClass("active");
-				gesamt = gesamt +1;
-			}
-			
-			if (k.getResonanz() > 3 ){
-				//$(".resonanz #green").addClass("active");
-				gesamt = gesamt +3;
-			}else if(k.getResonanz() > 1){
-//				$(".resonanz #orange").addClass("active");
-				gesamt = gesamt +2;
-			}else{
-				//$(".resonanz #red").addClass("active");
-				gesamt = gesamt +1;
-			}
-			
-			int status= 0;
-			
-			if (gesamt > 7  ){
-				status = 3;
-			}else if(gesamt > 4){
-				status = 2;
-			}else{
-				status = 1;
-			}
-			
-			k.setStatus(status);
-		}
-
-		
 		
 		model.addAttribute("kampagne", k);
-		
-		// ToDo: update status
-		kampagnenDAO.updateKampagnenStatusById(k);
-		
-		return "/werbekampagnen/kampagneAuswerten";
+
+		return HomeController.isLoggedIn("/werbekampagnen/kampagneAuswerten", request);
 
 	}
 	
@@ -167,7 +109,7 @@ public class WerbekampagnenController {
 			
 			Random r = new Random();
 			int Low = (int)(k.getAnzahlExemplare() *0.5);
-			int High = (int) (k.getAnzahlExemplare() * 1.5);
+			int High = (int) (k.getAnzahlExemplare());
 			int R = r.nextInt(High-Low) + Low;
 			k.setAnzahlVerkaufteExemplare(R);
 			
@@ -196,19 +138,21 @@ public class WerbekampagnenController {
 		
 		int gesamt = 0;
 		double gewinn = 0;
-		gewinn = k.getUmsatz() - k.getKosten();
-		
-		if (gewinn > (k.getKosten() * 1.1) && gewinn > 0 ){
-			//$(".gewinn #green").addClass("active");
-			gesamt = gesamt +3;
-		}else if(gewinn < (gewinn * 1.1) && gewinn > 0){
-			//(".gewinn #orange").addClass("active");
-			gesamt = gesamt +2;
-		}else{
-			//$(".gewinn #red").addClass("active");
-			gesamt = gesamt +1;
+
+		if (k.getArtId() != 3) {
+			gewinn = k.getUmsatz() - k.getKosten();
+
+			if (gewinn > (k.getKosten() * 1.1) && gewinn > 0) {
+				// $(".gewinn #green").addClass("active");
+				gesamt = gesamt + 3;
+			} else if (gewinn < (gewinn * 1.1) && gewinn > 0) {
+				// (".gewinn #orange").addClass("active");
+				gesamt = gesamt + 2;
+			} else {
+				// $(".gewinn #red").addClass("active");
+				gesamt = gesamt + 1;
+			}
 		}
-		
 		
 		if (k.getBudget()> (k.getKosten() * 1.1) && k.getBudget() > 0 ){
 			//$(".budget #green").addClass("active");
@@ -234,21 +178,31 @@ public class WerbekampagnenController {
 		}
 		
 		int status= 0;
-		
-		if (gesamt > 7  ){
-			status = 3;
-		}else if(gesamt > 4){
-			status = 2;
+		if (k.getArtId() != 3){
+			if (gesamt > 7  ){
+				status = 3;
+			}else if(gesamt > 4){
+				status = 2;
+			}else{
+				status = 1;
+			}
 		}else{
-			status = 1;
+			if (gesamt > 4  ){
+				status = 3;
+			}else if(gesamt > 2){
+				status = 2;
+			}else{
+				status = 1;
+			}
 		}
-		
+
 		k.setStatus(status);
 
 		kampagnenDAO.updateKampagneById(k);
+		kampagnenDAO.updateKampagnenStatusById(k);
 		model.addAttribute("kampagne", k);
 		
-		return "/werbekampagnen/kampagneAuswerten";
+		return HomeController.isLoggedIn("/werbekampagnen/kampagneAuswerten", request);
 		//return "/werbekampagnen/pie";
 
 	}
@@ -275,8 +229,9 @@ public class WerbekampagnenController {
 	    //Number number = format.parse("1,234");
 	    //double d = number.doubleValue();
 		int werbemittelId = 0;
-		if (request.getParameter("werbemittelId") != null){
-			werbemittelId = Integer.parseInt(request.getParameter("werbemittelId"));
+		if (request.getParameter("werbemittelId") != null && request.getParameter("werbemittelId").toString() != ""){
+			
+			werbemittelId = Integer.parseInt(request.getParameter("werbemittelId").toString());
 		}
 		WerbekampagnenEntity kampagne = new WerbekampagnenEntity(
 				0,
@@ -311,7 +266,7 @@ public class WerbekampagnenController {
 		KampagnenDAO kampagnenDAO = (KampagnenDAO) context.getBean("kampagnenService");
 		kampagnenDAO.insertKampagne(kampagne);
 		
-		return "redirect:/werbekampagnen/kampagnenUebersicht";
+		return HomeController.isLoggedIn("redirect:/werbekampagnen/kampagnenUebersicht", request);
 	}
 	
 	@RequestMapping(value = "/werbekampagnen/submitKampagneUpdaten", method = RequestMethod.POST)
@@ -340,7 +295,6 @@ public class WerbekampagnenController {
 			werbemittelId = Integer.parseInt(request.getParameter("werbemittelId"));
 		}
 		
-		int status= 0;
 		
 		
 		WerbekampagnenEntity kampagne = new WerbekampagnenEntity(
@@ -369,7 +323,7 @@ public class WerbekampagnenController {
 				Double.parseDouble(request.getParameter("budget").toString().replace(",", ".")),
 				werbemittelId,
 				request.getParameter("notiz"),
-				status);
+				0);
 		
 		
 		System.out.println("beilage" + kampagne.toString());
@@ -377,7 +331,7 @@ public class WerbekampagnenController {
 		KampagnenDAO kampagnenDAO = (KampagnenDAO) context.getBean("kampagnenService");
 		kampagnenDAO.updateKampagneById(kampagne);
 
-		return "redirect:/werbekampagnen/kampagnenUebersicht";
+		return HomeController.isLoggedIn("redirect:/werbekampagnen/kampagnenUebersicht", request);
 	}
 	
 }

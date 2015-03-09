@@ -33,6 +33,7 @@ import de.waksh.crm.dao.CustomerDAO;
 import de.waksh.crm.dao.JsonDAO;
 import de.waksh.crm.model.Customer;
 import de.waksh.crm.model.Suche;
+import de.waksh.crm.model.User;
 
 @Controller
 public class SuchController {
@@ -48,19 +49,16 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 	 * @throws JSONException 
 	 */
 	@RequestMapping(value = { "/", "/home", "/crm/", "/suche" }, method = RequestMethod.GET)
-	public String privatkunden(Model model, HttpSession session) throws URISyntaxException, JSONException, UnsupportedEncodingException, MalformedURLException, IOException {
+	public String privatkunden(HttpServletRequest request, Model model, HttpSession session) throws URISyntaxException, JSONException, UnsupportedEncodingException, MalformedURLException, IOException {
 		logger.info("Suche!");
 	
+		request.getSession().setAttribute("currentCustomer", "");
+		
 		model.addAttribute("allAttributes", session.getAttributeNames());
 		model.addAttribute("getId", session.getId());
-		/*
-		URI uri = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de/user");
-		InputStreamReader is = new InputStreamReader(uri.toURL().openStream(),"UTF-8");
-		System.out.println("testttt");
-		JSONObject jsonObject =new JSONObject(new JSONTokener(is));
-		System.out.println("objek" +  jsonObject);
-		*/
-		return "/suche/suche";
+		
+
+		return HomeController.isLoggedIn("/suche/suche", request);
 	}
 	
 	@RequestMapping(value = "/suche/submitSearch", method = RequestMethod.POST)
@@ -262,7 +260,9 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 			strView = "/businesskunden/stammdaten";
 			
 		}
-		return "redirect:" + strView;
+		String view= "redirect:" + strView;
+		return HomeController.isLoggedIn(view, request);
+
 	}
 
 	
@@ -288,5 +288,4 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
     }
 	
 
-	
 }

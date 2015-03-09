@@ -27,9 +27,10 @@
                               <label for="dateBeginn">Startzeitpunkt</label>
                               <input type="text" class="form-control datePicker" name="dateBeginn" id="dateBeginn" placeholder="Startzeitpunkt" />
                            </div>
+                           
                            <div class="form-group">
                               <label for="dateUntil">Endzeitpunkt</label> 
-                              <input type="text" class="form-control datePicker" name="dateUntil" id="dateUntil" placeholder="Endzeitpunkt"/>
+                              <input type="text" class="form-control datePicker_end" name="dateUntil" id="dateUntil" placeholder="Endzeitpunkt"/>
                            </div>
                            
                            <div class="form-group">
@@ -212,25 +213,58 @@ jQuery.validator.setDefaults({
 	});
 
 	
+ 
+	 
+	 
+jQuery('#dateBeginn').datetimepicker({
 
-$('.datePicker').datetimepicker(
-{
-   lang : 'de',
-   i18n : {
-      de : {
-         months : [ 'Januar', 'Februar', 'März',
-         'April', 'Mai', 'Juni', 'Juli',
-         'August', 'September', 'Oktober',
-         'November', 'Dezember', ],
-         dayOfWeek : [ "Mo", "Di", "Mi", "Do", "Fr" ]
-      }
-   }
-   ,
-   timepicker : false,
-   format : 'd.m.Y'
-}
-);
+	onShow:function( ct ){
+	   this.setOptions({
+	   // maxDate:jQuery('#dateUntil').val()?jQuery('#dateUntil').val():false
+			   maxDate: false
+	   })
+	  },
+	   lang : 'de',
+	   i18n : {
+	      de : {
+	         months : [ 'Januar', 'Februar', 'März',
+	         'April', 'Mai', 'Juni', 'Juli',
+	         'August', 'September', 'Oktober',
+	         'November', 'Dezember' ],
+	         dayOfWeek : ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
+	      }
+	   },
+	   timepicker : false,
+	   format : 'd.m.Y'
+	 });
+	 
+	 jQuery('#dateUntil').datetimepicker({
 
+
+	  i18n : {
+	      de : {
+	         months : [ 'Januar', 'Februar', 'März',
+	         'April', 'Mai', 'Juni', 'Juli',
+	         'August', 'September', 'Oktober',
+	         'November', 'Dezember' ],
+	         dayOfWeek : ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
+	      }
+	   }
+	   ,
+	   timepicker : false,
+	   format : 'd.m.Y',
+
+		  onShow:function( ct ){
+			  
+		   this.setOptions({
+			   // minDate:jQuery('#dateBeginn').val()?jQuery('#dateBeginn').val():false
+		    minDate:false
+		   })
+		  }
+	 });
+	 
+	 
+	 
 jQuery(document).ready(function () {
 
 	

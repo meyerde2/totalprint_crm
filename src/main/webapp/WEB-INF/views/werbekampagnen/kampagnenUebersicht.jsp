@@ -28,7 +28,7 @@
 						      <th><input type="text" class="form-control art" placeholder="Art" disabled></th>
 						      <th><input type="text" class="form-control" placeholder="Datum" disabled></th>
 						      <th><input type="text" class="form-control " placeholder="Grund" disabled></th>
-						      <th>Status</th>
+						      <th><input type="text" class="form-control status" placeholder="Status" disabled></th>
 						      <th class="aktion">Aktion</th>
 						   </tr>
 						</thead>
@@ -145,6 +145,9 @@
 .aktion{
 	width: 94px;
 }	
+.status{
+	width: 100px;
+}
 .filterable {
 	margin-top: 15px;
 }

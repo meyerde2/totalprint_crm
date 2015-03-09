@@ -54,20 +54,50 @@
              		
 					<!--  <li class="${theString=='/crm/' ? 'active' : ''}"><a href="${homeUrl}"><span class="glyphicon glyphicon-home"></span>  CRM</a></li> -->
 					<li class="${theString=='/crm/' ? 'active' : ''} <c:if test="${fn:contains(theString, 'suche')}">active</c:if>"><a href="${suche}"> <span class="glyphicon glyphicon-search"></span>  Suche</a></li>
+				
 
-					<li class="dropdown  ${sessionScope.currentCustomer.kundenart != 'Privatkunde' ? 'non-active' : 'activeKundenart'} <c:if test="${fn:contains(theString, 'privatkunden')}">active</c:if> "> <a class="dropdown-toggle" data-toggle="dropdown" href="${privatkunden}"><span class="glyphicon glyphicon-th-list"></span>  Privatkunden<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="${pStammdaten}"><span class="glyphicon glyphicon-th-large"></span>  Stammdaten</a></li>
-							<li class="divider"></li>
-							<li ><a class="${sessionScope.currentCustomer.isAbonnent == true ? 'non-active' : ''}" href="${aboAbschliessen}"><span class="glyphicon glyphicon-plus"></span>  Abonnement abschließen</a></li>
-							<li ><a class="${sessionScope.currentCustomer.isAbonnent == false ? 'non-active' : ''}" href="${aboKuendigen}"><span class="glyphicon glyphicon-remove"></span>  Abonnement kündigen</a></li>
-							<li class="divider"></li>
-							<li><a href="${pActivity}"><span class="glyphicon glyphicon-th-large"></span>  Aktivitäten</a></li>
-							<li><a href="${pActivityAnlegen}"><span class="glyphicon glyphicon-plus"></span>  Aktivitäten anlegen</a></li>
-						</ul>
-					</li>
-
-					<li class="dropdown ${sessionScope.currentCustomer.kundenart != 'Geschäftskunde' ? 'non-active' : 'activeKundenart'} <c:if test="${fn:contains(theString, 'businesskunden')}">active</c:if>"><a class="dropdown-toggle" data-toggle="dropdown" href="${businesskunden}"><span class="glyphicon glyphicon-th-list"></span>  Geschäftskunden<span class="caret"></span></a>
+						<c:if test="${!empty sessionScope.currentCustomer }">
+							<li class="dropdown  ${sessionScope.currentCustomer.kundenart != 'Privatkunde' ? 'non-active' : 'activeKundenart'} <c:if test="${fn:contains(theString, 'privatkunden')}">active</c:if> "> <a class="dropdown-toggle" data-toggle="dropdown" href="${privatkunden}"><span class="glyphicon glyphicon-th-list"></span>  Privatkunden<span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a href="${pStammdaten}"><span class="glyphicon glyphicon-th-large"></span>  Stammdaten</a></li>
+										<li class="divider"></li>
+										<li ><a class="${sessionScope.currentCustomer.isAbonnent == true ? 'non-active' : ''}" href="${aboAbschliessen}"><span class="glyphicon glyphicon-plus"></span>  Abonnement abschließen</a></li>
+										<li ><a class="${sessionScope.currentCustomer.isAbonnent == false ? 'non-active' : ''}" href="${aboKuendigen}"><span class="glyphicon glyphicon-remove"></span>  Abonnement kündigen</a></li>
+										<li class="divider"></li>
+										<li><a href="${pActivity}"><span class="glyphicon glyphicon-th-large"></span>  Aktivitäten</a></li>
+										<li><a href="${pActivityAnlegen}"><span class="glyphicon glyphicon-plus"></span>  Aktivitäten anlegen</a></li>
+									</ul>
+								</li>
+								
+									<li class="dropdown ${sessionScope.currentCustomer.kundenart != 'Geschäftskunde' ? 'non-active' : 'activeKundenart'} <c:if test="${fn:contains(theString, 'businesskunden')}">active</c:if>"><a class="dropdown-toggle" data-toggle="dropdown" href="${businesskunden}"><span class="glyphicon glyphicon-th-list"></span>  Geschäftskunden<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+				
+											<li><a href="${bStammdaten}"><span class="glyphicon glyphicon-th-large"></span> Stammdaten</a></li>
+											<li class="divider"></li>
+											<li><a href="${bestellungBearbeiten}"><span class="glyphicon glyphicon-pencil"></span>  Bestellung
+													aufgeben/bearbeiten</a></li>
+											<li class="divider"></li>
+											<li><a href="${bActivity}"><span class="glyphicon glyphicon-th-large"></span>  Aktivitäten</a></li>
+											<li><a href="${bActivityAnlegen}"><span class="glyphicon glyphicon-plus"></span>  Aktivitäten anlegen</a></li>
+										</ul>
+									</li>
+									
+						</c:if>		
+				
+					<c:if test="${empty sessionScope.currentCustomer }">
+							<li class="dropdown  non-active"> <a class="dropdown-toggle" data-toggle="dropdown" href="${privatkunden}"><span class="glyphicon glyphicon-th-list"></span>  Privatkunden<span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a href="${pStammdaten}"><span class="glyphicon glyphicon-th-large"></span>  Stammdaten</a></li>
+										<li class="divider"></li>
+										<li ><a class="non-active" href="${aboAbschliessen}"><span class="glyphicon glyphicon-plus"></span>  Abonnement abschließen</a></li>
+										<li ><a class="non-active" href="${aboKuendigen}"><span class="glyphicon glyphicon-remove"></span>  Abonnement kündigen</a></li>
+										<li class="divider"></li>
+										<li><a href="${pActivity}"><span class="glyphicon glyphicon-th-large"></span>  Aktivitäten</a></li>
+										<li><a href="${pActivityAnlegen}"><span class="glyphicon glyphicon-plus"></span>  Aktivitäten anlegen</a></li>
+									</ul>
+								</li>
+								
+						<li class="dropdown non-active"><a class="dropdown-toggle" data-toggle="dropdown" href="${businesskunden}"><span class="glyphicon glyphicon-th-list"></span>  Geschäftskunden<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 
 							<li><a href="${bStammdaten}"><span class="glyphicon glyphicon-th-large"></span> Stammdaten</a></li>
@@ -79,6 +109,9 @@
 							<li><a href="${bActivityAnlegen}"><span class="glyphicon glyphicon-plus"></span>  Aktivitäten anlegen</a></li>
 						</ul>
 					</li>
+						</c:if>	
+
+
 					
 					<li class="dropdown <c:if test="${fn:contains(theString, 'werbekampagne')}">active</c:if>"><a class="dropdown-toggle" data-toggle="dropdown" href="${werbekampagnen}"><span class="glyphicon glyphicon-th-list"></span>   Werbekampagnen<span class="caret"></span></a>
 						<ul class="dropdown-menu">

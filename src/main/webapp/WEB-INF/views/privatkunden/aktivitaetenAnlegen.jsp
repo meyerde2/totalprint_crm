@@ -28,8 +28,8 @@
 
 										<div class="form-group">
 											<label for="ma"> Mitarbeitername</label> 
-											 <input type="text" class="form-control" name="ma" id="ma" placeholder="Vorname Name" readonly />
-											<input type="hidden" name="maId" id="maId" value="111">
+											 <input type="text" class="form-control" name="ma" id="ma" value="${sessionScope.user.email}" placeholder="Vorname Name" readonly />
+											<input type="hidden" name="maId" id="maId" value="${sessionScope.user.id}">
 										</div>
 										<div class="form-group">
 											<label for="ma"> Kontaktmedium</label> 
@@ -107,9 +107,6 @@
   			},
   			sonstigesTxt: {
   				required: false
-  			},
-  			notiz: {
-  				required: true
   			}
   		  },
   		  messages:{
@@ -136,9 +133,8 @@
 													'März', 'April', 'Mai',
 													'Juni', 'Juli', 'August',
 													'September', 'Oktober',
-													'November', 'Dezember', ],
-											dayOfWeek : [ "Mo", "Di", "Mi",
-													"Do", "Fr" ]
+													'November', 'Dezember' ],
+													 dayOfWeek : ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
 										}
 									},
 									timepicker : false,

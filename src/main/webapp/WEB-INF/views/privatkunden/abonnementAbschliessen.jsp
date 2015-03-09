@@ -65,7 +65,7 @@
 									</tr>
 								</table>
 
-								<button id="activate-step-2" class="btn btn-primary btn-md">Weiter<span class="glyphicon glyphicon-chevron-right"></span></button>
+								<a id="activate-step-2" class="btn btn-primary btn-md">Weiter<span class="glyphicon glyphicon-chevron-right"></span></a>
 
 
 							</div>
@@ -117,7 +117,7 @@
 									</tr>
 
 								</table>
-								<button id="activate-step-3" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></button>
+								<a id="activate-step-3" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></a>
 							</div>
 						</div>
 					</div>
@@ -164,7 +164,7 @@
 											id="abwort" placeholder="Ort" value="${sessionScope.currentCustomer.abwOrt}"></td>
 									</tr>
 								</table>
-								<button id="activate-step-4" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></button>
+								<a id="activate-step-4" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></a>
 							</div>
 						</div>
 					</div>
@@ -229,15 +229,15 @@
 								<table class="overview">
 									<tr class="abwLieferanschrift">
 										<td><label>Abweichende Str.</label></td>
-										<td id="tdAbwStr">${sessionScope.currentCustomer.abwStrasse}</td>
+										<td id="tdAbwStr"></td>
 									</tr>
 									<tr class="abwLieferanschrift">
 										<td><label>Abweichende PLZ</label></td>
-										<td id="tdAbwPlz">${sessionScope.currentCustomer.abwPlz}</td>
+										<td id="tdAbwPlz"></td>
 									</tr>
 									<tr class="abwLieferanschrift">
 										<td><label>Abweichender Ort</label></td>
-										<td id="tdAbwOrt">${sessionScope.currentCustomer.abwOrt}</td>
+										<td id="tdAbwOrt"></td>
 									</tr>
 								</table>
 								</div>
@@ -351,7 +351,7 @@
 	            $(".payment").hide();
 
 	            $("#activate-step-4, #showStep4").click(function(){
-	            	
+
 	            	if($("input[value='lastschrift']:checked").val()=="lastschrift"){
 						
 	            		$("#overviewLastschrift").show();
@@ -362,6 +362,7 @@
 	            		$("#tdBic").html($('#bic').val());
 	            		$("#tdBank").html($('#bank').val());
 	            		$("#tdKontoinhaber").html($('#kontoinhaber').val());
+
 		            	
 	            	}else{
 	            		$("#tdZahlungsart").html("Rechnung");
@@ -371,6 +372,11 @@
 	            	if( $("#abwLieferadresse").is(":checked") == true){	
 
 	            		$("#overviewAbwLieferanschrift").show();
+
+	            		$("#tdAbwStr").html($('#abwstrasse').val());
+	            		$("#tdAbwPlz").html($('#abwplz').val());
+	            		$("#tdAbwOrt").html($('#abwort').val());
+	            		
 	            	}else{
 	            		
 	            		$("#overviewAbwLieferanschrift").hide();
@@ -445,7 +451,14 @@
 	                .on('click', function(e) {
 	                    
 	                        // Wenn die Elemente in dem Div keine error Label danach haben, next, ansonsten nicht!
-	                        $("#abschliessen").validate({ });
+	                        $("#abschliessen").validate();
+	                        $('#iban').focus();
+	                        $('#bic').focus();
+	                        $('#bank').focus();
+	                        $('#kontoinhaber').focus();
+	                        $('#iban').focus();
+	                        
+	                        
 	                        if ($("input:radio[value=lastschrift]").is(":checked") && 
 	                        		$("#iban-error").hasClass("valid") && 
 	                        		$("#bic-error").hasClass("valid")&& 
@@ -468,7 +481,14 @@
 	            $('#activate-step-4').on('click', function(e) {
 	                	
 	                	$("#abschliessen").validate({ });
-	                	
+
+
+                        $('#abwstrasse').focus();
+                        $('#abwplz').focus();
+                        $('#abwort').focus();
+                        $('#abwstrasse').focus();
+
+                        
 	                    	if ($("#abwLieferadresse").is(":checked") &&
 	                    			$("#abwstrasse-error").hasClass("valid") && 
 	                        		$("#abwplz-error").hasClass("valid")&& 

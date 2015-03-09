@@ -52,6 +52,12 @@
 													</td>
 												</tr>
 												<tr>
+													<td>Abonnement</td>
+													<td>
+														${sessionScope.currentCustomer.isAbonnent == true ? "ja" : "nein"}<br> <br>
+													</td>
+												</tr>
+												<tr>
 													<td>Email</td>
 													<td><a href="mailto:${sessionScope.currentCustomer.email}" class="glyphicon glyphicon-envelope">  ${sessionScope.currentCustomer.email}</a></td>
 												</tr>

@@ -46,25 +46,27 @@ public class BusinesskundenController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/businesskunden", method = RequestMethod.GET)
-	public String privatkunden(Model model) {
+	public String privatkunden(HttpServletRequest request, Model model) {
 		logger.info("Gesch‰ftskunden!");
 		
-		return "/businesskunden/businesskunden";
+
+		return HomeController.isLoggedIn( "/businesskunden/businesskunden", request);
 	}
 	
 	@RequestMapping(value = "/businesskunden/stammdaten", method = RequestMethod.GET)
-	public String pStammdaten(Model model) {
+	public String pStammdaten(HttpServletRequest request, Model model) {
 		logger.info("pStammdaten-Page!");
 		
-		return "/businesskunden/bStammdaten";
+		return HomeController.isLoggedIn( "/businesskunden/bStammdaten", request);
+		
 	}
 		
 	
 	@RequestMapping(value = "/businesskunden/bestellungBearbeiten", method = RequestMethod.GET)
-	public String pAboAbschliessen(Model model) {
+	public String pAboAbschliessen(HttpServletRequest request, Model model) {
 		logger.info("aboAbschlieﬂen-Page !");
-		
-		return "/businesskunden/bestellungBearbeiten";
+
+		return HomeController.isLoggedIn( "/businesskunden/bestellungBearbeiten", request);
 	}
 	
 	@RequestMapping(value = "/businesskunden/submitBestellung", method = RequestMethod.POST)
@@ -96,10 +98,10 @@ public class BusinesskundenController {
 				c.setBank(request.getParameter("bank"));
 				
 				json.put("bank", request.getParameter("bank").toString());
-				json.put("iban", request.getParameter("iban").toString());
+				json.put("iBAN", request.getParameter("iban").toString());
 				json.put("bIC", request.getParameter("bic").toString());
-				json.put("iBAN", request.getParameter("kontoinhaber").toString());
-				
+				json.put("kontoinhaber", request.getParameter("kontoinhaber").toString());
+								
 				json.put("id", c.getId());
 
 				jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/person/update.json",  json);
@@ -110,15 +112,14 @@ public class BusinesskundenController {
 			System.out.println("abwLieferad  " + request.getParameter("abwLieferadresse"));
 			if ("ja".equals(request.getParameter("abwLieferadresse"))){
 				
-				c.setStrasse(request.getParameter("abwstrasse"));
-				c.setOrt(request.getParameter("abwort"));
-				c.setPlz(request.getParameter("abwplz"));
-				
+				c.setAbwStrasse(request.getParameter("abwstrasse"));
+				c.setAbwOrt(request.getParameter("abwort"));
+				c.setAbwPlz(request.getParameter("abwplz"));
+
+				jsonDebi.put("id", c.getDebitorId());
 				jsonDebi.put("lieferOrt", request.getParameter("abwort").toString());
 				jsonDebi.put("lieferPlz", request.getParameter("abwplz").toString());
 				jsonDebi.put("lieferadresse", request.getParameter("abwstrasse").toString());
-				
-				jsonDebi.put("id", c.getDebitorId());
 
 				jsonDebi.put("abonnement", true);
 
@@ -215,7 +216,8 @@ public class BusinesskundenController {
 			activityDAO.insertActivity(a);
 		}
 		
-		return "/businesskunden/bestellungBearbeiten";
+
+		return HomeController.isLoggedIn( "/businesskunden/bestellungBearbeiten", request);
 	}
 	
 	@RequestMapping(value = "/businesskunden/activity", method = RequestMethod.GET)
@@ -237,21 +239,20 @@ public class BusinesskundenController {
 		
 		System.out.println("activityEntity:   " + activityEntity.toString());
 		
-		return "/businesskunden/aktivitaeten";
+		return HomeController.isLoggedIn( "/businesskunden/aktivitaeten", request);
 	}
 	
 	@RequestMapping(value = "/businesskunden/activityAnlegen", method = RequestMethod.GET)
-	public String pActivityAnlegen(Model model) {
+	public String pActivityAnlegen(HttpServletRequest request, Model model) {
 		logger.info("activityAnlegen-Page !");
 		
-		return "/businesskunden/aktivitaetenAnlegen";
+		return HomeController.isLoggedIn( "/businesskunden/aktivitaetenAnlegen", request);
+		
 	}
 	
 	@RequestMapping(value = "/businesskunden/submitAddActivity", method = RequestMethod.POST)
 	public String submitAddActivity(HttpServletRequest request, ModelMap model) throws ParseException {
 		//model.addAttribute("name", activity.getAktivitaetenId());d
-		
-		
 		
 		String date2 = request.getParameter("date");
 		DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
@@ -265,19 +266,25 @@ public class BusinesskundenController {
 		ActivityDAO activityDAO = (ActivityDAO) context.getBean("activityService");
 		int grundId = Integer.parseInt(request.getParameter("grund"));
 		if (request.getParameter("grund").equals("5")){
-		
+			
+			// ToDo: neuen Grund anlegen
+			
 			 grundId = activityDAO.insertNewGrund(request.getParameter("sonstigesTxt"));
 		
+			
+			// Insert aufrufen und dem activity-construct neue ID mitgeben
+			// Brauche Insert, getIdByGrund
 		}
 
-		// ToDo: Kundennummer mitgeben!
-		Activity a = new Activity(0, 11, sqlDate,
+		// ToDo: Kundennummer mitgeben!= PersonID aus dem JSON,  MA ID - aus der Session auslesen!
+		Customer c = (Customer) request.getSession().getAttribute("currentCustomer");
+		Activity a = new Activity(0, c.getId(), sqlDate,
 				Integer.parseInt(request.getParameter("maId")), Integer.parseInt(request.getParameter("medium")),
 				grundId, request.getParameter("notiz"));
 		
 		activityDAO.insertActivity(a);
-		System.out.println("a  " + a.toString());	
 	
-		return "redirect:/privatkunden/activity";
+
+		return HomeController.isLoggedIn( "redirect:/businesskunden/activity", request);
 	}
 }

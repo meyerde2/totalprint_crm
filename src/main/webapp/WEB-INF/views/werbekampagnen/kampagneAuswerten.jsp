@@ -78,11 +78,11 @@
 			
 			
 			
-        <div id="sectionB" class="tab-pane fade">
+        <div id="sectionB" class="tab-pane fade" ${kampagne.resonanz > 0 ? '' : 'style="display: none;"'}>
         <table id="overview">
         
         <tr>
-			<td>
+			<td ${kampagne.artId == 3 ? 'style="display: none;"' : ''} >
 	        <fieldset>
 	        	<legend>Gewinnampel</legend>
 	        
@@ -178,18 +178,19 @@
 	        </tr>
         </table>
         
-        <hr>
+		<input type="hidden" id="anzahlExemplare" value="${kampagne.anzahlExemplare}">
+		<input type="hidden" id="anzahlVerkaufteExemplare" value="${kampagne.anzahlVerkaufteExemplare}">
+        	        		
+      	<hr>
+        	        		
+        	        		<div id="chartContainerBar"  style="height: 300px; width: 100%; "></div>
+        	        <hr>
         	<!--  <div id="chartContainer" style="height: 150px; width: 200px;"></div>
         	<hr>
         	        	<div id="chartContainer2" style="height: 300px; width: 100%;"></div>
         	        	
         	  -->
-        	        		<div id="chartContainer"  style="height: 300px; width: 100%; "></div>
-        	        		
-      	<hr>
-        	        		
-        	        		<div id="chartContainerBar"  style="height: 300px; width: 100%; "></div>
-        	
+        	        		<div id="chartContainer2"  style="height: 300px; width: 100%; ${kampagne.artId == 3 ? 'display: none;' : ''} "></div>
 		</div>
 
     </div>
@@ -266,68 +267,48 @@
     	    
     	    
 	window.onload = function () {
-		var chart = new CanvasJS.Chart("chartContainer",
-		{
-			theme: "theme2",
-			title:{
-				text: "Kampagne-XYZ...."
-			},
-			legend:{
-				verticalAlign: "bottom",
-				horizontalAlign: "center"
-			},
-			data: [
-			{       
-				type: "doughnut",
-				showInLegend: true,
-				toolTipContent: "{y} - #percent %",
+			
+		var anzahlVerkaufteExemplare =  parseInt($("#anzahlVerkaufteExemplare").val());
+		var anzahlExemplare =  parseInt($("#anzahlExemplare").val());
 
-				dataPoints: [
-					{  y: 1000, legendText:"PS 3", indexLabel: "PlayStation 3" },
-					{  y: 2000, legendText:"Wii", indexLabel: "Wii" },
-					{  y: 3000, legendText:"Vita" , indexLabel: "PS Vita"}
-				]
-			}
-			]
-		});
-		chart.render();
-		
-		
-		
 		var chartBar = new CanvasJS.Chart("chartContainerBar",
 			    {
-			      title:{
-			        text: "Headline"
-			      },
-			      axisY: {
-			        title: "y-title",
-			        maximum: 25000
+			 title:{
+			        text: "Vergleich produzierte/verkaufte Exemplare"
 			      },
 			      data: [
 			      {
 			        type: "bar",
-			        showInLegend: true,
-			        legendText: "Produzierte Exemplare",
-			        color: "gold",
 			        dataPoints: [
-			        { y: 20000, label: "Produzierte Exemplare"}
+			        { y: anzahlExemplare, label: "produzierte Exemplare"},
+			        { y: anzahlVerkaufteExemplare, label: "verkaufte Exemplare"}
 			        ]
-			      },
-			      {
-			        type: "bar",
-			        showInLegend: true,
-			        legendText: "Verkaufte Exemplare",
-			        color: "silver",
-			        dataPoints: [
-			        { y: 15000, label: "Verkaufte Exemplare"}
-			        ]
-			      } 
+			      }
 			      ]
 			    });
 
 			chartBar.render();
 			
+			var umsatz =  parseInt($("#umsatz").val());
+			var kosten =  parseInt($("#kosten").val());
 			
+			var chartBar2 = new CanvasJS.Chart("chartContainer2",
+				    {
+				 title:{
+				        text: "Umsatz-Kosten-Übersicht"
+				      },
+				      data: [
+				      {
+				        type: "bar", 
+				        dataPoints: [
+				        { y: umsatz, label: "Umsatz"},
+				        { y: kosten, label: "Kosten"}
+				        ]
+				      }
+				      ]
+				    });
+
+				chartBar2.render();
 	}
 
 

@@ -15,7 +15,7 @@
 					<div class="row form-group">
 						<div class="infoPanel">
 							<a href="/crm/businesskunden/stammdaten"> <span class="glyphicon glyphicon-user"></span>${sessionScope.currentCustomer.firma}</a>
-							<a href="/crm/handbuch/privatkunden"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
+							<a href="/crm/handbuch/businesskunden"><span class="glyphicon glyphicon-info-sign"></span>Hilfe</a>
 						</div>
 						<div class="col-xs-12">
 							<ul class="nav nav-pills nav-justified thumbnail setup-panel">
@@ -35,7 +35,7 @@
 										<h4 class="list-group-item-heading">Step 4</h4>
 										<p class="list-group-item-text">Anzahl</p>
 								</a></li>
-								<li class="disabled"><a href="#step-5">
+								<li class="disabled"><a href="#step-5" id="step-5A">
 										<h4 class="list-group-item-heading">Step 5</h4>
 										<p class="list-group-item-text">Bestätigung</p>
 								</a></li>
@@ -156,7 +156,7 @@
 									<tr>
 										<td><label>Abweichende Lieferadresse</label></td>
 										<td><input type="checkbox" class="checkbox-inline"
-											name="abwLieferadresseCheck" id="abwLieferadresseCheck" value="ja">
+											name="abwLieferadresse" id="abwLieferadresse" value="ja">
 										</td>
 									</tr>
 
@@ -258,19 +258,19 @@
 								<table class="overview">
 									<tr class="lastschrift">
 										<td><label>IBAN</label></td>
-										<td id="tdIban" >IBAN</td>
+										<td id="tdIban" ></td>
 									</tr>
 									<tr class="lastschrift">
 										<td><label>BIC</label></td>
-										<td id="tdBic">BIC</td>
+										<td id="tdBic"></td>
 									</tr>
 									<tr class="lastschrift">
 										<td><label>Bank</label></td>
-										<td id="tdBank">Bank</td>
+										<td id="tdBank"></td>
 									</tr>
 									<tr class="lastschrift">
 										<td><label>Kontoinhaber</label></td>
-										<td id="tdKontoinhaber">Max Mustermann</td>
+										<td id="tdKontoinhaber"></td>
 									</tr>
 								</table>
 								</div>
@@ -279,15 +279,15 @@
 								<table class="overview">
 									<tr class="abwLieferanschrift">
 										<td><label>Abweichende Str.</label></td>
-										<td id="tdAbwStr">${sessionScope.currentCustomer.abwStrasse}</td>
+										<td id="tdAbwStr"></td>
 									</tr>
 									<tr class="abwLieferanschrift">
 										<td><label>Abweichende PLZ</label></td>
-										<td id="tdAbwPlz">${sessionScope.currentCustomer.abwPlz}</td>
+										<td id="tdAbwPlz"></td>
 									</tr>
 									<tr class="abwLieferanschrift">
 										<td><label>Abweichender Ort</label></td>
-										<td id="tdAbwOrt">${sessionScope.currentCustomer.abwOrt}</td>
+										<td id="tdAbwOrt"></td>
 									</tr>
 								</table>
 								</div>
@@ -297,15 +297,15 @@
 								<table class="overview">
 									<tr class="owZeitschriftA">
 										<td><label>Zeitschrift A</label></td>
-										<td id="tdOwZeitschriftA">${sessionScope.currentCustomer.mengeA}</td>
+										<td id="tdOwZeitschriftA"></td>
 									</tr>
 									<tr class="owZeitschriftB">
 										<td><label>Zeitschrift B</label></td>
-										<td id="tdOwZeitschriftB">${sessionScope.currentCustomer.mengeB}</td>
+										<td id="tdOwZeitschriftB"></td>
 									</tr>
 									<tr class="owTageszeitung">
 										<td><label>Tageszeitung</label></td>
-										<td id="tdOwTageszeitung">${sessionScope.currentCustomer.mengeT}</td>
+										<td id="tdOwTageszeitung"></td>
 									</tr>
 								</table>
 								</div>
@@ -469,6 +469,13 @@
 				                    
 				                        // Wenn die Elemente in dem Div keine error Label danach haben, next, ansonsten nicht!
 				                        $("#abschliessen").validate({ });
+				                        
+				                        $('#iban').focus();
+				                        $('#bic').focus();
+				                        $('#bank').focus();
+				                        $('#kontoinhaber').focus();
+				                        $('#iban').focus();
+				                        
 				                        if ($("input:radio[value=lastschrift]").is(":checked") && 
 				                        		$("#iban-error").hasClass("valid") && 
 				                        		$("#bic-error").hasClass("valid")&& 
@@ -488,55 +495,44 @@
 				                        }
 				                      
 				                  });
-								
-								$('#activate-step-4').on('click', function(e) {
-									
-									 
-									 
-	                				alert("hello step 4");
-	                				$("input:checked").val()
-	                				alert($("#step-3 input:checked").val());
-	                				
-			                        $("#abschliessen").validate();
+								 $('#activate-step-4').on('click', function(e) {
+					                	
+					                	$("#abschliessen").validate({ });
 
-			                        
-	                				if(($("#step-3 input:checked").val() =="ja") &&
-	                    			$("#abwstrasse-error").hasClass("valid") && 
-	                        		$("#abwplz-error").hasClass("valid")&& 
-	                        		$("#abwort-error").hasClass("valid")){
-	                					alert("jooo");
-	                		       		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
-				                        $('ul.setup-panel li a[href="#step-4"]').click();
-				                        $(this).remove();
-	                				}
-	                				
-			                        $("#abschliessen").validate({});
 
-			                    	if ($("#step-3 input:checked").val() =="ja" &&
-			                    			$("#abwstrasse-error").hasClass("valid") && 
-			                        		$("#abwplz-error").hasClass("valid")&& 
-			                        		$("#abwort-error").hasClass("valid")
-			                  			){
-			                    		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
-				                        $('ul.setup-panel li a[href="#step-4"]').click();
-				                        $(this).remove();
-			                    	}else{
-			                   
-			                    	}
-		
-			                    	if ($("#step-3 input:checked").val() != "ja"){
-			                    		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
-				                        $('ul.setup-panel li a[href="#step-4"]').click();
-				                        $(this).remove();
-			                    	}
+				                        $('#abwstrasse').focus();
+				                        $('#abwplz').focus();
+				                        $('#abwort').focus();
+				                        $('#abwstrasse').focus();
+
+				                        
+					                    	if ($("#abwLieferadresse").is(":checked") &&
+					                    			$("#abwstrasse-error").hasClass("valid") && 
+					                        		$("#abwplz-error").hasClass("valid")&& 
+					                        		$("#abwort-error").hasClass("valid")
+					                  			){
+					                    		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
+						                        $('ul.setup-panel li a[href="#step-4"]').trigger('click');
+						                        $(this).remove();
+					                    	}
+
+					                    	if (!$("#abwLieferadresse").is(":checked")){
+					                    		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
+						                        $('ul.setup-panel li a[href="#step-4"]').trigger('click');
+						                        $(this).remove();
+					                    	}
 				                });
 								
 								
-								$('#activate-step-5').on('click',function(e) {
-									$('ul.setup-panel li:eq(4)').removeClass('disabled');
-									$('ul.setup-panel li a[href="#step-5"]').trigger('click');
-									$(this).remove();
-									
+								$("#activate-step-5, #step-5A").click(function(){
+	
+								//	alert("activate step 5");
+									$("#abschliessen").validate({ });
+				                    		$('ul.setup-panel li:eq(4)').removeClass( 'disabled');
+					                        $('ul.setup-panel li a[href="#step-5"]').trigger('click');
+					                        $(this).remove();
+				           
+					                        
 									if($("input[value='lastschrift']:checked").val()=="lastschrift"){
 										
 					            		$("#overviewLastschrift").show();
@@ -547,65 +543,34 @@
 					            		$("#tdBic").html($('#bic').val());
 					            		$("#tdBank").html($('#bank').val());
 					            		$("#tdKontoinhaber").html($('#kontoinhaber').val());
+
 						            	
 					            	}else{
 					            		$("#tdZahlungsart").html("Rechnung");
 					            		$("#overviewLastschrift").hide();
+					            	}
+					            	
+					            	if( $("#abwLieferadresse").is(":checked") == true){	
+
+					            		$("#overviewAbwLieferanschrift").show();
+
+					            		$("#tdAbwStr").html($('#abwstrasse').val());
+					            		$("#tdAbwPlz").html($('#abwplz').val());
+					            		$("#tdAbwOrt").html($('#abwort').val());
+					            		
+					            	}else{
+					            		
+					            		$("#overviewAbwLieferanschrift").hide();
 					            	}
 									
 									$("#tdOwZeitschriftA").html($('#numberZeitschriftA').val());
 									$("#tdOwZeitschriftB").html($('#numberZeitschriftB').val());
 									$("#tdOwTageszeitung").html($('#numberTZ').val());
 									
-					            	if( $("#abwLieferadresse").is(":checked") == true){	
-										alert($('#abwstrasse').val());
-					            		$("#overviewAbwLieferanschrift").show();
-					              		$("#tdAbwStr").html($('#abwstrasse').val());
-										$("#tdAbwPlz").html($('#abwplz').val());
-										$("#tdAbwOrt").html($('#abwort').val());
-					            	}else{
-					            		
-					            		$("#overviewAbwLieferanschrift").hide();
-					            	}
+					
 								});
  
-								$('#step-5A').on('click',function(e) {
-									$('ul.setup-panel li:eq(4)').removeClass('disabled');
-									$('ul.setup-panel li a[href="#step-5"]').trigger('click');
-									$(this).remove();
-									
-									if($("input[value='lastschrift']:checked").val()=="lastschrift"){
-										
-					            		$("#overviewLastschrift").show();
-					            		
-					            		$("#tdZahlungsart").html("Lastschrift");
-					            		//getValuesFromInputTextFields
-					            		$("#tdIban").html($('#iban').val());
-					            		$("#tdBic").html($('#bic').val());
-					            		$("#tdBank").html($('#bank').val());
-					            		$("#tdKontoinhaber").html($('#kontoinhaber').val());
-						            	
-					            	}else{
-					            		$("#tdZahlungsart").html("Rechnung");
-					            		$("#overviewLastschrift").hide();
-					            	}
-									
-									$("#tdOwZeitschriftA").html($('#numberZeitschriftA').val());
-									$("#tdOwZeitschriftB").html($('#numberZeitschriftB').val());
-									$("#tdOwTageszeitung").html($('#numberTZ').val());
-									
-					            	if( $("#abwLieferadresse").is(":checked") == true){	
-										alert($('#abwstrasse').val());
-					            		$("#overviewAbwLieferanschrift").show();
-					              		$("#tdAbwStr").html($('#abwstrasse').val());
-										$("#tdAbwPlz").html($('#abwplz').val());
-										$("#tdAbwOrt").html($('#abwort').val());
-					            	}else{
-					            		
-					            		$("#overviewAbwLieferanschrift").hide();
-					            	}
-								});
- 
+							
 								
 					            $('#abbrechen').on('click', function(e) {
 				                	

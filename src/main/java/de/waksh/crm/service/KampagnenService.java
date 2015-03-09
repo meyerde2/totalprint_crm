@@ -215,7 +215,7 @@ public class KampagnenService implements KampagnenDAO{
 			+ "`beilage_bei_id` = ?,`zielgruppen_id` = ?, `zielgruppen_notizen` = ?,  `anzahl_exemplare` = ?,	"
 			+ "`geschenk` = ?,`budget` = ?, `plankosten` = ?,"
 			+ "`werbemittel_id` = ?, `notizen` = ? , "
-			+ "`kosten` = ? , `umsatz` = ? , `resonanz` = ? , `anzahl_verkaeufe` = ? , `status` = ? "
+			+ "`kosten` = ? , `umsatz` = ? , `resonanz` = ? , `anzahl_verkaeufe` = ? "
 			+ "WHERE `werbekampagnen_id` = " + k.getKampagnenId()+ ";";
 		
 		Connection conn = null;
@@ -242,7 +242,6 @@ public class KampagnenService implements KampagnenDAO{
 			ps.setDouble(16, k.getUmsatz());
 			ps.setInt(17, k.getResonanz());
 			ps.setInt(18, k.getAnzahlVerkaufteExemplare());
-			ps.setInt(19, (int) k.getStatus());
 			 // call executeUpdate to execute our sql update statement
 		    ps.executeUpdate();
 		    ps.close();			

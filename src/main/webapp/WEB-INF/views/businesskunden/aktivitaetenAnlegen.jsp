@@ -29,8 +29,9 @@
 
 										<div class="form-group">
 											<label for="ma"> Mitarbeitername</label> 
-											 <input type="text" class="form-control" name="ma" id="ma" placeholder="Vorname Name" readonly />
-											<input type="hidden" name="maId" id="maId" value="111">
+				 							<input type="text" class="form-control" name="ma" id="ma" value="${sessionScope.user.email}" placeholder="Vorname Name" readonly />
+											<input type="hidden" name="maId" id="maId" value="${sessionScope.user.id}">
+									
 										</div>
 										<div class="form-group">
 											<label for="ma"> Kontaktmedium</label> 
@@ -80,13 +81,48 @@
 			</div>
 		</div>
 
-
-		<script>
+<script>
+		
+		jQuery.validator.setDefaults({
+  		  debug: false,
+  		  success: "valid",
+  		  focusCleanup: false
+  		});
+  		$( "#activityAnlegen" ).validate({
+  		  rules: {
+  			date: {
+  		      required: true,
+  		      dateDECH: true
+  		    },
+  			ma: {
+  				required: false
+  			},
+  			maId: {
+  				required: false
+  			},
+  			medium: {
+  				required: true
+  			},
+  			grund: {
+  				required: true
+  			},
+  			sonstigesTxt: {
+  				required: false
+  			}
+  		  },
+  		  messages:{
+  			date:{
+  				dateDECH: "Kein gültiges Datum!"
+  			}
+	
+  		  }
+  		});
+  		
 			$(document).ready(
 					function() {
 						$("#sonstiges").hide();
 
-						document.forms['activityAnlegen']['cId'].readOnly = true;
+						
 						
 						$('#date').datetimepicker(
 								{
@@ -98,9 +134,8 @@
 													'März', 'April', 'Mai',
 													'Juni', 'Juli', 'August',
 													'September', 'Oktober',
-													'November', 'Dezember', ],
-											dayOfWeek : [ "Mo", "Di", "Mi",
-													"Do", "Fr" ]
+													'November', 'Dezember' ],
+													 dayOfWeek : ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
 										}
 									},
 									timepicker : false,
@@ -110,7 +145,7 @@
 						$('#grund').change(function() {
 							// assign the value to a variable, so you can test to see if it is working
 							var selectVal = $('#grund').val();
-							if (selectVal == 'sonstiges') {
+							if (selectVal == '5') {
 								$("#sonstiges").show();
 							} else {
 								$("#sonstiges").hide();
@@ -119,8 +154,6 @@
 						});
 
 					});
-		</script>
-			
 		</script>
 	</tiles:putAttribute>
 </tiles:insertDefinition>

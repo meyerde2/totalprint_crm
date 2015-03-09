@@ -36,17 +36,23 @@ public class JsonService implements JsonDAO{
 	
 			conn.setRequestMethod("PUT");
 	        conn.setDoOutput(true);
-	        conn.setRequestProperty("Content-Type", "application/json");
-	        conn.setRequestProperty("Accept", "application/json");
-	        conn.setRequestProperty("charset", "UTF-8");
-
-	        OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
+	       
+	//        conn.setRequestProperty("Connection", "Keep-Alive");
+	    //    conn.setRequestProperty("Accept", "application/json, text/plain, */*");
+	     //   conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
+	        conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+	  //      conn.setRequestProperty("charset", "UTF-8");
+	     //   conn.setDoInput(true);
 	        
-			osw.write(obj.toString());
+	        OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
+	        System.out.println("obj json:  " + obj.toString());
+	        
+	        
+			osw.write(new String(obj.toString().getBytes("UTF-8"), "ISO-8859-1"));
 	        osw.flush();
 	        osw.close();
-		     System.err.println(conn.getResponseCode());
-		    System.out.println(conn.getResponseMessage());
+		    System.err.println(conn.getResponseCode());
+		    System.out.println(conn.getResponseMessage() + "   -  getContentEncoding -   " + conn.getContentEncoding());
 		    
 		    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		    StringBuilder sb = new StringBuilder();
@@ -60,7 +66,7 @@ public class JsonService implements JsonDAO{
 		    if (!retval) {
 		    	status = true;
 		    }
-		    //System.out.println(sb);
+		    System.out.println("string:  " + sb.toString());
 		    br.close();
 		    conn.disconnect();
 		    
