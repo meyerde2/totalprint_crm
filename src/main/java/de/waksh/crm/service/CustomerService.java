@@ -100,7 +100,8 @@ public class CustomerService implements CustomerDAO {
 		try {
 			// Json einlesen
 			// all:  http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/person/show/.json
-			URI uri = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/person/.json");
+			//URI uri = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/person/.json");
+			URI uri = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/debitor/.json");
 			JSONTokener tokener = new JSONTokener(new InputStreamReader(uri.toURL().openStream(),"UTF-8"));
 			//JSONTokener tokener = new JSONTokener(uri.toURL().openStream());
 		
@@ -108,29 +109,29 @@ public class CustomerService implements CustomerDAO {
 			
 			for (int i = 0; i < jsonArray.length(); i++) {
 				
-				JSONArray jsonDebitor =(JSONArray) jsonArray.getJSONObject(i).get("debitor");
-				if(jsonDebitor.length() == 0){
+				JSONObject jsonPerson = jsonArray.getJSONObject(i).getJSONObject("person");
+				if(jsonPerson.length() == 0){
 					
 				}else if( 
-					Integer.parseInt(jsonDebitor.getJSONObject(0).get("id").toString()) >= 1)  
+					Integer.parseInt(jsonPerson.get("id").toString()) >= 1)  
 					{
 					
-					JSONObject jsonObject =  (JSONObject)jsonArray.getJSONObject(i);
-					JSONObject objAnrede = (JSONObject) jsonObject.get("anrede");
+					int id= Integer.parseInt(jsonPerson.get("id").toString());
+					JSONObject objKennzeichen = jsonArray.getJSONObject(i).getJSONObject("kennzeichen");
 					
-					int idPerson = Integer.parseInt(jsonObject.get("id").toString());
-					int id= Integer.parseInt(jsonDebitor.getJSONObject(0).get("id").toString());
+
 					
 					//http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/debitor/show/1.json
 					
-					URI uriDebitor = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/debitor/show/" + id + ".json");
+					URI uriDebitor = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/person/show/" + id + ".json");
 					JSONTokener tokenerDebitor = new JSONTokener(new InputStreamReader(uriDebitor.toURL().openStream(),"UTF-8"));
-					JSONObject jsonObjDebitor = new JSONObject(tokenerDebitor);
-					JSONObject objKennzeichen = jsonObjDebitor.getJSONObject("kennzeichen");
+					JSONObject jsonObject = new JSONObject(tokenerDebitor);
+
 					//JSONArray jsonArrayRechnung =(JSONArray) jsonObject.get("rechnung");
 					//System.out.println("rechnung   " + jsonArrayRechnung.toString());
 
-
+					JSONObject jsonObjDebitor =  (JSONObject)jsonArray.getJSONObject(i);
+					JSONObject objAnrede = (JSONObject) jsonObject.get("anrede");
 					
 					Customer customer = new Customer(
 							Integer.parseInt(jsonObject.get("id").toString()),
