@@ -109,9 +109,8 @@ public class CustomerService implements CustomerDAO {
 			for (int i = 0; i < jsonArray.length(); i++) {
 				
 				JSONArray jsonDebitor =(JSONArray) jsonArray.getJSONObject(i).get("debitor");
-				System.out.println("debitor-: " + jsonDebitor);
 				if(jsonDebitor.length() == 0){
-					System.out.println("gleich 0");
+					
 				}else if( 
 					Integer.parseInt(jsonDebitor.getJSONObject(0).get("id").toString()) >= 1)  
 					{

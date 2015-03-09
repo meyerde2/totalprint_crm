@@ -52,7 +52,7 @@
 								<table>
 									<tr>
 										<td><label>Kundennummer</label></td>
-										<td>${sessionScope.currentCustomer.id}</td>
+										<td>${sessionScope.currentCustomer.debitorId}</td>
 									</tr>
 									<tr>
 										<td><label>Name</label></td>

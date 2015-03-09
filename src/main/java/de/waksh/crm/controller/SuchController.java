@@ -133,87 +133,120 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 			
 			JSONArray jsonBestellungen =(JSONArray) jsonObject.get("bestellungen");
 
-			ArrayList<Integer> mengen = new ArrayList<Integer>();
 			
+			int debitorId = Integer.parseInt(jsonDebitor.getJSONObject(0).get("id").toString());
+
+			URI uriDebitor = new URI(
+					"http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/debitor/show/"
+							+ debitorId + ".json");
+
+			JSONObject jsonObjDebitor = new JSONObject(new JSONTokener(
+					new InputStreamReader(uriDebitor.toURL().openStream(),
+							"UTF-8")));
+			JSONObject objKundenart = (JSONObject) jsonObjDebitor
+					.get("kennzeichen");
+			JSONObject objKennzeichen = jsonObjDebitor
+					.getJSONObject("kennzeichen");
+
+			// ToDo: Auf das Update warten und überprüfen, ob die Bezeichner
+			// verändert worden.
+
+			if (objKundenart.get("name").equals("Businesskunde")) {
+				kundenart = "Geschäftskunde";
+			} else {
+				kundenart = "Privatkunde";
+			}
 			int mengeA = -1;
 			int mengeB = -1;
 			int mengeTz = -1;
-			
-			for(int i = 0; i< jsonBestellungen.length(); i++){
+			if ("Geschäftskunde".equals(kundenart)) {
 
-				int bestId = Integer.parseInt(jsonBestellungen.getJSONObject(i).get("id").toString());
-				URI uriBest = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/show/" + bestId + ".json");
-				JSONObject jsonBest =new JSONObject(new JSONTokener(new InputStreamReader(uriBest.toURL().openStream(),"UTF-8")));
-				JSONObject jArtikelVersion = (JSONObject) jsonBest.get("artikelVersionen");
-				
-				System.out.println("artikelVersionen:  " + jArtikelVersion.get("id"));
+				ArrayList<Integer> mengen = new ArrayList<Integer>();
 
-				jArtikelVersion.get("id");
-				
-				if (Integer.parseInt(jArtikelVersion.get("id").toString()) == 1){
-					mengeA = Integer.parseInt(jsonBest.get("menge").toString());
-				}else if (Integer.parseInt(jArtikelVersion.get("id").toString()) == 2){
-					mengeB = Integer.parseInt(jsonBest.get("menge").toString());
-				}else if (Integer.parseInt(jArtikelVersion.get("id").toString()) == 3){
-					mengeTz = Integer.parseInt(jsonBest.get("menge").toString());
+		
+
+				for (int i = 0; i < jsonBestellungen.length(); i++) {
+
+					int bestId = Integer.parseInt(jsonBestellungen
+							.getJSONObject(i).get("id").toString());
+					URI uriBest = new URI(
+							"http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/show/"
+									+ bestId + ".json");
+					JSONObject jsonBest = new JSONObject(new JSONTokener(
+							new InputStreamReader(uriBest.toURL().openStream(),
+									"UTF-8")));
+					JSONObject jArtikelVersion = (JSONObject) jsonBest
+							.get("artikelVersionen");
+
+					System.out.println("artikelVersionen:  "
+							+ jArtikelVersion.get("id"));
+
+					jArtikelVersion.get("id");
+
+					if (Integer.parseInt(jArtikelVersion.get("id").toString()) == 1) {
+						mengeA = Integer.parseInt(jsonBest.get("menge")
+								.toString());
+					} else if (Integer.parseInt(jArtikelVersion.get("id")
+							.toString()) == 2) {
+						mengeB = Integer.parseInt(jsonBest.get("menge")
+								.toString());
+					} else if (Integer.parseInt(jArtikelVersion.get("id")
+							.toString()) == 3) {
+						mengeTz = Integer.parseInt(jsonBest.get("menge")
+								.toString());
+					}
+
+					mengen.add(Integer.parseInt(jsonBest.get("menge")
+							.toString()));
+
 				}
-				
-				mengen.add(Integer.parseInt(jsonBest.get("menge").toString()));
-								
-			}
-			
-			if(mengeA == -1){
-				// Post 				
-				JSONObject objBestSave = new JSONObject();
-				
-				objBestSave.put("id", 1);
-				objBestSave.put("person", id);
-				objBestSave.put("menge", 0);
-				mengeA = 0;
-				jsonDAO.saveJsonInErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/save.json",  objBestSave);
 
-			}
-			if(mengeB == -1){
-				// Post 				
-				JSONObject objBestSave = new JSONObject();
-				
-				objBestSave.put("id", 2);
-				objBestSave.put("person", id);
-				objBestSave.put("menge", 0);
-				mengeB = 0;
-				jsonDAO.saveJsonInErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/save.json",  objBestSave);
+				if (mengeA == -1) {
+					// Post
+					JSONObject objBestSave = new JSONObject();
 
-			}
-			
-			if(mengeTz == -1){
-				// Post 				
-				JSONObject objBestSave = new JSONObject();
-				
-				objBestSave.put("id", 3);
-				objBestSave.put("person", id);
-				objBestSave.put("menge", 0);
-				mengeTz = 0;
-				jsonDAO.saveJsonInErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/save.json",  objBestSave);
+					objBestSave.put("artikelVersionen", 1);
+					objBestSave.put("person", id);
+					objBestSave.put("menge", 0);
+					mengeA = 0;
+					jsonDAO.saveJsonInErp(
+							"http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/save.json",
+							objBestSave);
 
-			}
-			
-			
-			int debitorId = Integer.parseInt(jsonDebitor.getJSONObject(0).get("id").toString());
-		
-			URI uriDebitor = new URI("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/debitor/show/" + debitorId + ".json");
-			
-			JSONObject jsonObjDebitor =new JSONObject(new JSONTokener(new InputStreamReader(uriDebitor.toURL().openStream(),"UTF-8")));
-			JSONObject objKundenart = (JSONObject) jsonObjDebitor.get("kennzeichen");
-			JSONObject objKennzeichen = jsonObjDebitor.getJSONObject("kennzeichen");
-			
-			// ToDo: Auf das Update warten und überprüfen, ob die Bezeichner verändert worden.
-		
-			if (objKundenart.get("name").equals("Businesskunde")){
-				kundenart ="Geschäftskunde";
-			}else{
-				kundenart = "Privatkunde";
+				}
+				if (mengeB == -1) {
+					// Post
+					JSONObject objBestSave = new JSONObject();
+
+					objBestSave.put("artikelVersionen", 2);
+					objBestSave.put("person", id);
+					objBestSave.put("menge", 0);
+					mengeB = 0;
+					jsonDAO.saveJsonInErp(
+							"http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/save.json",
+							objBestSave);
+
+				}
+
+				if (mengeTz == -1) {
+					// Post
+					JSONObject objBestSave = new JSONObject();
+
+					objBestSave.put("artikelVersionen", 3);
+					objBestSave.put("person", id);
+					objBestSave.put("menge", 0);
+					mengeTz = 0;
+					jsonDAO.saveJsonInErp(
+							"http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/save.json",
+							objBestSave);
+
+				}
+
 			}
 			// ToDo:  CustomerSearchEntity erstellen
+			
+
+			
 			Customer customer = new Customer(
 					Integer.parseInt(jsonObject.get("id").toString()),
 					Integer.parseInt(jsonObjDebitor.get("id").toString()),
@@ -236,6 +269,13 @@ private static final Logger logger = LoggerFactory.getLogger(AddCustomerControll
 					(Boolean)jsonObjDebitor.get("abonnement"),
 					1, // Rechnungsart
 					mengeA, mengeB, mengeTz); // Mengen
+			
+			if("-".equals(jsonObjDebitor.get("lieferadresse").toString())){
+				customer.setAbwPlz("");
+				customer.setAbwOrt("");
+				customer.setAbwStrasse("");	
+			}
+
 			
 			request.getSession().setAttribute("currentCustomer", customer);
 

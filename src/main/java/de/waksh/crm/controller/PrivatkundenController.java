@@ -101,7 +101,15 @@ public class PrivatkundenController {
 				json.put("id", c.getDebitorId());
 			
 				c.setAbonnent(false);
+				c.setAbwPlz("");
+				c.setAbwOrt("");
+				c.setAbwStrasse("");
+				
 				json.put("abonnement", false);
+				
+				json.put("lieferOrt", "-");
+				json.put("lieferPlz", 0);
+				json.put("lieferadresse", "-");
 				// ToDo: 
 				// json.put("kuendigungZum", request.getParameter("dateUntil").toString());
 				
@@ -126,7 +134,7 @@ public class PrivatkundenController {
 			request.getSession().setAttribute("currentCustomer", c);
 		}
 		
-		return HomeController.isLoggedIn("/privatkunden/pStammdaten", request);
+		return HomeController.isLoggedIn("redirect:/privatkunden/stammdaten", request);
 	}
 	
 	
@@ -231,7 +239,7 @@ public class PrivatkundenController {
 			activityDAO.insertActivity(a);
 		}
 
-		return HomeController.isLoggedIn("/privatkunden/pStammdaten", request);
+		return HomeController.isLoggedIn("redirect:/privatkunden/stammdaten", request);
 		// return "redirect:/privatkunden/submitAddAboJSON" ;
 	}
 	

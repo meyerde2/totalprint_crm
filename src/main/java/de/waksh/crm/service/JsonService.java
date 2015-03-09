@@ -167,7 +167,7 @@ public class JsonService implements JsonDAO{
 		    if (!retval) {
 		    	status = true;
 		    }
-		    //System.out.println(sb);
+		    System.out.println(sb);
 		    br.close();
 		    conn.disconnect();
 		    

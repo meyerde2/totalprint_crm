@@ -148,6 +148,9 @@ public class BusinesskundenController {
 			JSONObject jsonObject =new JSONObject(new JSONTokener(new InputStreamReader(uri2.toURL().openStream(),"UTF-8")));
 
 			JSONArray jsonBestellungen =(JSONArray) jsonObject.get("bestellungen");
+			boolean ma = false;
+			boolean mb = false;
+			boolean mt = false;
 			
 			for(int i = 0; i< jsonBestellungen.length(); i++){
 
@@ -156,13 +159,13 @@ public class BusinesskundenController {
 				JSONObject jsonBest =new JSONObject(new JSONTokener(new InputStreamReader(uriBest.toURL().openStream(),"UTF-8")));
 				JSONObject jArtikelVersion = (JSONObject) jsonBest.get("artikelVersionen");
 				
-				System.out.println("artikelVersionen:  " + jArtikelVersion.get("id"));
+				System.out.println("artikelVersionen:  " + jArtikelVersion.get("id") +"    -   bestId  -    " + bestId);
 
 				jArtikelVersion.get("id");
 				
 				JSONObject jsonBestUpdate = new JSONObject();
 				if (Integer.parseInt(jArtikelVersion.get("id").toString()) == 1){
-
+					ma = true;
 					jsonBestUpdate.put("id", bestId);
 					jsonBestUpdate.put("person", c.getId());
 					jsonBestUpdate.put("menge", Integer.parseInt(request.getParameter("numberZeitschriftA")));
@@ -170,7 +173,7 @@ public class BusinesskundenController {
 					jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/bestellungen/update.json",  jsonBestUpdate);
 					
 				}else if (Integer.parseInt(jArtikelVersion.get("id").toString()) == 2){
-
+					mb = true;
 					jsonBestUpdate.put("id", bestId);
 					jsonBestUpdate.put("person", c.getId());
 					jsonBestUpdate.put("menge", Integer.parseInt(request.getParameter("numberZeitschriftB")));
@@ -179,7 +182,7 @@ public class BusinesskundenController {
 
 					
 				}else if (Integer.parseInt(jArtikelVersion.get("id").toString()) == 3){
-
+					mt = true;
 					jsonBestUpdate.put("id", bestId);
 					jsonBestUpdate.put("person", c.getId());
 					jsonBestUpdate.put("menge", Integer.parseInt(request.getParameter("numberTZ")));
@@ -190,13 +193,32 @@ public class BusinesskundenController {
 												
 			}
 			
-			// ToDo: Unterscheidung, ob schon vorhanden, dann put oder nciht vorhanden dann: post
+		
+				JSONObject jsonBestUpdate = new JSONObject();
 
-			//Post
-			
-//			jsonDAO.putJsonToErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/person/save.json",  jsonBestellung);
+				if(!ma){
+					jsonBestUpdate.put("person", c.getId());
+					jsonBestUpdate.put("menge", 0);
+					jsonBestUpdate.put("artikelVersionen", 1);
 
-			//http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERP-System/person/save.json
+					jsonDAO.saveJsonInErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/bestellungen/save.json", jsonBestUpdate);
+				}
+				
+				if(!mb){
+					jsonBestUpdate.put("person", c.getId());
+					jsonBestUpdate.put("menge", 0);
+					jsonBestUpdate.put("artikelVersionen", 2);
+
+					jsonDAO.saveJsonInErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/bestellungen/save.json", jsonBestUpdate);
+				}
+				
+				if(!mt){
+					jsonBestUpdate.put("person", c.getId());
+					jsonBestUpdate.put("menge", 0);
+					jsonBestUpdate.put("artikelVersionen", 3);
+					
+					jsonDAO.saveJsonInErp("http://lvps87-230-14-183.dedicated.hosteurope.de:8080/ERPSystem/bestellungen/save.json", jsonBestUpdate);
+				}
 			
 			c.setMengeA(Integer.parseInt(request.getParameter("numberZeitschriftA")));
 			c.setMengeB(Integer.parseInt(request.getParameter("numberZeitschriftB")));
@@ -217,7 +239,7 @@ public class BusinesskundenController {
 		}
 		
 
-		return HomeController.isLoggedIn( "/businesskunden/bestellungBearbeiten", request);
+		return HomeController.isLoggedIn( "redirect:/businesskunden/stammdaten", request);
 	}
 	
 	@RequestMapping(value = "/businesskunden/activity", method = RequestMethod.GET)

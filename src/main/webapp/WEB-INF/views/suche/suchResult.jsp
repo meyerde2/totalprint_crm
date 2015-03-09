@@ -46,7 +46,7 @@
 										
 							<tr>
 								<td>${customer.debitorId}</td>
-								<td>${customer.firma}</td>	
+								<td>${customer.kundenart == 'Privatkunde' ? '-' : customer.firma}</td>	
 								<td>${customer.vorname}</td>
 								<td>${customer.name}</td>
 								<td>${customer.ort}</td>

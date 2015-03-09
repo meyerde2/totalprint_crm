@@ -35,26 +35,22 @@
 										<h4 class="list-group-item-heading">Step 4</h4>
 										<p class="list-group-item-text">Anzahl</p>
 								</a></li>
-								<li class="disabled"><a href="#step-5" id="step-5A">
+								<li class="disabled"><a href="#step-5" id="showStep5">
 										<h4 class="list-group-item-heading">Step 5</h4>
 										<p class="list-group-item-text">Bestätigung</p>
 								</a></li>
 							</ul>
 						</div>
 					</div>
-					<div class="row setup-content" id="step-1">
+					
+				<div class="row setup-content" id="step-1">
 						<div class="col-xs-12">
 							<div class="col-md-12 well text-center">
-								<h1>Kundendaten</h1>
+								<h2>Kundendaten</h2>
 								<table>
 									<tr>
 										<td><label>Kundennummer</label></td>
-										<td>${sessionScope.currentCustomer.id}</td>
-									</tr>
-									<tr>
-										<td><label>Firma</label></td>
-										<td>${sessionScope.currentCustomer.firma}</td>
-
+										<td>${sessionScope.currentCustomer.debitorId}</td>
 									</tr>
 									<tr>
 										<td><label>Name</label></td>
@@ -67,7 +63,7 @@
 									</tr>
 								</table>
 
-								<a id="activate-step-2" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></a>
+								<a id="activate-step-2" class="btn btn-primary btn-md">Weiter<span class="glyphicon glyphicon-chevron-right"></span></a>
 
 
 							</div>
@@ -76,7 +72,7 @@
 					<div class="row setup-content" id="step-2">
 						<div class="col-xs-12">
 							<div class="col-md-12 well text-center">
-								<h1 class="text-center">Zahlungsart</h1>
+								<h2>Zahlungsart</h2>
 								<table>
 									<tr>
 										<td><label>Zahlungsart</label></td>
@@ -103,24 +99,19 @@
 									</tr>
 									<tr class="payment">
 										<td><label>IBAN</label></td>
-										<td><input type="text" class="form-control" name="iban"
-											id="iban" placeholder="IBAN" value="${sessionScope.currentCustomer.iban}"></td>
+										<td><input type="text" class="form-control" name="iban" id="iban" placeholder="IBAN" value="${sessionScope.currentCustomer.iban}"></td>
 									</tr>
 									<tr class="payment">
 										<td><label>BIC</label></td>
-										<td><input type="text" class="form-control" name="bic"
-											id="bic" placeholder="BIC" value="${sessionScope.currentCustomer.bic}"></td>
+										<td><input type="text" class="form-control" name="bic" id="bic" placeholder="BIC" value="${sessionScope.currentCustomer.bic}"></td>
 									</tr>
 									<tr class="payment">
 										<td><label>Bank</label></td>
-										<td><input type="text" class="form-control" name="bank"
-											id="bank" placeholder="Bank" value="${sessionScope.currentCustomer.bank}"></td>
+										<td><input type="text" class="form-control" name="bank" id="bank" placeholder="Bank" value="${sessionScope.currentCustomer.bank}"></td>
 									</tr>
 									<tr class="payment">
 										<td><label>Kontoinhaber</label></td>
-										<td><input type="text" class="form-control"
-											name="kontoinhaber" id="kontoinhaber"
-											placeholder="Kontoinhaber" value="${sessionScope.currentCustomer.kontoinhaber}"></td>
+										<td><input type="text" class="form-control" name="kontoinhaber" id="kontoinhaber" placeholder="Kontoinhaber" value="${sessionScope.currentCustomer.kontoinhaber}"></td>
 									</tr>
 
 								</table>
@@ -128,17 +119,12 @@
 							</div>
 						</div>
 					</div>
-
 					<div class="row setup-content" id="step-3">
 						<div class="col-xs-12">
 							<div class="col-md-12 well text-center">
-								<h1 class="text-center">Lieferadresse</h1>
+								<h2>Lieferadresse</h2>
 
 								<table>
-									<tr>
-										<td><label>Firma</label></td>
-										<td>${sessionScope.currentCustomer.firma}</td>
-									</tr>
 									<tr>
 										<td><label>Straße</label></td>
 										<td>${sessionScope.currentCustomer.strasse}</td>
@@ -168,7 +154,7 @@
 									<tr class="abwLieferadresse">
 										<td><label>PLZ</label></td>
 										<td><input type="text" class="form-control" name="abwplz"
-											id="abwplz" placeholder="Postleitzahl" value="${sessionScope.currentCustomer.abwPlz}"></td>
+											id="abwplz" placeholder="Postleitzahl" value ="${sessionScope.currentCustomer.abwPlz}"></td>
 									</tr>
 									<tr class="abwLieferadresse">
 										<td><label>Ort</label></td>
@@ -181,7 +167,6 @@
 						</div>
 					</div>
 
-
 					<div class="row setup-content" id="step-4">
 						<div class="col-xs-12">
 							<div class="col-md-12 well text-center">
@@ -192,19 +177,19 @@
 										<td><label>Zeitschrift A</label></td>
 										<td><input type="number" MIN="0"  STEP="1"
 											class="form-control" name="numberZeitschriftA"
-											id="numberZeitschriftA" placeholder="Anzahl" value="${sessionScope.currentCustomer.mengeA}"></td>
+											id="numberZeitschriftA" placeholder="Anzahl" value="${sessionScope.currentCustomer.mengeA}" required></td>
 									</tr>
 
 									<tr>
 										<td><label>Zeitschrift B</label></td>
 										<td><input type="number" MIN="0"STEP="1"
 											class="form-control" name="numberZeitschriftB"
-											id="numberZeitschriftB" placeholder="Anzahl" value="${sessionScope.currentCustomer.mengeB}"></td>
+											id="numberZeitschriftB" placeholder="Anzahl" value="${sessionScope.currentCustomer.mengeB}" required></td>
 									</tr>
 									<tr>
 										<td><label>Tageszeitung</label></td>
 										<td><input type="number" MIN="0" STEP="1"
-											class="form-control" name="numberTZ" id="numberTZ" placeholder="Anzahl" value="${sessionScope.currentCustomer.mengeT}"></td>
+											class="form-control" name="numberTZ" id="numberTZ" placeholder="Anzahl" required value="${sessionScope.currentCustomer.mengeT}"></td>
 									</tr>
 								</table>
 								<a id="activate-step-5" class="btn btn-primary btn-md">Weiter <span class="glyphicon glyphicon-chevron-right"></span></a>
@@ -212,20 +197,13 @@
 						</div>
 					</div>
 
-
-
 					<div class="row setup-content" id="step-5">
 						<div class="col-xs-12">
 							<div class="col-md-12 well text-center">
-								<h1 class="text-center">Bestätigung</h1>
-
+								<h2>Bestätigung</h2>
 								<div>
 								<p class="abschnitt">Anschrift</p>
 								<table class="overview">
-									<tr>
-										<td><label>Firma</label></td>
-										<td id="firma">${sessionScope.currentCustomer.firma}</td>
-									</tr>
 									<tr>
 										<td><label>Name</label></td>
 										<td id="name">${sessionScope.currentCustomer.vorname} ${sessionScope.currentCustomer.name}</td>
@@ -258,19 +236,19 @@
 								<table class="overview">
 									<tr class="lastschrift">
 										<td><label>IBAN</label></td>
-										<td id="tdIban" ></td>
+										<td id="tdIban">IBAN</td>
 									</tr>
 									<tr class="lastschrift">
 										<td><label>BIC</label></td>
-										<td id="tdBic"></td>
+										<td id="tdBic">BIC</td>
 									</tr>
 									<tr class="lastschrift">
 										<td><label>Bank</label></td>
-										<td id="tdBank"></td>
+										<td id="tdBank">Bank</td>
 									</tr>
 									<tr class="lastschrift">
 										<td><label>Kontoinhaber</label></td>
-										<td id="tdKontoinhaber"></td>
+										<td id="tdKontoinhaber">Max Mustermann</td>
 									</tr>
 								</table>
 								</div>
@@ -291,7 +269,6 @@
 									</tr>
 								</table>
 								</div>
-								
 								<div id="overviewAnzahl">
 								<p class="abschnitt">Anzahl</p>
 								<table class="overview">
@@ -308,277 +285,357 @@
 										<td id="tdOwTageszeitung"></td>
 									</tr>
 								</table>
-								</div>
 								
+								
+								</div>
 								<p></p>
 								<!-- <button id="submit" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-ok"></span>  Abonnement
 									abschließen</button> -->
 									<a href="#" id="abbrechen" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-remove"></span>  Vorgang abbrechen</a>
-									<button id="submit" class="btn btn-primary btn-md"><span class='glyphicon glyphicon-ok'></span>  Bestellung verbindlich abschließen</button>
-									
-									
+									<button id="submit" class="btn btn-primary btn-md"><span class='glyphicon glyphicon-ok'></span>  Bestellung abschließen</button>
+								</div>	
 							</div>
-						</div>
-					</div>
-
+						</div>		
 			</form>
 		</div>
+		
+
 		<script>
 		
+				
 		jQuery.validator.setDefaults({
-	  		  debug: false,
-	  		  success: "valid",
-	  		  focusCleanup: false
-	  		});
-	  		$("#abschliessen").validate({
- 	 			
-	  		  rules: {
-	  			iban: {
-	    		      required: {
-	  					depends: function(element) {
-	  					      return $("input[value='lastschrift']").is(":checked");
-	  					  }
-	  		      },
-	    		      iban:  {
-	  			        depends: function(element) {
-	  			          return $("input[value='lastschrift']").is(":checked");
-	  			        }
-	    		      }
-	    		    },
-	    			bic: {
-	    				required: {
-	    					depends: function(element) {
-	    			          return $("input[value='lastschrift']").is(":checked");
-	    			        }
-	    				},
-	    				bic: {
-	    					depends: function(element) {
-	    			          return $("input[value='lastschrift']").is(":checked");
-	    			        }
-	    				}
-	    			},
-	    		    bank: {
-	    		    	required: {
-	    		    		depends: function(element) {
-	    			          return $("input[value='lastschrift']").is(":checked");
-	    			        }
-	    		    	}
-	    		    },
-	    		  	kontoinhaber: {
-	    		    	required: {
-	    		    		depends: function(element) {
-	    			          return $("input[value='lastschrift']").is(":checked");
-	    			        }
-	    		    	}
-	    		    }, 
-		  		  	abwstrasse: {
-				    	required: {
-				    		depends: function(element) {
-		    			          return ($("#step-3 input:checked").val() =="ja" ) ? true : false
-		    			    }
-				    	}
-				   	},
-				   	abwplz: {
-				   		required: {
-				    		depends: function(element) {
-				    			 return ($("#step-3 input:checked").val() =="ja" ) ? true : false
-		    			    }
-				    	},
-					   	digits: {
-				    		depends: function(element) {
-				    			 return ($("#step-3 input:checked").val() =="ja" ) ? true : false
-		    			    }
-				    	}
-				   	},
-				   	abwort: {
-				   		required: {
-				    		depends: function(element) {
-				    			 return ($("#step-3 input:checked").val() =="ja" ) ? true : false
-		    			    }
-				    	}
-				   	}
-	  		  },
-	  		  messages:{
-	  			  iban: {
-	  				  iban: "Bitte eine gültige IBAN eingeben."
-	  				  
-	  			  },
-	  			  bic:{
-	  				 bic: "Bitte eine gültige BIC eingeben." 
-	  			  }
-	  		  }
-	  		});
-	  		 
-	  		
-			$(document).ready(function() {
+  		  debug: false,
+  		  success: "valid",
+  		  focusCleanup: false
+  		});
+  		$( "#abschliessen" ).validate({
+ 			
+  		  rules: {
+  			iban: {
+    		      required: {
+  					depends: function(element) {
+  					      return $("input[value='lastschrift']").is(":checked");
+  					  }
+  		      },
+    		      iban:  {
+  			        depends: function(element) {
+  			          return $("input[value='lastschrift']").is(":checked");
+  			        }
+    		      }
+    		    },
+    			bic: {
+    				required: {
+    					depends: function(element) {
+    			          return $("input[value='lastschrift']").is(":checked");
+    			        }
+    				},
+    				bic: {
+    					depends: function(element) {
+    			          return $("input[value='lastschrift']").is(":checked");
+    			        }
+    				}
+    			},
+    		    bank: {
+    		    	required: {
+    		    		depends: function(element) {
+    			          return $("input[value='lastschrift']").is(":checked");
+    			        }
+    		    	}
+    		    },
+    		  	kontoinhaber: {
+    		    	required: {
+    		    		depends: function(element) {
+    			          return $("input[value='lastschrift']").is(":checked");
+    			        }
+    		    	}
+    		    }, 
+	  		  	abwstrasse: {
+			    	required: {
+			    		depends: function(element) {
+	    			          return $("#abwLieferadresse").is(":checked");
+	    			    }
+			    	}
+			   	},
+			   	abwplz: {
+			   		required: {
+			    		depends: function(element) {
+	    			          return $("#abwLieferadresse").is(":checked");
+	    			    }
+			    	},
+				   	digits: {
+			    		depends: function(element) {
+	    			          return $("#abwLieferadresse").is(":checked");
+	    			    }
+			    	}
+			   	},
+			   	abwort: {
+			   		required: {
+			    		depends: function(element) {
+	    			          return $("#abwLieferadresse").is(":checked");
+	    			    }
+			    	}
+			   	},
+			   	numberZeitschriftA: {
+			   		required: true
+			   	},
+			   	numberZeitschriftB: {
+			   		required: true
+			   	},
+			   	numberTZ: {
+			   		required: true
+			   	}
+  		  },
+  		  messages:{
+  			  iban: {
+  				  iban: "Bitte eine gültige IBAN eingeben."
+  				  
+  			  },
+  			  bic:{
+  				 bic: "Bitte eine gültige BIC eingeben." 
+  			  }
+  		  }
+  		});
+		$(document)
+	    .ready(
+	        function() {
+	        	
+	            var isVisiblePayment = false;
 
-								var isVisiblePayment = false;
+	            $(".abwLieferadresse").hide();
+	            $(".payment").hide();
 
-								$(".abwLieferadresse").hide();
-								$(".payment").hide();
+	            
+		
+	            
+	            $("input:radio[value=lastschrift]").click(
+	                function() {
+	                    if (!isVisiblePayment) {
+	                        $(".rechnung").hide("fast");
+	                        $(".payment").show("fast");
 
-								$("input:radio[value=lastschrift]").click(function() {
-											if (!isVisiblePayment) {
-												$(".rechnung").hide("fast");
-												$(".payment").show("fast");
+	                        isVisiblePayment = true;
+	                    }
 
-												isVisiblePayment = true;
-											}
+	                });
+	            $("input:radio[value=rechnung]").click(
+	                function() {
+	                    if (isVisiblePayment) {
+	                        $(".payment").hide("fast");
+	                        $(".rechnung").show("fast");
+	                        isVisiblePayment = false;
+	                    }
 
-								});
-								$("input:radio[value=rechnung]").click(function() {
-											if (isVisiblePayment) {
-												$(".payment").hide("fast");
-												$(".rechnung").show("fast");
-												isVisiblePayment = false;
-											}
+	                });
+	            $(".checkbox-inline").click(function() {
+	                $(".abwLieferadresse").toggle("slow");
+	            });
 
-								});
-								$(".checkbox-inline").click(function() {
-									$(".abwLieferadresse").toggle("fast");
-								});
+	            var navListItems = $('ul.setup-panel li a'),
+	                allWells = $('.setup-content');
 
-								var navListItems = $('ul.setup-panel li a'), allWells = $('.setup-content');
+	            allWells.hide();
 
-								allWells.hide();
+	            navListItems
+	                .click(function(e) {
+	                    e.preventDefault();
+	                    var $target = $($(this)
+	                            .attr('href')),
+	                        $item = $(
+	                            this).closest('li');
 
-								navListItems.click(function(e) {e.preventDefault();
-											var $target = $($(this)
-													.attr('href')), $item = $(
-													this).closest('li');
+	                    if (!$item.hasClass('disabled')) {
+	                        navListItems.closest('li')
+	                            .removeClass('active');
+	                        $item.addClass('active');
+	                        allWells.hide();
+	                        $target.show();
+	                    }
+	                });
 
-											if (!$item.hasClass('disabled')) {
-												navListItems.closest('li')
-														.removeClass('active');
-												$item.addClass('active');
-												allWells.hide();
-												$target.show();
-											}
-								});
+	            $('ul.setup-panel li.active a')
+	                .trigger('click');
 
-								$('ul.setup-panel li.active a').trigger('click');
+	            // DEMO ONLY //
+	            $('#activate-step-2')
+	                .on(
+	                    'click',
+	                    function(e) {
+	                        $('ul.setup-panel li:eq(1)')
+	                            .removeClass(
+	                                'disabled');
+	                        $(
+	                                'ul.setup-panel li a[href="#step-2"]')
+	                            .trigger('click');
+	                        $(this).remove();
+	                    })
 
-								// DEMO ONLY //
-								$('#activate-step-2').on('click',function(e) {
-									$('ul.setup-panel li:eq(1)').removeClass('disabled');
-									$('ul.setup-panel li a[href="#step-2"]').trigger('click');
-									$(this).remove();
-								});
-
-								$('#activate-step-3').on('click', function(e) {
-				                    
-				                        // Wenn die Elemente in dem Div keine error Label danach haben, next, ansonsten nicht!
-				                        $("#abschliessen").validate({ });
-				                        
-				                        $('#iban').focus();
-				                        $('#bic').focus();
-				                        $('#bank').focus();
-				                        $('#kontoinhaber').focus();
-				                        $('#iban').focus();
-				                        
-				                        if ($("input:radio[value=lastschrift]").is(":checked") && 
-				                        		$("#iban-error").hasClass("valid") && 
-				                        		$("#bic-error").hasClass("valid")&& 
-				                        		$("#bank-error").hasClass("valid")&& 
-				                        		$("#kontoinhaber-error").hasClass("valid")
-				                        ){
-				                        	$('ul.setup-panel li:eq(2)').removeClass('disabled');
-					                        $('ul.setup-panel li a[href="#step-3"]').click();
-					                        $(this).remove();
-				                        }else{
-				                        }
-				                        
-				                        if ($("input:radio[value=rechnung]").is(":checked")){
-				                        	$('ul.setup-panel li:eq(2)').removeClass('disabled');
-					                        $('ul.setup-panel li a[href="#step-3"]').trigger('click');
-					                        $(this).remove();
-				                        }
-				                      
-				                  });
-								 $('#activate-step-4').on('click', function(e) {
-					                	
-					                	$("#abschliessen").validate({ });
+	            $('#activate-step-3')
+	                .on('click', function(e) {
+	                    
+	                        // Wenn die Elemente in dem Div keine error Label danach haben, next, ansonsten nicht!
+	                        $("#abschliessen").validate();
+	                        $('#iban').focus();
+	                        $('#bic').focus();
+	                        $('#bank').focus();
+	                        $('#kontoinhaber').focus();
+	                        $('#iban').focus();
+	                        
+	                        
+	                        if ($("input:radio[value=lastschrift]").is(":checked") && 
+	                        		$("#iban-error").hasClass("valid") && 
+	                        		$("#bic-error").hasClass("valid")&& 
+	                        		$("#bank-error").hasClass("valid")&& 
+	                        		$("#kontoinhaber-error").hasClass("valid")
+	                        ){
+	                        	$('ul.setup-panel li:eq(2)').removeClass('disabled');
+		                        $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+		                        $(this).remove();
+	                        }else{
+	                        }
+	                        
+	                        if ($("input:radio[value=rechnung]").is(":checked")){
+	                        	$('ul.setup-panel li:eq(2)').removeClass('disabled');
+		                        $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+		                        $(this).remove();
+	                        }
+	                      
+	                    })
+	            $('#activate-step-4').on('click', function(e) {
+	                	
+	                	$("#abschliessen").validate({ });
 
 
-				                        $('#abwstrasse').focus();
-				                        $('#abwplz').focus();
-				                        $('#abwort').focus();
-				                        $('#abwstrasse').focus();
+                        $('#abwstrasse').focus();
+                        $('#abwplz').focus();
+                        $('#abwort').focus();
+                        $('#abwstrasse').focus();
 
-				                        
-					                    	if ($("#abwLieferadresse").is(":checked") &&
-					                    			$("#abwstrasse-error").hasClass("valid") && 
-					                        		$("#abwplz-error").hasClass("valid")&& 
-					                        		$("#abwort-error").hasClass("valid")
-					                  			){
-					                    		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
-						                        $('ul.setup-panel li a[href="#step-4"]').trigger('click');
-						                        $(this).remove();
-					                    	}
+                        
+	                    	if ($("#abwLieferadresse").is(":checked") &&
+	                    			$("#abwstrasse-error").hasClass("valid") && 
+	                        		$("#abwplz-error").hasClass("valid")&& 
+	                        		$("#abwort-error").hasClass("valid")
+	                  			){
+	                    		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
+		                        $('ul.setup-panel li a[href="#step-4"]').trigger('click');
+		                        $(this).remove();
+	                    	}
 
-					                    	if (!$("#abwLieferadresse").is(":checked")){
-					                    		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
-						                        $('ul.setup-panel li a[href="#step-4"]').trigger('click');
-						                        $(this).remove();
-					                    	}
-				                });
-								
-								
-								$("#activate-step-5, #step-5A").click(function(){
-	
-								//	alert("activate step 5");
-									$("#abschliessen").validate({ });
-				                    		$('ul.setup-panel li:eq(4)').removeClass( 'disabled');
-					                        $('ul.setup-panel li a[href="#step-5"]').trigger('click');
-					                        $(this).remove();
-				           
-					                        
-									if($("input[value='lastschrift']:checked").val()=="lastschrift"){
-										
-					            		$("#overviewLastschrift").show();
-					            		
-					            		$("#tdZahlungsart").html("Lastschrift");
-					            		//getValuesFromInputTextFields
-					            		$("#tdIban").html($('#iban').val());
-					            		$("#tdBic").html($('#bic').val());
-					            		$("#tdBank").html($('#bank').val());
-					            		$("#tdKontoinhaber").html($('#kontoinhaber').val());
+	                    	if (!$("#abwLieferadresse").is(":checked")){
+	                    		$('ul.setup-panel li:eq(3)').removeClass( 'disabled');
+		                        $('ul.setup-panel li a[href="#step-4"]').trigger('click');
+		                        $(this).remove();
+	                    	}
+                });
+	            
+	            
+	            $("#activate-step-5").click(function(){
+	            	
+	            	$("#abschliessen").validate();
+	            	 $('#numberZeitschriftA').focus();
+                     $('#numberZeitschriftB').focus();
+                     $('#numberTZ').focus();
+  
+                     $('#numberZeitschriftA').focus();
+                     
+	            	
+	            	$('ul.setup-panel li:eq(4)').removeClass( 'disabled');
+                    $('ul.setup-panel li a[href="#step-5"]').trigger('click');
+                    $(this).remove();
+                    
+	            	if($("input[value='lastschrift']:checked").val()=="lastschrift"){
+						
+	            		$("#overviewLastschrift").show();
+	            		
+	            		$("#tdZahlungsart").html("Lastschrift");
+	            		//getValuesFromInputTextFields
+	            		$("#tdIban").html($('#iban').val());
+	            		$("#tdBic").html($('#bic').val());
+	            		$("#tdBank").html($('#bank').val());
+	            		$("#tdKontoinhaber").html($('#kontoinhaber').val());
 
-						            	
-					            	}else{
-					            		$("#tdZahlungsart").html("Rechnung");
-					            		$("#overviewLastschrift").hide();
-					            	}
-					            	
-					            	if( $("#abwLieferadresse").is(":checked") == true){	
+		            	
+	            	}else{
+	            		$("#tdZahlungsart").html("Rechnung");
+	            		$("#overviewLastschrift").hide();
+	            	}
+	            	
+	            	if( $("#abwLieferadresse").is(":checked") == true){	
 
-					            		$("#overviewAbwLieferanschrift").show();
+	            		$("#overviewAbwLieferanschrift").show();
 
-					            		$("#tdAbwStr").html($('#abwstrasse').val());
-					            		$("#tdAbwPlz").html($('#abwplz').val());
-					            		$("#tdAbwOrt").html($('#abwort').val());
-					            		
-					            	}else{
-					            		
-					            		$("#overviewAbwLieferanschrift").hide();
-					            	}
-									
-									$("#tdOwZeitschriftA").html($('#numberZeitschriftA').val());
-									$("#tdOwZeitschriftB").html($('#numberZeitschriftB').val());
-									$("#tdOwTageszeitung").html($('#numberTZ').val());
-									
-					
-								});
+	            		$("#tdAbwStr").html($('#abwstrasse').val());
+	            		$("#tdAbwPlz").html($('#abwplz').val());
+	            		$("#tdAbwOrt").html($('#abwort').val());
+	            		
+	            	}else{
+	            		
+	            		$("#overviewAbwLieferanschrift").hide();
+	            	}
+	            	$("#tdOwZeitschriftA").html($('#numberZeitschriftA').val());
+					$("#tdOwZeitschriftB").html($('#numberZeitschriftB').val());
+					$("#tdOwTageszeitung").html($('#numberTZ').val());
+	            });
+	            
+				$("#showStep5").click(function(){
+
+					$("#abschliessen").validate();
+	            	 $('#numberZeitschriftA').focus();
+                    $('#numberZeitschriftB').focus();
+                    $('#numberTZ').focus();
  
-							
-								
-					            $('#abbrechen').on('click', function(e) {
-				                	
-					            	 location.reload();
-				                	
-				           		});
+                    $('#numberZeitschriftA').focus();
+                    
+	            	if($("input[value='lastschrift']:checked").val()=="lastschrift"){
+						
+	            		$("#overviewLastschrift").show();
+	            		
+	            		$("#tdZahlungsart").html("Lastschrift");
+	            		//getValuesFromInputTextFields
+	            		$("#tdIban").html($('#iban').val());
+	            		$("#tdBic").html($('#bic').val());
+	            		$("#tdBank").html($('#bank').val());
+	            		$("#tdKontoinhaber").html($('#kontoinhaber').val());
 
-							});
-		</script>
+		            	
+	            	}else{
+	            		$("#tdZahlungsart").html("Rechnung");
+	            		$("#overviewLastschrift").hide();
+	            	}
+	            	
+	            	if( $("#abwLieferadresse").is(":checked") == true){	
+
+	            		$("#overviewAbwLieferanschrift").show();
+
+	            		$("#tdAbwStr").html($('#abwstrasse').val());
+	            		$("#tdAbwPlz").html($('#abwplz').val());
+	            		$("#tdAbwOrt").html($('#abwort').val());
+	            		
+	            	}else{
+	            		
+	            		$("#overviewAbwLieferanschrift").hide();
+	            	}
+	            	
+	            	$("#tdOwZeitschriftA").html($('#numberZeitschriftA').val());
+					$("#tdOwZeitschriftB").html($('#numberZeitschriftB').val());
+					$("#tdOwTageszeitung").html($('#numberTZ').val());
+					
+	            });
+	            
+	            $('#abbrechen').on('click', function(e) {
+                	
+	            	 location.reload();
+                	
+           		});
+	            $('#submit').on('click', function(e) {
+                	
+	            	alert("Bestellung abgeschlossen.");
+               	
+          		});
+	        });
+		
+		
+		</script>	
+
 	</tiles:putAttribute>
 </tiles:insertDefinition>
